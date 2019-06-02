@@ -1,0 +1,24 @@
+# 开发环境配置
+
+spring:
+  # 数据库连接配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/boot-sample?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: chennan
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      connection-test-query: SELECT 1
+
+# Dubbo配置
+dubbo:
+  application:
+    name: ${artifactId}
+    logger: slf4j
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  protocol:
+    name: dubbo
+    port: 20881
+  scan:
+    base-packages: com.cn.boot.sample.server.impl
