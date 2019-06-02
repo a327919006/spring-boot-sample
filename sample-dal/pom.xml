@@ -70,7 +70,7 @@
                     <!-- 允许移动生成的文件 -->
                     <verbose>true</verbose>
                     <!-- 允许覆盖生成的文件 -->
-                    <configurationFile>../business-dal/src/main/resources/mybatis-generator.xml</configurationFile>
+                    <configurationFile>../sample-dal/src/main/resources/mybatis-generator.xml</configurationFile>
                 </configuration>
             </plugin>
         </plugins>

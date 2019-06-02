@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.boot.sample.dal.mapper.ClientMapper">
+  <resultMap id="BaseResultMap" type="com.cn.boot.sample.api.model.po.Client">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="plat_id" jdbcType="VARCHAR" property="platId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="threshold" jdbcType="INTEGER" property="threshold" />
+    <result column="repeat_second" jdbcType="INTEGER" property="repeatSecond" />
+    <result column="oss_type" jdbcType="TINYINT" property="ossType" />
+    <result column="oss_config_id" jdbcType="VARCHAR" property="ossConfigId" />
+    <result column="third_type" jdbcType="TINYINT" property="thirdType" />
+    <result column="third_app_id" jdbcType="VARCHAR" property="thirdAppId" />
+    <result column="third_secret_id" jdbcType="VARCHAR" property="thirdSecretId" />
+    <result column="third_secret_key" jdbcType="VARCHAR" property="thirdSecretKey" />
+    <result column="third_user_id" jdbcType="VARCHAR" property="thirdUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, plat_id, name, status, threshold, repeat_second, oss_type, oss_config_id, third_type, 
+    third_app_id, third_secret_id, third_secret_key, third_user_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_client
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_client
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cn.boot.sample.api.model.po.Client">
+    insert into t_client (id, plat_id, name, 
+      status, threshold, repeat_second, 
+      oss_type, oss_config_id, third_type, 
+      third_app_id, third_secret_id, third_secret_key, 
+      third_user_id, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{platId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{threshold,jdbcType=INTEGER}, #{repeatSecond,jdbcType=INTEGER}, 
+      #{ossType,jdbcType=TINYINT}, #{ossConfigId,jdbcType=VARCHAR}, #{thirdType,jdbcType=TINYINT}, 
+      #{thirdAppId,jdbcType=VARCHAR}, #{thirdSecretId,jdbcType=VARCHAR}, #{thirdSecretKey,jdbcType=VARCHAR}, 
+      #{thirdUserId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.boot.sample.api.model.po.Client">
+    insert into t_client
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="platId != null">
+        plat_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="threshold != null">
+        threshold,
+      </if>
+      <if test="repeatSecond != null">
+        repeat_second,
+      </if>
+      <if test="ossType != null">
+        oss_type,
+      </if>
+      <if test="ossConfigId != null">
+        oss_config_id,
+      </if>
+      <if test="thirdType != null">
+        third_type,
+      </if>
+      <if test="thirdAppId != null">
+        third_app_id,
+      </if>
+      <if test="thirdSecretId != null">
+        third_secret_id,
+      </if>
+      <if test="thirdSecretKey != null">
+        third_secret_key,
+      </if>
+      <if test="thirdUserId != null">
+        third_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="platId != null">
+        #{platId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="threshold != null">
+        #{threshold,jdbcType=INTEGER},
+      </if>
+      <if test="repeatSecond != null">
+        #{repeatSecond,jdbcType=INTEGER},
+      </if>
+      <if test="ossType != null">
+        #{ossType,jdbcType=TINYINT},
+      </if>
+      <if test="ossConfigId != null">
+        #{ossConfigId,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdType != null">
+        #{thirdType,jdbcType=TINYINT},
+      </if>
+      <if test="thirdAppId != null">
+        #{thirdAppId,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdSecretId != null">
+        #{thirdSecretId,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdSecretKey != null">
+        #{thirdSecretKey,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdUserId != null">
+        #{thirdUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.boot.sample.api.model.po.Client">
+    update t_client
+    <set>
+      <if test="platId != null">
+        plat_id = #{platId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="threshold != null">
+        threshold = #{threshold,jdbcType=INTEGER},
+      </if>
+      <if test="repeatSecond != null">
+        repeat_second = #{repeatSecond,jdbcType=INTEGER},
+      </if>
+      <if test="ossType != null">
+        oss_type = #{ossType,jdbcType=TINYINT},
+      </if>
+      <if test="ossConfigId != null">
+        oss_config_id = #{ossConfigId,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdType != null">
+        third_type = #{thirdType,jdbcType=TINYINT},
+      </if>
+      <if test="thirdAppId != null">
+        third_app_id = #{thirdAppId,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdSecretId != null">
+        third_secret_id = #{thirdSecretId,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdSecretKey != null">
+        third_secret_key = #{thirdSecretKey,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdUserId != null">
+        third_user_id = #{thirdUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.boot.sample.api.model.po.Client">
+    update t_client
+    set plat_id = #{platId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      threshold = #{threshold,jdbcType=INTEGER},
+      repeat_second = #{repeatSecond,jdbcType=INTEGER},
+      oss_type = #{ossType,jdbcType=TINYINT},
+      oss_config_id = #{ossConfigId,jdbcType=VARCHAR},
+      third_type = #{thirdType,jdbcType=TINYINT},
+      third_app_id = #{thirdAppId,jdbcType=VARCHAR},
+      third_secret_id = #{thirdSecretId,jdbcType=VARCHAR},
+      third_secret_key = #{thirdSecretKey,jdbcType=VARCHAR},
+      third_user_id = #{thirdUserId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
