@@ -16,7 +16,7 @@ import java.util.concurrent.TimeoutException;
  * @date 2019/6/2.
  */
 @Component
-public class AmqpDemo1 {
+public class Product1 {
 
     public void init() throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
@@ -31,5 +31,7 @@ public class AmqpDemo1 {
         String content = "Hello RabbitMQ!";
         channel.basicPublish("", "test001", null, content.getBytes());
 
+        channel.close();
+        connection.close();
     }
 }
