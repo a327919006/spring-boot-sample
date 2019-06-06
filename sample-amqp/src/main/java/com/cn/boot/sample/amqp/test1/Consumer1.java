@@ -1,12 +1,11 @@
 package com.cn.boot.sample.amqp.test1;
 
-import com.rabbitmq.client.BuiltinExchangeType;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -17,9 +16,18 @@ import java.util.concurrent.TimeoutException;
  * @date 2019/6/2.
  */
 @Component
+@Slf4j
 public class Consumer1 {
 
-    public void init() throws IOException, TimeoutException {
+    static {
+        try {
+            init();
+        } catch (IOException | TimeoutException e) {
+            log.error("Consumer1:", e);
+        }
+    }
+
+    private static void init() throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("127.0.0.1");
         factory.setPort(5672);
@@ -29,9 +37,26 @@ public class Consumer1 {
 
         Channel channel = connection.createChannel();
 
-        channel.exchangeDeclare("test001", BuiltinExchangeType.DIRECT, true, false, null);
+        String queue = "test01";
+        channel.queueDeclare(queue, true, false, false, null);
 
-        channel.close();
-        connection.close();
+        DefaultConsumer consumer = new DefaultConsumer(channel) {
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
+                String message = new String(body, StandardCharsets.UTF_8);
+                String routingKey = envelope.getRoutingKey();
+                String contentType = properties.getContentType();
+                long deliveryTag = envelope.getDeliveryTag();
+                log.info("收到消息：message = " + message);
+                log.info("routingKey = " + routingKey);
+                log.info("contentType = " + contentType);
+                log.info("deliveryTag = " + deliveryTag);
+            }
+        };
+
+        channel.basicConsume(queue, true, consumer);
+//
+//        channel.close();
+//        connection.close();
     }
 }
