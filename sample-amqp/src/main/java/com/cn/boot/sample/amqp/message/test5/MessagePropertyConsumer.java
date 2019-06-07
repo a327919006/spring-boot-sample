@@ -1,4 +1,4 @@
-package com.cn.boot.sample.amqp.test1;
+package com.cn.boot.sample.amqp.message.test5;
 
 import com.rabbitmq.client.*;
 import lombok.extern.slf4j.Slf4j;
@@ -6,17 +6,19 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeoutException;
 
 /**
- * HelloWorld-消费者
+ * 消息属性-消费者
  *
  * @author Chen Nan
  * @date 2019/6/2.
  */
-//@Component
+@Component
 @Slf4j
-public class HelloWorldConsumer {
+public class MessagePropertyConsumer {
 
     static {
         try {
@@ -45,11 +47,17 @@ public class HelloWorldConsumer {
                 String message = new String(body, StandardCharsets.UTF_8);
                 String routingKey = envelope.getRoutingKey();
                 String contentType = properties.getContentType();
+                Map<String, Object> headers = properties.getHeaders();
+
                 long deliveryTag = envelope.getDeliveryTag();
                 log.info("收到消息：message = " + message);
                 log.info("routingKey = " + routingKey);
                 log.info("contentType = " + contentType);
                 log.info("deliveryTag = " + deliveryTag);
+
+
+                Set<String> keySet = headers.keySet();
+                keySet.forEach((key) -> log.info("key={},val={}", key, headers.get(key)));
             }
         };
 

@@ -1,22 +1,21 @@
-package com.cn.boot.sample.amqp.test2;
+package com.cn.boot.sample.amqp.exchange.test3;
 
 import com.rabbitmq.client.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 /**
- * DirectExchange-消费者
+ * TopicExchange-消费者
  *
  * @author Chen Nan
  * @date 2019/6/2.
  */
 //@Component
 @Slf4j
-public class DirectExchangeConsumer {
+public class TopicExchangeConsumer {
 
     static {
         try {
@@ -36,14 +35,15 @@ public class DirectExchangeConsumer {
 
         Channel channel = connection.createChannel();
 
-        String exchangeName = "test02_direct_exchange";
-        String queueName = "test02_direct_queue";
-        String routingKey = "test02";
+        String exchangeName = "test03_topic_exchange";
+        String queueName = "test03_topic_queue";
+        String routingKey = "test03.#";
 
         // 声明交换机
-        channel.exchangeDeclare(exchangeName, BuiltinExchangeType.DIRECT, true, false, false, null);
+        channel.exchangeDeclare(exchangeName, BuiltinExchangeType.TOPIC, true, false, false, null);
         // 声明队列
         channel.queueDeclare(queueName, true, false, false, null);
+        // 绑定交换机与队列
         channel.queueBind(queueName, exchangeName, routingKey);
 
         DefaultConsumer consumer = new DefaultConsumer(channel) {

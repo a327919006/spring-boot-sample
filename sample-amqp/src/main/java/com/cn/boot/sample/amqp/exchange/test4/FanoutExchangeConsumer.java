@@ -1,4 +1,4 @@
-package com.cn.boot.sample.amqp.test3;
+package com.cn.boot.sample.amqp.exchange.test4;
 
 import com.rabbitmq.client.*;
 import lombok.extern.slf4j.Slf4j;
@@ -9,14 +9,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 /**
- * TopicExchange-消费者
+ * FanoutExchange-消费者
  *
  * @author Chen Nan
  * @date 2019/6/2.
  */
 //@Component
 @Slf4j
-public class TopicExchangeConsumer {
+public class FanoutExchangeConsumer {
 
     static {
         try {
@@ -36,12 +36,12 @@ public class TopicExchangeConsumer {
 
         Channel channel = connection.createChannel();
 
-        String exchangeName = "test03_topic_exchange";
-        String queueName = "test03_topic_queue";
-        String routingKey = "test03.#";
+        String exchangeName = "test04_fanout_exchange";
+        String queueName = "test04_fanout_queue";
+        String routingKey = ""; // 不设置路由key或随便设置
 
         // 声明交换机
-        channel.exchangeDeclare(exchangeName, BuiltinExchangeType.TOPIC, true, false, false, null);
+        channel.exchangeDeclare(exchangeName, BuiltinExchangeType.FANOUT, true, false, false, null);
         // 声明队列
         channel.queueDeclare(queueName, true, false, false, null);
         // 绑定交换机与队列

@@ -1,4 +1,4 @@
-package com.cn.boot.sample.amqp.test1;
+package com.cn.boot.sample.amqp.exchange.test4;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -10,14 +10,14 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 /**
- * HelloWorld-生产者
+ * FanoutExchange-生产者
  *
  * @author Chen Nan
  * @date 2019/6/2.
  */
 //@Component
 @Slf4j
-public class HelloWorldProduct {
+public class FanoutExchangeProduct {
     static {
         try {
             init();
@@ -37,11 +37,13 @@ public class HelloWorldProduct {
         Channel channel = connection.createChannel();
 
         log.info("开始发送");
-        String content = "Hello RabbitMQ!";
-        channel.basicPublish("", "test01", null, content.getBytes());
+        String exchangeName = "test04_fanout_exchange";
+        String routingKey = ""; // 不设置路由key或随便设置
+        String content = "Hello RabbitMQ! Fanout Exchange...";
+        channel.basicPublish(exchangeName, routingKey, null, content.getBytes());
         log.info("发送成功");
 
-        channel.close();
-        connection.close();
+//        channel.close();
+//        connection.close();
     }
 }

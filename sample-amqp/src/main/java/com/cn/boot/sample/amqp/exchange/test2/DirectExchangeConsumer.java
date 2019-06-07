@@ -1,22 +1,21 @@
-package com.cn.boot.sample.amqp.test4;
+package com.cn.boot.sample.amqp.exchange.test2;
 
 import com.rabbitmq.client.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 /**
- * FanoutExchange-消费者
+ * DirectExchange-消费者
  *
  * @author Chen Nan
  * @date 2019/6/2.
  */
-@Component
+//@Component
 @Slf4j
-public class FanoutExchangeConsumer {
+public class DirectExchangeConsumer {
 
     static {
         try {
@@ -36,15 +35,14 @@ public class FanoutExchangeConsumer {
 
         Channel channel = connection.createChannel();
 
-        String exchangeName = "test04_fanout_exchange";
-        String queueName = "test04_fanout_queue";
-        String routingKey = ""; // 不设置路由key或随便设置
+        String exchangeName = "test02_direct_exchange";
+        String queueName = "test02_direct_queue";
+        String routingKey = "test02";
 
         // 声明交换机
-        channel.exchangeDeclare(exchangeName, BuiltinExchangeType.FANOUT, true, false, false, null);
+        channel.exchangeDeclare(exchangeName, BuiltinExchangeType.DIRECT, true, false, false, null);
         // 声明队列
         channel.queueDeclare(queueName, true, false, false, null);
-        // 绑定交换机与队列
         channel.queueBind(queueName, exchangeName, routingKey);
 
         DefaultConsumer consumer = new DefaultConsumer(channel) {
