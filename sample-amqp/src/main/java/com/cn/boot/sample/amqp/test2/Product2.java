@@ -1,4 +1,4 @@
-package com.cn.boot.sample.amqp.test1;
+package com.cn.boot.sample.amqp.test2;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -10,14 +10,14 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 /**
- * HelloWorld-生产者
+ * DirectExchange-生产者
  *
  * @author Chen Nan
  * @date 2019/6/2.
  */
 //@Component
 @Slf4j
-public class Product1 {
+public class Product2 {
     static {
         try {
             init();
@@ -37,11 +37,13 @@ public class Product1 {
         Channel channel = connection.createChannel();
 
         log.info("开始发送");
-        String content = "Hello RabbitMQ!";
-        channel.basicPublish("", "test01", null, content.getBytes());
+        String exchangeName = "test02_direct_exchange";
+        String routingKey = "test02";
+        String content = "Hello RabbitMQ! Direct Exchange...";
+        channel.basicPublish(exchangeName, routingKey, null, content.getBytes());
         log.info("发送成功");
 
-        channel.close();
-        connection.close();
+//        channel.close();
+//        connection.close();
     }
 }

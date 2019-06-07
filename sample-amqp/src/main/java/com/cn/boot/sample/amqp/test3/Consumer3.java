@@ -1,4 +1,4 @@
-package com.cn.boot.sample.amqp.test1;
+package com.cn.boot.sample.amqp.test3;
 
 import com.rabbitmq.client.*;
 import lombok.extern.slf4j.Slf4j;
@@ -9,14 +9,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 /**
- * HelloWorld-消费者
+ * TopicExchange-消费者
  *
  * @author Chen Nan
  * @date 2019/6/2.
  */
-//@Component
+@Component
 @Slf4j
-public class Consumer1 {
+public class Consumer3 {
 
     static {
         try {
@@ -36,8 +36,16 @@ public class Consumer1 {
 
         Channel channel = connection.createChannel();
 
-        String queue = "test01";
-        channel.queueDeclare(queue, true, false, false, null);
+        String exchangeName = "test03_topic_exchange";
+        String queueName = "test03_queue";
+        String routingKey = "test03.#";
+
+        // 声明交换机
+        channel.exchangeDeclare(exchangeName, BuiltinExchangeType.TOPIC, true, false, false, null);
+        // 声明队列
+        channel.queueDeclare(queueName, true, false, false, null);
+        // 绑定交换机与队列
+        channel.queueBind(queueName, exchangeName, routingKey);
 
         DefaultConsumer consumer = new DefaultConsumer(channel) {
             @Override
@@ -53,6 +61,6 @@ public class Consumer1 {
             }
         };
 
-        channel.basicConsume(queue, true, consumer);
+        channel.basicConsume(queueName, true, consumer);
     }
 }
