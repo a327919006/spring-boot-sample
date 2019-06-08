@@ -14,7 +14,7 @@ import java.util.concurrent.TimeoutException;
  * @author Chen Nan
  * @date 2019/6/2.
  */
-@Component
+//@Component
 @Slf4j
 public class ReturnListenerConsumer {
 
@@ -40,11 +40,8 @@ public class ReturnListenerConsumer {
         String queueName = "test06_return_queue";
         String routingKey = "return.key";
 
-        // 声明交换机
         channel.exchangeDeclare(exchangeName, BuiltinExchangeType.DIRECT, true, false, false, null);
-        // 声明队列
         channel.queueDeclare(queueName, true, false, false, null);
-        // 绑定交换机与队列
         channel.queueBind(queueName, exchangeName, routingKey);
 
         DefaultConsumer consumer = new DefaultConsumer(channel) {

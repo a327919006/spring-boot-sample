@@ -1,6 +1,5 @@
 package com.cn.boot.sample.amqp.returnlistener.test6;
 
-import cn.hutool.core.thread.ThreadUtil;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -9,16 +8,16 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
  * ReturnListener-生产者
+ * 监听无法被路由到的消息
  *
  * @author Chen Nan
  * @date 2019/6/2.
  */
-@Component
+//@Component
 @Slf4j
 public class ReturnListenerProduct {
     static {
@@ -39,6 +38,7 @@ public class ReturnListenerProduct {
 
         Channel channel = connection.createChannel();
 
+        // 添加监听器
         channel.addReturnListener((replyCode, replyText, exchange, routingKey, properties, body) -> {
             log.info("---------------ReturnListener---------------");
             log.info("replyCode = " + replyCode);
