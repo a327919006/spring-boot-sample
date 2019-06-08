@@ -18,7 +18,7 @@ import java.util.concurrent.TimeoutException;
  * @author Chen Nan
  * @date 2019/6/2.
  */
-@Component
+//@Component
 @Slf4j
 public class MessagePropertyProduct {
     static {
@@ -53,8 +53,9 @@ public class MessagePropertyProduct {
                 .build();
 
         log.info("开始发送");
+        String routingKey = "test05";
         String content = "Hello RabbitMQ!";
-        channel.basicPublish("", "test01", properties, content.getBytes());
+        channel.basicPublish("", routingKey, properties, content.getBytes());
         log.info("发送成功");
 
         channel.close();

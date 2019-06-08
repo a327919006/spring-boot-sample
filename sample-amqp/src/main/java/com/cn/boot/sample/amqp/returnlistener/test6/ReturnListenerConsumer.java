@@ -1,4 +1,4 @@
-package com.cn.boot.sample.amqp.message.test5;
+package com.cn.boot.sample.amqp.returnlistener.test6;
 
 import com.rabbitmq.client.*;
 import lombok.extern.slf4j.Slf4j;
@@ -6,19 +6,17 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.TimeoutException;
 
 /**
- * 消息属性-消费者
+ * ReturnListener-消费者
  *
  * @author Chen Nan
  * @date 2019/6/2.
  */
-//@Component
+@Component
 @Slf4j
-public class MessagePropertyConsumer {
+public class ReturnListenerConsumer {
 
     static {
         try {
@@ -38,8 +36,16 @@ public class MessagePropertyConsumer {
 
         Channel channel = connection.createChannel();
 
-        String queue = "test05";
-        channel.queueDeclare(queue, true, false, false, null);
+        String exchangeName = "test06_return_exchange";
+        String queueName = "test06_return_queue";
+        String routingKey = "return.key";
+
+        // 声明交换机
+        channel.exchangeDeclare(exchangeName, BuiltinExchangeType.DIRECT, true, false, false, null);
+        // 声明队列
+        channel.queueDeclare(queueName, true, false, false, null);
+        // 绑定交换机与队列
+        channel.queueBind(queueName, exchangeName, routingKey);
 
         DefaultConsumer consumer = new DefaultConsumer(channel) {
             @Override
@@ -47,20 +53,14 @@ public class MessagePropertyConsumer {
                 String message = new String(body, StandardCharsets.UTF_8);
                 String routingKey = envelope.getRoutingKey();
                 String contentType = properties.getContentType();
-                Map<String, Object> headers = properties.getHeaders();
-
                 long deliveryTag = envelope.getDeliveryTag();
                 log.info("收到消息：message = " + message);
                 log.info("routingKey = " + routingKey);
                 log.info("contentType = " + contentType);
                 log.info("deliveryTag = " + deliveryTag);
-
-
-                Set<String> keySet = headers.keySet();
-                keySet.forEach((key) -> log.info("key={},val={}", key, headers.get(key)));
             }
         };
 
-        channel.basicConsume(queue, true, consumer);
+        channel.basicConsume(queueName, true, consumer);
     }
 }

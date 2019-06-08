@@ -36,8 +36,9 @@ public class HelloWorldProduct {
         Channel channel = connection.createChannel();
 
         log.info("开始发送");
+        String routingKey = "test01";
         String content = "Hello RabbitMQ!";
-        channel.basicPublish("", "test01", null, content.getBytes());
+        channel.basicPublish("", routingKey, null, content.getBytes());
         log.info("发送成功");
 
         channel.close();
