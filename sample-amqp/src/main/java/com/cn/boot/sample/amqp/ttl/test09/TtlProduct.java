@@ -1,4 +1,4 @@
-package com.cn.boot.sample.amqp.ack.test08;
+package com.cn.boot.sample.amqp.ttl.test09;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
@@ -14,14 +14,14 @@ import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 /**
- * Ack-生产者
+ * TTL-生产者
  *
  * @author Chen Nan
  * @date 2019/6/2.
  */
-//@Component
+@Component
 @Slf4j
-public class AckProduct {
+public class TtlProduct {
     static {
         try {
             init();
@@ -41,24 +41,13 @@ public class AckProduct {
         Channel channel = connection.createChannel();
 
         log.info("开始发送");
-        String exchange = "test08_ack_exchange";
-        String routingKey = "test08";
+        String exchange = "test09_ttl_exchange";
+        String routingKey = "test09";
 
-        for (int i = 0; i < 5; i++) {
-            String content = "Hello RabbitMQ! ACK!" + i;
+        String content = "Hello RabbitMQ! TTL!";
 
-            Map<String, Object> headers = new HashMap<>();
-            headers.put("num", i);
 
-            AMQP.BasicProperties properties = new AMQP.BasicProperties()
-                    .builder()
-                    .deliveryMode(2)
-                    .contentEncoding(StandardCharsets.UTF_8.displayName())
-                    .headers(headers)
-                    .build();
-
-            channel.basicPublish(exchange, routingKey, properties, content.getBytes());
-        }
+        channel.basicPublish(exchange, routingKey, null, content.getBytes());
         log.info("发送成功");
 
         channel.close();
