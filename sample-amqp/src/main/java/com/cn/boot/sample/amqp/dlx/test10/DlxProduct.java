@@ -1,4 +1,4 @@
-package com.cn.boot.sample.amqp.ttl.test09;
+package com.cn.boot.sample.amqp.dlx.test10;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
@@ -8,20 +8,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 /**
- * TTL-生产者
+ * Dlx-生产者
  *
  * @author Chen Nan
- * @date 2019/6/2.
+ * @date 2019/6/9.
  */
-//@Component
+@Component
 @Slf4j
-public class TtlProduct {
+public class DlxProduct {
     static {
         try {
             init();
@@ -41,16 +38,19 @@ public class TtlProduct {
         Channel channel = connection.createChannel();
 
         log.info("开始发送");
-        String exchange = "test09_ttl_exchange";
-        String routingKey = "test09";
+        String exchange = "test10_dlx_exchange";
+        String routingKey = "test10";
 
-        String content = "Hello RabbitMQ! TTL!";
+        String content = "Hello RabbitMQ! DLX!";
 
+        AMQP.BasicProperties properties = new AMQP.BasicProperties()
+                .builder()
+                .deliveryMode(2)
+                .contentEncoding("UTF-8") // 字符集
+                .expiration("10000") // 过期时间，过期清除
+                .build();
 
-        channel.basicPublish(exchange, routingKey, null, content.getBytes());
+        channel.basicPublish(exchange, routingKey, properties, content.getBytes());
         log.info("发送成功");
-
-        channel.close();
-        connection.close();
     }
 }

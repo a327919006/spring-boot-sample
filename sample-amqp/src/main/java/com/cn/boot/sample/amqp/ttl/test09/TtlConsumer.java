@@ -18,7 +18,7 @@ import java.util.concurrent.TimeoutException;
  * @author Chen Nan
  * @date 2019/6/2.
  */
-@Component
+//@Component
 @Slf4j
 public class TtlConsumer {
 
