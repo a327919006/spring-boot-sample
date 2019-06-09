@@ -1,12 +1,10 @@
-package com.cn.boot.sample.amqp.limit;
+package com.cn.boot.sample.amqp.limit.test07;
 
-import com.cn.boot.sample.amqp.consumer.TestConsumer;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -18,7 +16,7 @@ import java.util.concurrent.TimeoutException;
  * @author Chen Nan
  * @date 2019/6/2.
  */
-@Component
+//@Component
 @Slf4j
 public class LimitConsumer {
 
@@ -51,6 +49,6 @@ public class LimitConsumer {
         // 设置一次只拉取一条消息
         channel.basicQos(0, 1, false);
 
-        channel.basicConsume(queueName, false, new TestConsumer(channel));
+        channel.basicConsume(queueName, false, new MyConsumer07(channel));
     }
 }

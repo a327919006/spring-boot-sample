@@ -1,4 +1,4 @@
-package com.cn.boot.sample.amqp.consumer;
+package com.cn.boot.sample.amqp.limit.test07;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
@@ -16,10 +16,10 @@ import java.nio.charset.StandardCharsets;
  * @date 2019/6/8.
  */
 @Slf4j
-public class TestConsumer extends DefaultConsumer {
+public class MyConsumer07 extends DefaultConsumer {
     private Channel channel;
 
-    public TestConsumer(Channel channel) {
+    public MyConsumer07(Channel channel) {
         super(channel);
         this.channel = channel;
     }

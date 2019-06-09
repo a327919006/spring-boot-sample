@@ -1,4 +1,4 @@
-package com.cn.boot.sample.amqp.limit;
+package com.cn.boot.sample.amqp.limit.test07;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeoutException;
  * @author Chen Nan
  * @date 2019/6/2.
  */
-@Component
+//@Component
 @Slf4j
 public class LimitProduct {
     static {
