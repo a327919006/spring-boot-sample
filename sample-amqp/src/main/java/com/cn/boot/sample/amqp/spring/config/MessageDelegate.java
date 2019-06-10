@@ -17,10 +17,22 @@ public class MessageDelegate {
      * 传入参数类型根据消息发送方发送的消息类型
      */
     public void handleMessage(byte[] body) {
-        log.info("收到消息：" + new String(body));
+        log.info("收到消息1：" + new String(body));
     }
 
     public void handleMessage(String body) {
-        log.info("收到消息：" + body);
+        log.info("收到消息2：" + body);
+    }
+
+    public void handleDirect1(byte[] body) {
+        log.info("收到消息3：" + new String(body));
+    }
+
+    public void handleDirect1(String body) {
+        log.info("收到消息4：" + body);
+    }
+
+    public void handleDirect2(byte[] body) {
+        log.info("收到消息5：" + new String(body));
     }
 }

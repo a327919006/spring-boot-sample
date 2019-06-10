@@ -16,7 +16,6 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 @Slf4j
 public class RabbitTemplateTest {
     private String exchangeName = "test12.direct.exchange";
-    private String routingKey = "test12";
 
     private RabbitTemplate rabbitTemplate;
 
@@ -37,7 +36,7 @@ public class RabbitTemplateTest {
         Message message = new Message(body.getBytes(), messageProperties);
 
         // MessagePostProcessor可用于发送消息后置处理
-        rabbitTemplate.convertAndSend(exchangeName, routingKey, message, new MessagePostProcessor() {
+        rabbitTemplate.convertAndSend(exchangeName, "test12.q1", message, new MessagePostProcessor() {
             @Override
             public Message postProcessMessage(Message message) throws AmqpException {
                 log.info("添加额外的配置");
@@ -52,9 +51,9 @@ public class RabbitTemplateTest {
         // 第一种方式，接收Message对象
         MessageProperties messageProperties = new MessageProperties();
         Message message = new Message(body.getBytes(), messageProperties);
-        rabbitTemplate.send(exchangeName, routingKey, message);
+        rabbitTemplate.send(exchangeName, "test12.q2", message);
 
         // 第二种方式，接收Object对象
-        rabbitTemplate.convertAndSend(exchangeName, routingKey, body);
+        rabbitTemplate.convertAndSend(exchangeName, "test12.q1", body);
     }
 }

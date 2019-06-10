@@ -1,5 +1,6 @@
 package com.cn.boot.sample.amqp.spring.config;
 
+import com.cn.boot.sample.amqp.spring.converter.TextMessageConverter;
 import com.cn.boot.sample.amqp.spring.test12.RabbitTemplateTest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
@@ -12,6 +13,9 @@ import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * <p>Title:</p>
  * <p>Description:</p>
@@ -19,7 +23,7 @@ import org.springframework.context.annotation.Configuration;
  * @author Chen Nan
  * @date 2019/6/9.
  */
-@Configuration
+//@Configuration
 @Slf4j
 public class RabbitMqConfig {
 
@@ -56,21 +60,33 @@ public class RabbitMqConfig {
     }
 
     @Bean
-    public Queue test12DirectQueue() {
-        return new Queue("test12.direct.queue");
+    public Queue test12DirectQueue1() {
+        return new Queue("test12.direct.queue1");
     }
 
     @Bean
-    public Binding test12Binding() {
-        return BindingBuilder.bind(test12DirectQueue())
+    public Queue test12DirectQueue2() {
+        return new Queue("test12.direct.queue2");
+    }
+
+    @Bean
+    public Binding test12Binding1() {
+        return BindingBuilder.bind(test12DirectQueue1())
                 .to(test12DirectExchange())
-                .with("test12");
+                .with("test12.q1");
+    }
+
+    @Bean
+    public Binding test12Binding2() {
+        return BindingBuilder.bind(test12DirectQueue2())
+                .to(test12DirectExchange())
+                .with("test12.q2");
     }
 
     @Bean
     SimpleMessageListenerContainer simpleMessageListenerContainer(ConnectionFactory connectionFactory) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory);
-        container.setQueues(test12DirectQueue());
+        container.setQueues(test12DirectQueue1(), test12DirectQueue2());
         container.setConcurrentConsumers(1);
         container.setMaxConcurrentConsumers(5);
         container.setDefaultRequeueRejected(false);
@@ -90,6 +106,14 @@ public class RabbitMqConfig {
         MessageListenerAdapter adapter = new MessageListenerAdapter(new MessageDelegate());
         // 可自定义调用的方法名，默认是handleMessage
         adapter.setDefaultListenerMethod("handleMessage");
+        // 可设置指定队列使用指定方法进行处理
+        Map<String, String> queueMethodMap = new HashMap<>(16);
+        queueMethodMap.put("test12.direct.queue1", "handleDirect1");
+        queueMethodMap.put("test12.direct.queue2", "handleDirect2");
+        adapter.setQueueOrTagToMethodName(queueMethodMap);
+        // 可设置自定义消息转换器
+        adapter.setMessageConverter(new TextMessageConverter());
+
         container.setMessageListener(adapter);
         return container;
     }
