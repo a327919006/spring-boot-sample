@@ -1,7 +1,6 @@
 package com.cn.boot.sample.amqp.spring.config;
 
 import com.cn.boot.sample.amqp.spring.test12.RabbitTemplateTest;
-import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -9,7 +8,7 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
-import org.springframework.amqp.rabbit.listener.api.ChannelAwareMessageListener;
+import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -76,13 +75,22 @@ public class RabbitMqConfig {
         container.setMaxConcurrentConsumers(5);
         container.setDefaultRequeueRejected(false);
         container.setAcknowledgeMode(AcknowledgeMode.AUTO);
-        container.setMessageListener(new ChannelAwareMessageListener() {
-            @Override
-            public void onMessage(Message message, Channel channel) throws Exception {
-                String body = new String(message.getBody());
-                log.info("收到消息, body={}", body);
-            }
-        });
+
+        // 方式一 设置MessageListener
+//        container.setMessageListener(new ChannelAwareMessageListener() {
+//            @Override
+//            public void onMessage(Message message, Channel channel) throws Exception {
+//                String body = new String(message.getBody());
+//                log.info("收到消息, body={}", body);
+//            }
+//        });
+
+
+        // 方式二 使用MessageListenerAdapter
+        MessageListenerAdapter adapter = new MessageListenerAdapter(new MessageDelegate());
+        // 可自定义调用的方法名，默认是handleMessage
+        adapter.setDefaultListenerMethod("handleMessage");
+        container.setMessageListener(adapter);
         return container;
     }
 }
