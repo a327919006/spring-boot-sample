@@ -7,6 +7,7 @@ SpringBoot 2.1.x 整合其他框架：Mybatis、Dubbo、Swagger2等
 
 | 端口 | 模块名称 | 描述 |
 | --- | --- | --- |
+| 10082 | sample-amqp | 整合RabbitMQ |
 | ----- | sample-api | 服务接口、工具类、实体类 |
 | 10081 | sample-business | 业务接口 |
 | ----- | sample-dal | mapper、sql语句 |
