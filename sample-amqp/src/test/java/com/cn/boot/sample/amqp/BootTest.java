@@ -1,6 +1,7 @@
 package com.cn.boot.sample.amqp;
 
 import com.cn.boot.sample.amqp.boot.test13.RabbitSender;
+import com.cn.boot.sample.api.model.dto.client.ClientAddReq;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,10 @@ public class BootTest {
     public void test13() {
         rabbitSender.sendMessage("Hello RabbitMQ! SpringBoot!");
         rabbitSender.sendMessage("Hello RabbitMQ! SpringBoot!error");
+
+        ClientAddReq req = new ClientAddReq();
+        req.setId(123L);
+        req.setName("张三");
+        rabbitSender.sendMessage(req);
     }
 }

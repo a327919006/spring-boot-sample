@@ -1,11 +1,14 @@
 package com.cn.boot.sample.amqp.boot.test13;
 
 import cn.hutool.core.util.IdUtil;
+import com.cn.boot.sample.api.model.dto.client.ClientAddReq;
+import com.cn.boot.sample.api.model.po.Client;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 /**
@@ -49,6 +52,21 @@ public class RabbitSender {
         rabbitTemplate.setReturnCallback(returnCallback);
         CorrelationData correlationData = new CorrelationData();
         correlationData.setId(IdUtil.simpleUUID());
-        rabbitTemplate.convertAndSend("test13_exchange", "test13", data, correlationData);
+
+        String returnMsg = "return";
+        if (data.contains(returnMsg)) {
+            rabbitTemplate.convertAndSend("test13_exchange", "testaa", data, correlationData);
+        } else {
+            rabbitTemplate.convertAndSend("test13_exchange", "test13", data, correlationData);
+        }
+    }
+
+    public void sendMessage(ClientAddReq req) {
+        rabbitTemplate.setConfirmCallback(confirmCallback);
+        rabbitTemplate.setReturnCallback(returnCallback);
+        CorrelationData correlationData = new CorrelationData();
+        correlationData.setId(IdUtil.simpleUUID());
+
+        rabbitTemplate.convertAndSend("test13_exchange", "test13", req, correlationData);
     }
 }
