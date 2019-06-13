@@ -19,3 +19,10 @@ spring:
         acknowledge-mode: manual
         concurrency: 2
         max-concurrency: 5
+      test13:
+        queue:
+          name: test13_queue
+        exchange:
+          name: test13_exchange
+          type: topic
+        key: test13.#

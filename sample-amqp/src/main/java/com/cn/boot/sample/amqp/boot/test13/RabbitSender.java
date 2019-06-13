@@ -2,13 +2,11 @@ package com.cn.boot.sample.amqp.boot.test13;
 
 import cn.hutool.core.util.IdUtil;
 import com.cn.boot.sample.api.model.dto.client.ClientAddReq;
-import com.cn.boot.sample.api.model.po.Client;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 /**

@@ -22,9 +22,9 @@ import java.io.IOException;
 public class RabbitReceiver {
 
     @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = "test13_queue"),
-            exchange = @Exchange(value = "test13_exchange", type = "topic"),
-            key = "test13.#"))
+            value = @Queue(value = "${spring.rabbitmq.listener.test13.queue.name}"),
+            exchange = @Exchange(value = "${spring.rabbitmq.listener.test13.exchange.name}", type = "${spring.rabbitmq.listener.test13.exchange.type}"),
+            key = "${spring.rabbitmq.listener.test13.key}"))
     @RabbitHandler
     public void onMessage(String data, Channel channel, Message message) throws IOException {
         log.info("-----onMessage------");
@@ -40,9 +40,9 @@ public class RabbitReceiver {
     }
 
     @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = "test13_queue"),
-            exchange = @Exchange(value = "test13_exchange", type = "topic"),
-            key = "test13.#"))
+            value = @Queue(value = "${spring.rabbitmq.listener.test13.queue.name}"),
+            exchange = @Exchange(value = "${spring.rabbitmq.listener.test13.exchange.name}", type = "${spring.rabbitmq.listener.test13.exchange.type}"),
+            key = "${spring.rabbitmq.listener.test13.key}"))
     @RabbitHandler
     public void onMessage(@Payload ClientAddReq req, Channel channel, Message message) throws IOException {
         log.info("-----onMessage------");
