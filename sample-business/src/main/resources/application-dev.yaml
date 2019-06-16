@@ -32,3 +32,10 @@ swagger:
       version: 1.0.0
       terms-of-service-url: https://gitee.com/NuLiing
     response-message-language: cn
+
+spring:
+  task:
+    execution:
+      thread-name-prefix: myExecute-
+      pool:
+        max-size: 100

@@ -52,7 +52,7 @@ public class AsyncController {
         return result;
     }
 
-    @ApiOperation(value = "使用Callback")
+    @ApiOperation(value = "使用DeferredResult")
     @GetMapping(value = "test2")
     public DeferredResult<Client> test2(@ModelAttribute @Valid ClientSearchReq req) {
         log.info("【异步】开始：" + req);

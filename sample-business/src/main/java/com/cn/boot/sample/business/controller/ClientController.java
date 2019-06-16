@@ -86,13 +86,37 @@ public class ClientController {
 
     @ApiOperation(value = "查询商户")
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public Object delete(@ModelAttribute ClientSearchReq req) {
+    public Object get(@ModelAttribute ClientSearchReq req) {
         log.info("【商户】开始查询：" + req);
 
         Client client = clientService.selectByPrimaryKey(req.getId());
         if (client == null) {
             log.error("商户不存在");
             return new BaseRsp(Constants.CODE_FAILURE, "商户不存在" + req.getId());
+        }
+
+        Map<String, Object> rspMap = new HashMap<>(10);
+        rspMap.put("id", client.getId());
+        rspMap.put("name", client.getName());
+        rspMap.put("status", client.getStatus());
+        rspMap.put("thirdType", client.getThirdType());
+        rspMap.put("thirdSecretId", client.getThirdSecretId());
+        rspMap.put("thirdSecretKey", client.getThirdSecretKey());
+        rspMap.put("thirdUserId", client.getThirdUserId());
+
+        log.info("【商户】查询成功");
+        return new BaseRsp().data(rspMap);
+    }
+
+    @ApiOperation(value = "查询商户")
+    @GetMapping("/get/{id:\\d+}")
+    public Object getById(@PathVariable Long id) {
+        log.info("【商户】开始查询：" + id);
+
+        Client client = clientService.selectByPrimaryKey(id);
+        if (client == null) {
+            log.error("商户不存在");
+            return new BaseRsp(Constants.CODE_FAILURE, "商户不存在" + id);
         }
 
         Map<String, Object> rspMap = new HashMap<>(10);
