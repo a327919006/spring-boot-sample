@@ -1,5 +1,5 @@
 server:
-  port: 10081
+  port: 10083
   servlet:
     context-path: /${artifactId}
 
@@ -16,7 +16,7 @@ swagger:
   enabled: true
   print-init: true
   docket:
-    base-package: com.cn.boot.sample.business.controller
+    base-package: com.cn.boot.sample.security.controller
     group-name: ${artifactId}
     path-selectors:
       exclude-patterns: [/error]
@@ -32,10 +32,3 @@ swagger:
       version: ${parent.version}
       terms-of-service-url: https://gitee.com/NuLiing
     response-message-language: cn
-
-spring:
-  task:
-    execution:
-      thread-name-prefix: myExecute-
-      pool:
-        max-size: 100
