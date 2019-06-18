@@ -18,10 +18,8 @@ USE `boot-sample`;
 
 /*Table structure for table `t_client` */
 
-DROP TABLE IF EXISTS `t_client`;
-
 CREATE TABLE `t_client` (
-  `client_id` varchar(32) NOT NULL COMMENT '商户ID',
+  `id` bigint(20) NOT NULL COMMENT '商户ID',
   `plat_id` varchar(32) DEFAULT NULL COMMENT '平台ID',
   `name` varchar(32) DEFAULT NULL COMMENT '商户名称',
   `status` tinyint(2) unsigned DEFAULT '1' COMMENT '商户状态（0-无效，1-有效）',
@@ -36,8 +34,19 @@ CREATE TABLE `t_client` (
   `third_user_id` varchar(32) DEFAULT NULL COMMENT '第三方应用userId',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`client_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC COMMENT='商户信息';
+
+/*Table structure for table `t_user` */
+
+CREATE TABLE `t_user` (
+  `id` bigint(20) NOT NULL,
+  `username` varchar(16) DEFAULT NULL,
+  `password` varchar(32) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

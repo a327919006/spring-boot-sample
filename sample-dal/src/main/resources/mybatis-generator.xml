@@ -42,8 +42,8 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>-->
 
-        <table tableName="t_client" enableSelectByExample="false"
+        <table tableName="t_user" enableSelectByExample="false"
                enableDeleteByExample="false" enableCountByExample="false"
-               enableUpdateByExample="false" domainObjectName="Client"/>
+               enableUpdateByExample="false" domainObjectName="User"/>
     </context>
 </generatorConfiguration>
