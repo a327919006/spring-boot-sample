@@ -11,9 +11,12 @@ import org.springframework.context.annotation.ComponentScan;
  * @author Chen Nan
  */
 @SpringBootApplication
-@MapperScan("com.cn.boot.sample.dal.mapper")
+@MapperScan({
+        "com.cn.boot.sample.dal.mapper",
+        "com.baidu.fsg.uid.worker.dao"})
 @ComponentScan(basePackages = {
-        "com.cn.boot.sample.dal.mapper"
+        "com.cn.boot.sample.dal.mapper",
+        "com.cn.boot.sample.server.config"
 })
 public class ServerApplication {
     public static void main(String[] args) {

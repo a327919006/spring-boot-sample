@@ -54,6 +54,9 @@
         <!--rabbitmq-->
         <rabbitmq.version>5.7.1</rabbitmq.version>
 
+        <!--uid-->
+        <com.baidu.fsg.uid.version>1.0.1-SNAPSHOT</com.baidu.fsg.uid.version>
+
         <!-- plugins -->
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
         <maven-jar-plugin.version>2.3.1</maven-jar-plugin.version>
@@ -173,6 +176,27 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+
+            <!--uid-->
+            <dependency>
+                <groupId>com.baidu.fsg</groupId>
+                <artifactId>uid-generator</artifactId>
+                <version>${com.baidu.fsg.uid.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-classic</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>log4j-over-slf4j</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 			
             <!--model-->

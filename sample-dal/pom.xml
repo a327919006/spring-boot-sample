@@ -31,6 +31,12 @@
             <version>${mybatis-generator-core.version}</version>
         </dependency>
 
+        <!--uid-->
+        <dependency>
+            <groupId>com.baidu.fsg</groupId>
+            <artifactId>uid-generator</artifactId>
+        </dependency>
+
         <!-- modules -->
         <dependency>
             <groupId>com.cn.boot</groupId>
