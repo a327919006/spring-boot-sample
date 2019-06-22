@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class ClientSearchReq implements Serializable {
     @ApiModelProperty(value = "id", required = true)
     @NotNull
-    private Long id;
+    private String id;
 
     private Integer page;
     private Integer rows;

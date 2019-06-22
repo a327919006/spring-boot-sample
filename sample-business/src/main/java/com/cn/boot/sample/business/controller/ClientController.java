@@ -1,11 +1,13 @@
 package com.cn.boot.sample.business.controller;
 
-import com.cn.boot.sample.api.model.Constants;
-import com.cn.boot.sample.api.model.dto.BaseRsp;
-import com.cn.boot.sample.api.model.dto.client.*;
+import com.cn.boot.sample.api.exceptions.BusinessException;
+import com.cn.boot.sample.api.model.dto.client.ClientAddReq;
+import com.cn.boot.sample.api.model.dto.client.ClientEditReq;
+import com.cn.boot.sample.api.model.dto.client.ClientListReq;
 import com.cn.boot.sample.api.model.po.Client;
+import com.cn.boot.sample.api.model.vo.client.ClientGetRsp;
 import com.cn.boot.sample.api.service.IClientService;
-import com.cn.boot.sample.api.utils.IdGenerator;
+import com.cn.boot.sample.api.service.IUidGeneratorService;
 import com.github.pagehelper.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,28 +19,27 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /**
  * @author Chen Nan
  */
-@RestController
-@Api(tags = "商户管理", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@RequestMapping(value = "/client")
 @Slf4j
+@RestController
+@RequestMapping("/client")
+@Api(tags = "商户管理", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class ClientController {
 
     @Reference
     private IClientService clientService;
+    @Reference
+    private IUidGeneratorService uidGeneratorService;
 
-    @ApiOperation(value = "添加商户")
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public Object add(@RequestBody @Valid ClientAddReq req) {
-        log.info("【商户】开始添加：" + req);
-
+    @ApiOperation("商户-添加")
+    @PostMapping("")
+    public String insert(@RequestBody @Valid ClientAddReq req) {
         if (req.getId() == null) {
-            req.setId(IdGenerator.nextId());
+            req.setId(uidGeneratorService.generate());
         }
 
         Client client = new Client();
@@ -47,101 +48,45 @@ public class ClientController {
         client.setUpdateTime(client.getCreateTime());
         clientService.insertSelective(client);
 
-        Map<String, Object> rspMap = new HashMap<>(1);
-        rspMap.put("id", client.getId());
-
-        log.info("【商户】添加成功");
-        return new BaseRsp().data(rspMap);
+        return client.getId();
     }
 
-    @ApiOperation(value = "修改商户")
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public Object edit(@ModelAttribute ClientEditReq req) {
-        log.info("【商户】开始修改：" + req);
-
-        Client client = clientService.selectByPrimaryKey(req.getId());
+    @ApiOperation("商户-修改")
+    @PutMapping("/{id}")
+    public void update(@PathVariable String id, @ModelAttribute ClientEditReq req) {
+        Client client = clientService.selectByPrimaryKey(id);
         if (client == null) {
-            log.error("商户不存在");
-            return new BaseRsp(Constants.CODE_FAILURE, "商户不存在");
+            throw new BusinessException("商户不存在");
         }
 
         BeanUtils.copyProperties(req, client);
         client.setUpdateTime(LocalDateTime.now());
         clientService.updateByPrimaryKeySelective(client);
-
-        log.info("【商户】修改成功");
-        return new BaseRsp().msg(Constants.MSG_SUCCESS);
     }
 
-    @ApiOperation(value = "删除商户")
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public Object delete(@ModelAttribute ClientDeleteReq req) {
-        log.info("【商户】开始删除：" + req);
-
-        clientService.deleteByPrimaryKey(req.getId());
-
-        log.info("【商户】删除成功");
-        return new BaseRsp();
+    @ApiOperation("商户-删除")
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable String id) {
+        clientService.deleteByPrimaryKey(id);
     }
 
-    @ApiOperation(value = "查询商户")
-    @GetMapping(value = "/get")
-    public Object get(@ModelAttribute ClientSearchReq req) {
-        log.info("【商户】开始查询：" + req);
-
-        Client client = clientService.selectByPrimaryKey(req.getId());
-        if (client == null) {
-            log.error("商户不存在");
-            return new BaseRsp(Constants.CODE_FAILURE, "商户不存在" + req.getId());
-        }
-
-        Map<String, Object> rspMap = new HashMap<>(10);
-        rspMap.put("id", client.getId());
-        rspMap.put("name", client.getName());
-        rspMap.put("status", client.getStatus());
-        rspMap.put("thirdType", client.getThirdType());
-        rspMap.put("thirdSecretId", client.getThirdSecretId());
-        rspMap.put("thirdSecretKey", client.getThirdSecretKey());
-        rspMap.put("thirdUserId", client.getThirdUserId());
-
-        log.info("【商户】查询成功");
-        return new BaseRsp().data(rspMap);
-    }
-
-    @ApiOperation(value = "查询商户")
-    @GetMapping("/get/{id:\\d+}")
-    public Object getById(@PathVariable Long id) {
-        log.info("【商户】开始查询：" + id);
-
+    @ApiOperation("商户-获取")
+    @GetMapping("/{id}")
+    public ClientGetRsp get(@PathVariable String id) {
         Client client = clientService.selectByPrimaryKey(id);
         if (client == null) {
-            log.error("商户不存在");
-            return new BaseRsp(Constants.CODE_FAILURE, "商户不存在" + id);
+            throw new BusinessException("商户不存在");
         }
 
-        Map<String, Object> rspMap = new HashMap<>(10);
-        rspMap.put("id", client.getId());
-        rspMap.put("name", client.getName());
-        rspMap.put("status", client.getStatus());
-        rspMap.put("thirdType", client.getThirdType());
-        rspMap.put("thirdSecretId", client.getThirdSecretId());
-        rspMap.put("thirdSecretKey", client.getThirdSecretKey());
-        rspMap.put("thirdUserId", client.getThirdUserId());
-
-        log.info("【商户】查询成功");
-        return new BaseRsp().data(rspMap);
+        ClientGetRsp rsp = new ClientGetRsp();
+        BeanUtils.copyProperties(client, rsp);
+        return rsp;
     }
 
-    @ApiOperation(value = "商户列表")
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Object list(@RequestBody ClientListReq req) {
-        log.info("【商户列表】开始：" + req);
-
-        BaseRsp rsp = new BaseRsp();
-
+    @ApiOperation("商户-列表")
+    @GetMapping("")
+    public List<Client> list(@ModelAttribute ClientListReq req) {
         Page<Client> page = clientService.listPage(req);
-
-        log.info("【商户列表】查询成功");
-        return rsp.data(page.getResult());
+        return page.getResult();
     }
 }

@@ -82,7 +82,7 @@ public abstract class BaseServiceImpl<M extends Mapper, T, PK> {
         boolean count = (boolean) paramMap.get(Constants.KEY_COUNT);
         String orderBy = (String) paramMap.get(Constants.KEY_ORDER_BY);
         Page<T> page = PageHelper.startPage(pageNum, pageSize, count).setOrderBy(orderBy);
-        mapper.selectByExample(paramMap);
+        mapper.select(paramMap);
         return page;
     }
 }

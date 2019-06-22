@@ -1,6 +1,7 @@
 package com.cn.boot.sample.business.config;
 
-import com.cn.boot.sample.api.model.dto.BaseRsp;
+import cn.hutool.core.exceptions.ExceptionUtil;
+import com.cn.boot.sample.api.exceptions.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
@@ -11,17 +12,18 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
 /**
- * <p>Title: ControllerExceptionHandler</p>
- * <p>Description: 控制器异常处理</p>
+ * 控制器异常处理
+ *
+ * @author Chen Nan
  */
+@SuppressWarnings("unchecked")
 @ControllerAdvice
 @Slf4j
-public class ControllerExceptionHandler {
+public class ControllerExceptionHandler extends HttpStatusHandler {
 
     /**
      * 控制器异常处理入口
@@ -32,34 +34,31 @@ public class ControllerExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public Object resolveException(Exception e) {
-        log.error(e.getClass().getName());
-        BaseRsp retBean = new BaseRsp();
-
         if (e instanceof BindException) {
+            log.error("【参数校验异常】:" + e);
             BindException exs = (BindException) e;
-            log.error("【参数校验异常】:" + e);
-
-            List<FieldError> errors = exs.getFieldErrors();
-
-            if (errors.size() > 0) {
-                FieldError error = errors.get(0);
-                retBean.code(1).msg(error.getField() + error.getDefaultMessage());
-            }
+            return error(getArgumentError(exs.getFieldErrors()));
         } else if (e instanceof MethodArgumentNotValidException) {
-            MethodArgumentNotValidException exs = (MethodArgumentNotValidException) e;
             log.error("【参数校验异常】:" + e);
-
-            List<FieldError> errors = exs.getBindingResult().getFieldErrors();
-
-            if (errors.size() > 0) {
-                FieldError error = errors.get(0);
-                retBean.code(1).msg(error.getField() + error.getDefaultMessage());
-            }
-        } else {
-            log.error(e.getMessage(), e);
-            retBean.code(1).msg("系统异常");
+            MethodArgumentNotValidException exs = (MethodArgumentNotValidException) e;
+            return error(getArgumentError(exs.getBindingResult().getFieldErrors()));
+        } else if (ExceptionUtil.isCausedBy(e, BusinessException.class)) {
+            log.error("【业务异常】", e);
+            BusinessException exception = (BusinessException) ExceptionUtil.getCausedBy(e, BusinessException.class);
+            return error(HttpStatus.BAD_REQUEST, exception.getCode(), exception.getMsg());
         }
+        log.error(e.getMessage(), e);
+        return error(HttpStatus.INTERNAL_SERVER_ERROR, "服务器开小差");
+    }
 
-        return retBean;
+    /**
+     * 获取参数校验异常原因
+     */
+    private String getArgumentError(List<FieldError> errors) {
+        if (errors.size() > 0) {
+            FieldError error = errors.get(0);
+            return error.getField() + error.getDefaultMessage();
+        }
+        return "参数校验异常";
     }
 }

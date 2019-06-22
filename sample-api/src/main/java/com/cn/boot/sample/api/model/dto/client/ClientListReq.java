@@ -3,21 +3,18 @@ package com.cn.boot.sample.api.model.dto.client;
 import cn.hutool.json.JSONUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
  * @author Chen Nan
  */
 @ApiModel
-@Getter
-@Setter
+@Data
 public class ClientListReq implements Serializable {
-    @ApiModelProperty(value = "id", required = true)
-    private Long id;
+    @ApiModelProperty(value = "商户名称", required = true)
+    private String name;
 
     private Integer pageNum;
     private Integer pageSize;

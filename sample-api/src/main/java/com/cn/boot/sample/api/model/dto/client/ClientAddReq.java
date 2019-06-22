@@ -1,32 +1,32 @@
 package com.cn.boot.sample.api.model.dto.client;
 
-import cn.hutool.json.JSONUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
  * @author Chen Nan
  */
 @ApiModel
-@Getter
-@Setter
+@Data
 public class ClientAddReq implements Serializable {
-    @ApiModelProperty(value = "id")
-    private Long id;
+    @ApiModelProperty(value = "商户ID")
+    private String id;
+
+    @ApiModelProperty(value = "平台ID")
+    @NotBlank
+    private String platId;
 
     @ApiModelProperty(value = "商户名称", required = true)
     @NotBlank
     private String name;
 
-    @ApiModelProperty(value = "算法类型(0:腾讯)", required = true, allowableValues = "0")
-    @NotNull
-    private Byte thirdType;
+    @ApiModelProperty(value = "第三方存储配置ID", required = true)
+    @NotBlank
+    private String ossConfigId;
 
     @ApiModelProperty(value = "算法APPID", required = true)
     @NotBlank
@@ -43,9 +43,4 @@ public class ClientAddReq implements Serializable {
     @ApiModelProperty(value = "算法UserId", required = true)
     @NotBlank
     private String thirdUserId;
-
-    @Override
-    public String toString() {
-        return JSONUtil.toJsonStr(this);
-    }
 }

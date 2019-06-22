@@ -11,6 +11,6 @@ import org.apache.dubbo.config.annotation.Service;
  */
 @Service
 @Slf4j
-public class ClientServiceImpl extends BaseServiceImpl<ClientMapper, Client, Long>
+public class ClientServiceImpl extends BaseServiceImpl<ClientMapper, Client, String>
         implements IClientService {
 }

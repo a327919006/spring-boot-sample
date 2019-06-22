@@ -23,46 +23,39 @@ import java.util.concurrent.Callable;
 /**
  * @author Chen Nan
  */
-@RestController
-@Api(tags = "异步接口", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@RequestMapping(value = "/async")
 @Slf4j
+@RestController
+@RequestMapping("/async")
+@Api(tags = "异步接口", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class AsyncController {
 
     @Reference
     private IClientService clientService;
+
     @Autowired
     private DeferredResultHolder resultHolder;
     @Autowired
     private ClientQueue clientQueue;
 
-    @ApiOperation(value = "使用Callback")
-    @GetMapping(value = "test1")
+    @ApiOperation("异步-使用Callback")
+    @GetMapping("test1")
     public Callable<Client> test1(@ModelAttribute @Valid ClientSearchReq req) {
-        log.info("【异步】开始：" + req);
-
         Callable<Client> result = () -> {
             log.info("开始获取商户");
             Client client = clientService.selectByPrimaryKey(req.getId());
             log.info("获取商户成功");
             return client;
         };
-
-        log.info("【异步】成功");
         return result;
     }
 
-    @ApiOperation(value = "使用DeferredResult")
-    @GetMapping(value = "test2")
+    @ApiOperation("异步-使用DeferredResult")
+    @GetMapping("test2")
     public DeferredResult<Client> test2(@ModelAttribute @Valid ClientSearchReq req) {
-        log.info("【异步】开始：" + req);
-
         clientQueue.setClientId(req.getId());
 
         DeferredResult<Client> result = new DeferredResult<>();
         resultHolder.getMap().put(req.getId(), result);
-
-        log.info("【异步】成功");
         return result;
     }
 }

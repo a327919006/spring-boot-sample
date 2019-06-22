@@ -20,9 +20,9 @@ import org.springframework.stereotype.Component;
 public class ClientQueue {
     @Autowired
     private ThreadPoolTaskExecutor poolTaskExecutor;
-    private Long clientId;
+    private String clientId;
 
-    public void setClientId(Long clientId) {
+    public void setClientId(String clientId) {
         poolTaskExecutor.execute(() -> {
             log.info("开始发送MQ");
             ThreadUtil.sleep(1000);

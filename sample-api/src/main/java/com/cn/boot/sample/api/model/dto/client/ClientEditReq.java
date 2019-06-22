@@ -1,10 +1,8 @@
 package com.cn.boot.sample.api.model.dto.client;
 
-import cn.hutool.json.JSONUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -16,13 +14,8 @@ import java.io.Serializable;
  * @author Chen Nan
  */
 @ApiModel
-@Getter
-@Setter
+@Data
 public class ClientEditReq implements Serializable {
-    @ApiModelProperty(value = "id", required = true)
-    @NotNull
-    private Long id;
-
     @ApiModelProperty(value = "商户名称", required = true)
     @NotBlank
     private String name;
@@ -51,9 +44,4 @@ public class ClientEditReq implements Serializable {
     @Min(0)
     @Max(1)
     private byte status;
-
-    @Override
-    public String toString() {
-        return JSONUtil.toJsonStr(this);
-    }
 }
