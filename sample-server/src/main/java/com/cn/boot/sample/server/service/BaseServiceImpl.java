@@ -2,11 +2,11 @@ package com.cn.boot.sample.server.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.cn.boot.sample.api.model.Constants;
-import com.cn.boot.sample.dal.mapper.BaseMapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -21,8 +21,9 @@ import java.util.Map;
  *
  * @author Chen Nan
  */
+@SuppressWarnings("unchecked")
 @Slf4j
-public abstract class BaseServiceImpl<M extends BaseMapper, T, PK> {
+public abstract class BaseServiceImpl<M extends Mapper, T, PK> {
     /**
      * 持久层对象
      */
@@ -58,19 +59,19 @@ public abstract class BaseServiceImpl<M extends BaseMapper, T, PK> {
     }
 
     public int count(T record) {
-        return mapper.count(record);
+        return mapper.selectCount(record);
     }
 
     public T get(T record) {
-        return (T) mapper.get(record);
+        return (T) mapper.selectOne(record);
     }
 
     public List<T> list(T record) {
-        return mapper.list(record);
+        return mapper.select(record);
     }
 
     public List<T> listByCondition(Object record) {
-        return mapper.listByCondition(record);
+        return mapper.selectByExample(record);
     }
 
     public Page<T> listPage(Object record) {
@@ -81,7 +82,7 @@ public abstract class BaseServiceImpl<M extends BaseMapper, T, PK> {
         boolean count = (boolean) paramMap.get(Constants.KEY_COUNT);
         String orderBy = (String) paramMap.get(Constants.KEY_ORDER_BY);
         Page<T> page = PageHelper.startPage(pageNum, pageSize, count).setOrderBy(orderBy);
-        mapper.listByCondition(paramMap);
+        mapper.selectByExample(paramMap);
         return page;
     }
 }

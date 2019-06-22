@@ -18,7 +18,7 @@ public class UidGeneratorServiceImpl implements IUidGeneratorService {
     private UidGenerator uidGenerator;
 
     @Override
-    public long generate() {
-        return uidGenerator.getUID();
+    public String generate() {
+        return String.valueOf(uidGenerator.getUID());
     }
 }

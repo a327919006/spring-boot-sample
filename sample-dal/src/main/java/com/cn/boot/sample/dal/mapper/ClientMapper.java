@@ -1,6 +1,10 @@
 package com.cn.boot.sample.dal.mapper;
 
 import com.cn.boot.sample.api.model.po.Client;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface ClientMapper extends BaseMapper<Client, Long> {
+/**
+ * @author Chen Nan
+ */
+public interface ClientMapper extends Mapper<Client> {
 }

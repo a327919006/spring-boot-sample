@@ -85,7 +85,7 @@ public class ClientController {
     }
 
     @ApiOperation(value = "查询商户")
-    @RequestMapping(value = "/get", method = RequestMethod.POST)
+    @GetMapping(value = "/get")
     public Object get(@ModelAttribute ClientSearchReq req) {
         log.info("【商户】开始查询：" + req);
 

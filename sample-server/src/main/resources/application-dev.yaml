@@ -3,7 +3,7 @@
 spring:
   # 数据库连接配置
   datasource:
-    url: jdbc:mysql://localhost:3306/boot-sample?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306?useUnicode=true&characterEncoding=utf-8
     username: root
     password: chennan
     driver-class-name: com.mysql.jdbc.Driver

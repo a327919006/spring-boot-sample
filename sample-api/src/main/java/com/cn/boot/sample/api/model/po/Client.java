@@ -1,156 +1,105 @@
 package com.cn.boot.sample.api.model.po;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * @author Chen Nan
+ */
+@Data
+@Accessors(chain = true)
+@Table(name = "boot_sample.client")
 public class Client implements Serializable {
-    private Long id;
+    /**
+     * 商户ID
+     */
+    @Id
+    private String id;
 
+    /**
+     * 平台ID
+     */
+    @Column(name = "plat_id")
     private String platId;
 
+    /**
+     * 商户名称
+     */
     private String name;
 
-    private Byte status;
+    /**
+     * 商户状态（0-无效，1-有效）
+     */
+    private Integer status;
 
+    /**
+     * 人脸相似度阈值
+     */
     private Integer threshold;
 
+    /**
+     * 去重间隔（秒）
+     */
+    @Column(name = "repeat_second")
     private Integer repeatSecond;
 
-    private Byte ossType;
+    /**
+     * 第三方存储类型 0腾讯 1瑞为 2华为
+     */
+    @Column(name = "oss_type")
+    private Integer ossType;
 
+    /**
+     * 第三方存储配置ID
+     */
+    @Column(name = "oss_config_id")
     private String ossConfigId;
 
-    private Byte thirdType;
+    /**
+     * 第三方算法类型 0腾讯 1瑞为 2华为
+     */
+    @Column(name = "third_type")
+    private Integer thirdType;
 
+    /**
+     * 第三方应用APPID
+     */
+    @Column(name = "third_app_id")
     private String thirdAppId;
 
+    /**
+     * 第三方应用SecretId
+     */
+    @Column(name = "third_secret_id")
     private String thirdSecretId;
 
+    /**
+     * 第三方应用密钥
+     */
+    @Column(name = "third_secret_key")
     private String thirdSecretKey;
 
+    /**
+     * 第三方应用userId
+     */
+    @Column(name = "third_user_id")
     private String thirdUserId;
 
+    /**
+     * 创建时间
+     */
+    @Column(name = "create_time")
     private LocalDateTime createTime;
 
+    /**
+     * 更新时间
+     */
+    @Column(name = "update_time")
     private LocalDateTime updateTime;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPlatId() {
-        return platId;
-    }
-
-    public void setPlatId(String platId) {
-        this.platId = platId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public Integer getThreshold() {
-        return threshold;
-    }
-
-    public void setThreshold(Integer threshold) {
-        this.threshold = threshold;
-    }
-
-    public Integer getRepeatSecond() {
-        return repeatSecond;
-    }
-
-    public void setRepeatSecond(Integer repeatSecond) {
-        this.repeatSecond = repeatSecond;
-    }
-
-    public Byte getOssType() {
-        return ossType;
-    }
-
-    public void setOssType(Byte ossType) {
-        this.ossType = ossType;
-    }
-
-    public String getOssConfigId() {
-        return ossConfigId;
-    }
-
-    public void setOssConfigId(String ossConfigId) {
-        this.ossConfigId = ossConfigId;
-    }
-
-    public Byte getThirdType() {
-        return thirdType;
-    }
-
-    public void setThirdType(Byte thirdType) {
-        this.thirdType = thirdType;
-    }
-
-    public String getThirdAppId() {
-        return thirdAppId;
-    }
-
-    public void setThirdAppId(String thirdAppId) {
-        this.thirdAppId = thirdAppId;
-    }
-
-    public String getThirdSecretId() {
-        return thirdSecretId;
-    }
-
-    public void setThirdSecretId(String thirdSecretId) {
-        this.thirdSecretId = thirdSecretId;
-    }
-
-    public String getThirdSecretKey() {
-        return thirdSecretKey;
-    }
-
-    public void setThirdSecretKey(String thirdSecretKey) {
-        this.thirdSecretKey = thirdSecretKey;
-    }
-
-    public String getThirdUserId() {
-        return thirdUserId;
-    }
-
-    public void setThirdUserId(String thirdUserId) {
-        this.thirdUserId = thirdUserId;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
 }

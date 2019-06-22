@@ -12,5 +12,5 @@ public interface IUidGeneratorService {
      *
      * @return uid
      */
-    long generate();
+    String generate();
 }

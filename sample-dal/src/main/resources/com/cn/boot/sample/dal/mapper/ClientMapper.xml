@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.boot.sample.dal.mapper.ClientMapper">
+  <resultMap id="BaseResultMap" type="com.cn.boot.sample.api.model.po.Client">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="plat_id" jdbcType="VARCHAR" property="platId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="threshold" jdbcType="INTEGER" property="threshold" />
+    <result column="repeat_second" jdbcType="INTEGER" property="repeatSecond" />
+    <result column="oss_type" jdbcType="INTEGER" property="ossType" />
+    <result column="oss_config_id" jdbcType="VARCHAR" property="ossConfigId" />
+    <result column="third_type" jdbcType="INTEGER" property="thirdType" />
+    <result column="third_app_id" jdbcType="VARCHAR" property="thirdAppId" />
+    <result column="third_secret_id" jdbcType="VARCHAR" property="thirdSecretId" />
+    <result column="third_secret_key" jdbcType="VARCHAR" property="thirdSecretKey" />
+    <result column="third_user_id" jdbcType="VARCHAR" property="thirdUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, plat_id, name, status, threshold, repeat_second, oss_type, oss_config_id, third_type, 
+    third_app_id, third_secret_id, third_secret_key, third_user_id, create_time, update_time
+  </sql>
+</mapper>
