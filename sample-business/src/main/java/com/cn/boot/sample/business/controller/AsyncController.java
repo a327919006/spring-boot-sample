@@ -2,7 +2,7 @@ package com.cn.boot.sample.business.controller;
 
 import com.cn.boot.sample.api.model.dto.client.ClientSearchReq;
 import com.cn.boot.sample.api.model.po.Client;
-import com.cn.boot.sample.api.service.IClientService;
+import com.cn.boot.sample.api.service.ClientService;
 import com.cn.boot.sample.business.async.ClientQueue;
 import com.cn.boot.sample.business.async.DeferredResultHolder;
 import io.swagger.annotations.Api;
@@ -30,7 +30,7 @@ import java.util.concurrent.Callable;
 public class AsyncController {
 
     @Reference
-    private IClientService clientService;
+    private ClientService clientService;
 
     @Autowired
     private DeferredResultHolder resultHolder;

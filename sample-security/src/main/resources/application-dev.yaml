@@ -1,7 +1,5 @@
 server:
   port: 10083
-  servlet:
-    context-path: /${artifactId}
 
 dubbo:
   application:
@@ -29,6 +27,13 @@ swagger:
       description: ${artifactId}-接口文档
       license: Apache License, Version 2.0
       license-url: https://www.apache.org/licenses/LICENSE-2.0.html
-      version: ${parent.version}
+      version: ${project.version}
       terms-of-service-url: https://gitee.com/NuLiing
     response-message-language: cn
+
+boot:
+  sample:
+    security:
+      browser:
+        login-page: /login.html
+        login-type: JSON

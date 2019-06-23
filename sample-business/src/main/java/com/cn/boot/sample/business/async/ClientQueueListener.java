@@ -2,7 +2,7 @@ package com.cn.boot.sample.business.async;
 
 import cn.hutool.core.thread.ThreadUtil;
 import com.cn.boot.sample.api.model.po.Client;
-import com.cn.boot.sample.api.service.IClientService;
+import com.cn.boot.sample.api.service.ClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class ClientQueueListener implements ApplicationListener<ContextRefreshed
     @Autowired
     private ThreadPoolTaskExecutor poolTaskExecutor;
     @Reference
-    private IClientService clientService;
+    private ClientService clientService;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {

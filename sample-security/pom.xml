@@ -34,6 +34,11 @@
             <groupId>io.github.wilson-he</groupId>
             <artifactId>swagger2-spring-boot-starter</artifactId>
         </dependency>
+        <!--aop-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
 
         <!--dubbo-->
         <dependency>
@@ -62,6 +67,10 @@
         <dependency>
             <groupId>com.cn.boot</groupId>
             <artifactId>sample-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cn.boot</groupId>
+            <artifactId>sample-security-core</artifactId>
         </dependency>
     </dependencies>
 

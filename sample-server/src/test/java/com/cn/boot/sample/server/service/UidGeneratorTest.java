@@ -1,6 +1,6 @@
 package com.cn.boot.sample.server.service;
 
-import com.cn.boot.sample.api.service.IUidGeneratorService;
+import com.cn.boot.sample.api.service.UidGeneratorService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +20,7 @@ import java.util.Map;
 public class UidGeneratorTest {
 
     @Autowired
-    private IUidGeneratorService uidGeneratorService;
+    private UidGeneratorService uidGeneratorService;
 
     @Test
     public void generate() {

@@ -1,7 +1,7 @@
 package com.cn.boot.sample.server.service;
 
 import com.baidu.fsg.uid.UidGenerator;
-import com.cn.boot.sample.api.service.IUidGeneratorService;
+import com.cn.boot.sample.api.service.UidGeneratorService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Service(timeout = 30000)
 @Slf4j
-public class UidGeneratorServiceImpl implements IUidGeneratorService {
+public class UidGeneratorServiceImpl implements UidGeneratorService {
     @Autowired
     private UidGenerator uidGenerator;
 

@@ -48,11 +48,11 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>-->
 
-        <table catalog="boot-sample" tableName="client" enableSelectByExample="false"
-               enableDeleteByExample="false" enableCountByExample="false"
-               enableUpdateByExample="false"/>
+        <!--<table catalog="boot_sample" tableName="client" enableSelectByExample="false"-->
+               <!--enableDeleteByExample="false" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false"/>-->
 
-        <table catalog="boot-sample" tableName="user" enableSelectByExample="false"
+        <table catalog="boot_sample" tableName="user" enableSelectByExample="false"
                enableDeleteByExample="false" enableCountByExample="false"
                enableUpdateByExample="false"/>
     </context>

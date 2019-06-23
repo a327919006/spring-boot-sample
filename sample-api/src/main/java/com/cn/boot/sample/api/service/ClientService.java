@@ -5,5 +5,5 @@ import com.cn.boot.sample.api.model.po.Client;
 /**
  * @author Chen Nan
  */
-public interface IClientService extends IBaseService<Client, String> {
+public interface ClientService extends BaseService<Client, String> {
 }

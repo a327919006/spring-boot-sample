@@ -1,9 +1,8 @@
-package com.cn.boot.sample.business.config;
+package com.cn.boot.sample.security.config;
 
 import com.cn.boot.sample.api.model.dto.Error;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 
 /**
  * Http返回状态处理

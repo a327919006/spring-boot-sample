@@ -6,8 +6,8 @@ import com.cn.boot.sample.api.model.dto.client.ClientEditReq;
 import com.cn.boot.sample.api.model.dto.client.ClientListReq;
 import com.cn.boot.sample.api.model.po.Client;
 import com.cn.boot.sample.api.model.vo.client.ClientGetRsp;
-import com.cn.boot.sample.api.service.IClientService;
-import com.cn.boot.sample.api.service.IUidGeneratorService;
+import com.cn.boot.sample.api.service.ClientService;
+import com.cn.boot.sample.api.service.UidGeneratorService;
 import com.github.pagehelper.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,9 +31,9 @@ import java.util.List;
 public class ClientController {
 
     @Reference
-    private IClientService clientService;
+    private ClientService clientService;
     @Reference
-    private IUidGeneratorService uidGeneratorService;
+    private UidGeneratorService uidGeneratorService;
 
     @ApiOperation("商户-添加")
     @PostMapping("")

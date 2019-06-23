@@ -78,6 +78,7 @@
                     <dependency>
                         <groupId>tk.mybatis</groupId>
                         <artifactId>mapper</artifactId>
+                        <version>${tk.mybatis.mapper.generator.version}</version>
                     </dependency>
                 </dependencies>
                 <configuration>

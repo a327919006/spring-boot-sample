@@ -5,7 +5,7 @@ package com.cn.boot.sample.api.service;
  *
  * @author Xuerong Xue
  */
-public interface IUidGeneratorService {
+public interface UidGeneratorService {
 
     /**
      * 生成uid

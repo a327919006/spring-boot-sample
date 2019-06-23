@@ -12,7 +12,7 @@ import java.util.List;
  * @param <PK> 记录主键类型
  * @author Chen Nan
  */
-public interface IBaseService<T, PK> {
+public interface BaseService<T, PK> {
 
     /**
      * 根据主键删除

@@ -1,0 +1,41 @@
+package com.cn.boot.sample.security.service.impl;
+
+import com.cn.boot.sample.api.enums.UserStatusEnum;
+import com.cn.boot.sample.api.model.po.User;
+import com.cn.boot.sample.api.service.UserService;
+import com.cn.boot.sample.security.service.LoginService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+/**
+ * @author Chen Nan
+ */
+@Service
+@Slf4j
+public class LoginServiceImpl implements LoginService {
+    @Reference
+    private UserService userService;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userService.get(new User().setUsername(username));
+        if (user != null) {
+            Integer status = user.getStatus();
+            boolean normal = status.equals(UserStatusEnum.NORMAL.getValue());
+            log.info("normal = " + normal);
+            return new org.springframework.security.core.userdetails.User(
+                    username,
+                    user.getPassword(),
+                    normal,
+                    true,
+                    true,
+                    true,
+                    AuthorityUtils.createAuthorityList("admin"));
+        }
+        return null;
+    }
+}
