@@ -53,10 +53,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 // 如果是/login.html直接放行，注意：谷歌浏览器自己会请求favicon.ico
-                .antMatchers("/login").permitAll()
-                .antMatchers("/authentication/form").permitAll()
-                .antMatchers("/authentication/require").permitAll()
-                .antMatchers("/favicon.ico").permitAll()
+                .antMatchers("/login",
+                        "/authentication/form",
+                        "/authentication/require",
+                        "/favicon.ico").permitAll()
                 .antMatchers(securityProperties.getBrowser().getLoginPage()).permitAll()
                 .anyRequest()
                 .authenticated();
