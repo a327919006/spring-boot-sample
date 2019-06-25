@@ -28,6 +28,6 @@ public class ImageCodeProperties {
     /**
      * 需要校验验证码的接口url
      */
-    private String url;
+    private String url = "";
 
 }

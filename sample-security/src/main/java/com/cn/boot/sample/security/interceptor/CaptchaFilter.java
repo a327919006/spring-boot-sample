@@ -43,7 +43,8 @@ public class CaptchaFilter extends OncePerRequestFilter implements InitializingB
 
     private void initUrl() {
         log.info("【CaptchaFilter】initUrl");
-        urls.addAll(Arrays.asList(StringUtils.splitByWholeSeparatorPreserveAllTokens(securityProperties.getCode().getImage().getUrl(), ",")));
+        String url = securityProperties.getCode().getImage().getUrl();
+        urls.addAll(Arrays.asList(StringUtils.splitByWholeSeparatorPreserveAllTokens(url, ",")));
         String loginUri = "/authentication/form";
         urls.add(loginUri);
     }

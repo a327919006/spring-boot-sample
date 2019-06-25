@@ -53,6 +53,7 @@ public class SecurityController {
             String htmlEnd = ".html";
             if (StringUtils.endsWithIgnoreCase(redirectUrl, htmlEnd)) {
                 redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
+                return;
             }
         }
         throw new UnauthorizedException();
