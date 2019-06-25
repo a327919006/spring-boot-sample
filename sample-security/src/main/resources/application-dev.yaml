@@ -37,3 +37,7 @@ boot:
       browser:
         login-page: /login.html
         login-type: JSON
+      code:
+        image:
+          height: 25
+          url: /xxx/*, /xxx/**, /xxx

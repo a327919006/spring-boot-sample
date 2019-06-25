@@ -1,4 +1,4 @@
-package com.cn.boot.sample.security.controller;
+package com.cn.boot.sample.security.interceptor;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

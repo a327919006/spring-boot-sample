@@ -1,6 +1,7 @@
 package com.cn.boot.sample.security.config;
 
 import cn.hutool.json.JSONUtil;
+import com.cn.boot.sample.api.model.dto.Error;
 import com.cn.boot.sample.security.core.config.SecurityProperties;
 import com.cn.boot.sample.security.core.enums.LoginTypeEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +33,7 @@ public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
         log.info("【登录失败】");
         if (securityProperties.getBrowser().getLoginType().equals(LoginTypeEnum.JSON)) {
             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-            response.getWriter().print(JSONUtil.toJsonStr(exception));
+            response.getWriter().print(JSONUtil.toJsonStr(new Error(exception.getMessage())));
         } else {
             super.onAuthenticationFailure(request, response, exception);
         }

@@ -21,6 +21,10 @@ public class Error implements Serializable {
     private Integer code = Constants.CODE_FAILURE;
     private String msg = Constants.MSG_SUCCESS;
 
+    public Error(String msg) {
+        this.msg = msg;
+    }
+
     public Error(Integer code, String msg) {
         if (code == null) {
             code = Constants.CODE_FAILURE;

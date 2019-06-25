@@ -1,6 +1,7 @@
 package com.cn.boot.sample.security.config;
 
 import com.cn.boot.sample.security.core.config.SecurityProperties;
+import com.cn.boot.sample.security.interceptor.CaptchaFilter;
 import com.cn.boot.sample.security.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * @author Chen Nan
@@ -31,6 +33,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        CaptchaFilter captchaFilter = new CaptchaFilter(failureHandler, securityProperties);
+
 //        http.httpBasic()
 //                .and()
 //                .authorizeRequests()
@@ -40,6 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.cors()
                 .and()
+                .addFilterBefore(captchaFilter, UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable()
                 .formLogin()
                 // 设置登录页
@@ -56,6 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login",
                         "/authentication/form",
                         "/authentication/require",
+                        "/authentication/captcha",
                         "/favicon.ico").permitAll()
                 .antMatchers(securityProperties.getBrowser().getLoginPage()).permitAll()
                 .anyRequest()
