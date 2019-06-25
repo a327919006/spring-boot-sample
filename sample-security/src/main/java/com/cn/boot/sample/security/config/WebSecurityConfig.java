@@ -31,6 +31,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyAuthenticationFailureHandler failureHandler;
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(loginService).passwordEncoder(passwordEncoder());
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         CaptchaFilter captchaFilter = new CaptchaFilter(failureHandler, securityProperties);
@@ -56,6 +66,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 指定认证失败处理器
                 .failureHandler(failureHandler)
                 .and()
+                .rememberMe()
+                .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
+                .and()
                 .authorizeRequests()
                 // 如果是/login.html直接放行，注意：谷歌浏览器自己会请求favicon.ico
                 .antMatchers("/login",
@@ -66,15 +79,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(securityProperties.getBrowser().getLoginPage()).permitAll()
                 .anyRequest()
                 .authenticated();
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(loginService).passwordEncoder(passwordEncoder());
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 }
