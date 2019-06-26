@@ -1,9 +1,10 @@
 package com.cn.boot.sample.security.controller;
 
-import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ICaptcha;
 import com.cn.boot.sample.api.exceptions.UnauthorizedException;
 import com.cn.boot.sample.security.core.config.SecurityProperties;
+import com.cn.boot.sample.security.core.service.ImageCodeService;
+import com.cn.boot.sample.security.core.service.SmsCodeService;
 import com.cn.boot.sample.security.utils.CaptchaValidateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,9 +19,7 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.ServletOutputStream;
@@ -42,6 +41,10 @@ public class SecurityController {
 
     @Autowired
     private SecurityProperties securityProperties;
+    @Autowired
+    private ImageCodeService imageCodeService;
+    @Autowired
+    private SmsCodeService smsCodeService;
 
     @ApiOperation("判断是否跳转登录页")
     @GetMapping("/require")
@@ -68,14 +71,10 @@ public class SecurityController {
         return userDetails;
     }
 
-    @ApiOperation("获取验证码")
-    @GetMapping("/captcha")
-    public void captcha(HttpSession session, HttpServletResponse response) throws IOException {
-        ICaptcha captcha = CaptchaUtil.createCircleCaptcha(
-                securityProperties.getCode().getImage().getWidth(),
-                securityProperties.getCode().getImage().getHeight(),
-                securityProperties.getCode().getImage().getLength(),
-                5);
+    @ApiOperation("获取图片验证码")
+    @GetMapping("/code/image")
+    public void imageCode(HttpSession session, HttpServletResponse response) throws IOException {
+        ICaptcha captcha = imageCodeService.createImageCode();
 
         // 禁止图像缓存
         response.setHeader("Cache-Control", "no-store");
@@ -86,10 +85,20 @@ public class SecurityController {
         // 将图像输出到Servlet输出流中。
         ServletOutputStream outputStream = response.getOutputStream();
         captcha.write(outputStream);
-        // 将四位数字的验证码保存到Session中。
+        // 将验证码保存到Session中。
         session.setAttribute(CaptchaValidateUtil.SESSION_KEY, captcha.getCode());
         session.setAttribute(CaptchaValidateUtil.SESSION_TIME_KEY, System.currentTimeMillis());
         outputStream.flush();
         outputStream.close();
+    }
+
+    @ResponseBody
+    @ApiOperation("获取短信验证码")
+    @GetMapping("/code/sms/{phone}")
+    public void msgCode(@PathVariable String phone, HttpSession session) {
+        String code = smsCodeService.sendSmsCode(phone);
+        // 将验证码保存到Session中。
+        session.setAttribute(CaptchaValidateUtil.SESSION_KEY, code);
+        session.setAttribute(CaptchaValidateUtil.SESSION_TIME_KEY, System.currentTimeMillis());
     }
 }

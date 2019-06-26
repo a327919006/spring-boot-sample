@@ -74,7 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login",
                         "/authentication/form",
                         "/authentication/require",
-                        "/authentication/captcha",
+                        "/authentication/code/**",
                         "/favicon.ico").permitAll()
                 .antMatchers(securityProperties.getBrowser().getLoginPage()).permitAll()
                 .anyRequest()
