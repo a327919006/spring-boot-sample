@@ -1,4 +1,4 @@
-package com.cn.boot.sample.security.utils;
+package com.cn.boot.sample.security.core.util;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -10,9 +10,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author Chen Nan
  */
-public final class CaptchaValidateUtil {
+public final class CodeValidateUtil {
 
-    private CaptchaValidateUtil() {
+    private CodeValidateUtil() {
         throw new RuntimeException("CaptchaUtil.class can't be instantiated");
     }
 
@@ -21,7 +21,7 @@ public final class CaptchaValidateUtil {
     /**
      * 设置验证码的有效时间 3分钟
      */
-    public static final long TIMEOUT = 1000 * 60 * 3;
+    private static final long TIMEOUT = 1000 * 60 * 3;
 
     /**
      * <p>验证码合法性校验</p>

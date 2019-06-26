@@ -1,12 +1,12 @@
-package com.cn.boot.sample.security.interceptor;
+package com.cn.boot.sample.security.core.interceptors.validate.code;
 
-import com.cn.boot.sample.security.config.MyAuthenticationFailureHandler;
 import com.cn.boot.sample.security.core.config.SecurityProperties;
-import com.cn.boot.sample.security.exception.CaptchaException;
-import com.cn.boot.sample.security.utils.CaptchaValidateUtil;
+import com.cn.boot.sample.security.core.exception.CodeException;
+import com.cn.boot.sample.security.core.util.CodeValidateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.ServletRequestUtils;
@@ -26,26 +26,26 @@ import java.util.Set;
  */
 @Component
 @Slf4j
-public class CaptchaFilter extends OncePerRequestFilter implements InitializingBean {
+public class SmsCodeFilter extends OncePerRequestFilter implements InitializingBean {
 
     private AntPathMatcher matcher = new AntPathMatcher();
-
-    private MyAuthenticationFailureHandler failureHandler;
-    private SecurityProperties securityProperties;
-
     private Set<String> urls = new HashSet<>();
 
-    public CaptchaFilter(MyAuthenticationFailureHandler failureHandler, SecurityProperties securityProperties) {
+    private AuthenticationFailureHandler failureHandler;
+    private SecurityProperties securityProperties;
+
+
+    public SmsCodeFilter(AuthenticationFailureHandler failureHandler, SecurityProperties securityProperties) {
         this.failureHandler = failureHandler;
         this.securityProperties = securityProperties;
         initUrl();
     }
 
     private void initUrl() {
-        log.info("【CaptchaFilter】initUrl");
-        String url = securityProperties.getCode().getImage().getUrl();
+        log.info("【SmsCodeFilter】initUrl");
+        String url = securityProperties.getCode().getSms().getUrl();
         urls.addAll(Arrays.asList(StringUtils.splitByWholeSeparatorPreserveAllTokens(url, ",")));
-        String loginUri = "/authentication/form";
+        String loginUri = "/authentication/mobile";
         urls.add(loginUri);
     }
 
@@ -61,11 +61,12 @@ public class CaptchaFilter extends OncePerRequestFilter implements InitializingB
         }
 
         if (needCaptcha) {
-            String captchaParamName = "captcha";
-            String captcha = ServletRequestUtils.getStringParameter(request, captchaParamName);
-            long expire = securityProperties.getCode().getImage().getExpire();
-            if (!CaptchaValidateUtil.validate(request, captcha, expire)) {
-                failureHandler.onAuthenticationFailure(request, response, new CaptchaException("验证码错误"));
+            String codeParamName = "smsCode";
+            String code = ServletRequestUtils.getStringParameter(request, codeParamName);
+            log.info("====传入的验证码={}", code);
+            long expire = securityProperties.getCode().getSms().getExpire();
+            if (!CodeValidateUtil.validate(request, code, expire)) {
+                failureHandler.onAuthenticationFailure(request, response, new CodeException("验证码错误"));
                 return;
             }
         }

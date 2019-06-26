@@ -1,7 +1,9 @@
 package com.cn.boot.sample.security.config;
 
+import com.cn.boot.sample.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.cn.boot.sample.security.core.config.SecurityProperties;
-import com.cn.boot.sample.security.interceptor.CaptchaFilter;
+import com.cn.boot.sample.security.core.interceptors.validate.code.ImageCodeFilter;
+import com.cn.boot.sample.security.core.interceptors.validate.code.SmsCodeFilter;
 import com.cn.boot.sample.security.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private MyAuthenticationSuccessHandler successHandler;
     @Autowired
     private MyAuthenticationFailureHandler failureHandler;
+    @Autowired
+    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -43,7 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        CaptchaFilter captchaFilter = new CaptchaFilter(failureHandler, securityProperties);
+        ImageCodeFilter imageCodeFilter = new ImageCodeFilter(failureHandler, securityProperties);
+        SmsCodeFilter smsCodeFilter = new SmsCodeFilter(failureHandler, securityProperties);
 
 //        http.httpBasic()
 //                .and()
@@ -54,7 +59,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.cors()
                 .and()
-                .addFilterBefore(captchaFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(imageCodeFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(smsCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable()
                 .formLogin()
                 // 设置登录页
@@ -78,6 +84,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/favicon.ico").permitAll()
                 .antMatchers(securityProperties.getBrowser().getLoginPage()).permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                .and()
+                .apply(smsCodeAuthenticationSecurityConfig);
     }
 }

@@ -5,7 +5,7 @@ import com.cn.boot.sample.api.exceptions.UnauthorizedException;
 import com.cn.boot.sample.security.core.config.SecurityProperties;
 import com.cn.boot.sample.security.core.service.ImageCodeService;
 import com.cn.boot.sample.security.core.service.SmsCodeService;
-import com.cn.boot.sample.security.utils.CaptchaValidateUtil;
+import com.cn.boot.sample.security.core.util.CodeValidateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -86,8 +86,8 @@ public class SecurityController {
         ServletOutputStream outputStream = response.getOutputStream();
         captcha.write(outputStream);
         // 将验证码保存到Session中。
-        session.setAttribute(CaptchaValidateUtil.SESSION_KEY, captcha.getCode());
-        session.setAttribute(CaptchaValidateUtil.SESSION_TIME_KEY, System.currentTimeMillis());
+        session.setAttribute(CodeValidateUtil.SESSION_KEY, captcha.getCode());
+        session.setAttribute(CodeValidateUtil.SESSION_TIME_KEY, System.currentTimeMillis());
         outputStream.flush();
         outputStream.close();
     }
@@ -98,7 +98,7 @@ public class SecurityController {
     public void msgCode(@PathVariable String phone, HttpSession session) {
         String code = smsCodeService.sendSmsCode(phone);
         // 将验证码保存到Session中。
-        session.setAttribute(CaptchaValidateUtil.SESSION_KEY, code);
-        session.setAttribute(CaptchaValidateUtil.SESSION_TIME_KEY, System.currentTimeMillis());
+        session.setAttribute(CodeValidateUtil.SESSION_KEY, code);
+        session.setAttribute(CodeValidateUtil.SESSION_TIME_KEY, System.currentTimeMillis());
     }
 }

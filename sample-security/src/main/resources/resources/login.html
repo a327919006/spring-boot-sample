@@ -37,17 +37,17 @@
     </form>
 
     <h2>短信登录</h2>
-    <form action="/authentication/sms" method="POST">
+    <form action="/authentication/mobile" method="POST">
         <table>
             <tr>
                 <td>手机号：</td>
-                <td><input type="text" name="mobile" ></td>
+                <td><input type="text" name="mobile" value="13045678901"></td>
             </tr>
             <tr>
                 <td>验证码：</td>
                 <td>
-                    <input type="password" name="captcha" >
-                    <a href="/authentication/code/sms/12345678901">获取验证码</a>
+                    <input type="text" name="smsCode" >
+                    <a href="/authentication/code/sms/13045678901">获取验证码</a>
                 </td>
             </tr>
             <tr>
