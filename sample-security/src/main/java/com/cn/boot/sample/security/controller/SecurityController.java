@@ -2,7 +2,7 @@ package com.cn.boot.sample.security.controller;
 
 import cn.hutool.captcha.ICaptcha;
 import com.cn.boot.sample.api.exceptions.UnauthorizedException;
-import com.cn.boot.sample.security.core.config.SecurityProperties;
+import com.cn.boot.sample.security.core.config.properties.SecurityProperties;
 import com.cn.boot.sample.security.core.service.ImageCodeService;
 import com.cn.boot.sample.security.core.service.SmsCodeService;
 import com.cn.boot.sample.security.core.util.CodeValidateUtil;

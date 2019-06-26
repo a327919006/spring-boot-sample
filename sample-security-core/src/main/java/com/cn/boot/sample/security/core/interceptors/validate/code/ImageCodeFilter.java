@@ -1,6 +1,6 @@
 package com.cn.boot.sample.security.core.interceptors.validate.code;
 
-import com.cn.boot.sample.security.core.config.SecurityProperties;
+import com.cn.boot.sample.security.core.config.properties.SecurityProperties;
 import com.cn.boot.sample.security.core.exception.CodeException;
 import com.cn.boot.sample.security.core.util.CodeValidateUtil;
 import lombok.extern.slf4j.Slf4j;

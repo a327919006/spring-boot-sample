@@ -1,7 +1,7 @@
 package com.cn.boot.sample.security.core.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
-import com.cn.boot.sample.security.core.config.SecurityProperties;
+import com.cn.boot.sample.security.core.config.properties.SecurityProperties;
 import com.cn.boot.sample.security.core.service.SmsCodeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

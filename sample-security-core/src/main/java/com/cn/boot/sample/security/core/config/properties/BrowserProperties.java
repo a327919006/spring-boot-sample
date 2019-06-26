@@ -1,4 +1,4 @@
-package com.cn.boot.sample.security.core.config;
+package com.cn.boot.sample.security.core.config.properties;
 
 import com.cn.boot.sample.security.core.enums.LoginTypeEnum;
 import lombok.Data;

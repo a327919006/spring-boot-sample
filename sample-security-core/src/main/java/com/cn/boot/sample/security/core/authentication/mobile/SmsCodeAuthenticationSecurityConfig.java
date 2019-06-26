@@ -1,6 +1,7 @@
 package com.cn.boot.sample.security.core.authentication.mobile;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,15 +17,19 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
+    private final AuthenticationSuccessHandler successHandler;
+    private final AuthenticationFailureHandler failureHandler;
+    private final UserDetailsService userDetailsService;
+
     @Autowired
-    private AuthenticationSuccessHandler successHandler;
-    @Autowired
-    private AuthenticationFailureHandler failureHandler;
-    @Autowired
-    private UserDetailsService userDetailsService;
+    public SmsCodeAuthenticationSecurityConfig(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, @Qualifier("loginServiceImpl") UserDetailsService userDetailsService) {
+        this.successHandler = successHandler;
+        this.failureHandler = failureHandler;
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
-    public void configure(HttpSecurity http) throws Exception {
+    public void configure(HttpSecurity http) {
         SmsCodeAuthenticationFilter filter = new SmsCodeAuthenticationFilter();
         filter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
         filter.setAuthenticationSuccessHandler(successHandler);

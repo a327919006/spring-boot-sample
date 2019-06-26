@@ -2,7 +2,7 @@ package com.cn.boot.sample.security.core.service.impl;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ICaptcha;
-import com.cn.boot.sample.security.core.config.SecurityProperties;
+import com.cn.boot.sample.security.core.config.properties.SecurityProperties;
 import com.cn.boot.sample.security.core.service.ImageCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,7 +1,7 @@
 package com.cn.boot.sample.security.config;
 
 import cn.hutool.json.JSONUtil;
-import com.cn.boot.sample.security.core.config.SecurityProperties;
+import com.cn.boot.sample.security.core.config.properties.SecurityProperties;
 import com.cn.boot.sample.security.core.enums.LoginTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

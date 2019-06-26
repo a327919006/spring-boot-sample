@@ -16,6 +16,7 @@
         <module>sample-amqp</module>
         <module>sample-security</module>
         <module>sample-security-core</module>
+        <module>sample-security-browser</module>
     </modules>
 
 
@@ -235,6 +236,11 @@
             <dependency>
                 <groupId>com.cn.boot</groupId>
                 <artifactId>sample-security-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cn.boot</groupId>
+                <artifactId>sample-security-browser</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

@@ -70,7 +70,7 @@
         </dependency>
         <dependency>
             <groupId>com.cn.boot</groupId>
-            <artifactId>sample-security-core</artifactId>
+            <artifactId>sample-security-browser</artifactId>
         </dependency>
     </dependencies>
 

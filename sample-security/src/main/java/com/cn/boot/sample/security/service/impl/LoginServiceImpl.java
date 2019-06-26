@@ -3,20 +3,20 @@ package com.cn.boot.sample.security.service.impl;
 import com.cn.boot.sample.api.enums.UserStatusEnum;
 import com.cn.boot.sample.api.model.po.User;
 import com.cn.boot.sample.api.service.UserService;
-import com.cn.boot.sample.security.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Chen Nan
  */
-@Service
+@Component
 @Slf4j
-public class LoginServiceImpl implements LoginService {
+public class LoginServiceImpl implements UserDetailsService {
     @Reference
     private UserService userService;
 
@@ -26,7 +26,6 @@ public class LoginServiceImpl implements LoginService {
         if (user != null) {
             Integer status = user.getStatus();
             boolean normal = status.equals(UserStatusEnum.NORMAL.getValue());
-            log.info("normal = " + normal);
             return new org.springframework.security.core.userdetails.User(
                     username,
                     user.getPassword(),

@@ -1,5 +1,6 @@
 package com.cn.boot.sample.security.core.config;
 
+import com.cn.boot.sample.security.core.config.properties.SecurityProperties;
 import com.cn.boot.sample.security.core.service.ImageCodeService;
 import com.cn.boot.sample.security.core.service.SmsCodeService;
 import com.cn.boot.sample.security.core.service.impl.ImageCodeServiceImpl;
