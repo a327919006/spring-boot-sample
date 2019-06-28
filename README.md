@@ -12,6 +12,8 @@ SpringBoot 2.1.x 整合其他框架：Mybatis、Dubbo、Swagger2等
 | 10081 | sample-business | 业务接口 |
 | ----- | sample-dal | mapper、sql语句 |
 | 10083 | sample-security | 整合SpringSecurity |
+| ----- | sample-security-browser | SpringSecurity浏览器相关配置 |
+| ----- | sample-security-core | SpringSecurity通用配置 |
 | 20881 | sample-server | 服务接口实现 |
 
 
