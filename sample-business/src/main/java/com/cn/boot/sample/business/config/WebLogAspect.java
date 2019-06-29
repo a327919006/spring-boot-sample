@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class WebLogAspect {
 
-    @Pointcut("execution(public * com.cn.boot.sample.business.controller.*.*(..))" +
+    @Pointcut("execution(public * com.cn.boot.sample.business.controller..*.*(..))" +
             "&& @annotation(io.swagger.annotations.ApiOperation)")
     public void webLog() {
     }
