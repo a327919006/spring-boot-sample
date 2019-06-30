@@ -2,7 +2,7 @@ package com.cn.boot.sample.security.config;
 
 import cn.hutool.core.exceptions.ExceptionUtil;
 import com.cn.boot.sample.api.exceptions.BusinessException;
-import com.cn.boot.sample.api.exceptions.UnauthorizedException;
+import com.cn.boot.sample.security.core.exception.UnauthorizedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;

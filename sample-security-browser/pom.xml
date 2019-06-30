@@ -16,5 +16,11 @@
             <groupId>com.cn.boot</groupId>
             <artifactId>sample-security-core</artifactId>
         </dependency>
+
+        <!--swagger-->
+        <dependency>
+            <groupId>io.github.wilson-he</groupId>
+            <artifactId>swagger2-spring-boot-starter</artifactId>
+        </dependency>
     </dependencies>
 </project>

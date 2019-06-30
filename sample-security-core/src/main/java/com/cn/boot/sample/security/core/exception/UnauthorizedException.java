@@ -1,4 +1,4 @@
-package com.cn.boot.sample.api.exceptions;
+package com.cn.boot.sample.security.core.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

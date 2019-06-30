@@ -1,5 +1,6 @@
 package com.cn.boot.sample.security.browser.config;
 
+import com.cn.boot.sample.security.browser.session.ExpiredSessionStrategy;
 import com.cn.boot.sample.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.cn.boot.sample.security.core.config.BaseWebSecurityConfig;
 import com.cn.boot.sample.security.core.config.ValidateCodeSecurityConfig;
@@ -50,8 +51,21 @@ public class BrowserSecurityConfig extends BaseWebSecurityConfig {
                 .and()
                 .apply(smsCodeAuthenticationSecurityConfig)
                 .and()
+                // 设置记住我
                 .rememberMe()
+                // 设置记住我多久
                 .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
+                .and()
+                .sessionManagement()
+                // 设置session超时后跳转地址
+                .invalidSessionUrl("/authentication/session/invalid")
+                // 设置同个账号运行同时登录多少个
+                .maximumSessions(1)
+                // true 只能登录x个，后面的登录失败 false 后面的踢掉之前登录的
+                .maxSessionsPreventsLogin(true)
+                // 多账号登录处理方式
+                .expiredSessionStrategy(new ExpiredSessionStrategy())
+                .and()
                 .and()
                 .authorizeRequests()
                 // 如果是/login.html直接放行，注意：谷歌浏览器自己会请求favicon.ico

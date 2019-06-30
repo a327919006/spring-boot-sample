@@ -1,8 +1,9 @@
 package com.cn.boot.sample.security.controller;
 
 import cn.hutool.captcha.ICaptcha;
-import com.cn.boot.sample.api.exceptions.UnauthorizedException;
+import com.cn.boot.sample.api.model.dto.Error;
 import com.cn.boot.sample.security.core.config.properties.SecurityProperties;
+import com.cn.boot.sample.security.core.exception.UnauthorizedException;
 import com.cn.boot.sample.security.core.service.ImageCodeService;
 import com.cn.boot.sample.security.core.service.SmsCodeService;
 import com.cn.boot.sample.security.core.util.CodeValidateUtil;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -100,5 +102,12 @@ public class SecurityController {
         // 将验证码保存到Session中。
         session.setAttribute(CodeValidateUtil.SESSION_KEY, code);
         session.setAttribute(CodeValidateUtil.SESSION_TIME_KEY, System.currentTimeMillis());
+    }
+
+    @ResponseBody
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @GetMapping("/session/invalid")
+    public Error sessionInvalid() {
+        return new Error("登录超时");
     }
 }
