@@ -1,6 +1,7 @@
 package com.cn.boot.sample.security.browser.config;
 
 import com.cn.boot.sample.security.browser.session.ExpiredSessionStrategy;
+import com.cn.boot.sample.security.browser.session.SampleInvalidSessionStrategy;
 import com.cn.boot.sample.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.cn.boot.sample.security.core.config.BaseWebSecurityConfig;
 import com.cn.boot.sample.security.core.config.ValidateCodeSecurityConfig;
@@ -56,25 +57,25 @@ public class BrowserSecurityConfig extends BaseWebSecurityConfig {
                 // 设置记住我多久
                 .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
                 .and()
-                .sessionManagement()
-                // 设置session超时后跳转地址
-                .invalidSessionUrl("/authentication/session/invalid")
-                // 设置同个账号运行同时登录多少个
-                .maximumSessions(1)
-                // true 只能登录x个，后面的登录失败 false 后面的踢掉之前登录的
-                .maxSessionsPreventsLogin(true)
-                // 多账号登录处理方式
-                .expiredSessionStrategy(new ExpiredSessionStrategy())
-                .and()
-                .and()
+//                .sessionManagement()
+//                // 设置session超时后跳转地址
+//                .invalidSessionStrategy(new SampleInvalidSessionStrategy())
+//                // 设置同个账号运行同时登录多少个
+//                .maximumSessions(1)
+//                // true 只能登录x个，后面的登录失败 false 后面的踢掉之前登录的
+//                .maxSessionsPreventsLogin(true)
+//                // 多账号登录处理方式
+//                .expiredSessionStrategy(new ExpiredSessionStrategy())
+//                .and()
+//                .and()
                 .authorizeRequests()
                 // 如果是/login.html直接放行，注意：谷歌浏览器自己会请求favicon.ico
-                .antMatchers("/authentication/form",
+                .antMatchers(securityProperties.getBrowser().getLoginPage(),
+                        "/authentication/form",
                         "/authentication/require",
                         "/authentication/code/**",
+                        "/invalid.html",
                         "/favicon.ico").permitAll()
-                .antMatchers(securityProperties.getBrowser().getLoginPage())
-                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

@@ -103,11 +103,4 @@ public class SecurityController {
         session.setAttribute(CodeValidateUtil.SESSION_KEY, code);
         session.setAttribute(CodeValidateUtil.SESSION_TIME_KEY, System.currentTimeMillis());
     }
-
-    @ResponseBody
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @GetMapping("/session/invalid")
-    public Error sessionInvalid() {
-        return new Error("登录超时");
-    }
 }
