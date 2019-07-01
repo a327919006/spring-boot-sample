@@ -1,7 +1,6 @@
 package com.cn.boot.sample.security.controller;
 
 import cn.hutool.captcha.ICaptcha;
-import com.cn.boot.sample.api.model.dto.Error;
 import com.cn.boot.sample.security.core.config.properties.SecurityProperties;
 import com.cn.boot.sample.security.core.exception.UnauthorizedException;
 import com.cn.boot.sample.security.core.service.ImageCodeService;
@@ -12,7 +11,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
