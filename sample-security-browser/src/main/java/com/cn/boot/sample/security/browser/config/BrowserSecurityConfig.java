@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -46,6 +47,16 @@ public class BrowserSecurityConfig extends BaseWebSecurityConfig {
     }
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        // 如果是/login.html直接放行，注意：谷歌浏览器自己会请求favicon.ico
+        web.ignoring().antMatchers(securityProperties.getBrowser().getLoginPage(),
+                "/authentication/form",
+                "/authentication/require",
+                "/authentication/code/**",
+                "/favicon.ico");
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         applyPasswordAuthenticationConfig(http);
         http.apply(validateCodeSecurityConfig)
@@ -57,25 +68,18 @@ public class BrowserSecurityConfig extends BaseWebSecurityConfig {
                 // 设置记住我多久
                 .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
                 .and()
-//                .sessionManagement()
-//                // 设置session超时后跳转地址
-//                .invalidSessionStrategy(new SampleInvalidSessionStrategy())
-//                // 设置同个账号运行同时登录多少个
-//                .maximumSessions(1)
-//                // true 只能登录x个，后面的登录失败 false 后面的踢掉之前登录的
-//                .maxSessionsPreventsLogin(true)
-//                // 多账号登录处理方式
-//                .expiredSessionStrategy(new ExpiredSessionStrategy())
-//                .and()
-//                .and()
+                .sessionManagement()
+                // 设置session超时后跳转地址
+                .invalidSessionStrategy(new SampleInvalidSessionStrategy(securityProperties))
+                // 设置同个账号运行同时登录多少个
+                .maximumSessions(1)
+                // true 只能登录x个，后面的登录失败 false 后面的踢掉之前登录的
+                .maxSessionsPreventsLogin(true)
+                // 多账号登录处理方式
+                .expiredSessionStrategy(new ExpiredSessionStrategy())
+                .and()
+                .and()
                 .authorizeRequests()
-                // 如果是/login.html直接放行，注意：谷歌浏览器自己会请求favicon.ico
-                .antMatchers(securityProperties.getBrowser().getLoginPage(),
-                        "/authentication/form",
-                        "/authentication/require",
-                        "/authentication/code/**",
-                        "/invalid.html",
-                        "/favicon.ico").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
