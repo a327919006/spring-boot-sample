@@ -50,6 +50,7 @@ public class BrowserSecurityConfig extends BaseWebSecurityConfig {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(
                 securityProperties.getBrowser().getLoginPage(),
+                "/authentication/code/**",
                 "/favicon.ico");
     }
 
@@ -80,9 +81,7 @@ public class BrowserSecurityConfig extends BaseWebSecurityConfig {
                 // 如果是/login.html直接放行，注意：谷歌浏览器自己会请求favicon.ico
                 .antMatchers(
                         "/authentication/form",
-                        "/authentication/require",
-                        "/authentication/code/**",
-                        "/favicon.ico").permitAll()
+                        "/authentication/require").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
