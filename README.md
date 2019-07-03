@@ -27,7 +27,7 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2等
 | MyBatis | MyBatis |
 | Dubbo | RPC |
 | tk-mybatis | 通用mapper |
-| Swagger | 接口文档 |
+| Swagger2 | 接口文档 |
 | RabbitMQ | 消息队列 |
 | SpringSecurity | 身份认证 |
 | SpringSession | 分布式Session |
