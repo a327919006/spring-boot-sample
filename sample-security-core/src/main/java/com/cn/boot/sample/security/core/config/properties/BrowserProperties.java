@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 public class BrowserProperties {
     private String loginPage = "/default-login.html";
+    private String logoutPage = "";
 
     private LoginTypeEnum loginType = LoginTypeEnum.JSON;
 

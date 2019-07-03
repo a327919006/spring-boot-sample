@@ -1,8 +1,13 @@
 server:
   port: 10083
-  servlet:
-    session:
-      timeout: 1m
+
+spring:
+  session:
+    store-type: redis
+    timeout: 1m
+  redis:
+    host: localhost
+    port: 6379
 
 dubbo:
   application:

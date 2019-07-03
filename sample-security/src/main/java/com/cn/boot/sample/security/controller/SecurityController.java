@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.DefaultRedirectStrategy;
-import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
@@ -37,7 +35,6 @@ import java.io.IOException;
 @Api(tags = "安全认证", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class SecurityController {
     private RequestCache requestCache = new HttpSessionRequestCache();
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Autowired
     private SecurityProperties securityProperties;
@@ -55,7 +52,7 @@ public class SecurityController {
             log.info("redirectUrl = {}", redirectUrl);
             String htmlEnd = ".html";
             if (StringUtils.endsWithIgnoreCase(redirectUrl, htmlEnd)) {
-                redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
+                response.sendRedirect(securityProperties.getBrowser().getLoginPage());
                 return;
             }
         }

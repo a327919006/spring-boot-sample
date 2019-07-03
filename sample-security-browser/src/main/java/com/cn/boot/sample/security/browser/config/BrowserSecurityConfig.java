@@ -1,7 +1,5 @@
 package com.cn.boot.sample.security.browser.config;
 
-import com.cn.boot.sample.security.browser.session.ExpiredSessionStrategy;
-import com.cn.boot.sample.security.browser.session.SampleInvalidSessionStrategy;
 import com.cn.boot.sample.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.cn.boot.sample.security.core.config.BaseWebSecurityConfig;
 import com.cn.boot.sample.security.core.config.ValidateCodeSecurityConfig;
@@ -16,6 +14,9 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.session.InvalidSessionStrategy;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
 /**
  * @author Chen Nan
@@ -23,18 +24,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class BrowserSecurityConfig extends BaseWebSecurityConfig {
 
-    private final SecurityProperties securityProperties;
-    private final UserDetailsService userDetailsService;
-    private final ValidateCodeSecurityConfig validateCodeSecurityConfig;
-    private final SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
-
     @Autowired
-    public BrowserSecurityConfig(SecurityProperties securityProperties, @Qualifier("loginServiceImpl") UserDetailsService userDetailsService, ValidateCodeSecurityConfig validateCodeSecurityConfig, SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig) {
-        this.securityProperties = securityProperties;
-        this.userDetailsService = userDetailsService;
-        this.validateCodeSecurityConfig = validateCodeSecurityConfig;
-        this.smsCodeAuthenticationSecurityConfig = smsCodeAuthenticationSecurityConfig;
-    }
+    private SecurityProperties securityProperties;
+    @Autowired
+    @Qualifier("loginServiceImpl")
+    private UserDetailsService userDetailsService;
+    @Autowired
+    private ValidateCodeSecurityConfig validateCodeSecurityConfig;
+    @Autowired
+    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+    @Autowired
+    private InvalidSessionStrategy invalidSessionStrategy;
+    @Autowired
+    private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
+    @Autowired
+    private LogoutSuccessHandler logoutSuccessHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -68,14 +72,19 @@ public class BrowserSecurityConfig extends BaseWebSecurityConfig {
                 .and()
                 .sessionManagement()
                 // 设置session超时后跳转地址
-                .invalidSessionStrategy(new SampleInvalidSessionStrategy(securityProperties))
+                .invalidSessionStrategy(invalidSessionStrategy)
                 // 设置同个账号运行同时登录多少个
                 .maximumSessions(1)
-                // true 只能登录x个，后面的登录失败 false 后面的踢掉之前登录的
-                .maxSessionsPreventsLogin(true)
+                // true:只能登录x个，后面的登录失败. false:后面的踢掉之前登录的,默认false
+//                .maxSessionsPreventsLogin(true)
                 // 多账号登录处理方式
-                .expiredSessionStrategy(new ExpiredSessionStrategy())
+                .expiredSessionStrategy(sessionInformationExpiredStrategy)
                 .and()
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+//                .logoutSuccessUrl("/logout.html")
+                .logoutSuccessHandler(logoutSuccessHandler)
                 .and()
                 .authorizeRequests()
                 // 如果是/login.html直接放行，注意：谷歌浏览器自己会请求favicon.ico
