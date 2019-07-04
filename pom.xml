@@ -17,6 +17,7 @@
         <module>sample-security</module>
         <module>sample-security-core</module>
         <module>sample-security-browser</module>
+        <module>sample-security-app</module>
     </modules>
 
 
@@ -76,6 +77,33 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--model-->
+            <dependency>
+                <groupId>com.cn.boot</groupId>
+                <artifactId>sample-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cn.boot</groupId>
+                <artifactId>sample-dal</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cn.boot</groupId>
+                <artifactId>sample-security-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cn.boot</groupId>
+                <artifactId>sample-security-browser</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cn.boot</groupId>
+                <artifactId>sample-security-app</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <!-- Spring Boot依赖配置-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -260,28 +288,6 @@
                 <groupId>javax.persistence</groupId>
                 <artifactId>persistence-api</artifactId>
                 <version>${persistence-api.version}</version>
-            </dependency>
-
-            <!--model-->
-            <dependency>
-                <groupId>com.cn.boot</groupId>
-                <artifactId>sample-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cn.boot</groupId>
-                <artifactId>sample-dal</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cn.boot</groupId>
-                <artifactId>sample-security-core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cn.boot</groupId>
-                <artifactId>sample-security-browser</artifactId>
-                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

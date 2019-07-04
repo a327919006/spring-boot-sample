@@ -12,6 +12,20 @@
     <artifactId>sample-security</artifactId>
 
     <dependencies>
+        <!-- modules -->
+        <dependency>
+            <groupId>com.cn.boot</groupId>
+            <artifactId>sample-api</artifactId>
+        </dependency>
+        <!--<dependency>
+            <groupId>com.cn.boot</groupId>
+            <artifactId>sample-security-browser</artifactId>
+        </dependency>-->
+        <dependency>
+            <groupId>com.cn.boot</groupId>
+            <artifactId>sample-security-app</artifactId>
+        </dependency>
+
         <!-- spring boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -61,16 +75,6 @@
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-recipes</artifactId>
-        </dependency>
-
-        <!-- modules -->
-        <dependency>
-            <groupId>com.cn.boot</groupId>
-            <artifactId>sample-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cn.boot</groupId>
-            <artifactId>sample-security-browser</artifactId>
         </dependency>
     </dependencies>
 

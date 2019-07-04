@@ -85,6 +85,8 @@ public class BrowserSecurityConfig extends BaseWebSecurityConfig {
                 .logoutUrl("/logout")
 //                .logoutSuccessUrl("/logout.html")
                 .logoutSuccessHandler(logoutSuccessHandler)
+                // 退出登录后删除Cookie
+//                .deleteCookies("JSESSIONID")
                 .and()
                 .authorizeRequests()
                 // 如果是/login.html直接放行，注意：谷歌浏览器自己会请求favicon.ico
