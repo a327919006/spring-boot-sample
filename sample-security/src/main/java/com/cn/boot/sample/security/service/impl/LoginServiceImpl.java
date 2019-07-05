@@ -33,7 +33,7 @@ public class LoginServiceImpl implements UserDetailsService {
                     true,
                     true,
                     true,
-                    AuthorityUtils.createAuthorityList("admin"));
+                    AuthorityUtils.createAuthorityList("admin", "ROLE_USER"));
         }
         return null;
     }

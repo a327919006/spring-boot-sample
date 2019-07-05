@@ -9,6 +9,12 @@ spring:
     host: localhost
     port: 6379
 
+#security:
+#  oauth2:
+#    client:
+#      id: sample
+#      client-secret: 123456
+
 dubbo:
   application:
     name: ${artifactId}

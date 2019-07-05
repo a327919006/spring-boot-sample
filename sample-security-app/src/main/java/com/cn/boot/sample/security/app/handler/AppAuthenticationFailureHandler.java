@@ -1,15 +1,12 @@
-package com.cn.boot.sample.security.config;
+package com.cn.boot.sample.security.app.handler;
 
 import cn.hutool.json.JSONUtil;
-import com.cn.boot.sample.api.model.dto.Error;
 import com.cn.boot.sample.security.core.config.properties.SecurityProperties;
 import com.cn.boot.sample.security.core.enums.LoginTypeEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,12 +16,14 @@ import java.io.IOException;
 /**
  * @author Chen Nan
  */
-@Component
 @Slf4j
-public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+public class AppAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
-    @Autowired
     private SecurityProperties securityProperties;
+
+    public AppAuthenticationFailureHandler(SecurityProperties securityProperties) {
+        this.securityProperties = securityProperties;
+    }
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request,

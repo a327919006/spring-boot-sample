@@ -1,14 +1,12 @@
-package com.cn.boot.sample.security.config;
+package com.cn.boot.sample.security.browser.handler;
 
 import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.security.core.config.properties.SecurityProperties;
 import com.cn.boot.sample.security.core.enums.LoginTypeEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,12 +16,14 @@ import java.io.IOException;
 /**
  * @author Chen Nan
  */
-@Component
 @Slf4j
-public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class BrowserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    @Autowired
     private SecurityProperties securityProperties;
+
+    public BrowserAuthenticationSuccessHandler(SecurityProperties securityProperties) {
+        this.securityProperties = securityProperties;
+    }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
