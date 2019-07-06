@@ -17,10 +17,12 @@
             <groupId>com.cn.boot</groupId>
             <artifactId>sample-api</artifactId>
         </dependency>
+        <!--security针对浏览器-->
         <!--<dependency>
             <groupId>com.cn.boot</groupId>
             <artifactId>sample-security-browser</artifactId>
         </dependency>-->
+        <!--security针对APP-->
         <dependency>
             <groupId>com.cn.boot</groupId>
             <artifactId>sample-security-app</artifactId>

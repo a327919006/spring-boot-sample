@@ -19,8 +19,8 @@
 
         <!--swagger-->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
+            <groupId>io.github.wilson-he</groupId>
+            <artifactId>swagger2-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
