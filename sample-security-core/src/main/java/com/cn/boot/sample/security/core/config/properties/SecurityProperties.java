@@ -20,4 +20,9 @@ public class SecurityProperties {
      * 验证码配置
      */
     private ValidateCodeProperties code = new ValidateCodeProperties();
+
+    /**
+     * oauth2配置
+     */
+    private OAuth2Propertis oauth2 = new OAuth2Propertis();
 }
