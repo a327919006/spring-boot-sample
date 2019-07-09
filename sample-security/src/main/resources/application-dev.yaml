@@ -47,11 +47,11 @@ boot:
       oauth2:
         clients:
           - client-id: sample
-            client-secret: $2a$10$Gtn58DVJ7zKIFfg0gAsckesBipehRBf77RrxZLUzt/h/b3JjxsdqO
+            client-secret: 123456
             access-token-validity-seconds: 7200
             refresh-token-validity-seconds: 1296000
           - client-id: sample2
-            client-secret: $2a$10$Gtn58DVJ7zKIFfg0gAsckesBipehRBf77RrxZLUzt/h/b3JjxsdqO
+            client-secret: 123456
 
 #        login-type: JSON
 #      code:

@@ -2,11 +2,11 @@ package com.cn.boot.sample.security.app.handler;
 
 import cn.hutool.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
 import org.springframework.security.oauth2.provider.*;
@@ -36,6 +36,8 @@ public class AppAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
     private ClientDetailsService clientDetailsService;
     @Autowired
     private AuthorizationServerTokenServices authorizationServerTokenServices;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
@@ -58,9 +60,11 @@ public class AppAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
 
         ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);
 
-        if (clientDetails == null) {
+        if (null == clientDetails) {
             throw new UnapprovedClientAuthenticationException("该clientId不存在:" + clientId);
-        } else if (!StringUtils.equals(clientDetails.getClientSecret(), clientSecret)) {
+        }
+        boolean matches = passwordEncoder.matches(clientSecret, clientDetails.getClientSecret());
+        if (!matches) {
             throw new UnapprovedClientAuthenticationException("clientSecret不匹配:" + clientId);
         }
 
@@ -90,7 +94,7 @@ public class AppAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
             decoded = Base64.getDecoder().decode(base64Token);
         } catch (IllegalArgumentException e) {
             throw new BadCredentialsException(
-                    "Failed to decode basic authentication token");
+                    "无法解析authentication token");
         }
 
         String token = new String(decoded, StandardCharsets.UTF_8);
@@ -98,7 +102,7 @@ public class AppAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
         int delim = token.indexOf(":");
 
         if (delim == -1) {
-            throw new BadCredentialsException("Invalid basic authentication token");
+            throw new BadCredentialsException("错误的authentication token");
         }
         return new String[]{token.substring(0, delim), token.substring(delim + 1)};
     }
