@@ -24,5 +24,5 @@ public class SecurityProperties {
     /**
      * oauth2配置
      */
-    private OAuth2Propertis oauth2 = new OAuth2Propertis();
+    private OAuth2Properties oauth2 = new OAuth2Properties();
 }

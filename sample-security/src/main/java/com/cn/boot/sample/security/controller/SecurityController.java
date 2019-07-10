@@ -6,25 +6,26 @@ import com.cn.boot.sample.security.core.exception.UnauthorizedException;
 import com.cn.boot.sample.security.core.service.ImageCodeService;
 import com.cn.boot.sample.security.core.service.SmsCodeService;
 import com.cn.boot.sample.security.core.util.CodeValidateUtil;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author Chen Nan
@@ -61,11 +62,23 @@ public class SecurityController {
 
     @ApiOperation("获取认证信息")
     @GetMapping("/get")
-    public UserDetails get(@AuthenticationPrincipal @ApiIgnore UserDetails userDetails) throws IOException {
+    /**
+     * public UserDetails get(@AuthenticationPrincipal @ApiIgnore UserDetails userDetails) throws IOException {
+     */
+    public Authentication get(Authentication user, HttpServletRequest request) throws IOException {
+        String authorization = request.getHeader("Authorization");
+        String token = StringUtils.substringAfter(authorization, "bearer ");
+        Claims claims = Jwts.parser()
+                .setSigningKey(securityProperties.getOauth2().getJwtSigningKey().getBytes(StandardCharsets.UTF_8))
+                .parseClaimsJws(token).getBody();
+        String company = claims.get("company", String.class);
+        log.info("company = " + company);
+
+
         // 方式一：SecurityContextHolder
 //        return SecurityContextHolder.getContext().getAuthentication();
         // 方式二：@AuthenticationPrincipal
-        return userDetails;
+        return user;
     }
 
     @ApiOperation("获取图片验证码")

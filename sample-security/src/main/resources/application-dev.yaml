@@ -45,6 +45,8 @@ boot:
       browser:
         login-page: /login.html
       oauth2:
+        store-type: jwt
+        jwt-signing-key: sample
         clients:
           - client-id: sample
             client-secret: 123456
