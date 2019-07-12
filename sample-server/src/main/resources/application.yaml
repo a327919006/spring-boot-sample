@@ -7,4 +7,4 @@ mybatis:
   typeAliasesPackage: com.cn.boot.sample.api.model.po
   mapperLocations: classpath:com/cn/boot/sample/dal/mapper/**/*.xml
   configuration:
-    cache-enabled: true
+    map-underscore-to-camel-case: true
