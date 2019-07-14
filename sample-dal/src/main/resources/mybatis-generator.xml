@@ -44,15 +44,15 @@
         </sqlMapGenerator>
 
         <!-- 对应的dao接口-->
-        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="com.cn.boot.sample.dal.mapper" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.cn.boot.sample.dal.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
-        </javaClientGenerator>-->
+        </javaClientGenerator>
 
         <!--<table catalog="boot_sample" tableName="client" enableSelectByExample="false"-->
                <!--enableDeleteByExample="false" enableCountByExample="false"-->
                <!--enableUpdateByExample="false"/>-->
 
-        <table catalog="boot_sample" tableName="user" enableSelectByExample="false"
+        <table catalog="boot_sample" tableName="sys_user" enableSelectByExample="false"
                enableDeleteByExample="false" enableCountByExample="false"
                enableUpdateByExample="false"/>
     </context>
