@@ -1,6 +1,7 @@
 package com.cn.boot.sample.security.app.config;
 
 import com.cn.boot.sample.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
+import com.cn.boot.sample.security.core.authorize.AuthorizeConfigManager;
 import com.cn.boot.sample.security.core.config.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +23,8 @@ public class SampleResourceServerConfig extends ResourceServerConfigurerAdapter 
     protected AuthenticationFailureHandler authenticationFailureHandler;
     @Autowired
     private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
-
+    @Autowired
+    private AuthorizeConfigManager authorizeConfigManager;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -34,14 +36,8 @@ public class SampleResourceServerConfig extends ResourceServerConfigurerAdapter 
                 .and()
                 .apply(smsCodeAuthenticationSecurityConfig)
                 .and()
-                .authorizeRequests()
-                // 如果是/login.html直接放行，注意：谷歌浏览器自己会请求favicon.ico
-                .antMatchers(
-                        "/authentication/form",
-                        "/authentication/require").permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
                 .csrf().disable();
+
+        authorizeConfigManager.config(http.authorizeRequests());
     }
 }

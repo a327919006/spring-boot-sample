@@ -66,13 +66,13 @@ public class SecurityController {
      * public UserDetails get(@AuthenticationPrincipal @ApiIgnore UserDetails userDetails) throws IOException {
      */
     public Authentication get(Authentication user, HttpServletRequest request) throws IOException {
-        String authorization = request.getHeader("Authorization");
-        String token = StringUtils.substringAfter(authorization, "bearer ");
-        Claims claims = Jwts.parser()
-                .setSigningKey(securityProperties.getOauth2().getJwtSigningKey().getBytes(StandardCharsets.UTF_8))
-                .parseClaimsJws(token).getBody();
-        String company = claims.get("company", String.class);
-        log.info("company = " + company);
+//        String authorization = request.getHeader("Authorization");
+//        String token = StringUtils.substringAfter(authorization, "bearer ");
+//        Claims claims = Jwts.parser()
+//                .setSigningKey(securityProperties.getOauth2().getJwtSigningKey().getBytes(StandardCharsets.UTF_8))
+//                .parseClaimsJws(token).getBody();
+//        String company = claims.get("company", String.class);
+//        log.info("company = " + company);
 
 
         // 方式一：SecurityContextHolder

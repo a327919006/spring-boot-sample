@@ -1,6 +1,7 @@
 package com.cn.boot.sample.security.browser.config;
 
 import com.cn.boot.sample.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
+import com.cn.boot.sample.security.core.authorize.AuthorizeConfigManager;
 import com.cn.boot.sample.security.core.config.BaseWebSecurityConfig;
 import com.cn.boot.sample.security.core.config.ValidateCodeSecurityConfig;
 import com.cn.boot.sample.security.core.config.properties.SecurityProperties;
@@ -39,6 +40,8 @@ public class BrowserSecurityConfig extends BaseWebSecurityConfig {
     private LogoutSuccessHandler logoutSuccessHandler;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AuthorizeConfigManager authorizeConfigManager;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -83,16 +86,8 @@ public class BrowserSecurityConfig extends BaseWebSecurityConfig {
                 // 退出登录后删除Cookie
 //                .deleteCookies("JSESSIONID")
                 .and()
-                .authorizeRequests()
-                // 如果是/login.html直接放行，注意：谷歌浏览器自己会请求favicon.ico
-                .antMatchers(
-                        "/authentication/form",
-                        "/authentication/require").permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
                 .csrf().disable();
 
-
+        authorizeConfigManager.config(http.authorizeRequests());
     }
 }

@@ -72,6 +72,12 @@ public class SampleAuthorizationServerConfig extends AuthorizationServerConfigur
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
                 .passwordEncoder(passwordEncoder)
+                /**
+                 * 获取TokenKey
+                 * denyAll()拒绝所有 默认
+                 * permitAll()允许所有
+                 * isAuthenticated()授权允许
+                 */
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()")
                 .allowFormAuthenticationForClients();
