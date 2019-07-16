@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
@@ -25,6 +27,9 @@ public class SampleResourceServerConfig extends ResourceServerConfigurerAdapter 
     private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
     @Autowired
     private AuthorizeConfigManager authorizeConfigManager;
+    @Autowired
+    private OAuth2WebSecurityExpressionHandler expressionHandler;
+
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -40,4 +45,11 @@ public class SampleResourceServerConfig extends ResourceServerConfigurerAdapter 
 
         authorizeConfigManager.config(http.authorizeRequests());
     }
+
+
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+        resources.expressionHandler(expressionHandler);
+    }
+
 }
