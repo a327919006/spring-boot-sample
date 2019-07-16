@@ -78,7 +78,7 @@ public class SampleAuthorizationServerConfig extends AuthorizationServerConfigur
                  * permitAll()允许所有
                  * isAuthenticated()授权允许
                  */
-                .tokenKeyAccess("permitAll()")
+                .tokenKeyAccess("isAuthenticated()")
                 .checkTokenAccess("isAuthenticated()")
                 .allowFormAuthenticationForClients();
     }
