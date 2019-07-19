@@ -1,0 +1,62 @@
+# 开发环境配置
+server:
+  port: 10084
+
+
+spring:
+  # 数据库连接配置
+  datasource:
+    url: jdbc:mysql://localhost:3306?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: chennan
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5    #初始化连接个数
+      min-idle: 5        #最小空闲连接个数
+      max-active: 10     #最大连接个数
+      max-wait: 60000    #获取连接时最大等待时间，单位毫秒。
+      time-between-eviction-runs-millis: 60000  #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      min-evictable-idle-time-millis: 30000     #配置一个连接在池中最小生存的时间，单位是毫秒
+      validation-query: select 1 #用来检测连接是否有效的sql，要求是一个查询语句。
+      filters: stat,wall          #通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      test-while-idle: true       #建议配置为true，不影响性能，并且保证安全性。如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
+      test-on-borrow: true        #申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      test-on-return: false       #归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      pool-prepared-statements: false #是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。
+      max-pool-prepared-statement-per-connection-size: -1 #要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100
+      use-global-data-source-stat: false # 合并多个DruidDataSource的监控数据
+      # WebStatFilter配置，说明请参考Druid Wiki，配置_配置WebStatFilter
+      web-stat-filter:
+        enabled: true
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+        url-pattern: '/*'
+      # StatViewServlet配置，说明请参考Druid Wiki，配置_StatViewServlet配置
+      stat-view-servlet:
+        enabled: true
+        login-username: root
+        login-password: root
+        reset-enable: false
+      # Spring监控配置，说明请参考Druid Github Wiki，配置_Druid和Spring关联监控配置
+      aop-patterns: com.cn.boot.sample.server.druid.service..*
+      filter:
+        stat:
+          enabled: true
+          merge-sql: true
+          log-slow-sql: true
+          slow-sql-millis: 100
+
+
+
+# Dubbo配置
+dubbo:
+  application:
+    name: ${artifactId}
+    logger: slf4j
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  protocol:
+    name: dubbo
+    port: 20882
+  scan:
+    base-packages: com.cn.boot.sample.server.druid.service

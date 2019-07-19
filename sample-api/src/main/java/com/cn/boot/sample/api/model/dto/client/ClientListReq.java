@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -13,10 +14,15 @@ import java.io.Serializable;
 @ApiModel
 @Data
 public class ClientListReq implements Serializable {
-    @ApiModelProperty(value = "商户名称", required = true)
+    @ApiModelProperty(value = "商户名称")
     private String name;
 
+    @ApiModelProperty(value = "页码", required = true)
+    @NotNull
     private Integer pageNum;
+
+    @ApiModelProperty(value = "数量", required = true)
+    @NotNull
     private Integer pageSize;
 
     /**
