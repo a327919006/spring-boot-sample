@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class RedisServiceImpl implements RedisService {
 
     private RedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
     private HashOperations hashOperations;
     private ListOperations listOperations;
     private ZSetOperations zSetOperations;
