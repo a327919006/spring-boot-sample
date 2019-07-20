@@ -24,7 +24,7 @@ import java.util.List;
  * @author Chen Nan
  * @date 2019/3/11.
  */
-@Service
+@Service(timeout = 300000)
 public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleMapper, SysRole, String>
         implements SysRoleService {
 

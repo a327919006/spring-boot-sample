@@ -19,7 +19,7 @@ import java.util.List;
  * @author Chen Nan
  * @date 2019/3/11.
  */
-@Service
+@Service(timeout = 300000)
 public class SysResourceServiceImpl extends BaseServiceImpl<SysResourceMapper, SysResource, String>
         implements SysResourceService {
 

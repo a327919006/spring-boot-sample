@@ -11,7 +11,7 @@ import org.apache.dubbo.config.annotation.Service;
 /**
  * @author Chen Nan
  */
-@Service
+@Service(timeout = 300000)
 @Slf4j
 public class ClientServiceImpl extends BaseServiceImpl<ClientMapper, Client, String>
         implements ClientService {
