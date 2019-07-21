@@ -18,6 +18,7 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2等
 | ----- | sample-security-core | 认证相关通用配置 |
 | 20881 | sample-server | 服务接口实现，整合dubbo |
 | 10084、20882 | sample-server-druid | 服务接口实现，整合dubbo、druid |
+| 10085 | sample-webflux | 业务接口，整合webflux |
 
 ------------
 
@@ -34,3 +35,6 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2等
 | RabbitMQ | 消息队列 |
 | SpringSecurity | 身份认证 |
 | SpringSession | 分布式Session |
+| Druid | 阿里数据库连接池 |
+| Redis | Redis |
+| SpringWebflux | 反应式WEB框架 |
