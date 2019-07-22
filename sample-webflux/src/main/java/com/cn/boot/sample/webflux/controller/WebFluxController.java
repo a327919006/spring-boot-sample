@@ -1,20 +1,13 @@
 package com.cn.boot.sample.webflux.controller;
 
 import cn.hutool.core.thread.ThreadUtil;
-import com.cn.boot.sample.api.exceptions.BusinessException;
-import com.cn.boot.sample.api.model.dto.client.ClientListReq;
-import com.cn.boot.sample.api.model.po.Client;
-import com.cn.boot.sample.api.model.vo.client.ClientGetRsp;
-import com.cn.boot.sample.api.service.ClientService;
-import com.cn.boot.sample.api.service.UidGeneratorService;
-import com.github.pagehelper.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -26,14 +19,9 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/client")
-@Api(tags = "商户管理", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping("/test")
+@Api(tags = "测试", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class WebFluxController {
-
-    @Reference
-    private ClientService clientService;
-    @Reference
-    private UidGeneratorService uidGeneratorService;
 
     @ApiOperation("sync获取数据")
     @GetMapping("/sync/data")
@@ -68,8 +56,8 @@ public class WebFluxController {
         return Flux.fromStream(list.stream().map(this::getData));
     }
 
-    @ApiOperation(value = "sse", produces = "test/event-stream")
-    @GetMapping("/sse/list")
+    @ApiOperation("事件流方式")
+    @GetMapping(value = "/sse/list", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> getSseList() {
         List<String> list = new ArrayList<>();
         list.add("data1");
@@ -78,29 +66,9 @@ public class WebFluxController {
         return Flux.fromStream(list.stream());
     }
 
-    @ApiOperation("商户-获取")
-    @GetMapping("/{id}")
-    public Mono<ClientGetRsp> get(@PathVariable String id) {
-        Client client = clientService.selectByPrimaryKey(id);
-        if (client == null) {
-            throw new BusinessException("商户不存在");
-        }
-
-        ClientGetRsp rsp = new ClientGetRsp();
-        BeanUtils.copyProperties(client, rsp);
-
-        // Mono表示0-1个元素的异步序列
-        return Mono.just(rsp);
-    }
-
-    @ApiOperation("商户-列表")
-    @GetMapping("")
-    public List<Client> list(@ModelAttribute ClientListReq req) {
-        Page<Client> page = clientService.listPage(req);
-        return page.getResult();
-    }
-
-
+    /**
+     * 模拟异步获取数据
+     */
     public String getData(String msg) {
         ThreadUtil.sleep(1000);
         return msg;
