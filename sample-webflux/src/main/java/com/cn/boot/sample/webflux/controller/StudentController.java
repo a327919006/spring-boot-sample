@@ -55,7 +55,7 @@ public class StudentController {
 
     @ApiOperation("修改")
     @PutMapping("/{id}")
-    public Mono<ResponseEntity<Student>> update(@PathVariable String id, @RequestBody Student student) {
+    public Mono<ResponseEntity<Student>> update(@PathVariable String id, @RequestBody @Valid Student student) {
         return userRepository.findById(id)
                 .flatMap(stu -> {
                     stu.setName(student.getName());
