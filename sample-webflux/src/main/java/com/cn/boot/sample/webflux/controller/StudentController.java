@@ -25,42 +25,42 @@ import javax.validation.Valid;
 public class StudentController {
 
     @Autowired
-    private StudentRepository userRepository;
+    private StudentRepository studentRepository;
 
     @ApiOperation("添加")
     @PostMapping
     public Mono<Student> save(@RequestBody @Valid Student student) {
-        return userRepository.save(student);
+        return studentRepository.save(student);
     }
 
     @ApiOperation("列表")
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Student> list() {
-        return userRepository.findAll();
+        return studentRepository.findAll();
     }
 
     @ApiOperation("删除")
     @DeleteMapping("/{id}")
     public Mono<Void> delete(@PathVariable String id) {
-        return userRepository.deleteById(id);
+        return studentRepository.deleteById(id);
     }
 
     @ApiOperation("删除")
     @DeleteMapping("/exist/{id}")
     public Mono<ResponseEntity<Void>> deleteExist(@PathVariable String id) {
-        return userRepository.findById(id)
-                .flatMap(student -> userRepository.delete(student).then(Mono.just(new ResponseEntity<Void>(HttpStatus.OK))))
+        return studentRepository.findById(id)
+                .flatMap(student -> studentRepository.delete(student).then(Mono.just(new ResponseEntity<Void>(HttpStatus.OK))))
                 .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @ApiOperation("修改")
     @PutMapping("/{id}")
     public Mono<ResponseEntity<Student>> update(@PathVariable String id, @RequestBody @Valid Student student) {
-        return userRepository.findById(id)
+        return studentRepository.findById(id)
                 .flatMap(stu -> {
                     stu.setName(student.getName());
                     stu.setAge(student.getAge());
-                    return userRepository.save(stu);
+                    return studentRepository.save(stu);
                 })
                 .map(stu -> new ResponseEntity<>(stu, HttpStatus.OK))
                 .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -69,7 +69,7 @@ public class StudentController {
     @ApiOperation("查询")
     @GetMapping("/{id}")
     public Mono<ResponseEntity<Student>> findById(@PathVariable String id) {
-        return userRepository.findById(id)
+        return studentRepository.findById(id)
                 .map(stu -> new ResponseEntity<>(stu, HttpStatus.OK))
                 .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
@@ -77,12 +77,12 @@ public class StudentController {
     @ApiOperation("根据年龄查询")
     @GetMapping("/age/{below}/{top}")
     public Flux<Student> findByAge(@PathVariable Integer below, @PathVariable Integer top) {
-        return userRepository.findByAgeBetween(below, top);
+        return studentRepository.findByAgeBetween(below, top);
     }
 
     @ApiOperation("根据年龄查询")
     @GetMapping("/query/age/{below}/{top}")
     public Flux<Student> query(@PathVariable Integer below, @PathVariable Integer top) {
-        return userRepository.queryByAge(below, top);
+        return studentRepository.queryByAge(below, top);
     }
 }
