@@ -1,7 +1,7 @@
 ### spring-boot-sample
 
 #### 项目说明
-SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2等
+SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurity、RabbitMQ等
 
 #### Maven模块描述
 
