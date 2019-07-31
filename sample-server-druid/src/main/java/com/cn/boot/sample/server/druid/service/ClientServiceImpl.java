@@ -17,13 +17,4 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientMapper, Client, Str
         implements ClientService {
     @Reference
     private UidGeneratorService uidGeneratorService;
-
-    @Override
-    public void insertClients(Client client) {
-        for(int i = 0; i < 100000; i++){
-            client.setId(uidGeneratorService.generate());
-            client.setName("测试商户" + i);
-            mapper.insertSelective(client);
-        }
-    }
 }

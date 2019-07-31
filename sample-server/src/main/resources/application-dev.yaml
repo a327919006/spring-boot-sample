@@ -22,3 +22,6 @@ dubbo:
     port: 20881
   scan:
     base-packages: com.cn.boot.sample.server.service
+#  provider:
+    # 使用令牌防止消费者绕过注册中心访问提供者
+#    token: true

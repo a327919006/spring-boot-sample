@@ -44,13 +44,7 @@ public class ClientController {
 
         Client client = new Client();
         BeanUtils.copyProperties(req, client);
-
-        for(int i = 0; i < 100000; i++){
-            client.setId(uidGeneratorService.generate());
-            client.setName("测试商户" + i);
-            clientService.insertSelective(client);
-        }
-
+        clientService.insertSelective(client);
 
         return client.getId();
     }
