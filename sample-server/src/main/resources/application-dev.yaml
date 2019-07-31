@@ -23,5 +23,5 @@ dubbo:
   scan:
     base-packages: com.cn.boot.sample.server.service
 #  provider:
-    # 使用令牌防止消费者绕过注册中心访问提供者
+    # 使用令牌防止消费者绕过注册中心访问提供者，true 随机令牌， 其他自定义令牌 如123456
 #    token: true

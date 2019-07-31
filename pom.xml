@@ -51,7 +51,8 @@
         <commons-lang3.version>3.9</commons-lang3.version>
 
         <!--dubbo-->
-        <dubbo.version>2.7.0</dubbo.version>
+        <dubbo.version>2.7.3</dubbo.version>
+        <dubbo-spring-boot-starter.version>2.7.1</dubbo-spring-boot-starter.version>
 
         <!--guava-->
         <guava.version>27.1-jre</guava.version>
@@ -229,7 +230,7 @@
             <dependency>
                 <groupId>org.apache.dubbo</groupId>
                 <artifactId>dubbo-spring-boot-starter</artifactId>
-                <version>${dubbo.version}</version>
+                <version>${dubbo-spring-boot-starter.version}</version>
             </dependency>
 
             <!--mysql-->
