@@ -8,6 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
+ * 自定义认证方式：如短信验证码登录
+ * 此处也可用于实现不同类型用户访问不同用户表进行认证
+ *
  * @author Chen Nan
  */
 public class SmsCodeAuthenticationProvider implements AuthenticationProvider {

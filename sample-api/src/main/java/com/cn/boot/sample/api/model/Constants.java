@@ -26,6 +26,7 @@ public class Constants {
      * MSG
      */
     public static final String MSG_SUCCESS = "SUCCESS";
+    public static final String MSG_FAIL = "FAIL";
 
     /**
      * key
