@@ -19,6 +19,7 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 20881 | sample-server | 服务接口实现，整合dubbo |
 | 10084、20882 | sample-server-druid | 服务接口实现，整合dubbo、druid |
 | 10085 | sample-webflux | 业务接口，整合webflux |
+| 10086 | sample-wechat | 微信公众号开发 |
 
 ------------
 
