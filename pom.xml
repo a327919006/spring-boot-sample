@@ -21,6 +21,7 @@
         <module>sample-security-app</module>
         <module>sample-redis</module>
         <module>sample-webflux</module>
+        <module>sample-wechat</module>
     </modules>
 
 
