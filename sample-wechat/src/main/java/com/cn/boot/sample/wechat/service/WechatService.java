@@ -1,9 +1,6 @@
 package com.cn.boot.sample.wechat.service;
 
-import com.cn.boot.sample.wechat.model.BaseMsgRsp;
-import com.cn.boot.sample.wechat.model.CheckMsgDTO;
-import com.cn.boot.sample.wechat.model.CreateMenuDTO;
-import com.cn.boot.sample.wechat.model.ReceiveMsgDTO;
+import com.cn.boot.sample.wechat.model.*;
 
 /**
  * @author Chen Nan
@@ -38,4 +35,29 @@ public interface WechatService {
      * @param req 菜单信息
      */
     void createMenu(CreateMenuDTO req);
+
+    /**
+     * 设置行业
+     *
+     * @param req 行业信息
+     */
+    void updateIndustry(UpdateIndustryDTO req);
+
+    /**
+     * 发送模板消息
+     *
+     * @param req 模板消息信息
+     * @return 消息ID
+     */
+    long sendTemplateMsg(SendTemplateMsgDTO req);
+
+    /**
+     * 上传临时素材
+     *
+     * @param fileBytes 素材内容
+     * @param type      媒体文件类型，分别有图片（image）、语音（voice）、视频（video）和缩略图（thumb）
+     * @param fileName  文件名
+     * @return 素材ID
+     */
+    String uploadMedia(byte[] fileBytes, String type, String fileName);
 }

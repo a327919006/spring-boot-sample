@@ -4,6 +4,7 @@ import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.wechat.model.BaseMsgRsp;
 import com.cn.boot.sample.wechat.model.CheckMsgDTO;
 import com.cn.boot.sample.wechat.model.ReceiveMsgDTO;
+import com.cn.boot.sample.wechat.model.SendTemplateMsgDTO;
 import com.cn.boot.sample.wechat.service.WechatService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,8 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 /**
  * @author Chen Nan
@@ -46,5 +49,17 @@ public class WechatController {
         BaseMsgRsp baseMsgRsp = wechatService.handleMsg(req);
         log.info("rsp={}", baseMsgRsp);
         return baseMsgRsp;
+    }
+
+    @ApiOperation(value = "发送模板消息")
+    @PostMapping("/message/template/send")
+    public long sendTemplateMsg(@RequestBody SendTemplateMsgDTO req) {
+        return wechatService.sendTemplateMsg(req);
+    }
+
+    @ApiOperation(value = "上传临时素材")
+    @PostMapping("/media/upload")
+    public String uploadMedia(MultipartFile media) throws IOException {
+        return wechatService.uploadMedia(media.getBytes(), "image", media.getOriginalFilename());
     }
 }

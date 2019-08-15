@@ -43,8 +43,16 @@ public class ReceiveMsgDTO {
     private String content;
 
     @JacksonXmlProperty(localName = "MsgId")
-    @ApiModelProperty(value = "消息id，64位整型")
+    @ApiModelProperty(value = "消息id，64位整型，用户在公众号发送的消息")
     private String msgId;
+
+    @JacksonXmlProperty(localName = "MsgID")
+    @ApiModelProperty(value = "消息id，模板消息")
+    private String msgID;
+
+    @JacksonXmlProperty(localName = "Status")
+    @ApiModelProperty(value = "模板消息发送状态 success成功、failed:user block用户拒收、failed: system failed其他原因")
+    private String status;
 
     @JacksonXmlProperty(localName = "PicUrl")
     @ApiModelProperty(value = "图片链接（由系统生成）")
@@ -93,4 +101,13 @@ public class ReceiveMsgDTO {
     @JacksonXmlProperty(localName = "Url")
     @ApiModelProperty(value = "消息链接")
     private String url;
+
+    public String getMsgId() {
+        return msgId;
+    }
+
+    public String getMsgID() {
+        return msgID;
+    }
+
 }

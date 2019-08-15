@@ -54,7 +54,7 @@ public class WechatServiceImpl implements WechatService {
             case "event":
                 return handleEventMsg(req);
             default:
-                return new TextMsgRsp(req, "暂不支持该类型消息");
+                return new TextMsgRsp(req, "暂不支持该类型消息:" + req.getMsgType());
         }
     }
 
@@ -68,12 +68,30 @@ public class WechatServiceImpl implements WechatService {
         wechatUtils.createMenu(req);
     }
 
+    @Override
+    public void updateIndustry(UpdateIndustryDTO req) {
+        wechatUtils.updateIndustry(req);
+    }
+
+    @Override
+    public long sendTemplateMsg(SendTemplateMsgDTO req) {
+        return wechatUtils.sendTemplateMsg(req);
+    }
+
+    @Override
+    public String uploadMedia(byte[] fileBytes, String type, String fileName) {
+        return wechatUtils.uploadMedia(fileBytes, type, fileName);
+    }
+
     private BaseMsgRsp handleEventMsg(ReceiveMsgDTO req) {
-        switch (req.getEvent()){
+        switch (req.getEvent()) {
             case "CLICK":
                 return new TextMsgRsp(req, "点击了:" + req.getEventKey());
+            case "TEMPLATESENDJOBFINISH":
+                log.info("模板消息回调，msgID={},status={}", req.getMsgID(), req.getStatus());
+                return null;
             default:
-                return new TextMsgRsp(req, "暂不支持该类型消息");
+                return new TextMsgRsp(req, "暂不支持该类型事件:" + req.getEvent());
         }
     }
 }

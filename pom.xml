@@ -50,6 +50,7 @@
 
         <!-- common tools-->
         <commons-lang3.version>3.9</commons-lang3.version>
+        <commons-io.version>2.6</commons-io.version>
 
         <!--dubbo-->
         <dubbo.version>2.7.3</dubbo.version>
@@ -253,6 +254,11 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.hutool</groupId>

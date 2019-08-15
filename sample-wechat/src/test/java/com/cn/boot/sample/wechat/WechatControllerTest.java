@@ -1,13 +1,12 @@
 package com.cn.boot.sample.wechat;
 
-import cn.hutool.json.JSONUtil;
-import com.google.common.collect.Lists;
-
 import com.cn.boot.sample.wechat.model.CreateMenuDTO;
 import com.cn.boot.sample.wechat.model.CreateMenuDTO.ButtonBean;
 import com.cn.boot.sample.wechat.model.CreateMenuDTO.ButtonBean.SubButtonBean;
 import com.cn.boot.sample.wechat.service.WechatService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,9 @@ public class WechatControllerTest {
     @Autowired
     private WechatService wechatService;
 
+    /**
+     * 获取token
+     */
     @Test
     public void getAccessToken() {
         log.info(wechatService.getAccessToken());
@@ -41,6 +46,9 @@ public class WechatControllerTest {
         log.info(wechatService.getAccessToken());
     }
 
+    /**
+     * 创建菜单
+     */
     @Test
     public void createMenu() {
         CreateMenuDTO createMenuDTO = new CreateMenuDTO();
@@ -100,4 +108,20 @@ public class WechatControllerTest {
 
         wechatService.createMenu(createMenuDTO);
     }
+
+    /**
+     * 设置行业
+     */
+    @Test
+    public void updateIndustry() throws IOException {
+        String url = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id=MEDIA_ID";
+        String token = "24_qWArqrO_WkbPUoatcXdKQK4TbJyc7rYccgM8kiUGw3MQZnUuLNJMihYhrzlhOA050jeHGHS-0v1s8Q8dp_Wbg_4p3ZRYRluM9RUe4qX3g9N_yeTdb9F0YfvvHZNle9qw8yWIdVFhszBMu2aDJHHiAIAECC";
+        String mediaId = "HuMuZhsbvDWLU1hIjXz1hwXbt4gEIeNAz0Oar1vFjLr2G1xFjUOqEkCUeRAk_lUC";
+        url = url.replace("ACCESS_TOKEN", token);
+        url = url.replace("MEDIA_ID", mediaId);
+        byte[] bytes = IOUtils.toByteArray(new URL(url));
+        log.info("length={}", bytes.length);
+        FileUtils.writeByteArrayToFile(new File("E://aa.png"), bytes);
+    }
+
 }

@@ -51,6 +51,11 @@
             <artifactId>jackson-jaxrs-xml-provider</artifactId>
         </dependency>
 
+        <!--io-->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
 
         <!-- modules -->
         <dependency>
