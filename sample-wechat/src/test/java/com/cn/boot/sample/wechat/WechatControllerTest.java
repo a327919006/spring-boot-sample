@@ -3,6 +3,8 @@ package com.cn.boot.sample.wechat;
 import com.cn.boot.sample.wechat.model.CreateMenuDTO;
 import com.cn.boot.sample.wechat.model.CreateMenuDTO.ButtonBean;
 import com.cn.boot.sample.wechat.model.CreateMenuDTO.ButtonBean.SubButtonBean;
+import com.cn.boot.sample.wechat.model.UserInfoRsp;
+import com.cn.boot.sample.wechat.model.UpdateIndustryDTO;
 import com.cn.boot.sample.wechat.service.WechatService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -113,7 +115,19 @@ public class WechatControllerTest {
      * 设置行业
      */
     @Test
-    public void updateIndustry() throws IOException {
+    public void updateIndustry() {
+        UpdateIndustryDTO updateIndustryDTO = new UpdateIndustryDTO();
+        updateIndustryDTO.setIndustry_id1("1");
+        updateIndustryDTO.setIndustry_id2("2");
+
+        wechatService.updateIndustry(updateIndustryDTO);
+    }
+
+    /**
+     * 下载素材到本地
+     */
+    @Test
+    public void downloadMedia() throws IOException {
         String url = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id=MEDIA_ID";
         String token = "24_qWArqrO_WkbPUoatcXdKQK4TbJyc7rYccgM8kiUGw3MQZnUuLNJMihYhrzlhOA050jeHGHS-0v1s8Q8dp_Wbg_4p3ZRYRluM9RUe4qX3g9N_yeTdb9F0YfvvHZNle9qw8yWIdVFhszBMu2aDJHHiAIAECC";
         String mediaId = "HuMuZhsbvDWLU1hIjXz1hwXbt4gEIeNAz0Oar1vFjLr2G1xFjUOqEkCUeRAk_lUC";
@@ -124,4 +138,26 @@ public class WechatControllerTest {
         FileUtils.writeByteArrayToFile(new File("E://aa.png"), bytes);
     }
 
+    /**
+     * 使用ticket生成二维码，下载到本地
+     */
+    @Test
+    public void getQrCode() throws IOException {
+        String url = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=TICKET";
+        String ticket = "gQHp7jwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyQklkaVlqTXdkUjExbl94dWh0YzUAAgR-J1VdAwSAOgkA";
+        url = url.replace("TICKET", ticket);
+        byte[] bytes = IOUtils.toByteArray(new URL(url));
+        log.info("length={}", bytes.length);
+        FileUtils.writeByteArrayToFile(new File("E://aa.png"), bytes);
+    }
+
+    /**
+     * 使用ticket生成二维码，下载到本地
+     */
+    @Test
+    public void getUserInfo() throws IOException {
+        String openId = "o8OB1wRCFbJKaSyB9vMfFeq7rcGk";
+        UserInfoRsp userInfo = wechatService.getUserInfo(openId);
+        log.info("userInfo={}", userInfo);
+    }
 }

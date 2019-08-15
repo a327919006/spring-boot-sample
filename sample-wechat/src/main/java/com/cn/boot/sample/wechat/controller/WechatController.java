@@ -1,10 +1,7 @@
 package com.cn.boot.sample.wechat.controller;
 
 import com.cn.boot.sample.api.model.Constants;
-import com.cn.boot.sample.wechat.model.BaseMsgRsp;
-import com.cn.boot.sample.wechat.model.CheckMsgDTO;
-import com.cn.boot.sample.wechat.model.ReceiveMsgDTO;
-import com.cn.boot.sample.wechat.model.SendTemplateMsgDTO;
+import com.cn.boot.sample.wechat.model.*;
 import com.cn.boot.sample.wechat.service.WechatService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -61,5 +58,21 @@ public class WechatController {
     @PostMapping("/media/upload")
     public String uploadMedia(MultipartFile media) throws IOException {
         return wechatService.uploadMedia(media.getBytes(), "image", media.getOriginalFilename());
+    }
+
+    @ApiOperation(value = "创建二维码Ticket")
+    @PostMapping("/qrcode/ticket")
+    public String sendTemplateMsg(@RequestBody CreateQrCodeTicketDTO req) {
+        return wechatService.createQrCodeTicket(req);
+    }
+
+    @ApiOperation(value = "用户授权回调")
+    @GetMapping("/code/callback")
+    public Object callback(@ModelAttribute CodeCallbackDTO req) {
+        String code = req.getCode();
+        UserTokenRsp token = wechatService.getUserTokenByCode(code);
+        UserInfoRsp userInfoByToken = wechatService.getUserInfoByToken(token.getAccess_token(), token.getOpenid());
+
+        return userInfoByToken;
     }
 }

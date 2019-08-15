@@ -60,4 +60,37 @@ public interface WechatService {
      * @return 素材ID
      */
     String uploadMedia(byte[] fileBytes, String type, String fileName);
+
+    /**
+     * 创建二维码Ticket
+     *
+     * @param req 二维码信息
+     * @return 二维码ticket
+     */
+    String createQrCodeTicket(CreateQrCodeTicketDTO req);
+
+    /**
+     * 获取用户基本信息
+     *
+     * @param openId 用户openId
+     * @return 用户信息
+     */
+    UserInfoRsp getUserInfo(String openId);
+
+    /**
+     * 获取用户AccessToken
+     *
+     * @param code code
+     * @return 用户token
+     */
+    UserTokenRsp getUserTokenByCode(String code);
+
+    /**
+     * 获取用户信息，根据AccessToken
+     *
+     * @param accessToken 用户accessToken
+     * @param openid      openid
+     * @return 用户信息
+     */
+    UserInfoRsp getUserInfoByToken(String accessToken, String openid);
 }
