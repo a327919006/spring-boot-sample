@@ -5,10 +5,12 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author Chen Nan
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel
 @JacksonXmlRootElement(localName = "xml")

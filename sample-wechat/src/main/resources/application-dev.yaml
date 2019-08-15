@@ -3,6 +3,10 @@ server:
   servlet:
     context-path: /${artifactId}
 
+wechat:
+  token: 123456
+  app-id: wx53c809c42dcddfc4
+  app-secret: 5a081261e1ab15b32665de21083c44a9
 
 swagger:
   enabled: true

@@ -28,7 +28,7 @@ public class WechatController {
 
     @ApiOperation("验证消息的确来自微信服务器")
     @GetMapping
-    public String get(@ModelAttribute @Valid CheckMsgDTO req) {
+    public String checkMsg(@ModelAttribute @Valid CheckMsgDTO req) {
         log.info("验证消息,req={}", req);
 
         if (wechatService.check(req)) {
@@ -42,8 +42,7 @@ public class WechatController {
 
     @ApiOperation(value = "接收消息", produces = MediaType.APPLICATION_XML_VALUE)
     @PostMapping(produces = MediaType.APPLICATION_XML_VALUE)
-    public BaseMsgRsp post(@RequestBody ReceiveMsgDTO req) {
-        log.info("req={}", req);
+    public BaseMsgRsp receiveMsg(@RequestBody ReceiveMsgDTO req) {
         BaseMsgRsp baseMsgRsp = wechatService.handleMsg(req);
         log.info("rsp={}", baseMsgRsp);
         return baseMsgRsp;

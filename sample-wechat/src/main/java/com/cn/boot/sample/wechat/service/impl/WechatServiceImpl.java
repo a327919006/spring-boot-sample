@@ -1,10 +1,13 @@
 package com.cn.boot.sample.wechat.service.impl;
 
 import cn.hutool.crypto.SecureUtil;
+import com.cn.boot.sample.wechat.config.properties.WechatProperties;
 import com.cn.boot.sample.wechat.model.*;
 import com.cn.boot.sample.wechat.service.WechatService;
+import com.cn.boot.sample.wechat.util.WechatUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,12 +21,15 @@ import java.util.List;
 @Service
 public class WechatServiceImpl implements WechatService {
 
-    public static final String TOKEN = "123456";
+    @Autowired
+    public WechatProperties wechatProperties;
+    @Autowired
+    public WechatUtils wechatUtils;
 
     @Override
     public boolean check(CheckMsgDTO req) {
         // 1）将token、timestamp、nonce三个参数进行字典序排序
-        String[] args = new String[]{TOKEN, req.getTimestamp(), req.getNonce()};
+        String[] args = new String[]{wechatProperties.getToken(), req.getTimestamp(), req.getNonce()};
         Arrays.sort(args);
 
         // 2）将三个参数字符串拼接成一个字符串进行sha1加密
@@ -45,6 +51,27 @@ public class WechatServiceImpl implements WechatService {
                 List<ArticleMsgRsp> articles = new ArrayList<>();
                 articles.add(new ArticleMsgRsp("跳转到百度", "描述信息", req.getPicUrl(), "http://baidu.com"));
                 return new NewsMsgRsp(req, articles);
+            case "event":
+                return handleEventMsg(req);
+            default:
+                return new TextMsgRsp(req, "暂不支持该类型消息");
+        }
+    }
+
+    @Override
+    public String getAccessToken() {
+        return wechatUtils.getAccessToken();
+    }
+
+    @Override
+    public void createMenu(CreateMenuDTO req) {
+        wechatUtils.createMenu(req);
+    }
+
+    private BaseMsgRsp handleEventMsg(ReceiveMsgDTO req) {
+        switch (req.getEvent()){
+            case "CLICK":
+                return new TextMsgRsp(req, "点击了:" + req.getEventKey());
             default:
                 return new TextMsgRsp(req, "暂不支持该类型消息");
         }

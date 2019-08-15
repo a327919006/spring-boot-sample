@@ -30,6 +30,14 @@ public class ReceiveMsgDTO {
     @ApiModelProperty(value = "消息类型，文本为text、图片为image、语音为voice、视频为video、小视频为shortvideo、位置为location、连接为link")
     private String msgType;
 
+    @JacksonXmlProperty(localName = "Event")
+    @ApiModelProperty(value = "事件类型，CLICK/VIEW/scancode_push等等")
+    private String event;
+
+    @JacksonXmlProperty(localName = "EventKey")
+    @ApiModelProperty(value = "事件KEY值，与自定义菜单接口中KEY值对应")
+    private String eventKey;
+
     @JacksonXmlProperty(localName = "Content")
     @ApiModelProperty(value = "文本消息内容")
     private String content;
