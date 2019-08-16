@@ -1,8 +1,8 @@
-package com.cn.boot.sample.wechat.util;
+package com.cn.boot.sample.api.util;
 
 import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONUtil;
-import com.cn.boot.sample.wechat.model.ChatRsp;
+import com.cn.boot.sample.api.model.dto.chat.ChatRsp;
 
 /**
  * @author Chen Nan

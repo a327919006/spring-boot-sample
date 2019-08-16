@@ -1,4 +1,4 @@
-package com.cn.boot.sample.wechat.model;
+package com.cn.boot.sample.api.model.dto.chat;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

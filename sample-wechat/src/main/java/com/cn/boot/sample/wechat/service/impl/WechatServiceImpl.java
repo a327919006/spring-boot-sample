@@ -1,16 +1,18 @@
 package com.cn.boot.sample.wechat.service.impl;
 
 import cn.hutool.crypto.SecureUtil;
+import cn.hutool.http.HttpUtil;
+import com.cn.boot.sample.api.util.ChatRobotUtil;
 import com.cn.boot.sample.wechat.config.properties.WechatProperties;
 import com.cn.boot.sample.wechat.model.*;
 import com.cn.boot.sample.wechat.service.WechatService;
-import com.cn.boot.sample.wechat.util.ChatRobotUtil;
 import com.cn.boot.sample.wechat.util.WechatUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -152,18 +154,23 @@ public class WechatServiceImpl implements WechatService {
      * @return 响应消息
      */
     private BaseMsgRsp handleLoginMsg(ReceiveMsgDTO req) {
-        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect";
+        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?";
+        String param = "appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE";
         String redirectUri = "http://cntest.free.idcfengye.com/sample-wechat/wx/code/callback";
 
         if (StringUtils.containsIgnoreCase(req.getContent(), "静默")) {
-            url = url.replace("SCOPE", "snsapi_base");
-            url = url.replace("SCOPE", "base");
+            param = param.replace("SCOPE", "snsapi_base");
+            param = param.replace("STATE", "base");
         }
 
-        url = url.replace("APPID", wechatProperties.getAppId())
+        param = param.replace("APPID", wechatProperties.getAppId())
                 .replace("REDIRECT_URI", redirectUri)
                 .replace("SCOPE", "snsapi_userinfo")
                 .replace("STATE", "userinfo");
+
+        param = HttpUtil.encodeParams(param, StandardCharsets.UTF_8);
+
+        url += param + "#wechat_redirect";
         return new TextMsgRsp(req, "点击<a href=\"" + url + "\">这里</a>登录");
     }
 }
