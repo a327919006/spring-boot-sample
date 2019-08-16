@@ -4,6 +4,7 @@ import cn.hutool.crypto.SecureUtil;
 import com.cn.boot.sample.wechat.config.properties.WechatProperties;
 import com.cn.boot.sample.wechat.model.*;
 import com.cn.boot.sample.wechat.service.WechatService;
+import com.cn.boot.sample.wechat.util.ChatRobotUtil;
 import com.cn.boot.sample.wechat.util.WechatUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -47,18 +48,12 @@ public class WechatServiceImpl implements WechatService {
         switch (req.getMsgType()) {
             case "text":
                 if (StringUtils.containsIgnoreCase(req.getContent(), "登录")) {
-                    String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect";
-                    String redirectUri = "http://cntest.free.idcfengye.com/sample-wechat/wx/code/callback";
-
-                    if (StringUtils.containsIgnoreCase(req.getContent(), "静默")) {
-                        url = url.replace("SCOPE", "snsapi_base");
-                    }
-
-                    url = url.replace("APPID", wechatProperties.getAppId())
-                            .replace("REDIRECT_URI", redirectUri)
-                            .replace("SCOPE", "snsapi_userinfo")
-                            .replace("STATE", "mydata");
-                    return new TextMsgRsp(req, "点击<a href=\"" + url + "\">这里</a>登录");
+                    handleLoginMsg(req);
+                }
+                // 调用聊天机器人
+                String chat = ChatRobotUtil.chat(req.getContent());
+                if (StringUtils.isNotBlank(chat)) {
+                    return new TextMsgRsp(req, chat);
                 }
                 return new TextMsgRsp(req, "收到:" + req.getContent());
             case "image":
@@ -117,6 +112,12 @@ public class WechatServiceImpl implements WechatService {
         return wechatUtils.getUserInfoByToken(accessToken, openid);
     }
 
+    /**
+     * 处理事件消息
+     *
+     * @param req 消息内容
+     * @return 响应消息
+     */
     private BaseMsgRsp handleEventMsg(ReceiveMsgDTO req) {
         switch (req.getEvent()) {
             case "CLICK":
@@ -142,5 +143,26 @@ public class WechatServiceImpl implements WechatService {
             default:
                 return new TextMsgRsp(req, "暂不支持该类型事件:" + req.getEvent());
         }
+    }
+
+    /**
+     * 处理登录消息
+     *
+     * @param req 消息内容
+     * @return 响应消息
+     */
+    private BaseMsgRsp handleLoginMsg(ReceiveMsgDTO req) {
+        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect";
+        String redirectUri = "http://cntest.free.idcfengye.com/sample-wechat/wx/code/callback";
+
+        if (StringUtils.containsIgnoreCase(req.getContent(), "静默")) {
+            url = url.replace("SCOPE", "snsapi_base");
+        }
+
+        url = url.replace("APPID", wechatProperties.getAppId())
+                .replace("REDIRECT_URI", redirectUri)
+                .replace("SCOPE", "snsapi_userinfo")
+                .replace("STATE", "mydata");
+        return new TextMsgRsp(req, "点击<a href=\"" + url + "\">这里</a>登录");
     }
 }
