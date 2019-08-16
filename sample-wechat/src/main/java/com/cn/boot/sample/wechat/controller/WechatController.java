@@ -6,6 +6,7 @@ import com.cn.boot.sample.wechat.service.WechatService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -71,8 +72,11 @@ public class WechatController {
     public Object callback(@ModelAttribute CodeCallbackDTO req) {
         String code = req.getCode();
         UserTokenRsp token = wechatService.getUserTokenByCode(code);
-        UserInfoRsp userInfoByToken = wechatService.getUserInfoByToken(token.getAccess_token(), token.getOpenid());
+        if (StringUtils.endsWithIgnoreCase(req.getState(), "userinfo")) {
+            UserInfoRsp userInfoByToken = wechatService.getUserInfoByToken(token.getAccess_token(), token.getOpenid());
+            return userInfoByToken;
+        }
 
-        return userInfoByToken;
+        return token.getOpenid();
     }
 }

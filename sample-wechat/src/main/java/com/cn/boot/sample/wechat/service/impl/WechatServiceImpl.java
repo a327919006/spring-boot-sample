@@ -157,12 +157,13 @@ public class WechatServiceImpl implements WechatService {
 
         if (StringUtils.containsIgnoreCase(req.getContent(), "静默")) {
             url = url.replace("SCOPE", "snsapi_base");
+            url = url.replace("SCOPE", "base");
         }
 
         url = url.replace("APPID", wechatProperties.getAppId())
                 .replace("REDIRECT_URI", redirectUri)
                 .replace("SCOPE", "snsapi_userinfo")
-                .replace("STATE", "mydata");
+                .replace("STATE", "userinfo");
         return new TextMsgRsp(req, "点击<a href=\"" + url + "\">这里</a>登录");
     }
 }

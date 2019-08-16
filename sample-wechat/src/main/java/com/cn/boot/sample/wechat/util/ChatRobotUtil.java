@@ -13,7 +13,7 @@ public class ChatRobotUtil {
     public static String chat(String content) {
         String result = HttpRequest.get(URL + content).execute().body();
         ChatRsp chatRsp = JSONUtil.toBean(result, ChatRsp.class);
-        if (chatRsp.getResult() == 0) {
+        if (chatRsp.getResult() == 0 && chatRsp.getContent().length() < 200) {
             return chatRsp.getContent().replaceAll("\\{br}", "\n");
         }
         return "";
