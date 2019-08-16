@@ -48,7 +48,7 @@ public class WechatServiceImpl implements WechatService {
         switch (req.getMsgType()) {
             case "text":
                 if (StringUtils.containsIgnoreCase(req.getContent(), "登录")) {
-                    handleLoginMsg(req);
+                    return handleLoginMsg(req);
                 }
                 // 调用聊天机器人
                 String chat = ChatRobotUtil.chat(req.getContent());
