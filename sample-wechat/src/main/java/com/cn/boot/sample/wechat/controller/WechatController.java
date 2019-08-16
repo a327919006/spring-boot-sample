@@ -63,7 +63,7 @@ public class WechatController {
 
     @ApiOperation(value = "创建二维码Ticket")
     @PostMapping("/qrcode/ticket")
-    public String sendTemplateMsg(@RequestBody CreateQrCodeTicketDTO req) {
+    public String createQrCodeTicket(@RequestBody CreateQrCodeTicketDTO req) {
         return wechatService.createQrCodeTicket(req);
     }
 
