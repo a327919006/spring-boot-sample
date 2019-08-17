@@ -22,6 +22,7 @@
         <module>sample-redis</module>
         <module>sample-webflux</module>
         <module>sample-wechat</module>
+        <module>sample-wechat-tool</module>
     </modules>
 
 
@@ -78,6 +79,8 @@
         <!--druid-->
         <druid.version>1.1.18</druid.version>
 
+        <!--weixin-tool-->
+        <weixin-tool.version>3.5.0</weixin-tool.version>
 
         <!-- plugins -->
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -316,6 +319,13 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
+            </dependency>
+
+            <!--weixin-tool-->
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-mp</artifactId>
+                <version>${weixin-tool.version}</version>
             </dependency>
 
         </dependencies>
