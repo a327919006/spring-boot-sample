@@ -20,6 +20,7 @@ dubbo:
   protocol:
     name: dubbo
     port: 20881
+    serialization: kryo
   scan:
     base-packages: com.cn.boot.sample.server.service
 #  provider:

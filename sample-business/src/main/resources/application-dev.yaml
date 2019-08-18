@@ -11,6 +11,8 @@ dubbo:
     address: zookeeper://127.0.0.1:2181
   consumer:
     check: false
+  protocol:
+    serialization: kryo
 
 swagger:
   enabled: true
