@@ -55,7 +55,8 @@
 
         <!--dubbo-->
         <dubbo.version>2.7.3</dubbo.version>
-        <dubbo-spring-boot-starter.version>2.7.1</dubbo-spring-boot-starter.version>
+        <dubbo-serialization-kryo.version>2.7.3</dubbo-serialization-kryo.version>
+        <dubbo-spring-boot-starter.version>2.7.3</dubbo-spring-boot-starter.version>
 
         <!--guava-->
         <guava.version>27.1-jre</guava.version>
@@ -237,6 +238,12 @@
                 <artifactId>dubbo-spring-boot-starter</artifactId>
                 <version>${dubbo-spring-boot-starter.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-serialization-kryo</artifactId>
+                <version>${dubbo-serialization-kryo.version}</version>
+            </dependency>
+
 
             <!--mysql-->
             <dependency>
