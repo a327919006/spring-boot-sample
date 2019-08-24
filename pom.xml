@@ -23,6 +23,7 @@
         <module>sample-webflux</module>
         <module>sample-wechat</module>
         <module>sample-wechat-tool</module>
+        <module>sample-server-jpa</module>
     </modules>
 
 
@@ -32,7 +33,7 @@
         <jdk.encoding>UTF-8</jdk.encoding>
 
         <!--spring boot-->
-        <spring-boot.version>2.1.6.RELEASE</spring-boot.version>
+        <spring-boot.version>2.1.7.RELEASE</spring-boot.version>
         <mybatis-spring-boot-starter.version>2.1.0</mybatis-spring-boot-starter.version>
 
         <!--pagehelper-->
@@ -55,7 +56,8 @@
 
         <!--dubbo-->
         <dubbo.version>2.7.3</dubbo.version>
-        <dubbo-spring-boot-starter.version>2.7.1</dubbo-spring-boot-starter.version>
+        <dubbo-serialization-kryo.version>2.7.3</dubbo-serialization-kryo.version>
+        <dubbo-spring-boot-starter.version>2.7.3</dubbo-spring-boot-starter.version>
 
         <!--guava-->
         <guava.version>27.1-jre</guava.version>
@@ -237,6 +239,12 @@
                 <artifactId>dubbo-spring-boot-starter</artifactId>
                 <version>${dubbo-spring-boot-starter.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-serialization-kryo</artifactId>
+                <version>${dubbo-serialization-kryo.version}</version>
+            </dependency>
+
 
             <!--mysql-->
             <dependency>
