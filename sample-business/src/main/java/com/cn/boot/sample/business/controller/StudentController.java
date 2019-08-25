@@ -1,5 +1,6 @@
 package com.cn.boot.sample.business.controller;
 
+import com.cn.boot.sample.api.model.dto.DataGrid;
 import com.cn.boot.sample.api.model.dto.student.StudentAddReq;
 import com.cn.boot.sample.api.model.dto.student.StudentGetReq;
 import com.cn.boot.sample.api.model.po.Student;
@@ -12,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author Chen Nan
@@ -35,5 +37,29 @@ public class StudentController {
     @GetMapping("")
     public Student find(@ModelAttribute @Valid StudentGetReq req) {
         return studentService.findFirstByNameAndAge(req.getName(), req.getAge());
+    }
+
+    @ApiOperation("学生-DataGrid")
+    @GetMapping("/list/page")
+    public DataGrid listPage(@ModelAttribute @Valid StudentGetReq req) {
+        return studentService.listPage(req.getName(), req.getAge());
+    }
+
+    @ApiOperation("学生-分页")
+    @GetMapping("/list")
+    public List<Student> list(@ModelAttribute @Valid StudentGetReq req) {
+        return studentService.list(req.getName(), req.getAge());
+    }
+
+    @ApiOperation("学生ID、姓名列表")
+    @GetMapping("/list/info")
+    public List<Student> listIdAndName(@ModelAttribute @Valid StudentGetReq req) {
+        return studentService.findIdAndName(req.getName(), req.getAge());
+    }
+
+    @ApiOperation("学生ID、姓名列表分页")
+    @GetMapping("/list/info/page")
+    public DataGrid listIdAndNamePage(@ModelAttribute @Valid StudentGetReq req) {
+        return studentService.findIdAndNamePage(req.getName(), req.getAge());
     }
 }
