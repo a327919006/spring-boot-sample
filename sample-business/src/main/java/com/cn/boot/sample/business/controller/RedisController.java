@@ -52,8 +52,14 @@ public class RedisController {
     }
 
     @ApiOperation("获取对象")
-    @GetMapping("/get/{key}")
+    @GetMapping("/{key}")
     public Object get(@PathVariable String key) {
         return redisService.get(key);
+    }
+
+    @ApiOperation("获取商户")
+    @GetMapping("/client/{id}")
+    public Client getClient(@PathVariable String id) {
+        return redisService.getClient(id);
     }
 }

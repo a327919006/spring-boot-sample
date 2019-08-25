@@ -1,10 +1,15 @@
 package com.cn.boot.sample.redis.service;
 
+import com.cn.boot.sample.api.model.po.Client;
+import com.cn.boot.sample.api.service.ClientService;
 import com.cn.boot.sample.api.service.RedisService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.*;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -12,6 +17,9 @@ import java.util.concurrent.TimeUnit;
  */
 @Service(timeout = 300000)
 public class RedisServiceImpl implements RedisService {
+
+    @Reference
+    private ClientService clientService;
 
     private RedisTemplate redisTemplate;
     private StringRedisTemplate stringRedisTemplate;
@@ -45,5 +53,11 @@ public class RedisServiceImpl implements RedisService {
     @Override
     public Object get(String key) {
         return valueOperations.get(key);
+    }
+
+    @Override
+    @Cacheable(key = "'client_'+#id", value = "CLIENT")
+    public Client getClient(String id) {
+        return clientService.selectByPrimaryKey(id);
     }
 }

@@ -16,5 +16,8 @@ dubbo:
   protocol:
     name: dubbo
     port: 20883
+    serialization: kryo
   scan:
     base-packages: com.cn.boot.sample.redis.service
+  consumer:
+    check: false
