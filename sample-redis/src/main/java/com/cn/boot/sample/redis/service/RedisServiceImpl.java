@@ -6,6 +6,7 @@ import com.cn.boot.sample.api.service.RedisService;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.*;
 
@@ -16,6 +17,7 @@ import java.util.concurrent.TimeUnit;
  * @author Chen Nan
  */
 @Service(timeout = 300000)
+@CacheConfig(cacheNames = "CLIENT")
 public class RedisServiceImpl implements RedisService {
 
     @Reference
@@ -56,7 +58,7 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
-    @Cacheable(key = "'client_'+#id", value = "CLIENT")
+    @Cacheable(key = "'client_'+#id")
     public Client getClient(String id) {
         return clientService.selectByPrimaryKey(id);
     }
