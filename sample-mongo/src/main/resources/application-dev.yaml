@@ -1,0 +1,24 @@
+# 开发环境配置
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: test
+
+# Dubbo配置
+dubbo:
+  application:
+    name: ${artifactId}
+    logger: slf4j
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  protocol:
+    name: dubbo
+    port: 20882
+    serialization: kryo
+  scan:
+    base-packages: com.cn.boot.sample.mongo.service
+  consumer:
+    check: false
