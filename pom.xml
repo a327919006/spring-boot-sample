@@ -11,19 +11,20 @@
     <modules>
         <module>sample-api</module>
         <module>sample-dal</module>
+        <module>sample-business</module>
         <module>sample-server</module>
         <module>sample-server-druid</module>
-        <module>sample-business</module>
+        <module>sample-server-jpa</module>
         <module>sample-amqp</module>
         <module>sample-security</module>
         <module>sample-security-core</module>
         <module>sample-security-browser</module>
         <module>sample-security-app</module>
         <module>sample-redis</module>
+        <module>sample-mongo</module>
         <module>sample-webflux</module>
         <module>sample-wechat</module>
         <module>sample-wechat-tool</module>
-        <module>sample-server-jpa</module>
     </modules>
 
 
