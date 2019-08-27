@@ -34,8 +34,81 @@ CREATE TABLE `client` (
   `third_user_id` varchar(32) NOT NULL COMMENT '第三方应用userId',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `idx_name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC COMMENT='商户信息';
+
+/*Table structure for table `role_resource` */
+
+CREATE TABLE `role_resource` (
+  `role_resource_id` varchar(32) NOT NULL DEFAULT '' COMMENT '角色资源唯一标识',
+  `role_id` varchar(32) DEFAULT NULL COMMENT '角色唯一标识',
+  `resource_id` varchar(32) DEFAULT NULL COMMENT '资源唯一标识',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '记录创建时间',
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录更新时间',
+  PRIMARY KEY (`role_resource_id`),
+  KEY `FK_ROLE_RESOURCE` (`role_id`),
+  KEY `FK_RESOURCE_ROLE` (`resource_id`),
+  CONSTRAINT `role_resource_ibfk_1` FOREIGN KEY (`resource_id`) REFERENCES `sys_resource` (`resource_id`),
+  CONSTRAINT `role_resource_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='角色资源关联表';
+
+/*Table structure for table `student` */
+
+CREATE TABLE `student` (
+  `id` varchar(32) NOT NULL,
+  `name` varchar(32) NOT NULL COMMENT '姓名',
+  `age` int(5) NOT NULL COMMENT '年龄',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Table structure for table `sys_resource` */
+
+CREATE TABLE `sys_resource` (
+  `resource_id` varchar(32) NOT NULL DEFAULT '' COMMENT '资源唯一标识',
+  `name` varchar(64) DEFAULT NULL COMMENT '资源名称',
+  `url` varchar(256) DEFAULT NULL COMMENT '资源路径',
+  `type` tinyint(11) DEFAULT NULL COMMENT '资源类型（0：菜单；1：按钮）',
+  `icon` varchar(256) DEFAULT NULL COMMENT '资源图标',
+  `priority` int(11) DEFAULT NULL COMMENT '资源显示顺序',
+  `parent_id` varchar(32) DEFAULT NULL COMMENT '资源父编号',
+  `permission` varchar(128) DEFAULT NULL COMMENT '权限字符串',
+  `status` tinyint(11) DEFAULT NULL COMMENT '资源状态（0：禁用；1：启用）',
+  `create_user` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '资源创建时间',
+  `update_user` varchar(32) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '资源更新时间',
+  PRIMARY KEY (`resource_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+/*Table structure for table `sys_role` */
+
+CREATE TABLE `sys_role` (
+  `role_id` varchar(32) NOT NULL COMMENT '角色编号',
+  `role_name` varchar(50) DEFAULT NULL COMMENT '角色名称',
+  `status` tinyint(4) DEFAULT NULL COMMENT '状态(1:正常 -1:停用)',
+  `create_user` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_user` varchar(32) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+/*Table structure for table `sys_user` */
+
+CREATE TABLE `sys_user` (
+  `sys_user_id` varchar(32) NOT NULL COMMENT '系统用户编号',
+  `user_name` varchar(32) DEFAULT NULL COMMENT '用户名',
+  `user_status` tinyint(4) DEFAULT '1' COMMENT '用户状态(0:待审核 1:审核通过 2:审核不通过 -1:停用)',
+  `user_pwd` varchar(50) DEFAULT NULL COMMENT '用户密码',
+  `create_user` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_user` varchar(32) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`sys_user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 /*Table structure for table `uid_worker_node` */
 
@@ -48,18 +121,34 @@ CREATE TABLE `uid_worker_node` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='DB WorkerID Assigner for UID Generator';
+) ENGINE=InnoDB AUTO_INCREMENT=1383 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='DB WorkerID Assigner for UID Generator';
 
 /*Table structure for table `user` */
 
 CREATE TABLE `user` (
   `id` varchar(20) NOT NULL COMMENT '用户ID',
   `username` varchar(16) NOT NULL COMMENT '用户名',
-  `password` varchar(32) NOT NULL COMMENT '密码',
+  `password` varchar(64) NOT NULL COMMENT '密码',
+  `status` int(2) unsigned NOT NULL DEFAULT '1' COMMENT '用户状态 1启用 0禁用',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Table structure for table `user_role` */
+
+CREATE TABLE `user_role` (
+  `id` varchar(32) NOT NULL COMMENT '系统编号',
+  `sys_user_id` varchar(32) NOT NULL COMMENT '系统用户编号',
+  `role_id` varchar(32) NOT NULL COMMENT '角色编号',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `FK_sys_user` (`sys_user_id`),
+  KEY `FK_role_2` (`role_id`),
+  CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`role_id`),
+  CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`sys_user_id`) REFERENCES `sys_user` (`sys_user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
