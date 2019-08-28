@@ -1,17 +1,21 @@
 package com.cn.boot.sample.api.model.po;
 
-import java.time.LocalDateTime;
-import javax.persistence.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * @author Chen Nan
  */
 @Data
 @Accessors(chain = true)
-@Table(name = "boot_sample..sys_resource")
-public class SysResource {
+@Table(name = "boot_sample.sys_resource")
+public class SysResource implements Serializable {
     /**
      * 资源唯一标识
      */

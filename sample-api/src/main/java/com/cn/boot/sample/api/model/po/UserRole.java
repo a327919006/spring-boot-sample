@@ -1,5 +1,6 @@
 package com.cn.boot.sample.api.model.po;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.*;
 import lombok.Data;
@@ -10,8 +11,8 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@Table(name = "boot_sample..user_role")
-public class UserRole {
+@Table(name = "boot_sample.user_role")
+public class UserRole implements Serializable {
     /**
      * 系统编号
      */
