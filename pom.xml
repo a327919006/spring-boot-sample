@@ -26,6 +26,7 @@
         <module>sample-webflux</module>
         <module>sample-wechat</module>
         <module>sample-wechat-tool</module>
+        <module>sample-server-jpa-more</module>
     </modules>
 
 

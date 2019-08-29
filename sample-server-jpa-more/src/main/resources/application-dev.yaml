@@ -1,0 +1,36 @@
+# 开发环境配置
+
+spring:
+  # 数据库连接配置
+  datasource:
+    db1:
+      #注意：如果使用druid数据库连接池，配置为url，如果是默认的hikari，要配置jdbc-url
+      jdbc-url: jdbc:mysql://localhost:3306/boot_sample?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: chennan
+      driver-class-name: com.mysql.jdbc.Driver
+    db2:
+      jdbc-url: jdbc:mysql://localhost:3306/boot_sample2?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: chennan
+      driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+
+# Dubbo配置
+dubbo:
+  application:
+    name: ${artifactId}
+    logger: slf4j
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  protocol:
+    name: dubbo
+    port: 20881
+    serialization: kryo
+  scan:
+    base-packages: com.cn.boot.sample.server.jpa.more.service
