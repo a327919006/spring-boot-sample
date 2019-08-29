@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Accessors(chain = true)
+@Entity
 @Table(name = "boot_sample2.teacher")
 public class Teacher implements Serializable {
     @Id
