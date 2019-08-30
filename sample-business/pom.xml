@@ -68,6 +68,16 @@
             <groupId>com.cn.boot</groupId>
             <artifactId>sample-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cn.boot</groupId>
+            <artifactId>sample-mongo-api</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mongodb</groupId>
+                    <artifactId>mongo-java-driver</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
 
     <build>

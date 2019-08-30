@@ -58,7 +58,7 @@
         <!-- modules -->
         <dependency>
             <groupId>com.cn.boot</groupId>
-            <artifactId>sample-api</artifactId>
+            <artifactId>sample-mongo-api</artifactId>
         </dependency>
     </dependencies>
 
