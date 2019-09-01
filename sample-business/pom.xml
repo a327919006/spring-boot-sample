@@ -26,6 +26,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!--swagger-->
         <dependency>
             <groupId>io.github.wilson-he</groupId>
             <artifactId>swagger2-spring-boot-starter</artifactId>
@@ -34,6 +35,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <!--config-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
 
         <!--dubbo-->

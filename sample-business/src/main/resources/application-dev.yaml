@@ -41,3 +41,12 @@ spring:
       thread-name-prefix: myExecute-
       pool:
         max-size: 100
+
+test:
+  config:
+    address: 北京
+    users:
+      - name: user1
+        age: 11
+      - name: user2
+        age: 22

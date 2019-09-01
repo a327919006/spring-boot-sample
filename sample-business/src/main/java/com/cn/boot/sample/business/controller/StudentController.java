@@ -62,4 +62,10 @@ public class StudentController {
     public DataGrid listIdAndNamePage(@ModelAttribute @Valid StudentGetReq req) {
         return studentService.findIdAndNamePage(req.getName(), req.getAge());
     }
+
+    @ApiOperation("根据姓名获取列表")
+    @GetMapping("/list/name")
+    public List<Student> listByName(@RequestParam String name) {
+        return studentService.findByName(name);
+    }
 }
