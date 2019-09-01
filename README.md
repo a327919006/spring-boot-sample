@@ -9,6 +9,7 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | --- | --- | --- |
 | 10082         | sample-amqp               | 整合RabbitMQ |
 | -----         | sample-api                | 服务接口、工具类、实体类 |
+| 10087         | sample-apollo             | 整合Apollo配置中心 |
 | 10081         | sample-business           | 业务接口，整合Swagger |
 | -----         | sample-dal                | mapper、sql语句，整合tk-mybatis |
 | 20882         | sample-mongo              | 整合MongoDB、SpringDataMongodb |
@@ -55,4 +56,5 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | SpringDataJpa | jpa |
 | SpringDataRedis | Redis操作框架 |
 | SpringDataMongodb | MongoDB操作框架 |
+| Apollo | Apollo配置中心 |
 
