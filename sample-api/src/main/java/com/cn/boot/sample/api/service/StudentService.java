@@ -63,4 +63,11 @@ public interface StudentService {
      */
     DataGrid findIdAndNamePage(String name, Integer age);
 
+    /**
+     * 根据姓名获取列表
+     * @param name 姓名
+     * @return 学生列表
+     */
+    List<Student> findByName(String name);
+
 }
