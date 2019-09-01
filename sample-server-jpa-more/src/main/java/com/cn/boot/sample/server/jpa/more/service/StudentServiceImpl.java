@@ -71,4 +71,9 @@ public class StudentServiceImpl implements StudentService {
         dataGrid.setTotal(list.getTotalElements());
         return dataGrid;
     }
+
+    @Override
+    public List<Student> findByName(String name) {
+        return null;
+    }
 }
