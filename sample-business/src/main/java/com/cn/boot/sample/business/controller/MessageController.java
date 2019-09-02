@@ -1,6 +1,7 @@
 package com.cn.boot.sample.business.controller;
 
 import com.cn.boot.sample.mongo.api.model.Message;
+import com.cn.boot.sample.mongo.api.model.MessageCount;
 import com.cn.boot.sample.mongo.api.service.MessageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -55,5 +56,11 @@ public class MessageController {
     public int update(@RequestBody Message req) {
         req.setUpdateTime(LocalDateTime.now());
         return messageService.updateByPrimaryKey(req);
+    }
+
+    @ApiOperation("消息-数量")
+    @GetMapping("/count/{day}")
+    public List<MessageCount> count(@PathVariable Long day) {
+        return messageService.findMessageCount(LocalDateTime.now().minusDays(day), 1);
     }
 }
