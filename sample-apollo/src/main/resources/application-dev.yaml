@@ -1,0 +1,16 @@
+server:
+  port: 10087
+  servlet:
+    context-path: /${artifactId}
+
+# apollo配置
+app:
+  id: test1
+apollo:
+  bootstrap:
+    enabled: true
+    namespaces: application,test2.yaml
+  meta: http://localhost:8080
+  cacheDir: E:\javaforidea\project\spring-boot-sample\apollo
+
+

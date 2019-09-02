@@ -28,6 +28,7 @@
         <module>sample-wechat-tool</module>
         <module>sample-server-jpa-more</module>
         <module>sample-mongo-api</module>
+        <module>sample-apollo</module>
     </modules>
 
 
@@ -87,6 +88,9 @@
 
         <!--weixin-tool-->
         <weixin-tool.version>3.5.0</weixin-tool.version>
+
+        <!--apollo-->
+        <apollo.version>1.4.0</apollo.version>
 
         <!-- plugins -->
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -343,6 +347,13 @@
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-mp</artifactId>
                 <version>${weixin-tool.version}</version>
+            </dependency>
+
+            <!-- apollo配置中心-->
+            <dependency>
+                <groupId>com.ctrip.framework.apollo</groupId>
+                <artifactId>apollo-client</artifactId>
+                <version>${apollo.version}</version>
             </dependency>
 
         </dependencies>

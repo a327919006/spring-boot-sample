@@ -5,6 +5,7 @@ import com.cn.boot.sample.api.model.dto.DataGrid;
 import com.cn.boot.sample.api.model.dto.student.StudentAddReq;
 import com.cn.boot.sample.api.model.po.Student;
 import com.cn.boot.sample.api.service.StudentService;
+import com.cn.boot.sample.server.jpa.dao.StudentDao;
 import com.cn.boot.sample.server.jpa.repository.StudentRepository;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.BeanUtils;
@@ -24,6 +25,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private StudentRepository repository;
+    @Autowired
+    private StudentDao dao;
 
     @Override
     public Student insert(StudentAddReq req) {
@@ -70,5 +73,10 @@ public class StudentServiceImpl implements StudentService {
         dataGrid.setRows(list.getContent());
         dataGrid.setTotal(list.getTotalElements());
         return dataGrid;
+    }
+
+    @Override
+    public List<Student> findByName(String name) {
+        return dao.find(name);
     }
 }
