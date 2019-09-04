@@ -31,6 +31,7 @@
         <module>sample-apollo</module>
         <module>sample-kafka</module>
         <module>sample-kafka-origin</module>
+        <module>sample-geoip2</module>
     </modules>
 
 
