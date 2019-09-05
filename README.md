@@ -31,6 +31,13 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10086         | sample-wechat             | 微信公众号开发，未使用框架，直接调用微信接口 |
 | 10086         | sample-wechat-tool        | 微信公众号开发,使用框架：WxJava |
 
+##### 说明
+```
+端口为1xxxx的模块对外提供Http接口，并整合了Swagger，方便调试。
+端口为2xxxx的模块提供RPC服务，一般用于business模块调用，由business模块提供测试的http接口
+无端口的模块，提供给其他模块引用，如：实体类、工具类、配置类等
+```
+
 ------------
 
 #### sql文件说明
