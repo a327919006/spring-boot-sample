@@ -28,7 +28,7 @@ public class BootTest {
         rabbitSender.sendMessage("Hello RabbitMQ! SpringBoot!error");
 
         ClientAddReq req = new ClientAddReq();
-        req.setId(123L);
+        req.setId("123");
         req.setName("张三");
         rabbitSender.sendMessage(req);
     }
