@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author Chen Nan
  * @date 2019/6/10.
  */
-@Component
+//@Component
 @Slf4j
 public class RabbitSender {
 

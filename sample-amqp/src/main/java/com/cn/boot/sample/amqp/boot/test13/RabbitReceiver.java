@@ -17,7 +17,7 @@ import java.io.IOException;
  * @author Chen Nan
  * @date 2019/6/10.
  */
-@Component
+//@Component
 @Slf4j
 public class RabbitReceiver {
 
