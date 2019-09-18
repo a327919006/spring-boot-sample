@@ -2,6 +2,5 @@
 logs/
 */target/
 */*.iml
-out/
 *.iml
 target/
