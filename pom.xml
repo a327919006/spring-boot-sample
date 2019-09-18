@@ -32,6 +32,7 @@
         <module>sample-kafka</module>
         <module>sample-kafka-origin</module>
         <module>sample-geoip2</module>
+        <module>sample-hazelcast</module>
     </modules>
 
 
@@ -98,6 +99,9 @@
         <!--kafka-->
         <spring-kafka.version>2.2.8.RELEASE</spring-kafka.version>
         <kafka-clients.version>2.3.0</kafka-clients.version>
+
+        <!--hazelcast-->
+        <hazelcast.version>3.12.2</hazelcast.version>
 
         <!-- plugins -->
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -376,6 +380,12 @@
                 <version>${kafka-clients.version}</version>
             </dependency>
 
+            <!--hazelcast-->
+            <dependency>
+                <groupId>com.hazelcast</groupId>
+                <artifactId>hazelcast-spring</artifactId>
+                <version>${hazelcast.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
