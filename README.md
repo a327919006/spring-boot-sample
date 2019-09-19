@@ -19,6 +19,7 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 20882         | sample-mongo              | 整合MongoDB、SpringDataMongodb |
 | -----         | sample-mongo-api          | MongoDB实体类、服务接口 |
 | 20883         | sample-redis              | 整合Redis、SpringDataRedis |
+| 10092         | sample-rocketmq           | 整合RocketMQ |
 | 10083         | sample-security           | 整合SpringSecurity、SpringSession |
 | -----         | sample-security-browser   | 浏览器认证相关配置 |
 | -----         | sample-security-app       | app或前后端分离项目的认证相关配置 |
@@ -60,6 +61,7 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | Dubbo | RPC |
 | Swagger2 | 接口文档 |
 | RabbitMQ | 消息队列 |
+| RocketMQ | 消息队列 |
 | Druid | 阿里数据库连接池 |
 | Redis | Redis |
 | SpringSecurity | 身份认证 |
@@ -71,4 +73,5 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | SpringKafka | Kafka操作框架 |
 | Apollo | Apollo配置中心 |
 | Hazelcase | 分布式缓存 |
+
 
