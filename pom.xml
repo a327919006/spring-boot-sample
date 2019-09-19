@@ -33,6 +33,7 @@
         <module>sample-kafka-origin</module>
         <module>sample-geoip2</module>
         <module>sample-hazelcast</module>
+        <module>sample-rocketmq</module>
     </modules>
 
 
@@ -102,6 +103,9 @@
 
         <!--hazelcast-->
         <hazelcast.version>3.12.2</hazelcast.version>
+
+        <!--RocketMQ-->
+        <rocketmq.version>4.5.2</rocketmq.version>
 
         <!-- plugins -->
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -385,6 +389,13 @@
                 <groupId>com.hazelcast</groupId>
                 <artifactId>hazelcast-spring</artifactId>
                 <version>${hazelcast.version}</version>
+            </dependency>
+
+            <!--RocketMQ-->
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>${rocketmq.version}</version>
             </dependency>
 
         </dependencies>
