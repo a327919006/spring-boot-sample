@@ -3,12 +3,6 @@ server:
   servlet:
     context-path: /${artifactId}
 
-spring:
-  kafka:
-    bootstrap-servers: localhost:9092
-    consumer:
-      group-id: testGroup1
-
 swagger:
   enabled: true
   print-init: true
