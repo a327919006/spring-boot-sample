@@ -21,8 +21,9 @@ import java.util.List;
  * @author Chen Nan
  */
 @Slf4j
-@Component
+//@Component
 public class HelloConsumer {
+    public static final String TAG = "test1";
 
     private static DefaultMQPushConsumer consumer;
 
@@ -30,13 +31,13 @@ public class HelloConsumer {
     public void init() throws MQClientException {
         log.info("【HelloConsumer】init");
 
-        consumer = new DefaultMQPushConsumer("test1_consumer_group");
+        consumer = new DefaultMQPushConsumer(TAG + "_consumer_group");
 
         consumer.setNamesrvAddr(MqConstant.NAME_SERVER_ADDRESS);
 
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
 
-        consumer.subscribe("test1_topic", "*");
+        consumer.subscribe(TAG + "_topic", "*");
 
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override

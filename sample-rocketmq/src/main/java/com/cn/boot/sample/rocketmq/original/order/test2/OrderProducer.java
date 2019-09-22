@@ -1,4 +1,4 @@
-package com.cn.boot.sample.rocketmq.original.hello.test1;
+package com.cn.boot.sample.rocketmq.original.order.test2;
 
 import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.rocketmq.constant.MqConstant;
@@ -9,6 +9,7 @@ import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.exception.RemotingException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -18,15 +19,18 @@ import javax.annotation.PreDestroy;
  * @author Chen Nan
  */
 @Slf4j
-//@Component
-public class HelloProducer {
-    public static final String TAG = "test1";
+@Component
+public class OrderProducer {
+    public static final String TAG = "test2";
 
     private static DefaultMQProducer producer;
 
+    @Value("${server.port}")
+    private int port;
+
     @PostConstruct
     public void init() throws MQClientException, RemotingException, InterruptedException, MQBrokerException {
-        log.info("【HelloProducer】init");
+        log.info("【OrderProducer】init");
 
         producer = new DefaultMQProducer(TAG + "_producer_group");
 
@@ -35,8 +39,8 @@ public class HelloProducer {
         producer.start();
 
 
-        for (int i = 0; i < 5; i++) {
-            byte[] body = ("Hello RocketMQ! " + TAG + "_" + i).getBytes();
+        for (int i = 0; i < 10; i++) {
+            byte[] body = ("Hello RocketMQ! " + port + "_" + i).getBytes();
             Message message = new Message();
             message.setTopic(TAG + "_topic"); // 主题
             message.setTags(TAG); // 标签
@@ -44,14 +48,13 @@ public class HelloProducer {
             message.setBody(body);
 
             SendResult sendResult = producer.send(message);
-            // {"traceOn":true,"regionId":"DefaultRegion","msgId":"C0A81F411BEC18B4AAC26B2653F70000","messageQueue":{"queueId":3,"topic":"test1_topic","brokerName":"Hasee-PC"},"sendStatus":"SEND_OK","queueOffset":0,"offsetMsgId":"C0A81F4100002A9F0000000000000C4A"}
-            log.info("【HelloProducer】sendResult = {}", JSONUtil.toJsonStr(sendResult));
+            log.info("【OrderProducer】sendResult = {}", JSONUtil.toJsonStr(sendResult));
         }
     }
 
     @PreDestroy
     public void destroy() throws Exception {
-        log.info("【HelloProducer】destroy");
+        log.info("【OrderProducer】destroy");
         producer.shutdown();
     }
 }
