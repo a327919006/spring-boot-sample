@@ -16,10 +16,12 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 /**
+ * 顺序消息
+ *
  * @author Chen Nan
  */
 @Slf4j
-@Component
+//@Component
 public class OrderProducer {
     public static final String TAG = "test2";
 

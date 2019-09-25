@@ -1,12 +1,11 @@
-package com.cn.boot.sample.rocketmq.original.order.test2;
+package com.cn.boot.sample.rocketmq.original.async.test3;
 
-import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.rocketmq.constant.MqConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;
-import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
@@ -17,23 +16,20 @@ import javax.annotation.PreDestroy;
 
 
 /**
- * 顺序消息（MessageListenerOrderly）
- * 不是绝对顺序，
- * 默认会启动4个消费者，不能保证4个线程处理任务的顺序，只是前4个会先执行，后4个后执行
- * 如果不需要顺序可使用test1中的MessageListenerConcurrently
+ * 异步发送
  *
  * @author Chen Nan
  */
 @Slf4j
-//@Component
-public class OrderConsumer {
-    public static final String TAG = "test2";
+@Component
+public class AsyncConsumer {
+    public static final String TAG = "test3";
 
     private static DefaultMQPushConsumer consumer;
 
     @PostConstruct
     public void init() throws MQClientException {
-        log.info("【OrderConsumer】init");
+        log.info("【AsyncConsumer】init");
 
         consumer = new DefaultMQPushConsumer(TAG + "_consumer_group");
 
@@ -43,16 +39,13 @@ public class OrderConsumer {
 
         consumer.subscribe(TAG + "_topic", "*");
 
-        consumer.registerMessageListener((MessageListenerOrderly) (msgs, context) -> {
+        consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
             MessageExt msg = msgs.get(0);
-            log.info("【OrderConsumer】msg={}", JSONUtil.toJsonStr(msg));
-            // 处理业务
+            log.info("【AsyncConsumer】msg={}", JSONUtil.toJsonStr(msg));
             String body = new String(msg.getBody());
+            log.info("【AsyncConsumer】body={}", body);
 
-            log.info("【OrderConsumer】body={}", body);
-
-            ThreadUtil.sleep(1000);
-            return ConsumeOrderlyStatus.SUCCESS;
+            return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         });
 
         consumer.start();
@@ -60,7 +53,7 @@ public class OrderConsumer {
 
     @PreDestroy
     public void destroy() {
-        log.info("【OrderConsumer】destroy");
+        log.info("【AsyncConsumer】destroy");
         consumer.shutdown();
     }
 }
