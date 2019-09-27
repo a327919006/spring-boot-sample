@@ -107,6 +107,9 @@
         <!--RocketMQ-->
         <rocketmq.version>4.5.2</rocketmq.version>
 
+        <!--oshi-->
+        <oshi.version>3.4.4</oshi.version>
+
         <!-- plugins -->
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
         <maven-jar-plugin.version>2.3.1</maven-jar-plugin.version>
@@ -396,6 +399,13 @@
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-client</artifactId>
                 <version>${rocketmq.version}</version>
+            </dependency>
+
+            <!--oshi-->
+            <dependency>
+                <groupId>com.github.oshi</groupId>
+                <artifactId>oshi-core</artifactId>
+                <version>${oshi.version}</version>
             </dependency>
 
         </dependencies>

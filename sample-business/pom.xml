@@ -69,6 +69,12 @@
             <artifactId>curator-recipes</artifactId>
         </dependency>
 
+        <!--oshi-->
+        <dependency>
+            <groupId>com.github.oshi</groupId>
+            <artifactId>oshi-core</artifactId>
+        </dependency>
+
         <!-- modules -->
         <dependency>
             <groupId>com.cn.boot</groupId>
