@@ -109,7 +109,8 @@
         <rocketmq.version>4.5.2</rocketmq.version>
 
         <!--oshi-->
-        <oshi.version>3.4.4</oshi.version>
+        <oshi.version>4.0.0</oshi.version>
+        <jna.version>5.4.0</jna.version>
 
         <!-- plugins -->
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -408,6 +409,17 @@
                 <artifactId>oshi-core</artifactId>
                 <version>${oshi.version}</version>
             </dependency>
+            <dependency>
+                <groupId>net.java.dev.jna</groupId>
+                <artifactId>jna</artifactId>
+                <version>${jna.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.java.dev.jna</groupId>
+                <artifactId>jna-platform</artifactId>
+                <version>${jna.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

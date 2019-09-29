@@ -12,7 +12,28 @@
 - ConfigController：自定义Properties，从yaml获取配置
 - MessageController：测试MongoDB服务接口
 - RedisController：测试Redis
-- RuntimeController：获取系统运行状态，CPU、内存等
+- RuntimeController：
 - StudentController：测试JPA
 - TeacherController：测试多数据源
 
+#### RuntimeController说明
+使用oshi框架获取系统运行状态，CPU、内存等 
+- 官网示例代码： https://github.com/oshi/oshi/blob/master/oshi-core/src/test/java/oshi/SystemInfoTest.java
+- 引入依赖
+```
+<dependency>
+    <groupId>com.github.oshi</groupId>
+    <artifactId>oshi-core</artifactId>
+    <version>4.0.0</version>
+</dependency>
+<dependency>
+    <groupId>net.java.dev.jna</groupId>
+    <artifactId>jna</artifactId>
+    <version>5.4.0</version>
+</dependency>
+<dependency>
+    <groupId>net.java.dev.jna</groupId>
+    <artifactId>jna-platform</artifactId>
+    <version>5.4.0</version>
+</dependency>
+```
