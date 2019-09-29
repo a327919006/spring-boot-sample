@@ -38,6 +38,9 @@ public class OrderProducer {
 
         producer.setNamesrvAddr(MqConstant.NAME_SERVER_ADDRESS);
 
+        // 设置发送失败时的重发次数，默认2次，如果是异步发送，不重试
+        producer.setRetryTimesWhenSendFailed(0);
+
         producer.start();
 
 
