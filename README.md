@@ -32,7 +32,7 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10085         | sample-webflux            | 业务接口，整合webflux |
 | 10086         | sample-wechat             | 微信公众号开发，未使用框架，直接调用微信接口 |
 | 10086         | sample-wechat-tool        | 微信公众号开发,使用框架：WxJava |
-| 10092         | sample-zookeeper          | 整合Zookeeper，使用ZkClient |
+| 10092         | sample-zookeeper          | 整合ZooKeeper，使用ZkClient、Curator |
 
 ##### 说明
 ```
@@ -74,6 +74,6 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | SpringKafka | Kafka操作框架 |
 | Apollo | Apollo配置中心 |
 | Hazelcase | 分布式缓存 |
-| Zookeeper | Zookeeper |
+| ZooKeeper | 分布式协调服务 |
 
 
