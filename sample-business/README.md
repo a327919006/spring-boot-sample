@@ -1,5 +1,5 @@
 ### sample-business
-此模块包含一下功能
+此模块包含以下功能
 
 #### 基础功能说明：
 - ControllerExceptionHandler：统一异常处理
