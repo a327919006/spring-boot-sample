@@ -23,7 +23,7 @@ import java.util.List;
  * @author Chen Nan
  */
 @Slf4j
-@Component
+//@Component
 public class SelectorProducer {
     public static final String TAG = "test6";
 
