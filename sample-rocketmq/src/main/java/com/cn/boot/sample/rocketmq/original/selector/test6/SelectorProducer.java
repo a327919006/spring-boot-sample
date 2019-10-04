@@ -48,14 +48,11 @@ public class SelectorProducer {
             message.setKeys(TAG + "_" + i); // 消息唯一标识，用户自定义
             message.setBody(body);
 
-            SendResult sendResult = producer.send(message, new MessageQueueSelector() {
-                @Override
-                public MessageQueue select(List<MessageQueue> mqs, Message msg, Object arg) {
-                    log.info("【SelectorProducer】size = " + mqs.size());
-                    Integer num = (Integer) arg;
-                    int queueNum = num % mqs.size();
-                    return mqs.get(queueNum);
-                }
+            SendResult sendResult = producer.send(message, (mqs, msg, arg) -> {
+                log.info("【MessageQueueSelector】size = " + mqs.size());
+                Integer num = (Integer) arg;
+                int queueNum = num % mqs.size();
+                return mqs.get(queueNum);
             }, i);
             log.info("【SelectorProducer】sendResult = {}", JSONUtil.toJsonStr(sendResult));
         }
