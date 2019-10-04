@@ -1,4 +1,4 @@
-package com.cn.boot.sample.rocketmq.original.tag.test4;
+package com.cn.boot.sample.rocketmq.original.delay.test5;
 
 import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.rocketmq.constant.MqConstant;
@@ -15,20 +15,20 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 /**
- * 根据tag消费
+ * 延时消息
  *
  * @author Chen Nan
  */
 @Slf4j
-//@Component
-public class TagProducer {
-    public static final String TAG = "test4";
+@Component
+public class DelayProducer {
+    public static final String TAG = "test5";
 
     private static DefaultMQProducer producer;
 
     @PostConstruct
     public void init() throws MQClientException, RemotingException, InterruptedException, MQBrokerException {
-        log.info("【TagProducer】init");
+        log.info("【DelayProducer】init");
 
         producer = new DefaultMQProducer(TAG + "_producer_group");
 
@@ -37,23 +37,25 @@ public class TagProducer {
         producer.start();
 
         // 发送五条消息
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i <= 5; i++) {
             byte[] body = ("Hello RocketMQ! " + TAG + "_" + i).getBytes();
             Message message = new Message();
             message.setTopic(TAG + "_topic"); // 主题
-            message.setTags(TAG + "_" + i); // 标签
+            message.setTags(TAG); // 标签
             message.setKeys(TAG + "_" + i); // 消息唯一标识，用户自定义
             message.setBody(body);
 
+            // 设置延时等级
+            // 1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h
+            message.setDelayTimeLevel(i);
             SendResult sendResult = producer.send(message);
-            // {"traceOn":true,"regionId":"DefaultRegion","msgId":"C0A81F411BEC18B4AAC26B2653F70000","messageQueue":{"queueId":3,"topic":"test1_topic","brokerName":"Hasee-PC"},"sendStatus":"SEND_OK","queueOffset":0,"offsetMsgId":"C0A81F4100002A9F0000000000000C4A"}
-            log.info("【TagProducer】sendResult = {}", JSONUtil.toJsonStr(sendResult));
+            log.info("【DelayProducer】sendResult = {}", JSONUtil.toJsonStr(sendResult));
         }
     }
 
     @PreDestroy
     public void destroy() throws Exception {
-        log.info("【TagProducer】destroy");
+        log.info("【DelayProducer】destroy");
         producer.shutdown();
     }
 }
