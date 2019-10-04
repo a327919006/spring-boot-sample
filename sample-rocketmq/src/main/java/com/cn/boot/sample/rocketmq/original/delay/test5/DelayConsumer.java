@@ -21,7 +21,7 @@ import javax.annotation.PreDestroy;
  * @author Chen Nan
  */
 @Slf4j
-@Component
+//@Component
 public class DelayConsumer {
     public static final String TAG = "test5";
 
