@@ -1,7 +1,7 @@
 ### spring-boot-sample
 
 #### 项目说明
-SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurity、RabbitMQ等
+SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurity、RabbitMQ、RocketMQ、Kafka、Redis、MongoDB、Hazelcast、Apollo等
 
 #### Maven模块描述
 
@@ -13,7 +13,7 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10081         | sample-business           | 业务接口，整合Swagger，详情查看该模块README |
 | -----         | sample-dal                | mapper、sql语句，整合tk-mybatis |
 | 10090         | sample-geoip2             | 整合GeoIP2,实现根据IP地址获取对应城市 |
-| 10091         | sample-hazelcase          | 整合hazelcase,分布式缓存 |
+| 10091         | sample-hazelcast          | 整合hazelcase,分布式缓存 |
 | 10088         | sample-kafka              | 整合Kafka，使用框架spring-kafka |
 | 10089         | sample-kafka-origin       | 整合Kafka，使用原生kafka-client |
 | 20882         | sample-mongo              | 整合MongoDB、SpringDataMongodb |
@@ -74,7 +74,7 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | SpringDataMongodb | MongoDB操作框架 |
 | SpringKafka | Kafka操作框架 |
 | Apollo | Apollo配置中心 |
-| Hazelcase | 分布式缓存 |
+| Hazelcast | 分布式缓存 |
 | ZooKeeper | 分布式协调服务 |
 
 
