@@ -32,10 +32,10 @@ public class HazelcastConfig {
                         .setTcpIpConfig(
                                 new TcpIpConfig()
                                         .setEnabled(true)
-                                        .addMember("192.168.6.44:5701")
-                                        .addMember("192.168.6.44.5702")
-                                        .addMember("192.168.6.44.5703")
-                                        .addMember("192.168.6.44.5704")
+                                        .addMember("127.0.0.1:5701")
+                                        .addMember("127.0.0.1.5702")
+                                        .addMember("127.0.0.1.5703")
+                                        .addMember("127.0.0.1.5704")
                         ));
 
         Config config = new Config();

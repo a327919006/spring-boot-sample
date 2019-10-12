@@ -17,7 +17,7 @@ public class HazelcastClientConfig {
         ClientConfig config = new ClientConfig();
 
         ClientNetworkConfig clientNetworkConfig = new ClientNetworkConfig();
-        clientNetworkConfig.addAddress("192.168.6.44:5701");
+        clientNetworkConfig.addAddress("127.0.0.1:5701");
 
         config.setNetworkConfig(clientNetworkConfig);
         return config;
