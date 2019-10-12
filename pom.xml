@@ -35,6 +35,7 @@
         <module>sample-hazelcast</module>
         <module>sample-rocketmq</module>
         <module>sample-zookeeper</module>
+        <module>sample-hazelcast-client</module>
     </modules>
 
 
@@ -103,7 +104,7 @@
         <kafka-clients.version>2.3.0</kafka-clients.version>
 
         <!--hazelcast-->
-        <hazelcast.version>3.12.2</hazelcast.version>
+        <hazelcast.version>3.12.3</hazelcast.version>
 
         <!--RocketMQ-->
         <rocketmq.version>4.5.2</rocketmq.version>
@@ -395,6 +396,17 @@
                 <artifactId>hazelcast-spring</artifactId>
                 <version>${hazelcast.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.hazelcast</groupId>
+                <artifactId>hazelcast-client</artifactId>
+                <version>${hazelcast.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hazelcast</groupId>
+                <artifactId>hazelcast-all</artifactId>
+                <version>${hazelcast.version}</version>
+            </dependency>
+
 
             <!--RocketMQ-->
             <dependency>

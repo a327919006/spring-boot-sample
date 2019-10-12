@@ -1,0 +1,15 @@
+package com.cn.boot.sample.hazelcast.client;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * @author Chen Nan
+ */
+@SpringBootApplication
+public class HazelcastClientApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(HazelcastClientApplication.class, args);
+    }
+}

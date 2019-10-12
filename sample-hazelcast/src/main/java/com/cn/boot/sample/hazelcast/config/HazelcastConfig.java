@@ -19,7 +19,7 @@ public class HazelcastConfig {
 
         // map配置
         MapConfig mapConfig = new MapConfig()
-                .setName("default")
+                .setName("test")
                 .setBackupCount(2)
                 .setMaxSizeConfig(new MaxSizeConfig(200, MaxSizeConfig.MaxSizePolicy.FREE_HEAP_SIZE))
                 .setEvictionPolicy(EvictionPolicy.LRU)
