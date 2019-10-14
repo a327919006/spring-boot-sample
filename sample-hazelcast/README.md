@@ -1,5 +1,5 @@
-### sample-GEOIP2
-此模块整合Hyzelcast，实现分布式缓存
+### sample-hazelcast
+此模块整合Hazelcast，实现分布式缓存
 - 官网：https://hazelcast.org/
 - 下载：https://hazelcast.org/download/
 - 源码：https://github.com/hazelcast/hazelcast
@@ -10,7 +10,7 @@
 <dependency>
     <groupId>com.hazelcast</groupId>
     <artifactId>hazelcast-spring</artifactId>
-    <version>3.12.2</version>
+    <version>3.12.3</version>
 </dependency>
 ```
 
