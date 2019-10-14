@@ -35,7 +35,6 @@ public class HazelcastConfig {
                                         .addMember("127.0.0.1:5701")
                                         .addMember("127.0.0.1.5702")
                                         .addMember("127.0.0.1.5703")
-                                        .addMember("127.0.0.1.5704")
                         ));
 
         Config config = new Config();
@@ -43,6 +42,9 @@ public class HazelcastConfig {
                 .addMapConfig(mapConfig)
                 .setManagementCenterConfig(centerConfig)
                 .setNetworkConfig(networkConfig);
+
+        // 使用计数器功能需配置CPMemberCount(至少为3)
+//        config.getCPSubsystemConfig().setCPMemberCount(3);
         return config;
     }
 }

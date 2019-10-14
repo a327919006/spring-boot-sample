@@ -34,7 +34,8 @@ public class HazelcastConfig {
 }
 ```
 
-#### 使用Hazelcast
+#### 使用Hazelcast的Map
+示例：MapController
 ```
     @Autowired
     private HazelcastInstance hazelcastInstance;
@@ -55,3 +56,11 @@ public class HazelcastConfig {
 - 解压后运行start.bat或start.sh或执行java -jar hazelcast-mancenter-3.12.5.war 8080 hazelcast-mancenter
 - 访问http://localhost:8080/hazelcast-mancenter
 - 首次登录需配置管理账号和密码
+
+#### 使用计数器AtomicLong
+注意：使用此功能需至少启动3个节点，示例：AtomicController
+```
+    IAtomicLong dataMap = hazelcastInstance.getCPSubsystem().getAtomicLong(name);
+    long num1 = dataMap.incrementAndGet();
+    long num2 = dataMap.get();
+```

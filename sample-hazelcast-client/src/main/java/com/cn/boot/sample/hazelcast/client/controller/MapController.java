@@ -1,4 +1,4 @@
-package com.cn.boot.sample.hazelcast.controller;
+package com.cn.boot.sample.hazelcast.client.controller;
 
 import com.cn.boot.sample.api.model.Constants;
 import com.hazelcast.core.HazelcastInstance;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @RestController
-@RequestMapping("/data")
-@Api(tags = "发送端管理", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-public class HazelcastController {
+@RequestMapping("/map")
+@Api(tags = "MAP", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+public class MapController {
 
     @Autowired
     private HazelcastInstance hazelcastInstance;
