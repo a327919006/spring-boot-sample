@@ -7,7 +7,7 @@ swagger:
   enabled: true
   print-init: true
   docket:
-    base-package: com.cn.boot.sample.hazelcast.controller
+    base-package: com.cn.boot.sample.rocketmq.controller
     group-name: ${artifactId}
     path-selectors:
       exclude-patterns: [/error]
