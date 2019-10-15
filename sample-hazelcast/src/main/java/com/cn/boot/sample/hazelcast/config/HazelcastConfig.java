@@ -17,13 +17,19 @@ public class HazelcastConfig {
                 .setEnabled(true)
                 .setUrl("http://localhost:8080/hazelcast-mancenter");
 
+        // 数据处理器，缓存数据增删改查到数据库
+        MapStoreConfig testMapStoreConfig = new MapStoreConfig()
+                .setEnabled(true)
+                .setClassName("com.cn.boot.sample.hazelcast.loader.TestDataLoader");
         // map配置
         MapConfig mapConfig = new MapConfig()
-                .setName("test")
-                .setBackupCount(2)
-                .setMaxSizeConfig(new MaxSizeConfig(200, MaxSizeConfig.MaxSizePolicy.FREE_HEAP_SIZE))
-                .setEvictionPolicy(EvictionPolicy.LRU)
-                .setTimeToLiveSeconds(-1);
+                .setName("test") // map名称
+                .setBackupCount(2) // 数据备份数量，默认1
+                .setMaxSizeConfig(new MaxSizeConfig(1000000, MaxSizeConfig.MaxSizePolicy.PER_NODE)) // 最大数据量，默认int最大值
+                .setEvictionPolicy(EvictionPolicy.LRU) // 淘汰策略
+                .setTimeToLiveSeconds(604800) // 数据过期时长
+                .setMapStoreConfig(testMapStoreConfig) // 数据存储
+                ;
 
         // 网络配置
         NetworkConfig networkConfig = new NetworkConfig().setJoin(
@@ -41,7 +47,9 @@ public class HazelcastConfig {
         config.setInstanceName("hazelcast-instance")
                 .addMapConfig(mapConfig)
                 .setManagementCenterConfig(centerConfig)
-                .setNetworkConfig(networkConfig);
+                .setNetworkConfig(networkConfig)
+                .setProperty("hazelcast.logging.type", "slf4j") // 设置日志框架,jdk：JDK日志记录（默认） log4j、log4j2、slf4j、none：禁用日志记录
+        ;
 
         // 使用计数器功能需配置CPMemberCount(至少为3)
 //        config.getCPSubsystemConfig().setCPMemberCount(3);
