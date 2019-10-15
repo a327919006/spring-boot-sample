@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @author Chen Nan
  */
 @Slf4j
-@Component
+//@Component
 public class DelayConsumer {
 
     @RabbitListener(queues = "test14.delay.queue")

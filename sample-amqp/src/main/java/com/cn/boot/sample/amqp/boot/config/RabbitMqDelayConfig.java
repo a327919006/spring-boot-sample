@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * @author Chen Nan
  */
-@Configuration
+//@Configuration
 public class RabbitMqDelayConfig {
 
     @Autowired

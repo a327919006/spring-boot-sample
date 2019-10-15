@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @author Chen Nan
  */
 @Slf4j
-@Component
+//@Component
 public class DelayProduct {
 
     @Autowired
