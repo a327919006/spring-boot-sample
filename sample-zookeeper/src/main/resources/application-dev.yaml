@@ -2,6 +2,7 @@ server:
   port: 10093
   servlet:
     context-path: /${artifactId}
+  config: '{"servers":{"S3":{"appTags":[{"name":"APP1","weight":10}],"serverTags":[{"name":"区服1","weight":20}],"maxConnect":50000,"maxCPU":300,"serverUri":"218.104.231.102"},"S4":{"appTags":[{"name":"APP1","weight":10}],"serverTags":[{"name":"区服2","weight":20},{"name":"区服3","weight":20},{"name":"区服4","weight":20}],"maxConnect":50000,"maxCPU":300,"serverUri":"218.104.231.103"},"S5":{"appTags":[{"name":"APP2","weight":10}],"maxConnect":50000,"maxCPU":300,"serverUri":"218.104.231.104"},"S6":{"appTags":[{"name":"APP3","weight":10},{"name":"APP4","weight":10},{"name":"APP5","weight":10}],"maxConnect":50000,"maxCPU":300,"serverUri":"218.104.231.105"},"PC-20190610KWVD":{"maxConnect":100000,"maxCPU":600,"serverUri":"218.104.231.100"},"S2":{"appTags":[{"name":"APP1","weight":10}],"maxConnect":50000,"maxCPU":300,"serverUri":"218.104.231.101"}},"serverPort":1899,"parentNode":"/test"}'
 
 swagger:
   enabled: true

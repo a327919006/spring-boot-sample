@@ -21,7 +21,7 @@ public class CuratorUtil {
     private static CuratorFramework curator;
     public static final String PARENT_NODE = "/test";
 
-    @PostConstruct
+//    @PostConstruct
     public void init() throws Exception {
         RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 10);
 

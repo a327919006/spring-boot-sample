@@ -18,7 +18,7 @@ public class ZkClientUtil {
     private static ZkClient zkClient;
     public static final String PARENT_NODE = "/test";
 
-    @PostConstruct
+//    @PostConstruct
     public void init() {
         zkClient = new ZkClient("localhost:2181", 3000);
 
