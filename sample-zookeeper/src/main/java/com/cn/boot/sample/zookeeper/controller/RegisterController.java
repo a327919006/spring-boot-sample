@@ -1,7 +1,13 @@
 package com.cn.boot.sample.zookeeper.controller;
 
+import cn.hutool.core.util.StrUtil;
 import com.cn.boot.sample.zookeeper.register.RegisterUtil;
+import com.cn.boot.sample.zookeeper.register.RouteUtil;
+import com.cn.boot.sample.zookeeper.register.model.ServerWeight;
+import com.cn.boot.sample.zookeeper.register.monitor.ConnectMonitor;
+import com.cn.boot.sample.zookeeper.register.monitor.CpuMonitor;
 import com.cn.boot.sample.zookeeper.register.properties.ServerConfig;
+import com.hazelcast.core.HazelcastInstance;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -9,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,19 +31,51 @@ import java.util.Set;
 public class RegisterController {
 
     @Autowired
-    private ServerConfig config;
+    private ServerConfig serverConfig;
     @Autowired
     private RegisterUtil registerUtil;
+    @Autowired
+    private RouteUtil routeUtil;
+    @Autowired
+    private CpuMonitor cpuMonitor;
+    @Autowired
+    private ConnectMonitor connectMonitor;
+    @Autowired
+    private HazelcastInstance hazelcastInstance;
 
     @ApiOperation("获取配置")
     @GetMapping("/config")
-    public ServerConfig getConfig() {
-        return config;
+    public ServerConfig getServerConfig() {
+        return serverConfig;
     }
 
-    @ApiOperation("获取在线节点")
+    @ApiOperation("获取在线服务节点列表")
     @GetMapping("/nodes")
     public Set<String> getNodeSet() {
-        return registerUtil.getNodeSet();
+        return registerUtil.getOnlineNodeSet();
+    }
+
+    @ApiOperation("获取当前节点CPU使用率")
+    @GetMapping("/cpu")
+    public double getCpu(String nodeName) {
+        if (StrUtil.isBlank(nodeName)) {
+            nodeName = serverConfig.getNodeName();
+        }
+        return cpuMonitor.getCpuRate(nodeName);
+    }
+
+    @ApiOperation("获取当前节点连接数")
+    @GetMapping("/connect/count")
+    public double getConnectCount(String nodeName) {
+        if (StrUtil.isBlank(nodeName)) {
+            nodeName = serverConfig.getNodeName();
+        }
+        return connectMonitor.getConnectCount(nodeName);
+    }
+
+    @ApiOperation("客户端路由")
+    @GetMapping("/route")
+    public List<String> route(@RequestParam String appId, @RequestParam String server) {
+        return routeUtil.route(appId, server);
     }
 }

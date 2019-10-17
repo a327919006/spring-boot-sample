@@ -12,6 +12,8 @@ import java.util.Map;
 public class ServerConfig {
     private Map<String, ServerInfo> servers;
     private Integer serverPort;
-    private String hostName;
+    private String nodeName;
     private String parentNode;
+    private ServerLoadRule loadRule;
+
 }

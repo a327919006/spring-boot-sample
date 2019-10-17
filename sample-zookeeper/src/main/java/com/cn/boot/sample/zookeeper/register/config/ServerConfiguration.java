@@ -22,10 +22,10 @@ public class ServerConfiguration {
     public ServerConfig init() throws UnknownHostException {
         ServerConfig serverConfig = JSONUtil.toBean(this.serverConfig, ServerConfig.class);
 
+        // 获取主机名，作为节点名称即节点标识
         InetAddress addr = InetAddress.getLocalHost();
-        String hostName = addr.getHostName(); //获取本机计算机名称
-
-        serverConfig.setHostName(hostName);
+        String hostName = addr.getHostName();
+        serverConfig.setNodeName(hostName);
         return serverConfig;
     }
 }

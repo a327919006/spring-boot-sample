@@ -15,8 +15,7 @@ import java.util.List;
 public class ServerInfo {
     private List<TagInfo> appTags;
     private List<TagInfo> serverTags;
-    private List<TagInfo> areaTags;
     private int maxConnect = 50000;
-    private int maxCPU = 400;
+    private double maxCPU = 80;
     private String serverUri;
 }

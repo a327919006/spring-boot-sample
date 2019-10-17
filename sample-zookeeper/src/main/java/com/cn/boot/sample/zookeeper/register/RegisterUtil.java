@@ -59,9 +59,11 @@ public class RegisterUtil {
         cache.getListenable().addListener((curatorFramework, event) -> {
             switch (event.getType()) {
                 case CHILD_ADDED:
+                    // 监听节点上线
                     nodeOnline(event.getData().getPath(), event.getData().getData());
                     break;
                 case CHILD_REMOVED:
+                    // 监听节点下线
                     nodeOffline(event.getData().getPath(), event.getData().getData());
                     break;
                 default:
@@ -72,10 +74,6 @@ public class RegisterUtil {
         reportNode(parentNode);
     }
 
-    public Set<String> getNodeSet() {
-        return nodeSet;
-    }
-
     /**
      * 上报-本节点上线
      *
@@ -83,7 +81,7 @@ public class RegisterUtil {
      * @throws Exception 上报节点异常
      */
     private void reportNode(String parentNode) throws Exception {
-        String nodeName = serverConfig.getHostName();
+        String nodeName = serverConfig.getNodeName();
         if (StrUtil.isNotBlank(nodeName) && serverConfig.getServerPort() != null && serverConfig.getServers() != null) {
             ServerInfo serverInfo = serverConfig.getServers().get(nodeName);
             if (serverInfo != null) {
@@ -91,6 +89,14 @@ public class RegisterUtil {
                 curator.create().withMode(CreateMode.EPHEMERAL).forPath(parentNode + "/" + nodeName, nodeData.getBytes());
             }
         }
+    }
+
+    /**
+     * 获取在线节点列表
+     * @return 在线节点列表
+     */
+    public Set<String> getOnlineNodeSet() {
+        return nodeSet;
     }
 
     /**
