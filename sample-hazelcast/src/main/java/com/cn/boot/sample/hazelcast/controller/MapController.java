@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author Chen Nan
  */
@@ -24,17 +26,17 @@ public class MapController {
 
     @ApiOperation("保存数据")
     @PostMapping("/{map}")
-    public String set(@PathVariable String map, @RequestParam String key, @RequestParam String value) {
-        IMap<Object, Object> dataMap = hazelcastInstance.getMap(map);
-        dataMap.put(key, value);
+    public String set(@PathVariable String map, @RequestParam String key, @RequestParam String value, long ttl) {
+        IMap<String, String> dataMap = hazelcastInstance.getMap(map);
+        dataMap.put(key, value, ttl, TimeUnit.MILLISECONDS);
         return Constants.MSG_SUCCESS;
     }
 
     @ApiOperation("获取")
     @GetMapping("/{map}")
     public String get(@PathVariable String map, @RequestParam String key) {
-        IMap<Object, Object> dataMap = hazelcastInstance.getMap(map);
-        return (String) dataMap.get(key);
+        IMap<String, String> dataMap = hazelcastInstance.getMap(map);
+        return dataMap.get(key);
     }
 
     @ApiOperation("所有")
