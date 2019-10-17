@@ -2,6 +2,7 @@ package com.cn.boot.sample.zookeeper.register.monitor;
 
 import cn.hutool.core.io.IoUtil;
 import com.cn.boot.sample.api.util.OsUtil;
+import com.cn.boot.sample.zookeeper.register.constants.HazelcastConstant;
 import com.cn.boot.sample.zookeeper.register.properties.ServerConfig;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
@@ -28,10 +29,6 @@ public class ConnectMonitor {
      * 定时任务执行间隔
      */
     private int period = 60000;
-    /**
-     * 缓存map名称
-     */
-    public static final String CACHE_MAP_NAME = "serverConnect";
 
     @Autowired
     private ServerConfig serverConfig;
@@ -63,7 +60,7 @@ public class ConnectMonitor {
                     log.info("【ConnectMonitor】当前连接数:{}", result);
 
                     // 数据更新至缓存
-                    hazelcastInstance.getMap(CACHE_MAP_NAME).put(serverConfig.getNodeName(), connectCount);
+                    hazelcastInstance.getMap(HazelcastConstant.MAP_SERVER_CONNECT_COUNT).put(serverConfig.getNodeName(), connectCount);
                 } catch (Exception e) {
                     log.info("【ConnectMonitor】异常:", e);
                 }
@@ -78,7 +75,7 @@ public class ConnectMonitor {
      * @return 服务端口连接数
      */
     public int getConnectCount(String nodeName) {
-        IMap<String, Integer> map = hazelcastInstance.getMap(CACHE_MAP_NAME);
+        IMap<String, Integer> map = hazelcastInstance.getMap(HazelcastConstant.MAP_SERVER_CONNECT_COUNT);
         Integer count = map.get(nodeName);
         return count == null ? 0 : count;
     }

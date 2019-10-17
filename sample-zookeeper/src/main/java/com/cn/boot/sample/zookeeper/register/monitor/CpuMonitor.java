@@ -1,5 +1,6 @@
 package com.cn.boot.sample.zookeeper.register.monitor;
 
+import com.cn.boot.sample.zookeeper.register.constants.HazelcastConstant;
 import com.cn.boot.sample.zookeeper.register.properties.ServerConfig;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
@@ -33,10 +34,6 @@ public class CpuMonitor {
      * 计算CPU睡眠时间
      */
     private int sleep = 20000;
-    /**
-     * 缓存map名称
-     */
-    public static final String CACHE_MAP_NAME = "serverCpu";
 
     @Autowired
     private ServerConfig serverConfig;
@@ -59,7 +56,7 @@ public class CpuMonitor {
                 log.info(String.format("【CpuMonitor】CPU load: %.1f%%", cpuRate));
 
                 // 数据更新至缓存
-                hazelcastInstance.getMap(CACHE_MAP_NAME).put(serverConfig.getNodeName(), cpuRate);
+                hazelcastInstance.getMap(HazelcastConstant.MAP_SERVER_CPU_RATE).put(serverConfig.getNodeName(), cpuRate);
             }
         }, delay, period);
     }
@@ -71,7 +68,7 @@ public class CpuMonitor {
      * @return cpu使用率
      */
     public double getCpuRate(String nodeName) {
-        IMap<String, Double> map = hazelcastInstance.getMap(CACHE_MAP_NAME);
+        IMap<String, Double> map = hazelcastInstance.getMap(HazelcastConstant.MAP_SERVER_CPU_RATE);
         Double cpuRate = map.get(nodeName);
         return cpuRate == null ? 0 : cpuRate;
     }

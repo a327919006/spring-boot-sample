@@ -1,22 +1,21 @@
 package com.cn.boot.sample.zookeeper.controller;
 
 import cn.hutool.core.util.StrUtil;
+import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.zookeeper.register.RegisterUtil;
 import com.cn.boot.sample.zookeeper.register.RouteUtil;
-import com.cn.boot.sample.zookeeper.register.model.ServerWeight;
+import com.cn.boot.sample.zookeeper.register.constants.HazelcastConstant;
 import com.cn.boot.sample.zookeeper.register.monitor.ConnectMonitor;
 import com.cn.boot.sample.zookeeper.register.monitor.CpuMonitor;
 import com.cn.boot.sample.zookeeper.register.properties.ServerConfig;
 import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.IMap;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -77,5 +76,13 @@ public class RegisterController {
     @GetMapping("/route")
     public List<String> route(@RequestParam String appId, @RequestParam String server) {
         return routeUtil.route(appId, server);
+    }
+
+    @ApiOperation("模拟客户端发起长连接")
+    @PostMapping("/connect")
+    public String connect(String clientId) {
+        IMap<String, String> serverClient = hazelcastInstance.getMap(HazelcastConstant.MAP_SERVER_CLIENT);
+        serverClient.put(clientId, serverConfig.getNodeName());
+        return Constants.MSG_SUCCESS;
     }
 }
