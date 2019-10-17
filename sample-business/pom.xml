@@ -69,7 +69,7 @@
             <artifactId>curator-recipes</artifactId>
         </dependency>
 
-        <!--oshi-->
+        <!--oshi 用于获取系统信息:cpu、内存等-->
         <dependency>
             <groupId>com.github.oshi</groupId>
             <artifactId>oshi-core</artifactId>
