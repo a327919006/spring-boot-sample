@@ -1,5 +1,7 @@
 package com.cn.boot.sample.zookeeper.register;
 
+import cn.hutool.core.util.StrUtil;
+import com.cn.boot.sample.zookeeper.register.model.RouteInfoDTO;
 import com.cn.boot.sample.zookeeper.register.model.ServerWeight;
 import com.cn.boot.sample.zookeeper.register.monitor.ConnectMonitor;
 import com.cn.boot.sample.zookeeper.register.monitor.CpuMonitor;
@@ -46,19 +48,18 @@ public class RouteUtil {
      * @param serverTag 区服标识，如游戏中开了100服，相同服的用户路由到同一台服务器节点
      * @return 服务器节点列表
      */
-    public List<String> route(String appIdTag, String serverTag) {
+    public RouteInfoDTO route(String appIdTag, String serverTag) {
         // 获取配置中的节点列表
         Map<String, ServerInfo> servers = serverConfig.getServers();
-        List<String> nodeList = new ArrayList<>();
         if (servers == null) {
-            return nodeList;
+            return null;
         }
 
         // 获取在线节点列表
         Set<String> onlineNodeSet = registerUtil.getOnlineNodeSet();
         if (onlineNodeSet.size() <= 0) {
             // 在线节点列表为空
-            return nodeList;
+            return null;
         }
 
         // 遍历配置中的节点列表
@@ -77,13 +78,12 @@ public class RouteUtil {
 
             // 计算节点权重
             int nodeWeight = getNodeWeight(appIdTag, serverTag, serverInfo, cpuRate, connectCount);
-            String serverUri = serverInfo.getServerUri() + ":" + serverConfig.getServerPort();
+            String serverUri = serverInfo.getServerUri();
             serverWeightList.add(new ServerWeight(serverUri, nodeWeight));
         }
 
-        // 按权重排序
-        sortServerWeight(serverWeightList, nodeList);
-        return nodeList;
+        // 按权重排序后返回
+        return sortServerWeight(serverWeightList);
     }
 
     /**
@@ -153,7 +153,7 @@ public class RouteUtil {
      * @return 权重
      */
     private int judgeTag(List<TagInfo> tags, String clientTag) {
-        if (tags != null) {
+        if (tags != null && StrUtil.isNotBlank(clientTag)) {
             for (TagInfo tag : tags) {
                 if (StringUtils.equalsAnyIgnoreCase(clientTag, tag.getName())) {
                     return tag.getWeight();
@@ -181,13 +181,18 @@ public class RouteUtil {
      * 按权重排序节点
      *
      * @param serverWeightList 节点权重列表
-     * @param nodeList         节点列表
      */
-    private void sortServerWeight(List<ServerWeight> serverWeightList, List<String> nodeList) {
+    private RouteInfoDTO sortServerWeight(List<ServerWeight> serverWeightList) {
+        List<String> serverList = new ArrayList<>();
         Collections.sort(serverWeightList);
         log.info("【RouteUtil】serverWeightList={}", serverWeightList);
         for (ServerWeight serverWeight : serverWeightList) {
-            nodeList.add(serverWeight.getServerUri());
+            serverList.add(serverWeight.getServerUri());
         }
+
+        RouteInfoDTO routeInfoDTO = new RouteInfoDTO();
+        routeInfoDTO.setServerList(serverList);
+        routeInfoDTO.setServerPort(serverConfig.getServerPort());
+        return routeInfoDTO;
     }
 }

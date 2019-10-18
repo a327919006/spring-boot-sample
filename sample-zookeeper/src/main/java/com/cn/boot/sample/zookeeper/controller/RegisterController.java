@@ -5,6 +5,7 @@ import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.zookeeper.register.RegisterUtil;
 import com.cn.boot.sample.zookeeper.register.RouteUtil;
 import com.cn.boot.sample.zookeeper.register.constants.HazelcastConstant;
+import com.cn.boot.sample.zookeeper.register.model.RouteInfoDTO;
 import com.cn.boot.sample.zookeeper.register.monitor.ConnectMonitor;
 import com.cn.boot.sample.zookeeper.register.monitor.CpuMonitor;
 import com.cn.boot.sample.zookeeper.register.properties.ServerConfig;
@@ -74,7 +75,7 @@ public class RegisterController {
 
     @ApiOperation("客户端路由")
     @GetMapping("/route")
-    public List<String> route(@RequestParam String appId, @RequestParam String server) {
+    public RouteInfoDTO route(@RequestParam String appId, @RequestParam String server) {
         return routeUtil.route(appId, server);
     }
 
