@@ -1,6 +1,6 @@
 package com.cn.boot.sample.zookeeper.register.config;
 
-import com.cn.boot.sample.zookeeper.register.monitor.CpuMonitor;
+import com.cn.boot.sample.zookeeper.register.constants.HazelcastConstant;
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.client.config.ClientNetworkConfig;
@@ -31,7 +31,7 @@ public class HazelcastClientConfig {
         // 数据处理器，缓存数据增删改查到数据库
         // map配置
         MapConfig mapConfig = new MapConfig()
-                .setName(CpuMonitor.CACHE_MAP_NAME) // map名称
+                .setName(HazelcastConstant.MAP_SERVER_CPU_RATE) // map名称
                 .setBackupCount(2) // 数据备份数量，默认1
                 .setMaxSizeConfig(new MaxSizeConfig(1000000, MaxSizeConfig.MaxSizePolicy.PER_NODE)) // 最大数据量，默认int最大值
                 .setEvictionPolicy(EvictionPolicy.LRU) // 淘汰策略
