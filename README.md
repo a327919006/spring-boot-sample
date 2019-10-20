@@ -13,6 +13,7 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10081         | sample-business           | 业务接口，整合Swagger，详情查看该模块README |
 | -----         | sample-dal                | mapper、sql语句，整合tk-mybatis |
 | 10090         | sample-geoip2             | 整合GeoIP2,实现根据IP地址获取对应城市 |
+| 10095         | sample-guava              | 整合Guava |
 | 10091         | sample-hazelcast          | 整合hazelcase,分布式缓存 |
 | 10094         | sample-hazelcast-client   | 整合hazelcase,此模块只作为缓存客户端，不加入缓存集群 |
 | 10088         | sample-kafka              | 整合Kafka，使用框架spring-kafka |
@@ -36,7 +37,7 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10093         | sample-zookeeper          | 整合ZooKeeper，使用ZkClient、Curator |
 
 ##### 说明
-- 当前已使用端口10081-10094,20881-20883
+- 当前已使用端口10081-10095,20881-20883
 ```
 端口为1xxxx的模块对外提供Http接口，并整合了Swagger，方便调试。
 端口为2xxxx的模块提供RPC服务，一般用于business模块调用，由business模块提供测试的http接口
@@ -77,5 +78,6 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | Apollo | Apollo配置中心 |
 | Hazelcast | 分布式缓存 |
 | ZooKeeper | 分布式协调服务 |
+| Guava | 常用工具类 |
 
 
