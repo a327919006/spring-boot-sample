@@ -183,15 +183,15 @@ public class RouteUtil {
      * @param serverWeightList 节点权重列表
      */
     private RouteInfoDTO sortServerWeight(List<ServerWeight> serverWeightList) {
-        List<String> serverList = new ArrayList<>();
         Collections.sort(serverWeightList);
         log.info("【RouteUtil】serverWeightList={}", serverWeightList);
-        for (ServerWeight serverWeight : serverWeightList) {
-            serverList.add(serverWeight.getServerUri());
+        String[] servers = new String[serverWeightList.size()];
+        for (int i = 0; i < serverWeightList.size(); i++) {
+            servers[i] = serverWeightList.get(i).getServerUri();
         }
 
         RouteInfoDTO routeInfoDTO = new RouteInfoDTO();
-        routeInfoDTO.setServerList(serverList);
+        routeInfoDTO.setServerList(StringUtils.join(servers, ","));
         routeInfoDTO.setServerPort(serverConfig.getServerPort());
         return routeInfoDTO;
     }

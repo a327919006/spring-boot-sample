@@ -12,6 +12,7 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -27,17 +28,20 @@ public class RegisterUtil {
     @Autowired
     private ServerConfig serverConfig;
 
+    @Value("${zookeeper.url}")
+    private String zkUrl;
+
     private static CuratorFramework curator;
     private static Set<String> nodeSet = new HashSet<>();
 
     @PostConstruct
     public void init() throws Exception {
         // 连接Zookeeper
-        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 10);
+        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 100);
 
         curator = CuratorFrameworkFactory.builder()
-                .connectString("127.0.0.1:2181")
-                .sessionTimeoutMs(3000)
+                .connectString(zkUrl)
+                .sessionTimeoutMs(60000)
                 .retryPolicy(retryPolicy)
                 .build();
 
