@@ -5,10 +5,7 @@ import com.cn.boot.sample.zookeeper.register.model.RouteInfoDTO;
 import com.cn.boot.sample.zookeeper.register.model.ServerWeight;
 import com.cn.boot.sample.zookeeper.register.monitor.ConnectMonitor;
 import com.cn.boot.sample.zookeeper.register.monitor.CpuMonitor;
-import com.cn.boot.sample.zookeeper.register.properties.LoadRuleInfo;
-import com.cn.boot.sample.zookeeper.register.properties.ServerConfig;
-import com.cn.boot.sample.zookeeper.register.properties.ServerInfo;
-import com.cn.boot.sample.zookeeper.register.properties.TagInfo;
+import com.cn.boot.sample.zookeeper.register.properties.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,7 +101,7 @@ public class RouteUtil {
         }
 
         // 判断节点CPU使用率是否大于阈值
-        if (cpuRate >= serverInfo.getMaxCPU()) {
+        if (cpuRate >= serverInfo.getMaxCpu()) {
             return false;
         }
 
@@ -119,22 +116,18 @@ public class RouteUtil {
      * 获取节点权重
      *
      * @param appIdTag     客户端app标识
-     * @param serverTag    客户端区服标识
+     * @param areaTag      客户端区服标识
      * @param serverInfo   节点信息
      * @param cpuRate      节点当前CPU使用率
      * @param connectCount 节点当前连接数
      * @return 节点权重
      */
-    private int getNodeWeight(String appIdTag, String serverTag, ServerInfo serverInfo, double cpuRate, int connectCount) {
+    private int getNodeWeight(String appIdTag, String areaTag, ServerInfo serverInfo, double cpuRate, int connectCount) {
         int weight = 0;
 
-        // 增加相同app权重
-        List<TagInfo> appTags = serverInfo.getAppTags();
-        weight += judgeTag(appTags, appIdTag);
-
-        // 增加相同区服权重
-        List<TagInfo> serverTags = serverInfo.getServerTags();
-        weight += judgeTag(serverTags, serverTag);
+        // 根据tag增加权重
+        List<AppTagInfo> appTags = serverInfo.getAppTags();
+        weight += judgeTag(appTags, appIdTag, areaTag);
 
         // 根据CPU负载修改权重
         weight += judgeLoad(cpuRate, serverConfig.getLoadRule().getCpu());
@@ -148,19 +141,35 @@ public class RouteUtil {
     /**
      * 判断tag是否相同
      *
-     * @param tags      服务器tag列表
-     * @param clientTag 客户端tag
+     * @param appTags  app标识列表
+     * @param appIdTag 客户端app标识
+     * @param areaTag  客户端区服标识
      * @return 权重
      */
-    private int judgeTag(List<TagInfo> tags, String clientTag) {
-        if (tags != null && StrUtil.isNotBlank(clientTag)) {
-            for (TagInfo tag : tags) {
-                if (StringUtils.equalsAnyIgnoreCase(clientTag, tag.getName())) {
-                    return tag.getWeight();
+    private int judgeTag(List<AppTagInfo> appTags, String appIdTag, String areaTag) {
+        int weight = 0;
+        if (appTags != null && StrUtil.isNotBlank(appIdTag)) {
+            for (AppTagInfo appTag : appTags) {
+                if (StringUtils.equalsAnyIgnoreCase(appIdTag, appTag.getName())) {
+                    // app标识相同
+                    weight = appTag.getWeight();
+
+                    // 遍历区服标识
+                    List<AreaTagInfo> areaTags = appTag.getAreaTags();
+                    if (areaTags != null && StrUtil.isNotBlank(areaTag)) {
+                        for (AreaTagInfo areaTagInfo : areaTags) {
+                            if (StringUtils.equalsAnyIgnoreCase(areaTag, areaTagInfo.getName())) {
+                                // 区服标识相同
+                                weight += areaTagInfo.getWeight();
+                                break;
+                            }
+                        }
+                    }
+                    break;
                 }
             }
         }
-        return 0;
+        return weight;
     }
 
     /**

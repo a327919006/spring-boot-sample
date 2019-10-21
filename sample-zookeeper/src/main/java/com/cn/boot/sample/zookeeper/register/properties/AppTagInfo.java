@@ -12,9 +12,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ServerInfo {
-    private List<AppTagInfo> appTags;
-    private int maxConnect = 50000;
-    private double maxCpu = 80;
-    private String serverUri;
+public class AppTagInfo {
+    private String name;
+    private int weight;
+    private List<AreaTagInfo> areaTags;
 }
