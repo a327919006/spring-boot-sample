@@ -36,6 +36,7 @@
         <module>sample-rocketmq</module>
         <module>sample-zookeeper</module>
         <module>sample-hazelcast-client</module>
+        <module>sample-guava</module>
     </modules>
 
 
