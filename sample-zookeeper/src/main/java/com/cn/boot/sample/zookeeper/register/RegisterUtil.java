@@ -28,8 +28,8 @@ public class RegisterUtil {
     @Autowired
     private ServerConfig serverConfig;
 
-    @Value("${zookeeper.url}")
-    private String zkUrl;
+    @Value("${zookeeper.uri}")
+    private String zkUri;
 
     private static CuratorFramework curator;
     private static Set<String> nodeSet = new HashSet<>();
@@ -40,7 +40,7 @@ public class RegisterUtil {
         RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 100);
 
         curator = CuratorFrameworkFactory.builder()
-                .connectString(zkUrl)
+                .connectString(zkUri)
                 .sessionTimeoutMs(60000)
                 .retryPolicy(retryPolicy)
                 .build();
