@@ -12,16 +12,16 @@ public class HazelcastConfig {
 
     @Bean
     public Config hazelCastConfig() {
-        // 配置监控中心
+        // 可选，配置监控中心
         ManagementCenterConfig centerConfig = new ManagementCenterConfig()
                 .setEnabled(true)
                 .setUrl("http://localhost:8080/hazelcast-mancenter");
 
-        // 数据处理器，缓存数据增删改查到数据库
+        // 可选，数据处理器，缓存数据增删改查到数据库
         MapStoreConfig testMapStoreConfig = new MapStoreConfig()
                 .setEnabled(true)
                 .setClassName("com.cn.boot.sample.hazelcast.loader.TestDataLoader");
-        // map配置
+        // 可选，map配置
         MapConfig mapConfig = new MapConfig()
                 .setName("test") // map名称
                 .setBackupCount(2) // 数据备份数量，默认1
@@ -31,7 +31,7 @@ public class HazelcastConfig {
                 .setMapStoreConfig(testMapStoreConfig) // 数据存储
                 ;
 
-        // 网络配置
+        // 可选，网络配置，不配置默认采用广播
         NetworkConfig networkConfig = new NetworkConfig().setJoin(
                 new JoinConfig()
                         .setMulticastConfig(new MulticastConfig().setEnabled(false))
@@ -48,7 +48,7 @@ public class HazelcastConfig {
                 .addMapConfig(mapConfig)
                 .setManagementCenterConfig(centerConfig)
                 .setNetworkConfig(networkConfig)
-                .setProperty("hazelcast.logging.type", "slf4j") // 设置日志框架,jdk：JDK日志记录（默认） log4j、log4j2、slf4j、none：禁用日志记录
+                .setProperty("hazelcast.logging.type", "slf4j") // 可选，设置日志框架,jdk：JDK日志记录（默认） log4j、log4j2、slf4j、none：禁用日志记录
         ;
 
         // 使用计数器功能需配置CPMemberCount(至少为3)
