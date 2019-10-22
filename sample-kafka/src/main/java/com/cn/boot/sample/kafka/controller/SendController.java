@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,9 +26,15 @@ public class SendController {
 
     @ApiOperation("发送消息")
     @PostMapping
-    public String send(String msg) {
+    public String sendMsg(String msg) {
         kafkaTemplate.send(KafkaConstant.TOPIC_TEST, msg);
         return msg;
     }
 
+    @ApiOperation("发送消息")
+    @PostMapping("/{topic}")
+    public String sendTopicMsg(@PathVariable String topic, String msg) {
+        kafkaTemplate.send(topic, msg);
+        return msg;
+    }
 }
