@@ -82,8 +82,11 @@ public class RegisterController {
     @ApiOperation("模拟客户端发起长连接")
     @PostMapping("/connect")
     public String connect(String clientId) {
-        IMap<String, String> serverClient = hazelcastInstance.getMap(HazelcastConstant.MAP_SERVER_CLIENT);
-        serverClient.put(clientId, serverConfig.getNodeName());
-        return Constants.MSG_SUCCESS;
+        if (!connectMonitor.overLimit()) {
+            IMap<String, String> serverClient = hazelcastInstance.getMap(HazelcastConstant.MAP_SERVER_CLIENT);
+            serverClient.put(clientId, serverConfig.getNodeName());
+            return Constants.MSG_SUCCESS;
+        }
+        return Constants.MSG_FAIL;
     }
 }
