@@ -82,7 +82,8 @@ public class RegisterController {
     @ApiOperation("模拟客户端发起长连接")
     @PostMapping("/connect")
     public String connect(String clientId) {
-        if (!connectMonitor.overLimit()) {
+        // 判断连接数和CPU是否超过上限，作为服务器负载保护
+        if (!connectMonitor.overLimit() && !cpuMonitor.overLimit()) {
             IMap<String, String> serverClient = hazelcastInstance.getMap(HazelcastConstant.MAP_SERVER_CLIENT);
             serverClient.put(clientId, serverConfig.getNodeName());
             return Constants.MSG_SUCCESS;

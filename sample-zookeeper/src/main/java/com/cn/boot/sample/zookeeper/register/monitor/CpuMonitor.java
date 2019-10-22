@@ -2,6 +2,7 @@ package com.cn.boot.sample.zookeeper.register.monitor;
 
 import com.cn.boot.sample.zookeeper.register.constants.HazelcastConstant;
 import com.cn.boot.sample.zookeeper.register.properties.ServerConfig;
+import com.cn.boot.sample.zookeeper.register.properties.ServerInfo;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,10 @@ public class CpuMonitor {
      * 计算CPU睡眠时间
      */
     private int sleep = 20000;
+    /**
+     * 当前服务节点CPU
+     */
+    private static double cpuRate = 0;
 
     @Autowired
     private ServerConfig serverConfig;
@@ -52,7 +57,7 @@ public class CpuMonitor {
                 long[] prevTicks = processor.getSystemCpuLoadTicks();
                 // 计算CPU需睡眠一段时间，至少1秒
                 Util.sleep(sleep);
-                double cpuRate = processor.getSystemCpuLoadBetweenTicks(prevTicks) * 100;
+                cpuRate = processor.getSystemCpuLoadBetweenTicks(prevTicks) * 100;
                 log.info(String.format("【CpuMonitor】CPU load: %.1f%%", cpuRate));
 
                 // 数据更新至缓存
@@ -71,5 +76,19 @@ public class CpuMonitor {
         IMap<String, Double> map = hazelcastInstance.getMap(HazelcastConstant.MAP_SERVER_CPU_RATE);
         Double cpuRate = map.get(nodeName);
         return cpuRate == null ? 0 : cpuRate;
+    }
+
+    /**
+     * 判断当前节点CPU是否到达上限
+     *
+     * @return 是否到达上限 true
+     */
+    public boolean overLimit() {
+        String nodeName = serverConfig.getNodeName();
+        ServerInfo serverInfo = serverConfig.getServers().get(nodeName);
+        if (cpuRate >= serverInfo.getMaxCpu()) {
+            return true;
+        }
+        return false;
     }
 }
