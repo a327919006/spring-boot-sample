@@ -56,6 +56,15 @@ public class RegisterUtil {
             log.info("【RegisterUtil】PARENT_NODE create={}", result);
         }
 
+        // 判断本机节点是否创建
+        String currNode = serverConfig.getParentNode() + "/" + serverConfig.getNodeName();
+        Stat currNodeStat = curator.checkExists().forPath(currNode);
+        if (currNodeStat != null) {
+            // 删除旧节点
+            curator.delete().forPath(currNode);
+            log.info("【RegisterUtil】CURR_NODE exist, delete={}", currNode);
+        }
+
         // 第三个参数表示是否需要返回所操作的子节点数据
         PathChildrenCache cache = new PathChildrenCache(curator, parentNode, true);
         cache.start(PathChildrenCache.StartMode.POST_INITIALIZED_EVENT);
@@ -97,6 +106,7 @@ public class RegisterUtil {
 
     /**
      * 获取在线节点列表
+     *
      * @return 在线节点列表
      */
     public Set<String> getOnlineNodeSet() {
