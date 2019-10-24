@@ -47,14 +47,8 @@ public class RegisterUtil {
 
         curator.start();
 
-        // 判断根节点是否创建
+        // 根节点路径
         String parentNode = serverConfig.getParentNode();
-        Stat stat = curator.checkExists().forPath(parentNode);
-        if (stat == null) {
-            // 创建根节点
-            String result = curator.create().withMode(CreateMode.PERSISTENT).forPath(parentNode);
-            log.info("【RegisterUtil】PARENT_NODE create={}", result);
-        }
 
         // 判断本机节点是否创建
         String currNode = serverConfig.getParentNode() + "/" + serverConfig.getNodeName();
@@ -99,7 +93,7 @@ public class RegisterUtil {
             ServerInfo serverInfo = serverConfig.getServers().get(nodeName);
             if (serverInfo != null) {
                 String nodeData = serverInfo.getServerUri() + ":" + serverConfig.getServerPort();
-                curator.create().withMode(CreateMode.EPHEMERAL).forPath(parentNode + "/" + nodeName, nodeData.getBytes());
+                curator.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL).forPath(parentNode + "/" + nodeName, nodeData.getBytes());
             }
         }
     }
