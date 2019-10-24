@@ -1,4 +1,4 @@
-package com.cn.boot.sample.rocketmq.original.delay.test5;
+package com.cn.boot.sample.rocketmq.original.test6.selector;
 
 import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.rocketmq.constant.MqConstant;
@@ -14,22 +14,21 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-
 /**
- * 延时消息
+ * selector，指定发送到的队列
  *
  * @author Chen Nan
  */
 @Slf4j
 //@Component
-public class DelayConsumer {
-    public static final String TAG = "test5";
+public class SelectorConsumer {
+    public static final String TAG = "test6";
 
     private static DefaultMQPushConsumer consumer;
 
     @PostConstruct
     public void init() throws MQClientException {
-        log.info("【DelayConsumer】init");
+        log.info("【SelectorConsumer】init");
 
         consumer = new DefaultMQPushConsumer(TAG + "_consumer_group");
 
@@ -41,10 +40,10 @@ public class DelayConsumer {
 
         consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
             MessageExt msg = msgs.get(0);
-            log.info("【DelayConsumer】msg={}", JSONUtil.toJsonStr(msg));
+            log.info("【SelectorConsumer】msg={}", JSONUtil.toJsonStr(msg));
             String body = new String(msg.getBody());
 
-            log.info("【DelayConsumer】body={}", body);
+            log.info("【SelectorConsumer】body={}", body);
             return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         });
 
@@ -53,7 +52,7 @@ public class DelayConsumer {
 
     @PreDestroy
     public void destroy() {
-        log.info("【DelayConsumer】destroy");
+        log.info("【SelectorConsumer】destroy");
         consumer.shutdown();
     }
 }

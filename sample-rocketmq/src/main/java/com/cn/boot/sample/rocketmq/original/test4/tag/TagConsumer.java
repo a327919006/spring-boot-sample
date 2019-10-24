@@ -1,4 +1,4 @@
-package com.cn.boot.sample.rocketmq.original.tag.test4;
+package com.cn.boot.sample.rocketmq.original.test4.tag;
 
 import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.rocketmq.constant.MqConstant;

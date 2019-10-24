@@ -21,7 +21,7 @@ import javax.annotation.PreDestroy;
 @Slf4j
 @Component
 public class TestProducer {
-    public static final String TAG = "test6";
+    public static final String TAG = "test";
 
     private static DefaultMQProducer producer;
 

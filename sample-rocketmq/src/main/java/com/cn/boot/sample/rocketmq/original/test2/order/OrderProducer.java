@@ -1,4 +1,4 @@
-package com.cn.boot.sample.rocketmq.original.delay.test5;
+package com.cn.boot.sample.rocketmq.original.test2.order;
 
 import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.rocketmq.constant.MqConstant;
@@ -9,53 +9,57 @@ import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.exception.RemotingException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 /**
- * 延时消息
+ * 顺序消息
  *
  * @author Chen Nan
  */
 @Slf4j
 //@Component
-public class DelayProducer {
-    public static final String TAG = "test5";
+public class OrderProducer {
+    public static final String TAG = "test2";
 
     private static DefaultMQProducer producer;
 
+    @Value("${server.port}")
+    private int port;
+
     @PostConstruct
     public void init() throws MQClientException, RemotingException, InterruptedException, MQBrokerException {
-        log.info("【DelayProducer】init");
+        log.info("【OrderProducer】init");
 
         producer = new DefaultMQProducer(TAG + "_producer_group");
 
         producer.setNamesrvAddr(MqConstant.NAME_SERVER_ADDRESS);
 
+        // 设置发送失败时的重发次数，默认2次，如果是异步发送，不重试
+        producer.setRetryTimesWhenSendFailed(0);
+
         producer.start();
 
-        // 发送五条消息
-        for (int i = 0; i <= 5; i++) {
-            byte[] body = ("Hello RocketMQ! " + TAG + "_" + i).getBytes();
+
+        for (int i = 0; i < 10; i++) {
+            byte[] body = ("Hello RocketMQ! " + port + "_" + i).getBytes();
             Message message = new Message();
             message.setTopic(TAG + "_topic"); // 主题
             message.setTags(TAG); // 标签
             message.setKeys(TAG + "_" + i); // 消息唯一标识，用户自定义
             message.setBody(body);
 
-            // 设置延时等级
-            // 1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h
-            message.setDelayTimeLevel(i);
             SendResult sendResult = producer.send(message);
-            log.info("【DelayProducer】sendResult = {}", JSONUtil.toJsonStr(sendResult));
+            log.info("【OrderProducer】sendResult = {}", JSONUtil.toJsonStr(sendResult));
         }
     }
 
     @PreDestroy
     public void destroy() throws Exception {
-        log.info("【DelayProducer】destroy");
+        log.info("【OrderProducer】destroy");
         producer.shutdown();
     }
 }

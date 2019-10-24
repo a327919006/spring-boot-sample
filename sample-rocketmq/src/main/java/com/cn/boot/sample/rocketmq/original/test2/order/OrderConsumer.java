@@ -1,6 +1,7 @@
-package com.cn.boot.sample.rocketmq.test;
+package com.cn.boot.sample.rocketmq.original.test2.order;
 
 import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.rocketmq.constant.MqConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
@@ -14,21 +15,25 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+
 /**
- * selector，指定发送到的队列
+ * 顺序消息（MessageListenerOrderly）
+ * 不是绝对顺序，
+ * 默认会启动4个消费者，不能保证4个线程处理任务的顺序，只是前4个会先执行，后4个后执行
+ * 如果不需要顺序可使用test1中的MessageListenerConcurrently
  *
  * @author Chen Nan
  */
 @Slf4j
-@Component
-public class TestConsumer {
-    public static final String TAG = "test";
+//@Component
+public class OrderConsumer {
+    public static final String TAG = "test2";
 
     private static DefaultMQPushConsumer consumer;
 
     @PostConstruct
     public void init() throws MQClientException {
-        log.info("【TestConsumer】init");
+        log.info("【OrderConsumer】init");
 
         consumer = new DefaultMQPushConsumer(TAG + "_consumer_group");
 
@@ -40,11 +45,13 @@ public class TestConsumer {
 
         consumer.registerMessageListener((MessageListenerOrderly) (msgs, context) -> {
             MessageExt msg = msgs.get(0);
+            log.info("【OrderConsumer】msg={}", JSONUtil.toJsonStr(msg));
+            // 处理业务
             String body = new String(msg.getBody());
-            log.info("【TestConsumer】开始={}", body);
-            ThreadUtil.sleep(100);
-            log.info("【TestConsumer】完成={}", body);
 
+            log.info("【OrderConsumer】body={}", body);
+
+            ThreadUtil.sleep(1000);
             return ConsumeOrderlyStatus.SUCCESS;
         });
 
@@ -53,7 +60,7 @@ public class TestConsumer {
 
     @PreDestroy
     public void destroy() {
-        log.info("【TestConsumer】destroy");
+        log.info("【OrderConsumer】destroy");
         consumer.shutdown();
     }
 }

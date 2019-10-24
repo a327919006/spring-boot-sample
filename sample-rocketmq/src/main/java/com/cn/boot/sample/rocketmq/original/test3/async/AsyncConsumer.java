@@ -1,4 +1,4 @@
-package com.cn.boot.sample.rocketmq.original.selector.test6;
+package com.cn.boot.sample.rocketmq.original.test3.async;
 
 import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.rocketmq.constant.MqConstant;
@@ -14,21 +14,22 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+
 /**
- * selector，指定发送到的队列
+ * 异步发送
  *
  * @author Chen Nan
  */
 @Slf4j
 //@Component
-public class SelectorConsumer {
-    public static final String TAG = "test6";
+public class AsyncConsumer {
+    public static final String TAG = "test3";
 
     private static DefaultMQPushConsumer consumer;
 
     @PostConstruct
     public void init() throws MQClientException {
-        log.info("【SelectorConsumer】init");
+        log.info("【AsyncConsumer】init");
 
         consumer = new DefaultMQPushConsumer(TAG + "_consumer_group");
 
@@ -40,10 +41,10 @@ public class SelectorConsumer {
 
         consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
             MessageExt msg = msgs.get(0);
-            log.info("【SelectorConsumer】msg={}", JSONUtil.toJsonStr(msg));
+            log.info("【AsyncConsumer】msg={}", JSONUtil.toJsonStr(msg));
             String body = new String(msg.getBody());
+            log.info("【AsyncConsumer】body={}", body);
 
-            log.info("【SelectorConsumer】body={}", body);
             return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         });
 
@@ -52,7 +53,7 @@ public class SelectorConsumer {
 
     @PreDestroy
     public void destroy() {
-        log.info("【SelectorConsumer】destroy");
+        log.info("【AsyncConsumer】destroy");
         consumer.shutdown();
     }
 }
