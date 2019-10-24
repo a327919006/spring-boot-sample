@@ -93,6 +93,7 @@ public class RegisterUtil {
             ServerInfo serverInfo = serverConfig.getServers().get(nodeName);
             if (serverInfo != null) {
                 String nodeData = serverInfo.getServerUri() + ":" + serverConfig.getServerPort();
+                // 父节点不存在时自动创建
                 curator.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL).forPath(parentNode + "/" + nodeName, nodeData.getBytes());
             }
         }
