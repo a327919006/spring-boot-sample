@@ -20,7 +20,7 @@ import javax.annotation.PreDestroy;
  * @author Chen Nan
  */
 @Slf4j
-@Component
+//@Component
 public class MoreConsumer {
     public static final String TAG = "test8";
 
