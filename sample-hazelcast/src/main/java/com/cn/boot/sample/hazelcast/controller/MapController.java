@@ -26,7 +26,10 @@ public class MapController {
 
     @ApiOperation("保存数据")
     @PostMapping("/{map}")
-    public String set(@PathVariable String map, @RequestParam String key, @RequestParam String value, long ttl) {
+    public String set(@PathVariable String map, @RequestParam String key, @RequestParam String value, Long ttl) {
+        if(ttl == null){
+            ttl = 0L;
+        }
         IMap<String, String> dataMap = hazelcastInstance.getMap(map);
         dataMap.put(key, value, ttl, TimeUnit.MILLISECONDS);
         return Constants.MSG_SUCCESS;
