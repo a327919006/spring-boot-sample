@@ -26,14 +26,14 @@ public class AtomicController {
     @ApiOperation("保存数据")
     @PostMapping("/{name}/increment")
     public long set(@PathVariable String name) {
-        IAtomicLong dataMap = hazelcastInstance.getCPSubsystem().getAtomicLong(name);
-        return dataMap.incrementAndGet();
+        IAtomicLong atomicLong = hazelcastInstance.getCPSubsystem().getAtomicLong(name);
+        return atomicLong.incrementAndGet();
     }
 
     @ApiOperation("获取")
     @GetMapping("/{name}")
     public long get(@PathVariable String name) {
-        IAtomicLong dataMap = hazelcastInstance.getCPSubsystem().getAtomicLong(name);
-        return dataMap.get();
+        IAtomicLong atomicLong = hazelcastInstance.getCPSubsystem().getAtomicLong(name);
+        return atomicLong.get();
     }
 }
