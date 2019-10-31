@@ -1,5 +1,6 @@
 package com.cn.boot.sample.hazelcast.controller;
 
+import cn.hutool.core.thread.ThreadUtil;
 import com.cn.boot.sample.api.model.Constants;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
@@ -30,16 +31,35 @@ public class LockController {
 
     @ApiOperation("map加锁")
     @PostMapping("/{map}/{key}")
-    public String mapLock(@PathVariable String map, @PathVariable String key, Long ttl) {
+    public String mapLock(@PathVariable String map, @PathVariable String key, @RequestParam String value, Long ttl) throws InterruptedException {
         if (ttl == null) {
             ttl = 30L;
         }
         IMap<Object, Object> dataMap = hazelcastInstance.getMap(map);
-        dataMap.lock(key, ttl, TimeUnit.SECONDS);
-        return Constants.MSG_SUCCESS;
+        boolean result = dataMap.tryLock(key, 0, TimeUnit.MICROSECONDS, ttl, TimeUnit.SECONDS);
+        if (result) {
+            try {
+                log.info("获取锁{}成功，开始处理业务", key);
+                ThreadUtil.sleep(5000);
+
+                // 模拟异常
+                if ("0".equals(value)) {
+                    int i = 1 / 0;
+                }
+
+                log.info("业务处理完成");
+                return Constants.MSG_SUCCESS;
+            } finally {
+                dataMap.unlock(key);
+                log.info("释放锁{}成功", key);
+            }
+        } else {
+            log.info("获取锁{}失败", key);
+            return Constants.MSG_FAIL;
+        }
     }
 
-    @ApiOperation("map释放锁")
+    @ApiOperation(value = "map释放锁", notes = "此方法会抛出异常，仅允许上锁线程释放锁!")
     @DeleteMapping("/{map}/{key}")
     public String mapUnlock(@PathVariable String map, @PathVariable String key) {
         IMap<Object, Object> dataMap = hazelcastInstance.getMap(map);
@@ -53,7 +73,6 @@ public class LockController {
         IMap<Object, Object> dataMap = hazelcastInstance.getMap(map);
         return dataMap.isLocked(key);
     }
-
 
 
     @ApiOperation("加锁")

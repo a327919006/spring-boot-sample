@@ -53,9 +53,14 @@ public class HazelcastConfig {
 
 #### 管控平台（可选）
 - 下载管控台压缩包(hazelcast-management-center-3.12.5.zip)
-- 解压后运行start.bat或start.sh或执行java -jar hazelcast-mancenter-3.12.5.war 8080 hazelcast-mancenter
+- 解压后运行start.bat(Windows)或start.sh(Linux)
 - 访问http://localhost:8080/hazelcast-mancenter
 - 首次登录需配置管理账号和密码
+```
+默认端口:8080，路径:hazelcast-mancenter
+如需指定路径或端口执行 start.bat 18080 hazelcast-mancenter
+或执行java -jar hazelcast-mancenter-3.12.5.war 18080 hazelcast-mancenter
+```
 
 #### 使用计数器AtomicLong
 注意：使用此功能需至少启动3个节点，示例：AtomicController
