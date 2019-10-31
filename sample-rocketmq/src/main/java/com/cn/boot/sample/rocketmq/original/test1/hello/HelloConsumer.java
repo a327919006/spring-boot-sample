@@ -61,6 +61,7 @@ public class HelloConsumer {
                     return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
                 } catch (Exception e) {
                     // 获取消息已经重发的次数
+                    // 重试间隔10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h
                     int reconsumeTimes = msg.getReconsumeTimes();
                     log.error("【HelloConsumer】error reconsumeTimes={}, ", reconsumeTimes, e);
 
