@@ -20,25 +20,22 @@ import javax.annotation.PreDestroy;
  * @author Chen Nan
  */
 @Slf4j
-//@Component
+@Component
 public class MoreConsumer {
     public static final String TAG = "test8";
-
-    private static DefaultMQPushConsumer consumer;
 
     @PostConstruct
     public void init() throws MQClientException {
         log.info("【MoreConsumer】init");
 
-        consumer = new DefaultMQPushConsumer(TAG + "_consumer_group");
-
+        // 订阅多个topic，方式一：公用线程池
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(TAG + "_consumer_group");
         consumer.setNamesrvAddr(MqConstant.NAME_SERVER_ADDRESS);
-
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
 
         // 订阅多个主题
-        consumer.subscribe(TAG + "_0_topic", "*");
-        consumer.subscribe(TAG + "_1_topic", "*");
+        consumer.subscribe(TAG + "_" + 0 + "_topic", "*");
+        consumer.subscribe(TAG + "_" + 1 + "_topic", "*");
 
         consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
             MessageExt msg = msgs.get(0);
@@ -48,13 +45,29 @@ public class MoreConsumer {
             log.info("【MoreConsumer】body={}, tag={}", body, msg.getTags());
             return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         });
-
         consumer.start();
-    }
 
-    @PreDestroy
-    public void destroy() {
-        log.info("【MoreConsumer】destroy");
-        consumer.shutdown();
+        // 订阅多个topic，方式二：每个topic独立线程池
+//        for (int i = 0; i < 2; i++) {
+//            DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(TAG + "_consumer_group_" + i);
+//
+//            consumer.setNamesrvAddr(MqConstant.NAME_SERVER_ADDRESS);
+//
+//            consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
+//
+//            // 订阅多个主题
+//            consumer.subscribe(TAG + "_" + i + "_topic", "*");
+//
+//            consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
+//                MessageExt msg = msgs.get(0);
+//                log.info("【MoreConsumer】msg={}", JSONUtil.toJsonStr(msg));
+//                String body = new String(msg.getBody());
+//
+//                log.info("【MoreConsumer】body={}, tag={}", body, msg.getTags());
+//                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+//            });
+//
+//            consumer.start();
+//        }
     }
 }
