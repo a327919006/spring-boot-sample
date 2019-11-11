@@ -27,7 +27,7 @@ public class MapController {
     @ApiOperation("保存数据")
     @PostMapping("/{map}")
     public String set(@PathVariable String map, @RequestParam String key, @RequestParam String value, Long ttl) {
-        if(ttl == null){
+        if (ttl == null) {
             ttl = 0L;
         }
         IMap<String, String> dataMap = hazelcastInstance.getMap(map);
@@ -48,4 +48,17 @@ public class MapController {
         return hazelcastInstance.getMap(map);
     }
 
+    @ApiOperation("删除")
+    @DeleteMapping("/{map}")
+    public String remove(@PathVariable String map, @RequestParam String key) {
+        IMap<String, String> dataMap = hazelcastInstance.getMap(map);
+        return dataMap.remove(key);
+    }
+
+    @ApiOperation("删除-指定值")
+    @DeleteMapping("/{map}/kv")
+    public boolean removeValue(@PathVariable String map, @RequestParam String key, @RequestParam String value) {
+        IMap<String, String> dataMap = hazelcastInstance.getMap(map);
+        return dataMap.remove(key, value);
+    }
 }
