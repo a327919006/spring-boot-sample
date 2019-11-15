@@ -44,3 +44,31 @@ public class HazelcastClientConfig {
 
 #### 管控台监控（可选）
 在java 启动参数中增加-Dhazelcast.client.statistics.enabled=true
+
+#### 使用zookeeper作为注册中心（可选）
+- 参考: https://github.com/hazelcast/hazelcast-zookeeper/blob/master/README.md
+- 额外依赖：
+```$xslt
+<dependency>
+    <groupId>com.hazelcast</groupId>
+    <artifactId>hazelcast-zookeeper</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.apache.zookeeper</groupId>
+    <artifactId>zookeeper</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.apache.curator</groupId>
+    <artifactId>curator-x-discovery</artifactId>
+</dependency>
+```
+- 配置代码：
+```$xslt
+config.setProperty(GroupProperty.DISCOVERY_SPI_ENABLED.getName(), "true");
+
+DiscoveryStrategyConfig discoveryStrategyConfig = new DiscoveryStrategyConfig(new ZookeeperDiscoveryStrategyFactory());
+discoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.ZOOKEEPER_URL.key(), "127.0.0.1:2181");
+discoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.ZOOKEEPER_PATH.key(), "/hazelcast");
+discoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.GROUP.key(), "test");
+config.getNetworkConfig().getDiscoveryConfig().addDiscoveryStrategyConfig(discoveryStrategyConfig);
+```

@@ -12,10 +12,15 @@ public class HazelcastConfig {
 
     @Bean
     public Config hazelCastConfig() {
+        Config config = new Config();
+
+        // 可选，配置集群名称，默认dev
+        GroupConfig groupConfig = new GroupConfig("test");
+
         // 可选，配置监控中心
         ManagementCenterConfig centerConfig = new ManagementCenterConfig()
                 .setEnabled(true)
-                .setUrl("http://localhost:8080/hazelcast-mancenter");
+                .setUrl("http://127.0.0.1:18080/hazelcast-mancenter");
 
         // 可选，数据处理器，缓存数据增删改查到数据库
         MapStoreConfig testMapStoreConfig = new MapStoreConfig()
@@ -31,7 +36,7 @@ public class HazelcastConfig {
                 .setMapStoreConfig(testMapStoreConfig) // 数据存储
                 ;
 
-        // 可选，网络配置，不配置默认采用广播
+        // 可选，网络配置，使用固定ip地址端口方式，不配置默认采用广播
 //        NetworkConfig networkConfig = new NetworkConfig().setJoin(
 //                new JoinConfig()
 //                        .setMulticastConfig(new MulticastConfig().setEnabled(false))
@@ -42,12 +47,31 @@ public class HazelcastConfig {
 //                                        .addMember("127.0.0.1.5702")
 //                                        .addMember("127.0.0.1.5703")
 //                        ));
+//        config.setNetworkConfig(networkConfig);
 
-        Config config = new Config();
+
+        // 可选，网络配置，使用zk做为注册中心，不配置默认采用广播
+//        config.setProperty(GroupProperty.DISCOVERY_SPI_ENABLED.getName(), "true");
+//        DiscoveryStrategyConfig discoveryStrategyConfig = new DiscoveryStrategyConfig(new ZookeeperDiscoveryStrategyFactory());
+//        discoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.ZOOKEEPER_URL.key(), "127.0.0.1:2181");
+//        discoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.ZOOKEEPER_PATH.key(), "/hazelcast");
+//        discoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.GROUP.key(), "test");
+//
+//        DiscoveryConfig discoveryConfig = new DiscoveryConfig();
+//        discoveryConfig.addDiscoveryStrategyConfig(discoveryStrategyConfig);
+//
+//        NetworkConfig networkConfig = new NetworkConfig().setJoin(
+//                new JoinConfig()
+//                        .setMulticastConfig(new MulticastConfig().setEnabled(false))
+//                        .setDiscoveryConfig(discoveryConfig)
+//
+//        );
+//        config.setNetworkConfig(networkConfig);
+
         config.setInstanceName("hazelcast-instance")
+                .setGroupConfig(groupConfig)
                 .addMapConfig(mapConfig)
                 .setManagementCenterConfig(centerConfig)
-//                .setNetworkConfig(networkConfig)
                 .setProperty("hazelcast.logging.type", "slf4j") // 可选，设置日志框架,jdk：JDK日志记录（默认） log4j、log4j2、slf4j、none：禁用日志记录
         ;
 
