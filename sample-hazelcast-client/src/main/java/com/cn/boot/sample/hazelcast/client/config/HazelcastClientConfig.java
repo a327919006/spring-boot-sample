@@ -17,7 +17,7 @@ public class HazelcastClientConfig {
     @Bean
     public HazelcastInstance hazelcastInstance() {
         ClientNetworkConfig clientNetworkConfig = new ClientNetworkConfig();
-        clientNetworkConfig.addAddress("127.0.0.1:5701", "127.0.0.1:57002");
+        clientNetworkConfig.addAddress("127.0.0.1:5701", "127.0.0.1:5702");
 
         ClientConfig config = new ClientConfig();
         config.setNetworkConfig(clientNetworkConfig);
