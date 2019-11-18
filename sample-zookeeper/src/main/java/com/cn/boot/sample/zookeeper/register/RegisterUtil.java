@@ -51,15 +51,24 @@ public class RegisterUtil {
         String parentNode = serverConfig.getParentNode();
 
         // 判断本机节点是否创建
-        String currNode = serverConfig.getParentNode() + "/" + serverConfig.getNodeName();
-        Stat currNodeStat = curator.checkExists().forPath(currNode);
-        if (currNodeStat != null) {
-            // 删除旧节点
-            curator.delete().forPath(currNode);
-            log.info("【RegisterUtil】CURR_NODE exist, delete={}", currNode);
-        }
 
+
+        // 注册节点监听
+        addListener(parentNode);
+
+        // 服务注册
+        reportNode(parentNode);
+    }
+
+    /**
+     * 注册节点监听
+     *
+     * @param parentNode 根节点路径
+     * @throws Exception 注册监听异常
+     */
+    private void addListener(String parentNode) throws Exception {
         // 第三个参数表示是否需要返回所操作的子节点数据
+
         PathChildrenCache cache = new PathChildrenCache(curator, parentNode, true);
         cache.start(PathChildrenCache.StartMode.POST_INITIALIZED_EVENT);
 
@@ -77,8 +86,6 @@ public class RegisterUtil {
                     break;
             }
         });
-
-        reportNode(parentNode);
     }
 
     /**
@@ -88,6 +95,14 @@ public class RegisterUtil {
      * @throws Exception 上报节点异常
      */
     private void reportNode(String parentNode) throws Exception {
+        String currNode = parentNode + "/" + serverConfig.getNodeName();
+        Stat currNodeStat = curator.checkExists().forPath(currNode);
+        if (currNodeStat != null) {
+            // 删除旧节点
+            curator.delete().forPath(currNode);
+            log.info("【RegisterUtil】CURR_NODE exist, delete={}", currNode);
+        }
+
         String nodeName = serverConfig.getNodeName();
         if (StrUtil.isNotBlank(nodeName) && serverConfig.getServerPort() != null && serverConfig.getServers() != null) {
             ServerInfo serverInfo = serverConfig.getServers().get(nodeName);

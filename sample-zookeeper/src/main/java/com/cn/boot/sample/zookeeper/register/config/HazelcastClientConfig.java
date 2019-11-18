@@ -5,6 +5,7 @@ import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.client.config.ClientNetworkConfig;
 import com.hazelcast.config.EvictionPolicy;
+import com.hazelcast.config.GroupConfig;
 import com.hazelcast.config.MapConfig;
 import com.hazelcast.config.MaxSizeConfig;
 import com.hazelcast.core.HazelcastInstance;
@@ -19,10 +20,13 @@ public class HazelcastClientConfig {
 
     @Bean
     public HazelcastInstance hazelcastInstance() {
-        ClientNetworkConfig clientNetworkConfig = new ClientNetworkConfig();
-        clientNetworkConfig.addAddress("127.0.0.1:5701", "127.0.0.1:57002");
-
         ClientConfig config = new ClientConfig();
+
+        config.setGroupConfig(new GroupConfig("test"));
+
+        ClientNetworkConfig clientNetworkConfig = new ClientNetworkConfig();
+        clientNetworkConfig.addAddress("127.0.0.1:5701", "127.0.0.1:5702");
+
         config.setNetworkConfig(clientNetworkConfig);
 
         System.setProperty("hazelcast.client.statistics.enabled", "true");
