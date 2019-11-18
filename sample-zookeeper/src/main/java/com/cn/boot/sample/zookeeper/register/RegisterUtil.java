@@ -50,9 +50,6 @@ public class RegisterUtil {
         // 根节点路径
         String parentNode = serverConfig.getParentNode();
 
-        // 判断本机节点是否创建
-
-
         // 注册节点监听
         addListener(parentNode);
 
@@ -95,10 +92,10 @@ public class RegisterUtil {
      * @throws Exception 上报节点异常
      */
     private void reportNode(String parentNode) throws Exception {
+        // 判断本机节点是否创建
         String currNode = parentNode + "/" + serverConfig.getNodeName();
         Stat currNodeStat = curator.checkExists().forPath(currNode);
         if (currNodeStat != null) {
-            // 删除旧节点
             curator.delete().forPath(currNode);
             log.info("【RegisterUtil】CURR_NODE exist, delete={}", currNode);
         }
