@@ -1,10 +1,21 @@
-# 开发环境配置
+server:
+  port: 10091
+  servlet:
+    context-path: /${artifactId}
 
 spring:
   redis:
-    host: localhost
+    host: 127.0.0.1
     port: 6379
-    database: 0
+    database: 1
+    timeout: 10000
+    password:
+    jedis:
+      pool:
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+        max-wait: 1000
 
 # Dubbo配置
 dubbo:
@@ -21,3 +32,24 @@ dubbo:
     base-packages: com.cn.boot.sample.redis.service
   consumer:
     check: false
+
+swagger:
+  enabled: true
+  print-init: true
+  docket:
+    base-package: com.cn.boot.sample.redis.controller
+    group-name: ${artifactId}
+    path-selectors:
+      exclude-patterns: [/error]
+    api-info:
+      contact:
+        name: ChenNan
+        email: 327919006@qq.com
+        url: https://gitee.com/NuLiing
+      title: ${artifactId}
+      description: ${artifactId}-接口文档
+      license: Apache License, Version 2.0
+      license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+      version: ${project.version}
+      terms-of-service-url: https://gitee.com/NuLiing
+    response-message-language: cn
