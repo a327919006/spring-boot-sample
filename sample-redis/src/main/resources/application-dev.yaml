@@ -12,9 +12,9 @@ spring:
     password:
     jedis:
       pool:
-        max-idle: 8
-        min-idle: 0
-        max-active: 8
+        max-active: 300
+        max-idle: 100
+        min-idle: 1
         max-wait: 1000
 
 # Dubbo配置
