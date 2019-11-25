@@ -63,7 +63,7 @@ public class PressureTestController {
     }
 
     /**
-     * kv 写入速率9W/s 8G内存 最大3000w左右个数据(key平均35位，value32位)
+     * 单个hash 写入速率2W/s 4G内存 最大2500w左右个数据(key平均35位，value32位)
      *
      * @param dataCount 写入数据数量
      * @param printStep 打印日志步长
