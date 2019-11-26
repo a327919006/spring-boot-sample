@@ -1,6 +1,7 @@
 package com.cn.boot.sample.hazelcast.controller;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.RandomUtil;
 import com.cn.boot.sample.api.model.Constants;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
@@ -26,7 +27,8 @@ public class PressureTestController {
     private HazelcastInstance hazelcastInstance;
 
     /**
-     * 单map写入速率7W/s 4G内存 最大1100W左右个数据(可能还由本机CPU/内存有关)
+     * 单map 写入速率9W/s 8G内存 最大3000w左右个数据(key平均35位，value32位)
+     * 单map 写入速率7W/s 8G内存 最大1500w左右个数据(key平均35位，value300位)
      *
      * @param dataCount 写入数据数量
      * @param printStep 打印日志步长
@@ -36,10 +38,13 @@ public class PressureTestController {
     public String singleMap(int dataCount, int printStep) {
         long start = System.currentTimeMillis();
         long temp = System.currentTimeMillis();
+        String mapName = "MapPressureTest";
         String key = IdUtil.simpleUUID();
-        IMap<String, String> dataMap = hazelcastInstance.getMap("MapPressureTest");
+        log.info("mapName = {}, key = {}", mapName, key);
+        String data = RandomUtil.randomNumbers(300);
+        IMap<String, String> dataMap = hazelcastInstance.getMap(mapName);
         for (int i = 0; i < dataCount; i++) {
-            dataMap.put(key + i, key);
+            dataMap.put(key + i, data);
             if (0 == i % printStep) {
                 log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
                 temp = System.currentTimeMillis();
@@ -51,7 +56,7 @@ public class PressureTestController {
 
 
     /**
-     * 新map创建写入速率2W/s 4G内存 最大25W左右个map(可能还由本机CPU/内存有关)
+     * 新map创建写入速率2W/s 4G内存 最大25W左右个map(与内存大小有关)
      *
      * @param dataCount 写入数据数量
      * @param printStep 打印日志步长
