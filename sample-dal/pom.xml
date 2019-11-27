@@ -33,7 +33,7 @@
 
         <!--uid-->
         <dependency>
-            <groupId>com.baidu.fsg</groupId>
+            <groupId>com.gitee.nuliing</groupId>
             <artifactId>uid-generator</artifactId>
         </dependency>
 

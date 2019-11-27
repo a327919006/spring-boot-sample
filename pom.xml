@@ -78,8 +78,8 @@
         <!--rabbitmq-->
         <rabbitmq.version>5.7.2</rabbitmq.version>
 
-        <!--uid-->
-        <com.baidu.fsg.uid.version>1.0.1-SNAPSHOT</com.baidu.fsg.uid.version>
+        <!--uid-generator-->
+        <uid-generator>1.0.1</uid-generator>
 
         <!--tk.mybatis-->
         <tk.mybatis.mapper.version>2.1.5</tk.mybatis.mapper.version>
@@ -326,9 +326,9 @@
 
             <!--uid-->
             <dependency>
-                <groupId>com.baidu.fsg</groupId>
+                <groupId>com.gitee.nuliing</groupId>
                 <artifactId>uid-generator</artifactId>
-                <version>${com.baidu.fsg.uid.version}</version>
+                <version>${uid-generator}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>ch.qos.logback</groupId>
