@@ -11,5 +11,16 @@
 
     <artifactId>sample-guava</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
 
+        <!-- modules -->
+        <dependency>
+            <groupId>com.cn.boot</groupId>
+            <artifactId>sample-api</artifactId>
+        </dependency>
+    </dependencies>
 </project>
