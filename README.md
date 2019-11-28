@@ -63,6 +63,7 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | MyBatis | MyBatis |
 | tk-mybatis | 通用mapper |
 | Dubbo | RPC |
+| UidGenerator | 百度开源的ID生成框架 |
 | Swagger2 | 接口文档 |
 | RabbitMQ | 消息队列 |
 | RocketMQ | 消息队列 |
@@ -79,5 +80,6 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | Hazelcast | 分布式缓存 |
 | ZooKeeper | 分布式协调服务 |
 | Guava | 常用工具类 |
+
 
 

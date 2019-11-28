@@ -7,6 +7,7 @@
 - WebLogAspect：AOP，自动记录请求与响应日志
 
 #### Controller说明：
+部分接口依赖sample-server项目(Dubbo服务)
 - AsyncController：异步接口，类似webflux
 - ClientController：测试Dubbo+mybatis
 - ConfigController：自定义Properties，从yaml获取配置
