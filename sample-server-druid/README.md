@@ -1,5 +1,5 @@
 ### sample-server-druid
-此模块整合Dubbo、Druid
+此模块在sample-server模块基础上整合Druid
 
 #### druid依赖
 ```
