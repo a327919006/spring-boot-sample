@@ -32,9 +32,9 @@ public class MapController {
 
     @ApiOperation("获取")
     @GetMapping("/{map}")
-    public String get(@PathVariable String map, @RequestParam String key) {
+    public Object get(@PathVariable String map, @RequestParam String key) {
         IMap<Object, Object> dataMap = hazelcastInstance.getMap(map);
-        return (String) dataMap.get(key);
+        return dataMap.get(key);
     }
 
     @ApiOperation("所有")
