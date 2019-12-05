@@ -76,4 +76,9 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findByName(String name) {
         return null;
     }
+
+    @Override
+    public int updateAgeByName(Integer age, String name) {
+        return 0;
+    }
 }
