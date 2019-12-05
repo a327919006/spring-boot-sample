@@ -94,4 +94,10 @@ public class StudentServiceImpl implements StudentService {
     public int updateAgeByName(Integer age, String name) {
         return repository.updateAgeByName(age, new Date(), name);
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int upsert(Student student) {
+        return repository.upsert(student.getId(), student.getName(), student.getAge(), student.getCreateTime(), student.getUpdateTime());
+    }
 }
