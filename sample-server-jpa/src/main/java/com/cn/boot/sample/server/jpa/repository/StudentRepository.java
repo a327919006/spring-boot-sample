@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -72,11 +73,12 @@ public interface StudentRepository extends JpaRepository<Student, String>, JpaSp
     /**
      * 根据姓名更新年龄
      *
-     * @param age  年龄
-     * @param name 姓名
+     * @param age        年龄
+     * @param updateTime 更新时间
+     * @param name       姓名
      * @return 更新条数
      */
     @Modifying
-    @Query("update Student set age=?1 where name = ?2")
-    int updateAgeByName(Integer age, String name);
+    @Query("update Student set age=?1, update_time=?2 where name = ?3")
+    int updateAgeByName(Integer age, Date updateTime, String name);
 }

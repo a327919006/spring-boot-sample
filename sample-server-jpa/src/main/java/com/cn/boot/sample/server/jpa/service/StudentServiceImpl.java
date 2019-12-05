@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -89,8 +90,8 @@ public class StudentServiceImpl implements StudentService {
      * @return 更新条数
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int updateAgeByName(Integer age, String name) {
-        return repository.updateAgeByName(age, name);
+        return repository.updateAgeByName(age, new Date(), name);
     }
 }
