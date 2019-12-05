@@ -79,4 +79,12 @@ public interface StudentService {
      * @return 更新条数
      */
     int updateAgeByName(Integer age, String name);
+
+    /**
+     * 插入/更新
+     *
+     * @param student 学生数据
+     * @return 操作结果
+     */
+    int upsert(Student student);
 }
