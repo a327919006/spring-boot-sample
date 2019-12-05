@@ -74,4 +74,10 @@ public class StudentController {
     public int updateAgeByName(@RequestParam Integer age, @PathVariable String name) {
         return studentService.updateAgeByName(age, name);
     }
+
+    @ApiOperation("插入/更新")
+    @PostMapping("/upsert")
+    public int upsert(@RequestBody Student student) {
+        return studentService.upsert(student);
+    }
 }
