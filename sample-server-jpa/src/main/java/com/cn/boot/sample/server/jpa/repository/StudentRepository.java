@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -67,4 +68,8 @@ public interface StudentRepository extends JpaRepository<Student, String>, JpaSp
             countQuery = "select count(1) from student where name=?1 and age=?2",
             nativeQuery = true)
     Page<Student> findIdAndNamePage(String name, Integer age, Pageable pageable);
+
+    @Modifying
+    @Query("update Student set age=?1 where name = ?2")
+    int updateAgeByName(Integer age, String name);
 }

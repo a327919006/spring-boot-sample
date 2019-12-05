@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -78,5 +79,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> findByName(String name) {
         return dao.find(name);
+    }
+
+    @Override
+    @Transactional
+    public int updateAgeByName(Integer age, String name) {
+        return repository.updateAgeByName(age, name);
     }
 }
