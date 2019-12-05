@@ -81,6 +81,13 @@ public class StudentServiceImpl implements StudentService {
         return dao.find(name);
     }
 
+    /**
+     * 根据姓名更新年龄
+     *
+     * @param age  年龄
+     * @param name 姓名
+     * @return 更新条数
+     */
     @Override
     @Transactional
     public int updateAgeByName(Integer age, String name) {

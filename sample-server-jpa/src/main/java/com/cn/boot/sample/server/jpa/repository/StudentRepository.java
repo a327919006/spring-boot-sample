@@ -69,6 +69,13 @@ public interface StudentRepository extends JpaRepository<Student, String>, JpaSp
             nativeQuery = true)
     Page<Student> findIdAndNamePage(String name, Integer age, Pageable pageable);
 
+    /**
+     * 根据姓名更新年龄
+     *
+     * @param age  年龄
+     * @param name 姓名
+     * @return 更新条数
+     */
     @Modifying
     @Query("update Student set age=?1 where name = ?2")
     int updateAgeByName(Integer age, String name);
