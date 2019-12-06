@@ -12,8 +12,17 @@ public interface RedisService {
      *
      * @param key   key
      * @param value value
+     * @return 结果
      */
-    void lock(String key, String value);
+    boolean lock(String key, String value);
+
+    /**
+     * 移除分布式锁
+     *
+     * @param key key
+     * @return 结果
+     */
+    boolean unlock(String key);
 
     /**
      * 缓存对象
