@@ -24,12 +24,13 @@ public class RedisServiceImpl implements RedisService {
     private ClientService clientService;
 
     private RedisTemplate redisTemplate;
-    private StringRedisTemplate stringRedisTemplate;
     private HashOperations hashOperations;
     private ListOperations listOperations;
     private ZSetOperations zSetOperations;
     private SetOperations setOperations;
     private ValueOperations valueOperations;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
     public RedisServiceImpl(RedisTemplate redisTemplate) {
@@ -43,8 +44,13 @@ public class RedisServiceImpl implements RedisService {
 
 
     @Override
-    public void lock(String key, String value) {
-        valueOperations.set(key, value, 30, TimeUnit.SECONDS);
+    public boolean lock(String key, String value) {
+        return valueOperations.setIfAbsent(key, value, 30, TimeUnit.SECONDS);
+    }
+
+    @Override
+    public boolean unlock(String key) {
+        return stringRedisTemplate.delete(key);
     }
 
     @Override
