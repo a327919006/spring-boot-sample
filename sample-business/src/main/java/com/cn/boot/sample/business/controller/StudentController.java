@@ -68,4 +68,16 @@ public class StudentController {
     public List<Student> listByName(@RequestParam String name) {
         return studentService.findByName(name);
     }
+
+    @ApiOperation("根据姓名更新年龄")
+    @PutMapping("/{name}/age")
+    public int updateAgeByName(@RequestParam Integer age, @PathVariable String name) {
+        return studentService.updateAgeByName(age, name);
+    }
+
+    @ApiOperation("插入/更新")
+    @PostMapping("/upsert")
+    public int upsert(@RequestBody Student student) {
+        return studentService.upsert(student);
+    }
 }

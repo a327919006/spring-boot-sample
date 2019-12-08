@@ -2,7 +2,8 @@ package com.cn.boot.sample.hazelcast.controller;
 
 import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.api.model.po.User;
-import com.hazelcast.core.*;
+import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.MultiMap;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -43,5 +44,28 @@ public class MultiMapController {
     @GetMapping("/{map}/all")
     public MultiMap<Object, Object> all(@PathVariable String map) {
         return hazelcastInstance.getMultiMap(map);
+    }
+
+
+    @ApiOperation("测试-保存用户")
+    @PostMapping("/{map}/test/user")
+    public boolean putUser(@PathVariable String map, @RequestParam String key, @RequestParam String value) {
+        User user = new User().setUsername(value);
+
+        MultiMap<String, User> multiMap = hazelcastInstance.getMultiMap(map);
+        return multiMap.put(key, user);
+    }
+
+    /**
+     * 测试结果：MultiMap可以放入自定义对象，只要实现Serializable接口
+     * 需要判断对象是否存在，不需要遍历，只要对象的属性值全部相同，调用containsEntry方法即可。
+     */
+    @ApiOperation("测试-查找用户")
+    @GetMapping("/{map}/test/user")
+    public boolean findUser(@PathVariable String map, @RequestParam String key, @RequestParam String value) {
+        User user = new User().setUsername(value);
+
+        MultiMap<String, User> multiMap = hazelcastInstance.getMultiMap(map);
+        return multiMap.containsEntry(key, user);
     }
 }

@@ -65,9 +65,26 @@ public interface StudentService {
 
     /**
      * 根据姓名获取列表
+     *
      * @param name 姓名
      * @return 学生列表
      */
     List<Student> findByName(String name);
 
+    /**
+     * 根据姓名更新年龄
+     *
+     * @param age  年龄
+     * @param name 姓名
+     * @return 更新条数
+     */
+    int updateAgeByName(Integer age, String name);
+
+    /**
+     * 插入/更新
+     *
+     * @param student 学生数据
+     * @return 操作结果
+     */
+    int upsert(Student student);
 }

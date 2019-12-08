@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -78,5 +80,24 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> findByName(String name) {
         return dao.find(name);
+    }
+
+    /**
+     * 根据姓名更新年龄
+     *
+     * @param age  年龄
+     * @param name 姓名
+     * @return 更新条数
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int updateAgeByName(Integer age, String name) {
+        return repository.updateAgeByName(age, new Date(), name);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int upsert(Student student) {
+        return repository.upsert(student.getId(), student.getName(), student.getAge(), student.getCreateTime(), student.getUpdateTime());
     }
 }
