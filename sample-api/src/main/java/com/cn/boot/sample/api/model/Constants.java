@@ -35,4 +35,19 @@ public class Constants {
     public static final String KEY_PAGE_SIZE = "pageSize";
     public static final String KEY_COUNT = "count";
     public static final String KEY_ORDER_BY = "orderBy";
+
+
+    /*========设备通信数据========*/
+    /**
+     * 设备连接
+     */
+    public static final String DATA_CONN = "conn";
+    /**
+     * 设备处理结果
+     */
+    public static final String DATA_RESULT = "result";
+    /**
+     * 设备处理结果
+     */
+    public static final String DATA_CEHCK = "check";
 }
