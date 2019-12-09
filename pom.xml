@@ -37,6 +37,7 @@
         <module>sample-zookeeper</module>
         <module>sample-hazelcast-client</module>
         <module>sample-guava</module>
+        <module>sample-netty</module>
     </modules>
 
 
@@ -118,6 +119,9 @@
         <!--oshi-->
         <oshi.version>4.0.0</oshi.version>
         <jna.version>5.4.0</jna.version>
+
+        <!--netty-->
+        <netty.version>4.1.43.Final</netty.version>
 
         <!-- plugins -->
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -435,6 +439,13 @@
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-client</artifactId>
                 <version>${rocketmq.version}</version>
+            </dependency>
+
+            <!-- netty -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
             </dependency>
 
             <!--oshi-->
