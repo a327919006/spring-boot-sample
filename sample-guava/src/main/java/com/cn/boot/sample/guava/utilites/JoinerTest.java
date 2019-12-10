@@ -17,8 +17,30 @@ public class JoinerTest {
     private final List list2 = Arrays.asList("aaa", "bbb", null);
 
     @Test
-    public void test1() {
-        String result1 = Joiner.on("#").join(list1);
-        log.info("result1={}", result1);
+    public void onJoin() {
+        String result = Joiner.on("#").join(list1);
+        // aaa#bbb#ccc
+        log.info("result={}", result);
+    }
+
+    @Test
+    public void onJoinSkipNull() {
+        String result = Joiner.on("#").skipNulls().join(list2);
+        // aaa#bbb
+        log.info("result={}", result);
+    }
+
+    @Test
+    public void onJoinUseForNull() {
+        String result = Joiner.on("#").useForNull("default").join(list2);
+        // aaa#bbb#default
+        log.info("result={}", result);
+    }
+
+    @Test
+    public void onAppendTo() {
+        StringBuilder result = Joiner.on("#").appendTo(new StringBuilder(), list1);
+        // aaa#bbb#ccc
+        log.info("result={}", result);
     }
 }
