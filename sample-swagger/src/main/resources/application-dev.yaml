@@ -1,0 +1,4 @@
+server:
+  port: 10098
+  servlet:
+    context-path: /sample-swagger
