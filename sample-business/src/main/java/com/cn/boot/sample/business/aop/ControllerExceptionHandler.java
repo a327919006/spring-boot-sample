@@ -1,4 +1,4 @@
-package com.cn.boot.sample.business.config;
+package com.cn.boot.sample.business.aop;
 
 import cn.hutool.core.exceptions.ExceptionUtil;
 import com.cn.boot.sample.api.exceptions.BusinessException;
