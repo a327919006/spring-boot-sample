@@ -12,15 +12,18 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 /**
  * @author Chen Nan
  */
+@Slf4j
 public class NettyClientTest {
+
     @Test
     public void runClient() {
-        System.out.println("客户端开始连接");
+        log.info("客户端开始连接");
         String ip = "127.0.0.1";
         int port = 50001;
 
@@ -43,7 +46,7 @@ public class NettyClientTest {
                     .option(ChannelOption.SO_KEEPALIVE, true);
 
             ChannelFuture future = bootstrap.connect(ip, port).sync();
-            System.out.println("客户端连接完成");
+            log.info("客户端连接完成");
             future.channel().closeFuture().sync();
         } catch (Exception e) {
             e.printStackTrace();

@@ -98,14 +98,6 @@ public class NettyServer {
         bossGroup.shutdownGracefully();
         // 关闭线程池
         singleThreadPool.shutdown();
-        // 注销jdbc驱动
-        try {
-            while (DriverManager.getDrivers().hasMoreElements()) {
-                DriverManager.deregisterDriver(DriverManager.getDrivers().nextElement());
-            }
-        } catch (Exception e) {
-            log.error("【注销驱动异常】:" + e.getMessage());
-        }
         log.info("【netty server stop】");
         // 睡眠3秒，等待netty关闭结束，不睡的话会抛异常，但不影响流程
         try {

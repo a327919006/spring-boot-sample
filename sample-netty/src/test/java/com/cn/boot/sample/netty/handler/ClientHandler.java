@@ -6,6 +6,7 @@ import com.cn.boot.sample.netty.model.RspDeviceData;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * <p>Title:</p>
@@ -14,6 +15,7 @@ import io.netty.util.ReferenceCountUtil;
  * @author Chen Nan
  * @date 2017/12/27.
  */
+@Slf4j
 public class ClientHandler extends ChannelInboundHandlerAdapter {
     @Override
      public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -28,15 +30,12 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         try {
             RspDeviceData rspDeviceData = (RspDeviceData) msg;
-            System.out.println("客户端接收数据：" + rspDeviceData);
+            log.info("客户端接收数据：" + rspDeviceData);
 
             ReqDeviceData reqDeviceData = new ReqDeviceData();
             reqDeviceData.setTag(Constants.DATA_RESULT);
-            reqDeviceData.setRequestNo(rspDeviceData.getRequestNo());
             reqDeviceData.setDeviceNo(rspDeviceData.getDeviceNo());
-            reqDeviceData.setThirdUserId(rspDeviceData.getThirdUserId());
-
-            reqDeviceData.setResult("1");
+            reqDeviceData.setData("ok");
 
             ctx.writeAndFlush(reqDeviceData);
         } finally {
