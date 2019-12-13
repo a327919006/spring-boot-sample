@@ -3,6 +3,9 @@ server:
   servlet:
     context-path: /${artifactId}
 
+netty:
+  port: 50001
+
 swagger:
   enabled: true
   print-init: true

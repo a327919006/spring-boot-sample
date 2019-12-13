@@ -20,7 +20,6 @@ import org.junit.Test;
  */
 @Slf4j
 public class NettyClientTest {
-
     @Test
     public void runClient() {
         log.info("客户端开始连接");
