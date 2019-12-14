@@ -6,7 +6,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 /**
  * <p>Title:</p>
@@ -24,22 +23,24 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
-        log.info("设备连接服务器:" + ClientUtils.getClientIpAddress(ctx));
+        String channelId = ctx.channel().id().asShortText();
+        String ip = ClientUtils.getClientIpAddress(ctx);
+        log.info("新连接, channelId={}, ip={}", channelId, ip);
     }
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
         super.handlerRemoved(ctx);
-        String ipAddress = ClientUtils.getClientIpAddress(ctx);
-        log.info("handlerRemoved ipAddress = {}", ipAddress);
+        ClientUtils.removeClient(ctx);
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         try {
             ReqDeviceData data = (ReqDeviceData) msg;
-
-            log.info("服务端接收数据：" + data + " ip:port：" + ClientUtils.getClientIpAddress(ctx));
+            String channelId = ctx.channel().id().asShortText();
+            String ip = ClientUtils.getClientIpAddress(ctx);
+            log.info("接收数据, data={}, channelId={}, ip={}", data, channelId, ip);
 
             if (data.getTag().equals(Constants.DATA_CONN)) {
                 // 收到设备连接数据
@@ -49,7 +50,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 handleDeviceResult(data);
             } else {
                 // 收到未知数据
-                log.error("unknown data:" + data);
+                log.error("unknown data={}", data);
                 ctx.close();
             }
         } finally {
@@ -69,7 +70,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
      * 处理设备返回结果
      */
     private void handleDeviceResult(ReqDeviceData data) {
-        log.info("收到设备校验结果:" + data);
+        log.info("处理业务..., data={}", data);
     }
 
     /**
@@ -79,6 +80,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         // 当异常时释放关闭连接
         cause.printStackTrace();
+        ClientUtils.removeClient(ctx);
         ctx.close();
     }
 }

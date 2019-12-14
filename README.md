@@ -32,13 +32,14 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 20881         | sample-server-jpa         | 服务接口实现，整合JPA、JdbcTemplate |
 | 20881         | sample-server-jpa-more    | 服务接口实现，整合JPA、Hikari，对接多数据源 |
 | 20881         | sample-server-more        | 服务接口实现，整合MyBatis、Druid，对接多数据源 |
+| 10098         | sample-swagger            | 整合Swagger，使用原生方式 |
 | 10085         | sample-webflux            | 业务接口，整合webflux |
 | 10086         | sample-wechat             | 微信公众号开发，未使用框架，直接调用微信接口 |
 | 10086         | sample-wechat-tool        | 微信公众号开发,使用框架：WxJava |
 | 10093         | sample-zookeeper          | 整合ZooKeeper，使用ZkClient、Curator |
 
 ##### 说明
-- 当前已使用端口10081-10097,20881-20883
+- 当前已使用端口10081-10098,20881-20883
 ```
 端口为1xxxx的模块对外提供Http接口，并整合了Swagger，方便调试。
 端口为2xxxx的模块提供RPC服务，一般用于business模块调用，由business模块提供测试的http接口

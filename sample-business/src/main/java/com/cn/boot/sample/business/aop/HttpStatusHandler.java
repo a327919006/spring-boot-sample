@@ -1,4 +1,4 @@
-package com.cn.boot.sample.business.config;
+package com.cn.boot.sample.business.aop;
 
 import com.cn.boot.sample.api.model.dto.Error;
 import org.springframework.http.HttpStatus;

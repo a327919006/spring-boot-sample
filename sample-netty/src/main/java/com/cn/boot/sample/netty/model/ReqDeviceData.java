@@ -10,8 +10,6 @@ import java.io.Serializable;
 @Data
 public class ReqDeviceData implements Serializable {
     private String tag;
-    private String requestNo;
     private String deviceNo;
-    private String thirdUserId;
-    private String result;
+    private String data;
 }
