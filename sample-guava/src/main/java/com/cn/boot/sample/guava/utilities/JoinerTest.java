@@ -1,4 +1,4 @@
-package com.cn.boot.sample.guava.utilites;
+package com.cn.boot.sample.guava.utilities;
 
 import cn.hutool.core.util.StrUtil;
 import com.google.common.base.Joiner;
@@ -48,9 +48,10 @@ public class JoinerTest {
 
     @Test
     public void streamSkipNull() {
-        String result = list1.stream()
+        String result = list2.stream()
                 .filter(StrUtil::isNotBlank)
                 .collect(Collectors.joining("#"));
+        // aaa#bbb
         log.info("result={}", result);
     }
 
@@ -59,6 +60,7 @@ public class JoinerTest {
         String result = list2.stream()
                 .map(item -> StrUtil.isBlank(item) ? "default" : item)
                 .collect(Collectors.joining("#"));
+        // aaa#bbb#default
         log.info("result={}", result);
     }
 }
