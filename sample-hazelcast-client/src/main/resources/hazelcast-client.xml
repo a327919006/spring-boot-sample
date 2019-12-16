@@ -1,0 +1,33 @@
+<hazelcast-client xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://www.hazelcast.com/schema/client-config
+                               http://www.hazelcast.com/schema/client-config/hazelcast-client-config-4.0.xsd"
+                  xmlns="http://www.hazelcast.com/schema/client-config">
+
+    <group>
+        <name>test</name>
+    </group>
+
+    <properties>
+        <property name="hazelcast.discovery.enabled">true</property>
+    </properties>
+
+    <network>
+        <discovery-strategies>
+            <discovery-strategy enabled="true" class="com.hazelcast.zookeeper.ZookeeperDiscoveryStrategy">
+                <properties>
+                    <!--
+                      Connection string to your ZooKeeper server.
+                      Default: There is no default, this is a required property.
+                      Example: 127.0.0.1:2181
+                    -->
+                    <property name="zookeeper_url">127.0.0.1:2181</property>
+                    <!--Path in ZooKeeper Hazelcast will useDefault: /discovery/hazelcast -->
+                    <property name="zookeeper_path">/hazelcast</property>
+                    <!--Name of this Hazelcast cluster. You can have multiple distinct clusters to use the same ZooKeeper installation.-->
+                    <property name="group">test</property>
+                </properties>
+            </discovery-strategy>
+        </discovery-strategies>
+    </network>
+
+</hazelcast-client>

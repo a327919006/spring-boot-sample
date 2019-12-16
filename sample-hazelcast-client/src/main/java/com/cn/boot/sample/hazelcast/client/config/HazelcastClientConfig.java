@@ -1,6 +1,7 @@
 package com.cn.boot.sample.hazelcast.client.config;
 
 import com.hazelcast.client.HazelcastClient;
+import com.hazelcast.client.config.ClientClasspathXmlConfig;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.config.*;
 import com.hazelcast.core.HazelcastInstance;
@@ -12,7 +13,10 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class HazelcastClientConfig {
-
+    /**
+     * 方式一：通过代码配置
+     * @return
+     */
     @Bean
     public HazelcastInstance hazelcastInstance() {
         ClientConfig config = new ClientConfig();
@@ -53,4 +57,14 @@ public class HazelcastClientConfig {
         hazelcastInstance.getConfig().addMapConfig(mapConfig);
         return hazelcastInstance;
     }
+
+    /**
+     * 方式二：通过xml配置
+     */
+//    @Bean
+//    public HazelcastInstance hazelcastInstanceByXml() {
+//        String configFile = "hazelcast-client.xml";
+//        ClientConfig hzconfig = new ClientClasspathXmlConfig(configFile);
+//        return HazelcastClient.newHazelcastClient(hzconfig);
+//    }
 }
