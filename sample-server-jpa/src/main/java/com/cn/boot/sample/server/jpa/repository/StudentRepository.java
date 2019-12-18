@@ -1,5 +1,6 @@
 package com.cn.boot.sample.server.jpa.repository;
 
+import com.cn.boot.sample.api.model.dto.student.StudentAddReq;
 import com.cn.boot.sample.api.model.po.Student;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -7,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -98,4 +100,16 @@ public interface StudentRepository extends JpaRepository<Student, String>, JpaSp
             "VALUES (?1, ?2, ?3, ?4, ?5) " +
             "on duplicate key update `age` = ?3, `update_time`= ?5", nativeQuery = true)
     int upsert(String id, String name, Integer age, LocalDateTime createTime, LocalDateTime updateTime);
+
+
+    /**
+     * 插入
+     *
+     * @param req 学生信息
+     * @return 操作结果
+     */
+    @Modifying
+    @Query(value = "INSERT INTO `boot_sample`.`student`(`id`, `name`, `age`) " +
+            "VALUES (:id, :#{#req.name}, :#{#req.age}) ", nativeQuery = true)
+    int insertInfo(@Param("id") String id, @Param("req") StudentAddReq req);
 }

@@ -100,4 +100,10 @@ public class StudentServiceImpl implements StudentService {
     public int upsert(Student student) {
         return repository.upsert(student.getId(), student.getName(), student.getAge(), student.getCreateTime(), student.getUpdateTime());
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int insertInfo(StudentAddReq req) {
+        return repository.insertInfo(IdUtil.simpleUUID(), req);
+    }
 }
