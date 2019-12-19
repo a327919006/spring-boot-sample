@@ -45,7 +45,7 @@
 
         <!-- 对应的dao接口-->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.cn.boot.sample.dal.mapper" targetProject="src/main/java">
-            <property name="enableSubPackages" value="true"/>
+            <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
         <!--<table catalog="boot_sample" tableName="client" enableSelectByExample="false"-->
