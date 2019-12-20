@@ -1,4 +1,6 @@
-### spring-boot-sample
+<p align="center">
+    <h1>spring-boot-sample</h1>
+</p>
 
 <p align="center">
     <a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0.html">
