@@ -1,5 +1,5 @@
 <p align="center">
-    <h1>spring-boot-sample</h1>
+    <h1 align="center">spring-boot-sample</h1>
 </p>
 
 <p align="center">
