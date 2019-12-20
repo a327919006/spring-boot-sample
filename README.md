@@ -1,7 +1,9 @@
 ### spring-boot-sample
 
-#### 项目说明
+#### 介绍
 SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurity、RabbitMQ、RocketMQ、Kafka、Redis、MongoDB、Hazelcast、Apollo等
+
+如果感觉有帮助，帮忙点个star！
 
 #### Maven模块描述
 
