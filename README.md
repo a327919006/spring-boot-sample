@@ -1,7 +1,25 @@
-### spring-boot-sample
+<p align="center">
+    <h1 align="center">spring-boot-sample</h1>
+</p>
 
-#### 项目说明
+<p align="center">
+    <a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0.html">
+        <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" ></img>
+    </a>
+    <a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
+        <img src="https://img.shields.io/badge/JDK-1.8+-green.svg" ></img>
+    </a>
+    <a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
+        <img src="https://img.shields.io/badge/SpringBoot-2.1+-red.svg" ></img>
+    </a>
+</p>
+
+------------
+
+#### 介绍
 SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurity、RabbitMQ、RocketMQ、Kafka、Redis、MongoDB、Hazelcast、Apollo等
+
+如果感觉有帮助，帮忙点个star！
 
 #### Maven模块描述
 

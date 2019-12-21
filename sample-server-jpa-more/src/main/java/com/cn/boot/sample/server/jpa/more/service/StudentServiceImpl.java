@@ -81,4 +81,14 @@ public class StudentServiceImpl implements StudentService {
     public int updateAgeByName(Integer age, String name) {
         return 0;
     }
+
+    @Override
+    public int upsert(Student student) {
+        return 0;
+    }
+
+    @Override
+    public int insertInfo(StudentAddReq req) {
+        return 0;
+    }
 }

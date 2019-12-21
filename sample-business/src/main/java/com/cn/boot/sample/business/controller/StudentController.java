@@ -80,4 +80,10 @@ public class StudentController {
     public int upsert(@RequestBody Student student) {
         return studentService.upsert(student);
     }
+
+    @ApiOperation("插入信息")
+    @PostMapping("/insert/info")
+    public int insertInfo(@RequestBody @Valid StudentAddReq req) {
+        return studentService.insertInfo(req);
+    }
 }

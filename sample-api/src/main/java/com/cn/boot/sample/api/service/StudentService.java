@@ -87,4 +87,13 @@ public interface StudentService {
      * @return 操作结果
      */
     int upsert(Student student);
+
+    /**
+     * 插入
+     *
+     * @param req 学生数据
+     * @return 操作结果
+     */
+    int insertInfo(StudentAddReq req);
+
 }
