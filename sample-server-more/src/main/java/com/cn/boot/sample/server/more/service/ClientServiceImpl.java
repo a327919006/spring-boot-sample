@@ -17,4 +17,9 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientMapper, Client, Str
         implements ClientService {
     @Reference
     private UidGeneratorService uidGeneratorService;
+
+    @Override
+    public int saveClient(Client client) {
+        return mapper.saveClient(client);
+    }
 }
