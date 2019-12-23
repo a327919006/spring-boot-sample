@@ -87,4 +87,18 @@ public class ClientController {
         Page<Client> page = clientService.listPage(req);
         return page.getResult();
     }
+
+    @ApiOperation("商户-保存")
+    @PostMapping("save")
+    public String save(@RequestBody @Valid ClientAddReq req) {
+        if (req.getId() == null) {
+            req.setId(uidGeneratorService.generate());
+        }
+
+        Client client = new Client();
+        BeanUtils.copyProperties(req, client);
+        clientService.saveClient(client);
+
+        return client.getId();
+    }
 }
