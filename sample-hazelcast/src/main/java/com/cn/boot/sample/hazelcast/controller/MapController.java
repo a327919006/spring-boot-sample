@@ -65,11 +65,11 @@ public class MapController {
         return dataMap.remove(key, value);
     }
 
-    @ApiOperation("测试-值为Map")
+    @ApiOperation(value = "测试-值为Map", notes = "测试结果：支持值为map")
     @GetMapping("/test/map")
     public Map<String, User> testMap() {
-        String mapName = "testMap";
-        String key = "test1";
+        String mapName = "testMap10";
+        String key = "test";
         IMap<String, Map<String, User>> dataMap = hazelcastInstance.getMap(mapName);
         Map<String, User> data = new HashMap<>();
         data.put("k1", new User().setUsername("u1"));
@@ -84,11 +84,11 @@ public class MapController {
         return testData;
     }
 
-    @ApiOperation("测试-默认值是否为null")
+    @ApiOperation(value = "测试-默认值是否为null", notes = "测试结果：默认key不存在时，值返回null")
     @GetMapping("/test/other")
     public String testOther() {
         String mapName = "test11";
-        String key = "key11";
+        String key = "key";
         IMap<String, Integer> dataMap = hazelcastInstance.getMap(mapName);
         Integer data = dataMap.get(key);
         if (data == null) {
@@ -96,14 +96,43 @@ public class MapController {
 
             dataMap.put(key, 1);
             data = dataMap.get(key);
-            log.info("data1 = {}",data);
+            log.info("data1 = {}", data);
 
             dataMap.delete(key);
             data = dataMap.get(key);
-            log.info("data2 = {}",data);
+            log.info("data2 = {}", data);
         } else {
             log.info("data = {}", data);
         }
+        return Constants.MSG_SUCCESS;
+    }
+
+    @ApiOperation(value = "测试-put和set的区别", notes = "测试结果：put返回旧值，set不返回，set效率高")
+    @GetMapping("/test/put")
+    public String testPut() {
+        String mapName = "test12";
+        String key = "key";
+        IMap<String, Integer> dataMap = hazelcastInstance.getMap(mapName);
+        log.info("put1 = {}", dataMap.put(key, 1));
+        log.info("put2 = {}", dataMap.put(key, 2));
+        dataMap.set(key, 3);
+        log.info("put3 = {}", dataMap.put(key, 4));
+        return Constants.MSG_SUCCESS;
+    }
+
+
+    @ApiOperation(value = "测试-remove和delete的区别", notes = "测试结果：remove返回旧值，delete不返回，delete效率高")
+    @GetMapping("/test/remove")
+    public String testRemove() {
+        String mapName = "test13";
+        String key = "key";
+        IMap<String, Integer> dataMap = hazelcastInstance.getMap(mapName);
+        dataMap.set(key, 1);
+        Integer oldValue = dataMap.remove(key);
+        log.info("oldValue = {}", oldValue);
+
+        dataMap.set(key, 1);
+        dataMap.delete(key);
         return Constants.MSG_SUCCESS;
     }
 }
