@@ -4,6 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import com.cn.boot.sample.api.model.dto.DataGrid;
 import com.cn.boot.sample.api.model.dto.student.StudentAddReq;
 import com.cn.boot.sample.api.model.po.Student;
+import com.cn.boot.sample.api.model.vo.student.StudentRsp;
 import com.cn.boot.sample.api.service.StudentService;
 import com.cn.boot.sample.server.jpa.dao.StudentDao;
 import com.cn.boot.sample.server.jpa.repository.StudentRepository;
@@ -105,5 +106,15 @@ public class StudentServiceImpl implements StudentService {
     @Transactional(rollbackFor = Exception.class)
     public int insertInfo(StudentAddReq req) {
         return repository.insertInfo(IdUtil.simpleUUID(), req);
+    }
+
+    @Override
+    public List<Student> findByIdList(List<String> idList, int age) {
+        return repository.findByIdList(idList, age);
+    }
+
+    @Override
+    public List<StudentRsp> findNameByAge(int age) {
+        return repository.findNameByAge(age);
     }
 }

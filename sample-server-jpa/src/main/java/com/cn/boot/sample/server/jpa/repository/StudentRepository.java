@@ -2,6 +2,7 @@ package com.cn.boot.sample.server.jpa.repository;
 
 import com.cn.boot.sample.api.model.dto.student.StudentAddReq;
 import com.cn.boot.sample.api.model.po.Student;
+import com.cn.boot.sample.api.model.vo.student.StudentRsp;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -86,7 +87,7 @@ public interface StudentRepository extends JpaRepository<Student, String>, JpaSp
     int updateAgeByName(Integer age, Date updateTime, String name);
 
     /**
-     * 插入/更新
+     * 插入/更新，使用on duplicate key update
      *
      * @param id         id
      * @param name       姓名
@@ -101,10 +102,10 @@ public interface StudentRepository extends JpaRepository<Student, String>, JpaSp
             "on duplicate key update `age` = ?3, `update_time`= ?5", nativeQuery = true)
     int upsert(String id, String name, Integer age, LocalDateTime createTime, LocalDateTime updateTime);
 
-
     /**
-     * 插入
+     * 插入，使用自定义对象StudentAddReq
      *
+     * @param id  id
      * @param req 学生信息
      * @return 操作结果
      */
@@ -112,4 +113,24 @@ public interface StudentRepository extends JpaRepository<Student, String>, JpaSp
     @Query(value = "INSERT INTO `boot_sample`.`student`(`id`, `name`, `age`) " +
             "VALUES (:id, :#{#req.name}, :#{#req.age}) ", nativeQuery = true)
     int insertInfo(@Param("id") String id, @Param("req") StudentAddReq req);
+
+    /**
+     * 查询，使用IN List
+     *
+     * @param idList ID列表
+     * @param age    年龄
+     * @return 操作结果
+     */
+    @Query(value = "SELECT * FROM `boot_sample`.`student` " +
+            "WHERE id IN(:idList) and age = :age", nativeQuery = true)
+    List<Student> findByIdList(@Param("idList") List<String> idList, @Param("age") int age);
+
+    /**
+     * 查询，返回自定义对象
+     *
+     * @param age    年龄
+     * @return 学生列表
+     */
+    @Query("SELECT new com.cn.boot.sample.api.model.vo.student.StudentRsp(name, createTime) FROM Student WHERE age = ?1")
+    List<StudentRsp> findNameByAge(Integer age);
 }
