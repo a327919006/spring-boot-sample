@@ -4,6 +4,7 @@ import com.cn.boot.sample.api.model.dto.DataGrid;
 import com.cn.boot.sample.api.model.dto.student.StudentAddReq;
 import com.cn.boot.sample.api.model.dto.student.StudentGetReq;
 import com.cn.boot.sample.api.model.po.Student;
+import com.cn.boot.sample.api.model.vo.student.StudentRsp;
 import com.cn.boot.sample.api.service.StudentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -75,15 +76,27 @@ public class StudentController {
         return studentService.updateAgeByName(age, name);
     }
 
-    @ApiOperation("插入/更新")
+    @ApiOperation("插入/更新,使用on duplicate key update")
     @PostMapping("/upsert")
     public int upsert(@RequestBody Student student) {
         return studentService.upsert(student);
     }
 
-    @ApiOperation("插入信息")
+    @ApiOperation("插入信息，使用自定义对象StudentAddReq")
     @PostMapping("/insert/info")
     public int insertInfo(@RequestBody @Valid StudentAddReq req) {
         return studentService.insertInfo(req);
+    }
+
+    @ApiOperation("查询，使用IN List")
+    @GetMapping("/findByIdList")
+    public List<Student> findByIdList(@RequestParam List<String> idList, @RequestParam int age) {
+        return studentService.findByIdList(idList, age);
+    }
+
+    @ApiOperation("查询，返回自定义对象")
+    @GetMapping("/findNameByAge")
+    public List<StudentRsp> findNameByAge(@RequestParam int age) {
+        return studentService.findNameByAge(age);
     }
 }
