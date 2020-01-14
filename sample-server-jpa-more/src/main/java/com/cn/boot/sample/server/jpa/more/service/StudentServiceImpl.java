@@ -4,6 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import com.cn.boot.sample.api.model.dto.DataGrid;
 import com.cn.boot.sample.api.model.dto.student.StudentAddReq;
 import com.cn.boot.sample.api.model.po.Student;
+import com.cn.boot.sample.api.model.vo.student.StudentRsp;
 import com.cn.boot.sample.api.service.StudentService;
 import com.cn.boot.sample.server.jpa.more.dao.one.StudentRepository;
 import org.apache.dubbo.config.annotation.Service;
@@ -90,5 +91,15 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public int insertInfo(StudentAddReq req) {
         return 0;
+    }
+
+    @Override
+    public List<Student> findByIdList(List<String> idList, int age) {
+        return null;
+    }
+
+    @Override
+    public List<StudentRsp> findNameByAge(int age) {
+        return null;
     }
 }
