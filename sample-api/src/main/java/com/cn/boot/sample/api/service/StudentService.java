@@ -3,6 +3,7 @@ package com.cn.boot.sample.api.service;
 import com.cn.boot.sample.api.model.dto.DataGrid;
 import com.cn.boot.sample.api.model.dto.student.StudentAddReq;
 import com.cn.boot.sample.api.model.po.Student;
+import com.cn.boot.sample.api.model.vo.student.StudentRsp;
 
 import java.util.List;
 
@@ -96,4 +97,20 @@ public interface StudentService {
      */
     int insertInfo(StudentAddReq req);
 
+    /**
+     * 查询，使用IN List
+     *
+     * @param idList ID列表
+     * @param age    年龄
+     * @return 操作结果
+     */
+    List<Student> findByIdList(List<String> idList, int age);
+
+    /**
+     * 查询，返回自定义对象
+     *
+     * @param age 年龄
+     * @return 学生列表
+     */
+    List<StudentRsp> findNameByAge(int age);
 }
