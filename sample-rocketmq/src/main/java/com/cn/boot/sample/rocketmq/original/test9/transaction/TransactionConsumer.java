@@ -18,12 +18,12 @@ import java.util.List;
 
 
 /**
- * 入门示例
+ * 事务消息消费者
  *
  * @author Chen Nan
  */
 @Slf4j
-@Component
+//@Component
 public class TransactionConsumer {
     public static final String TAG = "test9";
 

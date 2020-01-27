@@ -17,12 +17,12 @@ import javax.annotation.PreDestroy;
 import java.util.concurrent.*;
 
 /**
- * 入门示例
+ * 事务消息生产者
  *
  * @author Chen Nan
  */
 @Slf4j
-@Component
+//@Component
 public class TransactionProducer {
     public static final String TAG = "test9";
 
