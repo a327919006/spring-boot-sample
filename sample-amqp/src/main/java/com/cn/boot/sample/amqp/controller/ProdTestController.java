@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/mq")
-@Api(tags = "MQ发送端", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "MQ发送端", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProdTestController {
 
     @Autowired
