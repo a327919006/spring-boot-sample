@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/config")
-@Api(tags = "配置管理", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "配置管理", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ConfigController {
 
     @Value("${test.config.name}")
