@@ -7,14 +7,14 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author Chen Nan
  */
 @Data
 @Accessors(chain = true)
-@Table(name = "boot_sample.user")
+@Table(name = "user")
 public class User implements Serializable {
     /**
      * 用户ID
@@ -41,11 +41,11 @@ public class User implements Serializable {
      * 创建时间
      */
     @Column(name = "create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新时间
      */
     @Column(name = "update_time")
-    private LocalDateTime updateTime;
+    private Date updateTime;
 }
