@@ -1,0 +1,90 @@
+# 开发环境配置
+
+spring:
+  # 数据库连接配置
+  shardingsphere:
+    # 属性配置
+    props:
+      # 是否开启 SQL 显示，默认值: false
+      sql:
+        show: true
+    # 数据源配置，可配置多个
+    datasource:
+      # 本案例中配置了两个数据源，分别对应刚才创建的两个 MySQL 容器
+      names: ds0,ds1
+      ds0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/boot_sample?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: chennan
+        hikari:
+          minimum-idle: 5
+          idle-timeout: 600000
+          maximum-pool-size: 10
+          auto-commit: true
+          pool-name: MyHikariCP
+          max-lifetime: 1800000
+          connection-timeout: 30000
+          connection-test-query: SELECT 1
+      ds1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/boot_sample2?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: chennan
+        hikari:
+          minimum-idle: 5
+          idle-timeout: 600000
+          maximum-pool-size: 10
+          auto-commit: true
+          pool-name: MyHikariCP
+          max-lifetime: 1800000
+          connection-timeout: 30000
+          connection-test-query: SELECT 1
+    # 分片规则配置
+    sharding:
+      # 绑定表规则列表
+      binding-tables: t_order
+      # 默认数据库分片策略，同分库策略
+      default-database-strategy:
+        inline:
+          # 分片算法行表达式，需符合 groovy 语法
+          # 此处根据 user_id 分片
+          # 如果 user_id 为奇数则落入奇数库即 ds1 匹配的数据源
+          # 如果 user_id 为偶数则落入偶数库即 ds0 匹配的数据源
+          algorithm-expression: ds$->{user_id % 2}
+          # 分片列名称
+          sharding-column: user_id
+      # 数据分片规则配置，可配置多个
+      tables:
+        # 逻辑表名称
+        t_order:
+          # 由数据源名 + 表名组成，以小数点分隔
+          actual-data-nodes: ds$->{0..1}.t_order_$->{0..1}
+          # 分表策略，同分库策略
+          table-strategy:
+            inline:
+              # 此处根据 order_id 分片
+              # 如果 order_id 为奇数则落入奇数表即 t_order_1
+              # 如果 order_id 为偶数则落入偶数表即 t_order_0
+              algorithm-expression: t_order_$->{order_id % 2}
+              # 分片列名称
+              sharding-column: order_id
+        user:
+          actual-data-nodes: ds$->{0..0}.user
+
+
+# Dubbo配置
+dubbo:
+  application:
+    name: ${artifactId}
+    logger: slf4j
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  protocol:
+    name: dubbo
+    port: 20882
+    serialization: kryo
+  scan:
+    base-packages: com.cn.boot.sample.server.shard.service
