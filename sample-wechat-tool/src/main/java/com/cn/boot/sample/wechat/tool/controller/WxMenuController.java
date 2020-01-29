@@ -26,7 +26,7 @@ import static me.chanjar.weixin.common.api.WxConsts.MenuButtonType;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/wx/menu")
-@Api(tags = "微信菜单", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "微信菜单", produces = MediaType.APPLICATION_JSON_VALUE)
 public class WxMenuController {
     private final WxMpService wxService;
 

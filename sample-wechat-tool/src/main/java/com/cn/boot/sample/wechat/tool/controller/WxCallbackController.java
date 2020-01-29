@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/wx/code")
-@Api(tags = "微信网页授权", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "微信网页授权", produces = MediaType.APPLICATION_JSON_VALUE)
 public class WxCallbackController {
 
     @Autowired

@@ -20,7 +20,7 @@ import java.io.IOException;
  */
 @RestController
 @RequestMapping("/wx/media")
-@Api(tags = "微信素材", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "微信素材", produces = MediaType.APPLICATION_JSON_VALUE)
 public class WxMediaController {
 
     @Autowired

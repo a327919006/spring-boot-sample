@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/wx/jssdk")
-@Api(tags = "微信二维码", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "微信二维码", produces = MediaType.APPLICATION_JSON_VALUE)
 public class WxJsSdkController {
 
     @Autowired

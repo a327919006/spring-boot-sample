@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/wx/message/template")
-@Api(tags = "微信模板消息", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "微信模板消息", produces = MediaType.APPLICATION_JSON_VALUE)
 public class WxTemplateMsgController {
 
     @Autowired
