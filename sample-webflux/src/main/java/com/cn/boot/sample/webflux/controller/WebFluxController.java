@@ -20,7 +20,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/test")
-@Api(tags = "测试", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "测试", produces = MediaType.APPLICATION_JSON_VALUE)
 public class WebFluxController {
 
     @ApiOperation("sync获取数据")
