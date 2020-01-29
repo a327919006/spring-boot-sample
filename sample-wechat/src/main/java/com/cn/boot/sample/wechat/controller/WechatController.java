@@ -21,7 +21,7 @@ import java.io.IOException;
 @Slf4j
 @RestController
 @RequestMapping("wx")
-@Api(tags = "微信", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "微信", produces = MediaType.APPLICATION_JSON_VALUE)
 public class WechatController {
 
     @Autowired
