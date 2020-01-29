@@ -84,7 +84,7 @@ dubbo:
     address: zookeeper://127.0.0.1:2181
   protocol:
     name: dubbo
-    port: 20882
+    port: 20881
     serialization: kryo
   scan:
     base-packages: com.cn.boot.sample.server.shard.service
