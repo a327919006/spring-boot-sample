@@ -50,6 +50,7 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 20881         | sample-server-jpa         | 服务接口实现，整合JPA、JdbcTemplate |
 | 20881         | sample-server-jpa-more    | 服务接口实现，整合JPA、Hikari，对接多数据源 |
 | 20881         | sample-server-more        | 服务接口实现，整合MyBatis、Druid，对接多数据源 |
+| 20881         | sample-server-shard       | 服务接口实现，整合ShardingSphere，分库分表 |
 | 10098         | sample-swagger            | 整合Swagger，使用原生方式 |
 | 10085         | sample-webflux            | 业务接口，整合webflux |
 | 10086         | sample-wechat             | 微信公众号开发，未使用框架，直接调用微信接口 |
@@ -100,6 +101,7 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | Hazelcast | 分布式缓存 |
 | ZooKeeper | 分布式协调服务 |
 | Guava | 常用工具类 |
+| ShardingSphere | 分库分表 |
 
 #### 项目地址
 - https://gitee.com/NuLiing/spring-boot-sample
