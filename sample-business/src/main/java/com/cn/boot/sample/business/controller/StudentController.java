@@ -22,7 +22,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/student")
-@Api(tags = "学生管理", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "学生管理", produces = MediaType.APPLICATION_JSON_VALUE)
 public class StudentController {
 
     @Reference

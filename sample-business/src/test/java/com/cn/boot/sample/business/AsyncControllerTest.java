@@ -37,7 +37,7 @@ public class AsyncControllerTest {
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders
                 .get("/async/test1")
                 .param("id", "1")
-                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
         MvcResult mvcResult = resultActions.andReturn();

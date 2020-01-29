@@ -21,7 +21,7 @@ import javax.validation.Valid;
 @Slf4j
 @RestController
 @RequestMapping("/teacher")
-@Api(tags = "教师管理", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "教师管理", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TeacherController {
 
     @Reference

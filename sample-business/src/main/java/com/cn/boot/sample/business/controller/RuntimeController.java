@@ -28,7 +28,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/runtime")
-@Api(tags = "系统运行状态", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "系统运行状态", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RuntimeController {
 
     /**

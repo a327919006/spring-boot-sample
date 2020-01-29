@@ -35,7 +35,7 @@ public class ClientControllerTest {
     public void get() throws Exception {
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders
                 .get("/client/get/1")
-                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
         MvcResult mvcResult = resultActions.andReturn();
