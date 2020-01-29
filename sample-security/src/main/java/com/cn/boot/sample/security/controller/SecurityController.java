@@ -33,7 +33,7 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 @RestController
 @RequestMapping("/authentication")
-@Api(tags = "安全认证", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "安全认证", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SecurityController {
     private RequestCache requestCache = new HttpSessionRequestCache();
 

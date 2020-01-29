@@ -30,7 +30,7 @@ public class SampleInvalidSessionStrategy implements InvalidSessionStrategy {
         if (StringUtils.endsWithIgnoreCase(uri, htmlEnd)) {
             response.sendRedirect(securityProperties.getBrowser().getLoginPage());
         } else {
-            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.getWriter().write("会话过期");
         }

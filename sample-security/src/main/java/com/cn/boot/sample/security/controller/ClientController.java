@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/client")
-@Api(tags = "商户管理", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "商户管理", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ClientController {
 
     @Reference

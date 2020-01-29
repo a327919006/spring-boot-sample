@@ -76,7 +76,7 @@ public class AppAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
 
         OAuth2AccessToken accessToken = authorizationServerTokenServices.createAccessToken(oAuth2Authentication);
 
-        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.getWriter().print(JSONUtil.toJsonStr(accessToken));
     }
 

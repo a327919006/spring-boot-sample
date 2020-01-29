@@ -31,7 +31,7 @@ public class BrowserAuthenticationFailureHandler extends SimpleUrlAuthentication
                                         AuthenticationException exception) throws IOException, ServletException {
         log.info("【登录失败】");
         if (securityProperties.getBrowser().getLoginType().equals(LoginTypeEnum.JSON)) {
-            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.getWriter().print(JSONUtil.toJsonStr(new Error(exception.getMessage())));
         } else {
             super.onAuthenticationFailure(request, response, exception);

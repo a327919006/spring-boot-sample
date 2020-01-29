@@ -32,7 +32,7 @@ public class BrowserAuthenticationSuccessHandler extends SimpleUrlAuthentication
         log.info("【登录成功】");
 
         if (securityProperties.getBrowser().getLoginType().equals(LoginTypeEnum.JSON)) {
-            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.getWriter().print(JSONUtil.toJsonStr(authentication));
         } else {
             super.onAuthenticationSuccess(request, response, authentication);
