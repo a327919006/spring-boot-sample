@@ -24,7 +24,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/pressure/test")
-@Api(tags = "压力测试", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "压力测试", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PressureTestController {
 
     @Autowired

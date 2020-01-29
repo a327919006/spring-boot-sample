@@ -21,7 +21,7 @@ import java.util.concurrent.*;
 @Slf4j
 @RestController
 @RequestMapping("/lock/test")
-@Api(tags = "分布式锁测试", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "分布式锁测试", produces = MediaType.APPLICATION_JSON_VALUE)
 public class LockTestController {
 
     @Reference
