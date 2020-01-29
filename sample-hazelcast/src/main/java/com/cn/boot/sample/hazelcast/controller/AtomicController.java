@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/atomic")
-@Api(tags = "计数器", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "计数器", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AtomicController {
 
     @Autowired

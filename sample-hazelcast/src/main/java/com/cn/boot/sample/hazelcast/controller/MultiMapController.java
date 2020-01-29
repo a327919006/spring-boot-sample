@@ -19,7 +19,7 @@ import java.util.Collection;
 @Slf4j
 @RestController
 @RequestMapping("/multimap")
-@Api(tags = "MultiMap", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "MultiMap", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MultiMapController {
 
     @Autowired

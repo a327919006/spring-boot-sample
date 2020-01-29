@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @RestController
 @RequestMapping("/lock")
-@Api(tags = "锁", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "锁", produces = MediaType.APPLICATION_JSON_VALUE)
 public class LockController {
 
     @Autowired
