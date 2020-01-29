@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/device")
-@Api(tags = "设备", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "设备", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DeviceController {
 
     @ApiOperation("发送")
