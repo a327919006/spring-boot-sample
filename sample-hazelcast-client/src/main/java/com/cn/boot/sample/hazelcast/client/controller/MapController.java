@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/map")
-@Api(tags = "MAP", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "MAP", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MapController {
 
     @Autowired
