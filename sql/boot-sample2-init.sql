@@ -1,9 +1,3 @@
-/*
-SQLyog 企业版 - MySQL GUI v8.14 
-MySQL - 5.6.21 : Database - boot_sample2
-*********************************************************************
-*/
-
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
@@ -15,6 +9,24 @@ MySQL - 5.6.21 : Database - boot_sample2
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`boot_sample2` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 
 USE `boot_sample2`;
+
+/*Table structure for table `t_order_0` */
+
+CREATE TABLE `t_order_0` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned DEFAULT NULL,
+  `order_id` bigint(20) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+/*Table structure for table `t_order_1` */
+
+CREATE TABLE `t_order_1` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned DEFAULT NULL,
+  `order_id` bigint(20) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Table structure for table `teacher` */
 
