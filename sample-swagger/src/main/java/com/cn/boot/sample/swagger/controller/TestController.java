@@ -18,7 +18,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/test")
-@Api(tags = "测试", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "测试", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TestController {
 
 
