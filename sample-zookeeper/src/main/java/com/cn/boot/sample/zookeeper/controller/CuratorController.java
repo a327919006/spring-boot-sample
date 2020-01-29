@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/curator")
-@Api(tags = "Curator测试", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "Curator测试", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CuratorController {
 
     @Autowired

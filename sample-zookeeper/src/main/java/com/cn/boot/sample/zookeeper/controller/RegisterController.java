@@ -27,7 +27,7 @@ import java.util.Set;
 @Slf4j
 @RestController
 @RequestMapping("/register")
-@Api(tags = "注册中心测试", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = "注册中心测试", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RegisterController {
 
     @Autowired
