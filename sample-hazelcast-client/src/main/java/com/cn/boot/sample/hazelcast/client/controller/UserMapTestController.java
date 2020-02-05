@@ -41,7 +41,7 @@ public class UserMapTestController {
         return Constants.MSG_SUCCESS;
     }
 
-    @ApiOperation("获取0")
+    @ApiOperation("测试getMap")
     @GetMapping("map0")
     public User getMap0(@RequestParam String key) {
         IMap<Object, Object> userMap1 = hzInstance.getMap("userMap");
@@ -52,7 +52,7 @@ public class UserMapTestController {
         return this.userMap.get(key);
     }
 
-    @ApiOperation("获取1")
+    @ApiOperation("测试keySet")
     @GetMapping("map1")
     public User getMap1(@RequestParam String key) {
         Set<String> keySet1 = userMap.keySet();
@@ -63,7 +63,7 @@ public class UserMapTestController {
         return userMap.get(key);
     }
 
-    @ApiOperation("获取2")
+    @ApiOperation("测试获取全量数据")
     @GetMapping("map2")
     public User getMap2(@RequestParam String key) {
         Set<String> keySet = userMap.keySet();
@@ -74,7 +74,7 @@ public class UserMapTestController {
         return userMap.get(key);
     }
 
-    @ApiOperation("获取3")
+    @ApiOperation("测试获取单个数据")
     @GetMapping("map3")
     public User getMap3(@RequestParam String key) {
         return this.userMap.get(key);
