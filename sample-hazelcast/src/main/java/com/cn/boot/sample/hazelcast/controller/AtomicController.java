@@ -21,19 +21,19 @@ import org.springframework.web.bind.annotation.*;
 public class AtomicController {
 
     @Autowired
-    private HazelcastInstance hazelcastInstance;
+    private HazelcastInstance hzInstance;
 
     @ApiOperation("保存数据")
     @PostMapping("/{name}/increment")
     public long set(@PathVariable String name) {
-        IAtomicLong atomicLong = hazelcastInstance.getCPSubsystem().getAtomicLong(name);
+        IAtomicLong atomicLong = hzInstance.getCPSubsystem().getAtomicLong(name);
         return atomicLong.incrementAndGet();
     }
 
     @ApiOperation("获取")
     @GetMapping("/{name}")
     public long get(@PathVariable String name) {
-        IAtomicLong atomicLong = hazelcastInstance.getCPSubsystem().getAtomicLong(name);
+        IAtomicLong atomicLong = hzInstance.getCPSubsystem().getAtomicLong(name);
         return atomicLong.get();
     }
 }

@@ -1,17 +1,24 @@
 package com.cn.boot.sample.hazelcast.config;
 
+import com.cn.boot.sample.api.model.po.User;
 import com.hazelcast.config.*;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.IMap;
+import com.hazelcast.core.MultiMap;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Chen Nan
  */
+@Slf4j
 @Configuration
 public class HazelcastConfig {
 
     @Bean
-    public Config hazelCastConfig() {
+    public HazelcastInstance hzInstance() {
         Config config = new Config();
 
         // 可选，配置集群名称，默认dev
@@ -20,7 +27,7 @@ public class HazelcastConfig {
         // 可选，配置监控中心
         ManagementCenterConfig centerConfig = new ManagementCenterConfig()
                 .setEnabled(true)
-                .setUrl("http://127.0.0.1:18080/hazelcast-mancenter");
+                .setUrl("http://10.0.0.52:18080/hazelcast-mancenter");
 
         // 可选，数据处理器，缓存数据增删改查到数据库
         MapStoreConfig testMapStoreConfig = new MapStoreConfig()
@@ -77,6 +84,21 @@ public class HazelcastConfig {
 
         // 使用计数器、锁等功能需配置CPMemberCount(至少为3，即需启动至少3个Hazelcast节点)
 //        config.getCPSubsystemConfig().setCPMemberCount(3);
-        return config;
+
+        return Hazelcast.newHazelcastInstance(config);
+    }
+
+    @Bean
+    public IMap<String, User> userMap(HazelcastInstance hzInstance) {
+        IMap<String, User> userMap = hzInstance.getMap("userMap");
+        log.info("userMap.size={}", userMap.size());
+        return userMap;
+    }
+
+    @Bean
+    public MultiMap<String, User> userMultiMap(HazelcastInstance hzInstance) {
+        MultiMap<String, User> userMultiMap = hzInstance.getMultiMap("userMultiMap");
+        log.info("userMultiMap.size={}", userMultiMap.size());
+        return userMultiMap;
     }
 }

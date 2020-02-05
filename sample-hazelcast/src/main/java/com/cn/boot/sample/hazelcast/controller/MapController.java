@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class MapController {
 
     @Autowired
-    private HazelcastInstance hazelcastInstance;
+    private HazelcastInstance hzInstance;
 
     @ApiOperation("保存数据")
     @PostMapping("/{map}")
@@ -33,7 +33,7 @@ public class MapController {
         if (ttl == null) {
             ttl = 0L;
         }
-        IMap<String, String> dataMap = hazelcastInstance.getMap(map);
+        IMap<String, String> dataMap = hzInstance.getMap(map);
         dataMap.put(key, value, ttl, TimeUnit.MILLISECONDS);
         return Constants.MSG_SUCCESS;
     }
@@ -41,27 +41,27 @@ public class MapController {
     @ApiOperation("获取")
     @GetMapping("/{map}")
     public String get(@PathVariable String map, @RequestParam String key) {
-        IMap<String, String> dataMap = hazelcastInstance.getMap(map);
+        IMap<String, String> dataMap = hzInstance.getMap(map);
         return dataMap.get(key);
     }
 
     @ApiOperation("所有")
     @GetMapping("/{map}/all")
     public IMap<Object, Object> all(@PathVariable String map) {
-        return hazelcastInstance.getMap(map);
+        return hzInstance.getMap(map);
     }
 
     @ApiOperation("删除")
     @DeleteMapping("/{map}")
     public String remove(@PathVariable String map, @RequestParam String key) {
-        IMap<String, String> dataMap = hazelcastInstance.getMap(map);
+        IMap<String, String> dataMap = hzInstance.getMap(map);
         return dataMap.remove(key);
     }
 
     @ApiOperation("删除-指定值")
     @DeleteMapping("/{map}/kv")
     public boolean removeValue(@PathVariable String map, @RequestParam String key, @RequestParam String value) {
-        IMap<String, String> dataMap = hazelcastInstance.getMap(map);
+        IMap<String, String> dataMap = hzInstance.getMap(map);
         return dataMap.remove(key, value);
     }
 
@@ -70,7 +70,7 @@ public class MapController {
     public Map<String, User> testMap() {
         String mapName = "testMap10";
         String key = "test";
-        IMap<String, Map<String, User>> dataMap = hazelcastInstance.getMap(mapName);
+        IMap<String, Map<String, User>> dataMap = hzInstance.getMap(mapName);
         Map<String, User> data = new HashMap<>();
         data.put("k1", new User().setUsername("u1"));
         data.put("k2", new User().setUsername("u2"));
@@ -89,7 +89,7 @@ public class MapController {
     public String testOther() {
         String mapName = "test11";
         String key = "key";
-        IMap<String, Integer> dataMap = hazelcastInstance.getMap(mapName);
+        IMap<String, Integer> dataMap = hzInstance.getMap(mapName);
         Integer data = dataMap.get(key);
         if (data == null) {
             log.info("data null");
@@ -112,7 +112,7 @@ public class MapController {
     public String testPut() {
         String mapName = "test12";
         String key = "key";
-        IMap<String, Integer> dataMap = hazelcastInstance.getMap(mapName);
+        IMap<String, Integer> dataMap = hzInstance.getMap(mapName);
         log.info("put1 = {}", dataMap.put(key, 1));
         log.info("put2 = {}", dataMap.put(key, 2));
         dataMap.set(key, 3);
@@ -126,7 +126,7 @@ public class MapController {
     public String testRemove() {
         String mapName = "test13";
         String key = "key";
-        IMap<String, Integer> dataMap = hazelcastInstance.getMap(mapName);
+        IMap<String, Integer> dataMap = hzInstance.getMap(mapName);
         dataMap.set(key, 1);
         Integer oldValue = dataMap.remove(key);
         log.info("oldValue = {}", oldValue);

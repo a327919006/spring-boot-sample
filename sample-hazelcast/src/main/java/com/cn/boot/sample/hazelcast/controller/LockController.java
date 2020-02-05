@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 public class LockController {
 
     @Autowired
-    private HazelcastInstance hazelcastInstance;
+    private HazelcastInstance hzInstance;
 
     @ApiOperation("map加锁")
     @PostMapping("/{map}/{key}")
@@ -35,7 +35,7 @@ public class LockController {
         if (ttl == null) {
             ttl = 30L;
         }
-        IMap<Object, Object> dataMap = hazelcastInstance.getMap(map);
+        IMap<Object, Object> dataMap = hzInstance.getMap(map);
         boolean result = dataMap.tryLock(key, 0, TimeUnit.MICROSECONDS, ttl, TimeUnit.SECONDS);
         if (result) {
             try {
@@ -62,7 +62,7 @@ public class LockController {
     @ApiOperation(value = "map释放锁", notes = "此方法会抛出异常，仅允许上锁线程释放锁!")
     @DeleteMapping("/{map}/{key}")
     public String mapUnlock(@PathVariable String map, @PathVariable String key) {
-        IMap<Object, Object> dataMap = hazelcastInstance.getMap(map);
+        IMap<Object, Object> dataMap = hzInstance.getMap(map);
         dataMap.unlock(key);
         return Constants.MSG_SUCCESS;
     }
@@ -70,7 +70,7 @@ public class LockController {
     @ApiOperation("map检查锁")
     @GetMapping("/{map}/{key}")
     public boolean mapIsLock(@PathVariable String map, @PathVariable String key) {
-        IMap<Object, Object> dataMap = hazelcastInstance.getMap(map);
+        IMap<Object, Object> dataMap = hzInstance.getMap(map);
         return dataMap.isLocked(key);
     }
 
@@ -78,14 +78,14 @@ public class LockController {
     @ApiOperation("加锁")
     @PostMapping("/{name}")
     public long lock(@PathVariable String name) {
-        FencedLock lock = hazelcastInstance.getCPSubsystem().getLock(name);
+        FencedLock lock = hzInstance.getCPSubsystem().getLock(name);
         return lock.lockAndGetFence();
     }
 
     @ApiOperation("释放锁")
     @DeleteMapping("/{name}")
     public String unlock(@PathVariable String name) {
-        FencedLock lock = hazelcastInstance.getCPSubsystem().getLock(name);
+        FencedLock lock = hzInstance.getCPSubsystem().getLock(name);
         lock.unlock();
         return Constants.MSG_SUCCESS;
     }
@@ -93,7 +93,7 @@ public class LockController {
     @ApiOperation("检查锁")
     @GetMapping("/{name}")
     public boolean isLock(@PathVariable String name) {
-        FencedLock lock = hazelcastInstance.getCPSubsystem().getLock(name);
+        FencedLock lock = hzInstance.getCPSubsystem().getLock(name);
         return lock.isLocked();
     }
 

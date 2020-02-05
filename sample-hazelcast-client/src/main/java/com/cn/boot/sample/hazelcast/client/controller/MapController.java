@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.*;
 public class MapController {
 
     @Autowired
-    private HazelcastInstance hazelcastInstance;
+    private HazelcastInstance hzInstance;
 
     @ApiOperation("保存数据")
     @PostMapping("/{map}")
     public String set(@PathVariable String map, @RequestParam String key, @RequestParam String value) {
-        IMap<Object, Object> dataMap = hazelcastInstance.getMap(map);
+        IMap<Object, Object> dataMap = hzInstance.getMap(map);
         dataMap.put(key, value);
         return Constants.MSG_SUCCESS;
     }
@@ -33,14 +33,14 @@ public class MapController {
     @ApiOperation("获取")
     @GetMapping("/{map}")
     public Object get(@PathVariable String map, @RequestParam String key) {
-        IMap<Object, Object> dataMap = hazelcastInstance.getMap(map);
+        IMap<Object, Object> dataMap = hzInstance.getMap(map);
         return dataMap.get(key);
     }
 
     @ApiOperation("所有")
     @GetMapping("/{map}/all")
     public IMap<Object, Object> all(@PathVariable String map) {
-        return hazelcastInstance.getMap(map);
+        return hzInstance.getMap(map);
     }
 
 }

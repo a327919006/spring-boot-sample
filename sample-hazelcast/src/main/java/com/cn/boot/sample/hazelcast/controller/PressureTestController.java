@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PressureTestController {
 
     @Autowired
-    private HazelcastInstance hazelcastInstance;
+    private HazelcastInstance hzInstance;
 
     /**
      * 单map 写入速率9W/s 8G内存 最大3000w左右个数据(key平均35位，value32位)
@@ -42,7 +42,7 @@ public class PressureTestController {
         String key = IdUtil.simpleUUID();
         log.info("mapName = {}, key = {}", mapName, key);
         String data = RandomUtil.randomNumbers(300);
-        IMap<String, String> dataMap = hazelcastInstance.getMap(mapName);
+        IMap<String, String> dataMap = hzInstance.getMap(mapName);
         for (int i = 0; i < dataCount; i++) {
             dataMap.put(key + i, data);
             if (0 == i % printStep) {
@@ -69,7 +69,7 @@ public class PressureTestController {
         String key = IdUtil.simpleUUID();
         for (int i = 0; i < dataCount; i++) {
             String name = key + i;
-            IMap<String, String> dataMap = hazelcastInstance.getMap(name);
+            IMap<String, String> dataMap = hzInstance.getMap(name);
             dataMap.put(key + i, key);
             if (0 == i % printStep) {
                 log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);

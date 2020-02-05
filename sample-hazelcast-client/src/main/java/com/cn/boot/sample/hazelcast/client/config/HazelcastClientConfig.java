@@ -1,24 +1,31 @@
 package com.cn.boot.sample.hazelcast.client.config;
 
+import com.cn.boot.sample.api.model.po.User;
 import com.hazelcast.client.HazelcastClient;
-import com.hazelcast.client.config.ClientClasspathXmlConfig;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.config.*;
 import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.IMap;
+import com.hazelcast.core.MultiMap;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Collection;
+import java.util.Set;
 
 /**
  * @author Chen Nan
  */
+@Slf4j
 @Configuration
 public class HazelcastClientConfig {
+
     /**
      * 方式一：通过代码配置
-     * @return
      */
     @Bean
-    public HazelcastInstance hazelcastInstance() {
+    public HazelcastInstance hzInstance() {
         ClientConfig config = new ClientConfig();
 
         // 可选，配置集群名称，默认dev
@@ -67,4 +74,21 @@ public class HazelcastClientConfig {
 //        ClientConfig hzconfig = new ClientClasspathXmlConfig(configFile);
 //        return HazelcastClient.newHazelcastClient(hzconfig);
 //    }
+
+    @Bean
+    public IMap<String, User> userMap(HazelcastInstance hzInstance) {
+        log.info("start");
+        IMap<String, User> userMap = hzInstance.getMap("userMap");
+        log.info("userMap.size={}", userMap.size());
+        User user = userMap.get("1");
+        log.info("user={}", user);
+        return userMap;
+    }
+
+    @Bean
+    public MultiMap<String, User> userMultiMap(HazelcastInstance hzInstance) {
+        MultiMap<String, User> userMultiMap = hzInstance.getMultiMap("userMultiMap");
+        log.info("userMultiMap.size={}", userMultiMap.size());
+        return userMultiMap;
+    }
 }

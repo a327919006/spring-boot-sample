@@ -23,12 +23,12 @@ import java.util.Collection;
 public class MultiMapController {
 
     @Autowired
-    private HazelcastInstance hazelcastInstance;
+    private HazelcastInstance hzInstance;
 
     @ApiOperation("保存数据")
     @PostMapping("/{map}")
     public String set(@PathVariable String map, @RequestParam String key, @RequestParam String value) {
-        MultiMap<Object, Object> multiMap = hazelcastInstance.getMultiMap(map);
+        MultiMap<Object, Object> multiMap = hzInstance.getMultiMap(map);
         multiMap.put(key, value);
         return Constants.MSG_SUCCESS;
     }
@@ -36,14 +36,14 @@ public class MultiMapController {
     @ApiOperation("获取")
     @GetMapping("/{map}")
     public Collection<Object> get(@PathVariable String map, @RequestParam String key) {
-        MultiMap<Object, Object> multiMap = hazelcastInstance.getMultiMap(map);
+        MultiMap<Object, Object> multiMap = hzInstance.getMultiMap(map);
         return multiMap.get(key);
     }
 
     @ApiOperation("所有")
     @GetMapping("/{map}/all")
     public MultiMap<Object, Object> all(@PathVariable String map) {
-        return hazelcastInstance.getMultiMap(map);
+        return hzInstance.getMultiMap(map);
     }
 
 
@@ -52,7 +52,7 @@ public class MultiMapController {
     public boolean putUser(@PathVariable String map, @RequestParam String key, @RequestParam String value) {
         User user = new User().setUsername(value);
 
-        MultiMap<String, User> multiMap = hazelcastInstance.getMultiMap(map);
+        MultiMap<String, User> multiMap = hzInstance.getMultiMap(map);
         return multiMap.put(key, user);
     }
 
@@ -65,7 +65,7 @@ public class MultiMapController {
     public boolean findUser(@PathVariable String map, @RequestParam String key, @RequestParam String value) {
         User user = new User().setUsername(value);
 
-        MultiMap<String, User> multiMap = hazelcastInstance.getMultiMap(map);
+        MultiMap<String, User> multiMap = hzInstance.getMultiMap(map);
         return multiMap.containsEntry(key, user);
     }
 }
