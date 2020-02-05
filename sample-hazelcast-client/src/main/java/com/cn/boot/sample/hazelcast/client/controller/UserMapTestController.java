@@ -20,8 +20,8 @@ import java.util.Set;
  * @author Chen Nan
  */
 @Slf4j
-//@RestController
-//@RequestMapping("/user")
+@RestController
+@RequestMapping("/user")
 @Api(tags = "UserMapTest", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserMapTestController {
 
