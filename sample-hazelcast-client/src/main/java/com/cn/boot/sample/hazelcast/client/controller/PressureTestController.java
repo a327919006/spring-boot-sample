@@ -35,12 +35,16 @@ public class PressureTestController {
     private HazelcastInstance hzInstance;
 
     /**
-     * 写入速率9W/s 8G内存 最大3000w左右个数据(key平均35位，value32位)
+     * 测试结果： 写入数量：100万，TPS：25316/s，并发线程数：32
      *
+     * @param threadCount 线程数
+     * @param total       数据总量
+     * @param printStep   打印日志步长
      */
     @ApiOperation("1、MAP<K,Object>写入测试")
     @PostMapping("/map/object")
     public String addMapObject(int threadCount, int total, int printStep) {
+        // 初始化线程池
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
                 .setNameFormat("demo-pool-%d").build();
         ExecutorService threadPool = new ThreadPoolExecutor(threadCount, threadCount,
@@ -49,8 +53,10 @@ public class PressureTestController {
 
         int count = total / threadCount;
 
-        for(int j = 0; j < threadCount; j++){
-            threadPool.execute(()->{
+
+        for (int j = 0; j < threadCount; j++) {
+            // 多线程操作
+            threadPool.execute(() -> {
                 long start = System.currentTimeMillis();
                 long temp = System.currentTimeMillis();
                 String mapName = "mapObject";
@@ -75,7 +81,7 @@ public class PressureTestController {
     }
 
     /**
-     *
+     * 读取次数：100万，QPS：30840/s，并发线程数：32
      */
     @ApiOperation("2、MAP<K,Object>读取测试")
     @GetMapping("/map/object")
@@ -88,8 +94,8 @@ public class PressureTestController {
 
         int count = total / threadCount;
 
-        for(int j = 0; j < threadCount; j++){
-            threadPool.execute(()->{
+        for (int j = 0; j < threadCount; j++) {
+            threadPool.execute(() -> {
                 long start = System.currentTimeMillis();
                 long temp = System.currentTimeMillis();
                 String mapName = "mapObject";
@@ -109,9 +115,7 @@ public class PressureTestController {
     }
 
     /**
-     *
-     * @param total 写入数据数量
-     * @param printStep 打印日志步长
+     * 写入数量：100万，TPS：26680/s，并发线程数：32
      */
     @ApiOperation("3、MultiMap<K,Object>写入测试")
     @PostMapping("/multimap/object")
@@ -124,8 +128,8 @@ public class PressureTestController {
 
         int count = total / threadCount;
 
-        for(int j = 0; j < threadCount; j++){
-            threadPool.execute(()->{
+        for (int j = 0; j < threadCount; j++) {
+            threadPool.execute(() -> {
                 long start = System.currentTimeMillis();
                 long temp = System.currentTimeMillis();
                 String mapName = "multimapObject";
@@ -150,7 +154,7 @@ public class PressureTestController {
     }
 
     /**
-     *
+     * 读取次数：100万，QPS：40241/s，并发线程数：32
      */
     @ApiOperation("4、MultiMap<K,Object>读取测试")
     @GetMapping("/multimap/object")
@@ -163,8 +167,8 @@ public class PressureTestController {
 
         int count = total / threadCount;
 
-        for(int j = 0; j < threadCount; j++){
-            threadPool.execute(()->{
+        for (int j = 0; j < threadCount; j++) {
+            threadPool.execute(() -> {
                 long start = System.currentTimeMillis();
                 long temp = System.currentTimeMillis();
                 String mapName = "multimapObject";
@@ -184,9 +188,9 @@ public class PressureTestController {
     }
 
     /**
-     *
-     * @param dataCount 写入数据数量
-     * @param printStep 打印日志步长
+     * 模拟真实业务场景
+     * 加锁->取出TreeMap->插入最新数据->删除最早数据，保持100条->释放锁
+     * 写入次数：100万，TPS：671/s
      */
     @ApiOperation("5、MAP<K,TreeMap<K,V>>写入测试,加锁")
     @PostMapping("/map/treemap/lock")
@@ -208,7 +212,7 @@ public class PressureTestController {
                     treeMap.put(value, value);
                 } else {
                     treeMap.put(value, value);
-                    if(100 < treeMap.size()){
+                    if (100 < treeMap.size()) {
                         treeMap.remove(treeMap.firstKey());
                     }
                 }
