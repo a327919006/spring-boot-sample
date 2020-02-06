@@ -29,9 +29,9 @@ public class LockController {
     @Autowired
     private HazelcastInstance hzInstance;
 
-    @ApiOperation("map加锁")
-    @PostMapping("/{map}/{key}")
-    public String mapLock(@PathVariable String map, @PathVariable String key, @RequestParam String value, Long ttl) throws InterruptedException {
+    @ApiOperation("map.tryLock加锁")
+    @PostMapping("/{map}/{key}/try")
+    public String mapTryLock(@PathVariable String map, @PathVariable String key, @RequestParam String value, Long ttl) throws InterruptedException {
         if (ttl == null) {
             ttl = 30L;
         }
@@ -56,6 +56,31 @@ public class LockController {
         } else {
             log.info("获取锁{}失败", key);
             return Constants.MSG_FAIL;
+        }
+    }
+
+    @ApiOperation("map.lock加锁")
+    @PostMapping("/{map}/{key}")
+    public String mapLock(@PathVariable String map, @PathVariable String key, @RequestParam String value, Long ttl) throws InterruptedException {
+        if (ttl == null) {
+            ttl = 30L;
+        }
+        IMap<Object, Object> dataMap = hzInstance.getMap(map);
+        dataMap.lock(key, ttl, TimeUnit.SECONDS);
+        try {
+            log.info("获取锁{}成功，开始处理业务", key);
+            ThreadUtil.sleep(5000);
+
+            // 模拟异常
+            if ("0".equals(value)) {
+                int i = 1 / 0;
+            }
+
+            log.info("业务处理完成");
+            return Constants.MSG_SUCCESS;
+        } finally {
+            dataMap.unlock(key);
+            log.info("释放锁{}成功", key);
         }
     }
 
