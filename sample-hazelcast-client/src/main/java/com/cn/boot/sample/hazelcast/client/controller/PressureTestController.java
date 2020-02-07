@@ -52,17 +52,18 @@ public class PressureTestController {
                 new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 
         int count = total / threadCount;
-
+        String data = RandomUtil.randomNumbers(75);
+        String mapName = "mapObject";
 
         for (int j = 0; j < threadCount; j++) {
             // 多线程操作
             threadPool.execute(() -> {
                 long start = System.currentTimeMillis();
                 long temp = System.currentTimeMillis();
-                String mapName = "mapObject";
+
                 String key = IdUtil.simpleUUID();
                 log.info("mapName = {}, key = {}", mapName, key);
-                String data = RandomUtil.randomNumbers(75);
+
                 IMap<String, User> dataMap = hzInstance.getMap(mapName);
                 User user = new User();
                 for (int i = 0; i < count; i++) {
@@ -93,13 +94,14 @@ public class PressureTestController {
                 new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 
         int count = total / threadCount;
+        String mapName = "mapObject";
+        log.info("mapName = {}, key = {}", mapName, key);
 
         for (int j = 0; j < threadCount; j++) {
             threadPool.execute(() -> {
                 long start = System.currentTimeMillis();
                 long temp = System.currentTimeMillis();
-                String mapName = "mapObject";
-                log.info("mapName = {}, key = {}", mapName, key);
+
                 IMap<String, User> dataMap = hzInstance.getMap(mapName);
                 for (int i = 0; i < count; i++) {
                     dataMap.get(key);
@@ -127,15 +129,17 @@ public class PressureTestController {
                 new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 
         int count = total / threadCount;
+        String mapName = "multimapObject";
+        String data = RandomUtil.randomNumbers(70);
 
         for (int j = 0; j < threadCount; j++) {
             threadPool.execute(() -> {
                 long start = System.currentTimeMillis();
                 long temp = System.currentTimeMillis();
-                String mapName = "multimapObject";
+
                 String key = IdUtil.simpleUUID();
                 log.info("mapName = {}, key = {}", mapName, key);
-                String data = RandomUtil.randomNumbers(70);
+
                 MultiMap<String, User> dataMap = hzInstance.getMultiMap(mapName);
                 User user = new User();
                 for (int i = 0; i < count; i++) {
@@ -166,13 +170,14 @@ public class PressureTestController {
                 new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 
         int count = total / threadCount;
+        String mapName = "multimapObject";
+        log.info("mapName = {}, key = {}", mapName, key);
 
         for (int j = 0; j < threadCount; j++) {
             threadPool.execute(() -> {
                 long start = System.currentTimeMillis();
                 long temp = System.currentTimeMillis();
-                String mapName = "multimapObject";
-                log.info("mapName = {}, key = {}", mapName, key);
+
                 MultiMap<String, User> dataMap = hzInstance.getMultiMap(mapName);
                 for (int i = 0; i < count; i++) {
                     dataMap.get(key);
@@ -200,6 +205,7 @@ public class PressureTestController {
         String mapName = "mapTreeMap";
         String key = "g1";
         log.info("mapName = {}, key = {}", mapName, key);
+
         IMap<String, TreeMap<Long, Long>> dataMap = hzInstance.getMap(mapName);
         AtomicLong atomicLong = new AtomicLong(System.currentTimeMillis());
         for (int i = 0; i < dataCount; i++) {
