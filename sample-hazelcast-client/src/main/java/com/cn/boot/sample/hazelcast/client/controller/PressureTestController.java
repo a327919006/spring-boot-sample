@@ -55,28 +55,30 @@ public class PressureTestController {
         String data = RandomUtil.randomNumbers(75);
         String mapName = "mapObject";
 
+        IMap<String, User> dataMap = hzInstance.getMap(mapName);
+
+        Runnable task = () -> {
+            long start = System.currentTimeMillis();
+            long temp = System.currentTimeMillis();
+
+            String key = IdUtil.simpleUUID();
+            log.info("mapName = {}, key = {}", mapName, key);
+            User user = new User();
+            for (int i = 0; i < count; i++) {
+                user.setId(key + i);
+                user.setUsername(data);
+                dataMap.set(key + i, user);
+                if (0 == i % printStep) {
+                    log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
+                    temp = System.currentTimeMillis();
+                }
+            }
+            log.info("总耗时:{}", System.currentTimeMillis() - start);
+        };
+
         for (int j = 0; j < threadCount; j++) {
             // 多线程操作
-            threadPool.execute(() -> {
-                long start = System.currentTimeMillis();
-                long temp = System.currentTimeMillis();
-
-                String key = IdUtil.simpleUUID();
-                log.info("mapName = {}, key = {}", mapName, key);
-
-                IMap<String, User> dataMap = hzInstance.getMap(mapName);
-                User user = new User();
-                for (int i = 0; i < count; i++) {
-                    user.setId(key + i);
-                    user.setUsername(data);
-                    dataMap.set(key + i, user);
-                    if (0 == i % printStep) {
-                        log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
-                        temp = System.currentTimeMillis();
-                    }
-                }
-                log.info("总耗时:{}", System.currentTimeMillis() - start);
-            });
+            threadPool.execute(task);
         }
         return Constants.MSG_SUCCESS;
     }
@@ -96,22 +98,24 @@ public class PressureTestController {
         int count = total / threadCount;
         String mapName = "mapObject";
         log.info("mapName = {}, key = {}", mapName, key);
+        IMap<String, User> dataMap = hzInstance.getMap(mapName);
+
+        Runnable task = () -> {
+            long start = System.currentTimeMillis();
+            long temp = System.currentTimeMillis();
+
+            for (int i = 0; i < count; i++) {
+                dataMap.get(key);
+                if (0 == i % printStep) {
+                    log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
+                    temp = System.currentTimeMillis();
+                }
+            }
+            log.info("总耗时:{}", System.currentTimeMillis() - start);
+        };
 
         for (int j = 0; j < threadCount; j++) {
-            threadPool.execute(() -> {
-                long start = System.currentTimeMillis();
-                long temp = System.currentTimeMillis();
-
-                IMap<String, User> dataMap = hzInstance.getMap(mapName);
-                for (int i = 0; i < count; i++) {
-                    dataMap.get(key);
-                    if (0 == i % printStep) {
-                        log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
-                        temp = System.currentTimeMillis();
-                    }
-                }
-                log.info("总耗时:{}", System.currentTimeMillis() - start);
-            });
+            threadPool.execute(task);
         }
         return Constants.MSG_SUCCESS;
     }
@@ -131,28 +135,30 @@ public class PressureTestController {
         int count = total / threadCount;
         String mapName = "multimapObject";
         String data = RandomUtil.randomNumbers(70);
+        MultiMap<String, User> dataMap = hzInstance.getMultiMap(mapName);
+
+        Runnable task = () -> {
+            long start = System.currentTimeMillis();
+            long temp = System.currentTimeMillis();
+
+            String key = IdUtil.simpleUUID();
+            log.info("mapName = {}, key = {}", mapName, key);
+
+            User user = new User();
+            for (int i = 0; i < count; i++) {
+                user.setId(key + i);
+                user.setUsername(data);
+                dataMap.put(key + i, user);
+                if (0 == i % printStep) {
+                    log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
+                    temp = System.currentTimeMillis();
+                }
+            }
+            log.info("总耗时:{}", System.currentTimeMillis() - start);
+        };
 
         for (int j = 0; j < threadCount; j++) {
-            threadPool.execute(() -> {
-                long start = System.currentTimeMillis();
-                long temp = System.currentTimeMillis();
-
-                String key = IdUtil.simpleUUID();
-                log.info("mapName = {}, key = {}", mapName, key);
-
-                MultiMap<String, User> dataMap = hzInstance.getMultiMap(mapName);
-                User user = new User();
-                for (int i = 0; i < count; i++) {
-                    user.setId(key + i);
-                    user.setUsername(data);
-                    dataMap.put(key + i, user);
-                    if (0 == i % printStep) {
-                        log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
-                        temp = System.currentTimeMillis();
-                    }
-                }
-                log.info("总耗时:{}", System.currentTimeMillis() - start);
-            });
+            threadPool.execute(task);
         }
         return Constants.MSG_SUCCESS;
     }
@@ -172,22 +178,24 @@ public class PressureTestController {
         int count = total / threadCount;
         String mapName = "multimapObject";
         log.info("mapName = {}, key = {}", mapName, key);
+        MultiMap<String, User> dataMap = hzInstance.getMultiMap(mapName);
+
+        Runnable task = () -> {
+            long start = System.currentTimeMillis();
+            long temp = System.currentTimeMillis();
+
+            for (int i = 0; i < count; i++) {
+                dataMap.get(key);
+                if (0 == i % printStep) {
+                    log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
+                    temp = System.currentTimeMillis();
+                }
+            }
+            log.info("总耗时:{}", System.currentTimeMillis() - start);
+        };
 
         for (int j = 0; j < threadCount; j++) {
-            threadPool.execute(() -> {
-                long start = System.currentTimeMillis();
-                long temp = System.currentTimeMillis();
-
-                MultiMap<String, User> dataMap = hzInstance.getMultiMap(mapName);
-                for (int i = 0; i < count; i++) {
-                    dataMap.get(key);
-                    if (0 == i % printStep) {
-                        log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
-                        temp = System.currentTimeMillis();
-                    }
-                }
-                log.info("总耗时:{}", System.currentTimeMillis() - start);
-            });
+            threadPool.execute(task);
         }
         return Constants.MSG_SUCCESS;
     }
