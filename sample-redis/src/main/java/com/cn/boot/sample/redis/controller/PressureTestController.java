@@ -2,21 +2,26 @@ package com.cn.boot.sample.redis.controller;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
+import com.alibaba.fastjson.JSONObject;
 import com.cn.boot.sample.api.model.Constants;
+import com.cn.boot.sample.api.model.po.User;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.TreeMap;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author Chen Nan
@@ -34,63 +39,231 @@ public class PressureTestController {
     private int database;
 
     /**
-     * kv 写入速率2W/s 4G内存 最大2500w左右个数据(key平均35位，value32位)
+     * 写入数据：100万，QPS：8849/s，并发线程数：32
      *
-     * @param dataCount 写入数据数量
-     * @param printStep 打印日志步长
+     * @param threadCount 线程数
+     * @param total       数据总量
+     * @param printStep   打印日志步长
      */
-    @ApiOperation("kv 写入测试")
-    @PostMapping("/kv")
-    public String kv(int dataCount, int printStep) {
-        long start = System.currentTimeMillis();
-        long temp = System.currentTimeMillis();
-        Jedis jedis = jedisPool.getResource();
-        jedis.select(database);
+    @ApiOperation("1、set命令测试")
+    @PostMapping("/set")
+    public String set(int threadCount, int total, int printStep) {
+        // 初始化线程池
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("demo-pool-%d").build();
+        ExecutorService threadPool = new ThreadPoolExecutor(threadCount, threadCount,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 
-        String data = RandomUtil.randomNumbers(32);
-        String key = IdUtil.simpleUUID();
-        log.info("key = {}", key);
-        for (int i = 0; i < dataCount; i++) {
-            jedis.set(key + i, data);
-            if (0 == i % printStep) {
-                log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
-                temp = System.currentTimeMillis();
+        int count = total / threadCount;
+        String data = RandomUtil.randomNumbers(75);
+
+        Runnable task = () -> {
+            long start = System.currentTimeMillis();
+            long temp = System.currentTimeMillis();
+
+            User user = new User();
+            String key = IdUtil.simpleUUID();
+            log.info("key = {}", key);
+            for (int i = 0; i < count; i++) {
+                Jedis jedis = jedisPool.getResource();
+                try {
+                    user.setId(key + i);
+                    user.setUsername(data);
+
+                    jedis.set(key + i, JSONObject.toJSONString(user));
+                    if (0 == i % printStep) {
+                        log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
+                        temp = System.currentTimeMillis();
+                    }
+                } finally {
+                    jedis.close();
+                }
             }
+            log.info("总耗时:{}", System.currentTimeMillis() - start);
+        };
+
+        for (int j = 0; j < threadCount; j++) {
+            // 多线程操作
+            threadPool.execute(task);
         }
-        log.info("总耗时:{}", System.currentTimeMillis() - start);
-        jedis.close();
         return Constants.MSG_SUCCESS;
     }
 
     /**
-     * 单个hash 写入速率2W/s 4G内存 最大2500w左右个数据(key平均35位，value32位)
-     *
-     * @param dataCount 写入数据数量
-     * @param printStep 打印日志步长
+     * 读取次数：100万，QPS：30840/s，并发线程数：32
      */
-    @ApiOperation("hash 写入测试")
-    @PostMapping("/hash")
-    public String hmset(int dataCount, int printStep) {
-        long start = System.currentTimeMillis();
-        long temp = System.currentTimeMillis();
-        Jedis jedis = jedisPool.getResource();
-        jedis.select(database);
+    @ApiOperation("2、get命令测试")
+    @GetMapping("/get")
+    public String get(String key, int threadCount, int total, int printStep) {
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("demo-pool-%d").build();
+        ExecutorService threadPool = new ThreadPoolExecutor(threadCount, threadCount,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 
-        String data = RandomUtil.randomNumbers(32);
-        String key = IdUtil.simpleUUID();
-        Map<String, String> map = new HashMap<>();
-        log.info("key = {}", key);
-        for (int i = 0; i < dataCount; i++) {
-            map.clear();
-            map.put(key + i, data);
-            jedis.hmset("HashPressureTest", map);
-            if (0 == i % printStep) {
-                log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
-                temp = System.currentTimeMillis();
+        int count = total / threadCount;
+
+        Runnable task = () -> {
+            long start = System.currentTimeMillis();
+            long temp = System.currentTimeMillis();
+
+            for (int i = 0; i < count; i++) {
+                Jedis jedis = jedisPool.getResource();
+                try {
+                    jedis.get(key);
+                    if (0 == i % printStep) {
+                        log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
+                        temp = System.currentTimeMillis();
+                    }
+                } finally {
+                    jedis.close();
+                }
             }
+            log.info("总耗时:{}", System.currentTimeMillis() - start);
+        };
+
+        for (int j = 0; j < threadCount; j++) {
+            threadPool.execute(task);
         }
-        log.info("总耗时:{}", System.currentTimeMillis() - start);
-        jedis.close();
+        return Constants.MSG_SUCCESS;
+    }
+
+    /**
+     * 写入数量：100万，TPS：26680/s，并发线程数：32
+     */
+    @ApiOperation("3、sadd命令测试")
+    @PostMapping("/sadd")
+    public String addMultimapObject(int threadCount, int total, int printStep) {
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("demo-pool-%d").build();
+        ExecutorService threadPool = new ThreadPoolExecutor(threadCount, threadCount,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+
+        int count = total / threadCount;
+        String data = RandomUtil.randomNumbers(70);
+
+        Runnable task = () -> {
+            long start = System.currentTimeMillis();
+            long temp = System.currentTimeMillis();
+
+            String key = IdUtil.simpleUUID();
+            log.info("key = {}", key);
+
+            User user = new User();
+            for (int i = 0; i < count; i++) {
+                Jedis jedis = jedisPool.getResource();
+                try {
+                    user.setId(key + i);
+                    user.setUsername(data);
+                    jedis.sadd(key + i, JSONObject.toJSONString(user));
+                    if (0 == i % printStep) {
+                        log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
+                        temp = System.currentTimeMillis();
+                    }
+                } finally {
+                    jedis.close();
+                }
+            }
+            log.info("总耗时:{}", System.currentTimeMillis() - start);
+        };
+
+        for (int j = 0; j < threadCount; j++) {
+            threadPool.execute(task);
+        }
+        return Constants.MSG_SUCCESS;
+    }
+
+    /**
+     * 读取次数：100万，QPS：40241/s，并发线程数：32
+     */
+    @ApiOperation("4、smembers命令测试")
+    @GetMapping("/smembers")
+    public String smembers(String key, int threadCount, int total, int printStep) {
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("demo-pool-%d").build();
+        ExecutorService threadPool = new ThreadPoolExecutor(threadCount, threadCount,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+
+        int count = total / threadCount;
+
+        Runnable task = () -> {
+            long start = System.currentTimeMillis();
+            long temp = System.currentTimeMillis();
+
+            for (int i = 0; i < count; i++) {
+                Jedis jedis = jedisPool.getResource();
+                try {
+                    jedis.smembers(key);
+                    if (0 == i % printStep) {
+                        log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
+                        temp = System.currentTimeMillis();
+                    }
+                } finally {
+                    jedis.close();
+                }
+            }
+            log.info("总耗时:{}", System.currentTimeMillis() - start);
+        };
+
+        for (int j = 0; j < threadCount; j++) {
+            threadPool.execute(task);
+        }
+        return Constants.MSG_SUCCESS;
+    }
+
+    /**
+     * 模拟真实业务场景
+     * 加锁->取出TreeMap->插入最新数据->删除最早数据，保持100条->释放锁
+     * 写入次数：100万，TPS：671/s
+     */
+    @ApiOperation("5、zset保持100条数据测试")
+    @PostMapping("/zset/keep")
+    public String zset(int threadCount, int total, int printStep) {
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("demo-pool-%d").build();
+        ExecutorService threadPool = new ThreadPoolExecutor(threadCount, threadCount,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+
+        int count = total / threadCount;
+        AtomicLong atomicLong = new AtomicLong(System.currentTimeMillis());
+        String key = "g1";
+        log.info("key = {}", key);
+
+        Runnable task = () -> {
+            long start = System.currentTimeMillis();
+            long temp = System.currentTimeMillis();
+
+            for (int i = 0; i < count; i++) {
+                Jedis jedis = jedisPool.getResource();
+                try {
+                    long mid = atomicLong.getAndIncrement();
+                    jedis.zadd(key, (double) mid, String.valueOf(mid));
+                    Long msgCount = jedis.zcard(key);
+                    if (100 < msgCount) {
+                        long deletCount = msgCount - 100;
+                        jedis.zremrangeByRank(key, 0, deletCount - 1);
+                    }
+
+                    if (0 == i % printStep) {
+                        log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
+                        temp = System.currentTimeMillis();
+                    }
+                } finally {
+                    jedis.close();
+                }
+            }
+            log.info("总耗时:{}", System.currentTimeMillis() - start);
+        };
+
+        for (int j = 0; j < threadCount; j++) {
+            threadPool.execute(task);
+        }
+
+
         return Constants.MSG_SUCCESS;
     }
 }
