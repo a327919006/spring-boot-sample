@@ -217,11 +217,12 @@ public class PressureTestController {
     /**
      * 模拟真实业务场景
      * 加锁->取出TreeMap->插入最新数据->删除最早数据，保持100条->释放锁
-     * 写入次数：100万，TPS：671/s
+     * key数量：1，写入次数：100万，TPS：671/s
+     * key数量：32，写入次数：100万，TPS：2594/s
      */
     @ApiOperation("5、zset保持100条数据测试")
     @PostMapping("/zset/keep")
-    public String zset(int threadCount, int total, int printStep) {
+    public String zset(int threadCount, int total, int printStep) throws InterruptedException {
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
                 .setNameFormat("demo-pool-%d").build();
         ExecutorService threadPool = new ThreadPoolExecutor(threadCount, threadCount,
@@ -229,14 +230,17 @@ public class PressureTestController {
                 new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 
         int count = total / threadCount;
-        AtomicLong atomicLong = new AtomicLong(System.currentTimeMillis());
-        String key = "g1";
-        log.info("key = {}", key);
 
+//        AtomicLong totalTime = new AtomicLong();
+//        CountDownLatch countDownLatch = new CountDownLatch(threadCount);
         Runnable task = () -> {
             long start = System.currentTimeMillis();
             long temp = System.currentTimeMillis();
 
+            String key = "g" + Thread.currentThread().getId();
+            log.info("key = {}", key);
+
+            AtomicLong atomicLong = new AtomicLong(System.currentTimeMillis());
             for (int i = 0; i < count; i++) {
                 Jedis jedis = jedisPool.getResource();
                 try {
@@ -256,14 +260,17 @@ public class PressureTestController {
                     jedis.close();
                 }
             }
-            log.info("总耗时:{}", System.currentTimeMillis() - start);
+            long useTime = System.currentTimeMillis() - start;
+            log.info("总耗时:{}", useTime);
+//            totalTime.addAndGet(useTime);
+//            countDownLatch.countDown();
         };
 
         for (int j = 0; j < threadCount; j++) {
             threadPool.execute(task);
         }
-
-
+//        countDownLatch.await();
+//        log.info("totalTime:{}", totalTime);
         return Constants.MSG_SUCCESS;
     }
 }
