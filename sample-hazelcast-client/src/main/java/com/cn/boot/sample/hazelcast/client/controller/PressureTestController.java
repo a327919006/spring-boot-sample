@@ -224,7 +224,7 @@ public class PressureTestController {
             long start = System.currentTimeMillis();
             long temp = System.currentTimeMillis();
 
-            String key = "g1";
+            String key = "g" + Thread.currentThread().getId();
             log.info("mapName = {}, key = {}", mapName, key);
 
             AtomicLong atomicLong = new AtomicLong(System.currentTimeMillis());
