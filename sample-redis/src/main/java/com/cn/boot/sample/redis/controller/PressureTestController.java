@@ -231,8 +231,8 @@ public class PressureTestController {
 
         int count = total / threadCount;
 
-//        AtomicLong totalTime = new AtomicLong();
-//        CountDownLatch countDownLatch = new CountDownLatch(threadCount);
+        AtomicLong totalTime = new AtomicLong();
+        CountDownLatch countDownLatch = new CountDownLatch(threadCount);
         Runnable task = () -> {
             long start = System.currentTimeMillis();
             long temp = System.currentTimeMillis();
@@ -262,15 +262,15 @@ public class PressureTestController {
             }
             long useTime = System.currentTimeMillis() - start;
             log.info("总耗时:{}", useTime);
-//            totalTime.addAndGet(useTime);
-//            countDownLatch.countDown();
+            totalTime.addAndGet(useTime);
+            countDownLatch.countDown();
         };
 
         for (int j = 0; j < threadCount; j++) {
             threadPool.execute(task);
         }
-//        countDownLatch.await();
-//        log.info("totalTime:{}", totalTime);
+        countDownLatch.await();
+        log.info("totalTime:{}", totalTime);
         return Constants.MSG_SUCCESS;
     }
 }
