@@ -207,40 +207,62 @@ public class PressureTestController {
      */
     @ApiOperation("5、MAP<K,TreeMap<K,V>>写入测试,加锁")
     @PostMapping("/map/treemap/lock")
-    public String addMapTreeMap(int dataCount, int printStep) {
-        long start = System.currentTimeMillis();
-        long temp = System.currentTimeMillis();
+    public String addMapTreeMap(int threadCount, int total, int printStep) throws InterruptedException {
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("demo-pool-%d").build();
+        ExecutorService threadPool = new ThreadPoolExecutor(threadCount, threadCount,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+
+        int count = total / threadCount;
         String mapName = "mapTreeMap";
-        String key = "g1";
-        log.info("mapName = {}, key = {}", mapName, key);
-
         IMap<String, TreeMap<Long, Long>> dataMap = hzInstance.getMap(mapName);
-        AtomicLong atomicLong = new AtomicLong(System.currentTimeMillis());
-        for (int i = 0; i < dataCount; i++) {
-            dataMap.lock(key);
-            try {
-                TreeMap<Long, Long> treeMap = dataMap.get(key);
-                long value = atomicLong.getAndIncrement();
-                if (null == treeMap) {
-                    treeMap = new TreeMap<>();
-                    treeMap.put(value, value);
-                } else {
-                    treeMap.put(value, value);
-                    if (100 < treeMap.size()) {
-                        treeMap.remove(treeMap.firstKey());
-                    }
-                }
-                dataMap.put(key, treeMap);
-            } finally {
-                dataMap.unlock(key);
-            }
 
-            if (0 == i % printStep) {
-                log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
-                temp = System.currentTimeMillis();
+        AtomicLong totalTime = new AtomicLong();
+        CountDownLatch countDownLatch = new CountDownLatch(threadCount);
+        Runnable task = () -> {
+            long start = System.currentTimeMillis();
+            long temp = System.currentTimeMillis();
+
+            String key = "g1";
+            log.info("mapName = {}, key = {}", mapName, key);
+
+            AtomicLong atomicLong = new AtomicLong(System.currentTimeMillis());
+            for (int i = 0; i < count; i++) {
+                dataMap.lock(key);
+                try {
+                    TreeMap<Long, Long> treeMap = dataMap.get(key);
+                    long value = atomicLong.getAndIncrement();
+                    if (null == treeMap) {
+                        treeMap = new TreeMap<>();
+                        treeMap.put(value, value);
+                    } else {
+                        treeMap.put(value, value);
+                        if (100 < treeMap.size()) {
+                            treeMap.remove(treeMap.firstKey());
+                        }
+                    }
+                    dataMap.put(key, treeMap);
+                } finally {
+                    dataMap.unlock(key);
+                }
+
+                if (0 == i % printStep) {
+                    log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
+                    temp = System.currentTimeMillis();
+                }
             }
+            long useTime = System.currentTimeMillis() - start;
+            log.info("总耗时:{}", useTime);
+            totalTime.addAndGet(useTime);
+            countDownLatch.countDown();
+        };
+
+        for (int j = 0; j < threadCount; j++) {
+            threadPool.execute(task);
         }
-        log.info("总耗时:{}", System.currentTimeMillis() - start);
+        countDownLatch.await();
+        log.info("totalTime:{}", totalTime);
         return Constants.MSG_SUCCESS;
     }
 }
