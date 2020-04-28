@@ -1,6 +1,5 @@
 package com.cn.boot.sample.rocketmq.original.test3.async;
 
-import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.rocketmq.constant.MqConstant;
 import lombok.extern.slf4j.Slf4j;
@@ -11,8 +10,6 @@ import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.exception.RemotingException;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -36,11 +33,11 @@ public class AsyncProducer {
         producer = new DefaultMQProducer(TAG + "_producer_group");
 
         producer.setNamesrvAddr(MqConstant.NAME_SERVER_ADDRESS);
-
+        producer.setRetryTimesWhenSendFailed(3);
         producer.start();
 
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             byte[] body = ("Hello RocketMQ! " + TAG + "_" + i).getBytes();
             Message message = new Message();
             message.setTopic(TAG + "_topic"); // 主题
@@ -56,9 +53,21 @@ public class AsyncProducer {
 
                 @Override
                 public void onException(Throwable throwable) {
-                    log.info("【AsyncProducer】error = {}", throwable.getMessage(), throwable);
+                    log.error("【AsyncProducer】error = {}", throwable.getMessage(), throwable);
+                    retry(message);
                 }
-            });
+            }, 1);
+        }
+    }
+
+    /**
+     * 失败重试
+     */
+    private void retry(Message message) {
+        try {
+            producer.send(message);
+        } catch (Exception e) {
+            log.error("【AsyncProducer】retry error = {}", e.getMessage(), e);
         }
     }
 
