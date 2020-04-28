@@ -273,4 +273,43 @@ public class PressureTestController {
         log.info("totalTime:{}", totalTime);
         return Constants.MSG_SUCCESS;
     }
+
+    /**
+     *
+     */
+    @ApiOperation("6、incr命令测试")
+    @GetMapping("/incr")
+    public String incr(String key, int threadCount, int total, int printStep) {
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("demo-pool-%d").build();
+        ExecutorService threadPool = new ThreadPoolExecutor(threadCount, threadCount,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+
+        int count = total / threadCount;
+
+        Runnable task = () -> {
+            long start = System.currentTimeMillis();
+            long temp = System.currentTimeMillis();
+
+            for (int i = 0; i < count; i++) {
+                Jedis jedis = jedisPool.getResource();
+                try {
+                    jedis.incr(key);
+                    if (0 == i % printStep) {
+                        log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
+                        temp = System.currentTimeMillis();
+                    }
+                } finally {
+                    jedis.close();
+                }
+            }
+            log.info("总耗时:{}", System.currentTimeMillis() - start);
+        };
+
+        for (int j = 0; j < threadCount; j++) {
+            threadPool.execute(task);
+        }
+        return Constants.MSG_SUCCESS;
+    }
 }

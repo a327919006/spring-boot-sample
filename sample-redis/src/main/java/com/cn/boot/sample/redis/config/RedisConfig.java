@@ -10,6 +10,8 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.listener.PatternTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
@@ -75,4 +77,15 @@ public class RedisConfig extends CachingConfigurerSupport {
     public Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer() {
         return new Jackson2JsonRedisSerializer<>(Object.class);
     }
+
+    /**
+     * 注册key相关操作监听，如过期、删除等
+     */
+//    @Bean
+//    public RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory) {
+//        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+//        container.setConnectionFactory(connectionFactory);
+//        container.addMessageListener(new RedisEventListener(), new PatternTopic("__keyevent@0__:*"));
+//        return container;
+//    }
 }
