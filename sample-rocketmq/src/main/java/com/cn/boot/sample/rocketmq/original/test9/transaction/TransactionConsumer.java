@@ -4,17 +4,11 @@ import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.rocketmq.constant.MqConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import java.util.List;
 
 
 /**
@@ -23,14 +17,12 @@ import java.util.List;
  * @author Chen Nan
  */
 @Slf4j
-//@Component
 public class TransactionConsumer {
     public static final String TAG = "test9";
 
     private static DefaultMQPushConsumer consumer;
 
-    @PostConstruct
-    public void init() throws MQClientException {
+    public static void main(String[] args) throws MQClientException {
         log.info("【TransactionConsumer】init");
 
         consumer = new DefaultMQPushConsumer(TAG + "_consumer_group");
@@ -56,11 +48,5 @@ public class TransactionConsumer {
         });
 
         consumer.start();
-    }
-
-    @PreDestroy
-    public void destroy() {
-        log.info("【TransactionConsumer】destroy");
-        consumer.shutdown();
     }
 }
