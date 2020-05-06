@@ -4,7 +4,6 @@ import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.rocketmq.constant.MqConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
@@ -12,13 +11,11 @@ import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import java.util.List;
-
 
 /**
- * 入门示例
+ * 广播消息消费者
+ * 消费者需设置为广播模式consumer.setMessageModel(MessageModel.BROADCASTING);
+ * 启动多个consumer，每个consumer都能收到相同的消息
  *
  * @author Chen Nan
  */

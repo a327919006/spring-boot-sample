@@ -11,7 +11,8 @@ import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.exception.RemotingException;
 
 /**
- * 入门示例
+ * 广播消息生产者
+ * 广播消息生产者无特殊设置，与普通生产者一致，正常发送即可
  *
  * @author Chen Nan
  */
