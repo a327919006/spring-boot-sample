@@ -24,7 +24,7 @@ public class TransactionListenerImpl implements TransactionListener {
         String str = (String) arg;
         if (str.endsWith("1")) {
             // 如果业务抛出异常，与下方UNKNOW处理方式相同
-            throw new RuntimeException("222222");
+            throw new RuntimeException("test error");
         }
         // 业务处理成功则返回COMMIT_MESSAGE
         // 如果明确业务失败，可以返回ROLLBACK_MESSAGE或重试业务
