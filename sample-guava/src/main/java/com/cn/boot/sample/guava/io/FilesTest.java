@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 文件操作
+ *
  * @author Chen Nan
  */
 @Slf4j
@@ -32,6 +34,9 @@ public class FilesTest {
         file = ResourceUtils.getFile("classpath:test.txt");
     }
 
+    /**
+     * 按行处理
+     */
     @Test
     public void readLines() throws IOException {
         LineProcessor<List<String>> lineProcessor = new LineProcessor<List<String>>() {
@@ -63,6 +68,9 @@ public class FilesTest {
         log.info("result = {}", result);
     }
 
+    /**
+     * 获取文件hash值
+     */
     @Test
     public void fileHash() throws IOException {
         HashCode hash1 = Files.asByteSource(file).hash(Hashing.goodFastHash(128));
@@ -73,6 +81,9 @@ public class FilesTest {
         log.info("hash2 = {}", hash2);
     }
 
+    /**
+     * 文件追加内容
+     */
     @Test
     public void append() throws IOException {
         String absolutePath = file.getAbsolutePath();

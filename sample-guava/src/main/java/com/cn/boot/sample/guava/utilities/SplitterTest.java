@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 用于字符串切割
+ *
  * @author Chen Nan
  */
 @Slf4j

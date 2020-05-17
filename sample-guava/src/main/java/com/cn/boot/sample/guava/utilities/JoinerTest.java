@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * 用于多个字符串拼接
+ *
  * @author Chen Nan
  */
 @Slf4j
