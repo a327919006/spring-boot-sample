@@ -37,7 +37,7 @@ public class BroadcastConsumer {
 
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
 
-        consumer.subscribe(TAG + "group", "*");
+        consumer.subscribe(TAG + "_topic", "*");
 
         consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
             MessageExt msg = msgs.get(0);
