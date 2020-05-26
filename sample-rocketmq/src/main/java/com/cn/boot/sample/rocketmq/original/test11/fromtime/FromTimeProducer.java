@@ -1,4 +1,4 @@
-package com.cn.boot.sample.rocketmq.original.test11.from;
+package com.cn.boot.sample.rocketmq.original.test11.fromtime;
 
 import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.rocketmq.constant.MqConstant;
@@ -31,7 +31,7 @@ public class FromTimeProducer {
 
         producer.start();
 
-        for (int i = 30; i < 100; i++) {
+        for (int i = 1; i < 10; i++) {
             byte[] body = ("Hello RocketMQ! " + TAG + "_" + i).getBytes();
             Message message = new Message();
             message.setTopic(TAG + "_topic"); // 主题

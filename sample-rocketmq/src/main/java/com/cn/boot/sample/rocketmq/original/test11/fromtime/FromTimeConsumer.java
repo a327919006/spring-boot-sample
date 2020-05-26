@@ -1,4 +1,4 @@
-package com.cn.boot.sample.rocketmq.original.test11.from;
+package com.cn.boot.sample.rocketmq.original.test11.fromtime;
 
 import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.rocketmq.constant.MqConstant;
