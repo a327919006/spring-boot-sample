@@ -16,7 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 /**
+ * 发起客户端长连接，具体连接后的操作查看
+ *
  * @author Chen Nan
+ * @see ClientHandler
  */
 @Slf4j
 public class NettyClientTest {

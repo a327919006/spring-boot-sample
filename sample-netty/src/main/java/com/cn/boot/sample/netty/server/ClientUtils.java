@@ -3,6 +3,7 @@ package com.cn.boot.sample.netty.server;
 import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.netty.model.RspDeviceData;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.util.AttributeKey;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -34,6 +35,7 @@ public class ClientUtils {
         log.info("设备加入连接, deviceNo={}, channelId={}", deviceNo, channelId);
         CLIENT_MAP.put(deviceNo, client);
         DEVICE_CHANNEL_MAP.put(channelId, deviceNo);
+        client.channel().attr(AttributeKey.valueOf("deviceNo")).set(deviceNo);
     }
 
     /**

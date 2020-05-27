@@ -1,5 +1,6 @@
 package com.cn.boot.sample.netty.handler;
 
+import cn.hutool.core.thread.ThreadUtil;
 import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.netty.model.ReqDeviceData;
 import com.cn.boot.sample.netty.model.RspDeviceData;
@@ -9,21 +10,22 @@ import io.netty.util.ReferenceCountUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * <p>Title:</p>
- * <p>Description:</p>
- *
  * @author Chen Nan
  * @date 2017/12/27.
  */
 @Slf4j
 public class ClientHandler extends ChannelInboundHandlerAdapter {
     @Override
-     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
         ReqDeviceData reqDeviceData = new ReqDeviceData();
         reqDeviceData.setTag(Constants.DATA_CONN);
         reqDeviceData.setDeviceNo("d001");
 
         ctx.writeAndFlush(reqDeviceData);
+
+        // 连接10秒后客户端主动断开
+        ThreadUtil.sleep(10000);
+        ctx.close();
     }
 
     @Override
@@ -44,9 +46,21 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        super.channelInactive(ctx);
+        log.info("channelInactive");
+    }
+
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        super.handlerRemoved(ctx);
+        log.info("handlerRemoved");
+    }
+
+    @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         // 当异常时释放关闭连接
+        log.info("exceptionCaught");
         cause.printStackTrace();
-        ctx.close();
     }
 }
