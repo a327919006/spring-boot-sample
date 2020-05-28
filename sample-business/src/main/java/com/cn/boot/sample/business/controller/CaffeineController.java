@@ -3,6 +3,7 @@ package com.cn.boot.sample.business.controller;
 import com.cn.boot.sample.api.model.Constants;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.benmanes.caffeine.cache.LoadingCache;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -21,11 +23,20 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/caffeine")
 @Api(tags = "咖啡因缓存", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CaffeineController {
-    private static final Cache<String, List<String>> cache = Caffeine.newBuilder()
+    private static Cache<String, List<String>> cache = Caffeine.newBuilder()
             .initialCapacity(2000)//初始大小
             .maximumSize(2000)//最大数量
             .expireAfterWrite(7, TimeUnit.DAYS)//过期时间
             .build();
+
+    /**
+     * LoadingCache可以配置自动回源的方法，在key不存在的情况下，自动回源查询
+     */
+    private static LoadingCache<String, String> loadCache = Caffeine.newBuilder()
+            .initialCapacity(2000)//初始大小
+            .maximumSize(2000)//最大数量
+            .expireAfterWrite(7, TimeUnit.DAYS)//过期时间
+            .build(key -> getDataFromDb(key));
 
     @ApiOperation("添加元素")
     @PostMapping
@@ -56,5 +67,35 @@ public class CaffeineController {
         values.remove(value);
 
         return Constants.MSG_SUCCESS;
+    }
+
+
+    @ApiOperation("添加元素")
+    @PostMapping("/loadcache/put")
+    public String loadCachePut(String key, String value) {
+        loadCache.put(key, value);
+
+        return Constants.MSG_SUCCESS;
+    }
+
+    /**
+     * 批量获取，如果所有key都不存在，则返回空Map
+     */
+    @ApiOperation("获取")
+    @GetMapping("/loadcache/getall")
+    public Map<String, String> loadCacheGetAll() {
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("3");
+        list.add("4");
+        return loadCache.getAll(list);
+    }
+
+    /**
+     * 模拟数据回源查询
+     */
+    private static String getDataFromDb(String key) {
+        log.info("getDataFromDb");
+        return key + 111;
     }
 }
