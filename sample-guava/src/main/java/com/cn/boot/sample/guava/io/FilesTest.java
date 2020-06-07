@@ -10,6 +10,7 @@ import com.google.common.io.LineProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
@@ -19,12 +20,16 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
+
+
 /**
  * 文件操作
  *
  * @author Chen Nan
  */
 @Slf4j
+@TestInstance(PER_CLASS)
 public class FilesTest {
 
     private File file;
