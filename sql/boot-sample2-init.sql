@@ -39,6 +39,18 @@ CREATE TABLE `teacher` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- ----------------------------
+-- Table structure for sensitiveword
+-- ----------------------------
+CREATE TABLE `sensitiveword`  (
+   `id` bigint(21) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
+   `word` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '敏感词',
+   `appId` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '应用id',
+   PRIMARY KEY (`id`) USING BTREE,
+   INDEX `idx_appid`(`appId`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '敏感词' ROW_FORMAT = Compact;
+
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
