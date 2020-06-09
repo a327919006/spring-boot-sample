@@ -1,7 +1,7 @@
 package com.cn.boot.sample.server.dynamic.config;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
-import com.cn.boot.sample.server.dynamic.config.dds.DynamicDataSource;
+import com.cn.boot.sample.server.dynamic.config.dds.DynamicRoutingDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +19,8 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
+ * 动态数据源配置类
+ *
  * @author Chen Nan
  */
 @Configuration
@@ -31,27 +33,27 @@ public class DynamicDataSourceConfig {
     private String mapperLocations;
 
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.druid.db1")
+    @ConfigurationProperties(prefix = "spring.datasource.druid.ds1")
     @Primary
     public DataSource db1DataSource() {
         return DruidDataSourceBuilder.create().build();
     }
 
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.druid.db2")
+    @ConfigurationProperties(prefix = "spring.datasource.druid.ds2")
     public DataSource db2DataSource() {
         return DruidDataSourceBuilder.create().build();
     }
 
     @Bean("dynamicDataSource")
     public DataSource dynamicDataSource() {
-        DynamicDataSource dynamicDataSource = new DynamicDataSource();
+        DynamicRoutingDataSource dynamicDataSource = new DynamicRoutingDataSource();
         Map<Object, Object> dataSourceMap = new HashMap<>(2);
-        dataSourceMap.put("ds100010020", db1DataSource());
-        dataSourceMap.put("ds100010021", db2DataSource());
-        // 将 master 数据源作为默认指定的数据源
+        dataSourceMap.put("ds1", db1DataSource());
+        dataSourceMap.put("ds2", db2DataSource());
+        // 将 ds1 数据源作为默认指定的数据源
         dynamicDataSource.setDefaultDataSource(db1DataSource());
-        // 将 master 和 slave 数据源作为指定的数据源
+        // 将 ds1 和 ds2 数据源作为指定的数据源
         dynamicDataSource.setDataSources(dataSourceMap);
         return dynamicDataSource;
     }

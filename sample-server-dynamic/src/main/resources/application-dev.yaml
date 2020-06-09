@@ -6,20 +6,20 @@ server:
 spring:
   datasource:
     druid:
-      db1:
+      ds1:
         #注意：如果使用druid数据库连接池，配置为url，如果是默认的hikari，要配置jdbc-url
-        url: jdbc:mysql://10.0.0.55:3306/onemt_im_100010020?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        url: jdbc:mysql://localhost:3306/boot_sample?useUnicode=true&characterEncoding=utf-8&useSSL=false
         username: root
-        password: 123456
+        password: chennan
         driver-class-name: com.mysql.jdbc.Driver
         initial-size: 5
         min-idle: 5
         max-active: 10
         max-wait: 60000
-      db2:
-        url: jdbc:mysql://10.0.0.55:3306/onemt_im_100010021?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      ds2:
+        url: jdbc:mysql://localhost:3306/boot_sample2?useUnicode=true&characterEncoding=utf-8&useSSL=false
         username: root
-        password: 123456
+        password: chennan
         driver-class-name: com.mysql.jdbc.Driver
         initial-size: 5
         min-idle: 5
