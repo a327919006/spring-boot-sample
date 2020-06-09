@@ -52,8 +52,10 @@
                <!--enableDeleteByExample="false" enableCountByExample="false"-->
                <!--enableUpdateByExample="false"/>-->
 
-        <table catalog="boot_sample" tableName="order" enableSelectByExample="false"
+        <table tableName="sensitiveword" enableSelectByExample="false"
                enableDeleteByExample="false" enableCountByExample="false"
-               enableUpdateByExample="false"/>
+               enableUpdateByExample="false" domainObjectName="SensitiveWord">
+            <property name="useActualColumnNames" value="true"></property>
+        </table>
     </context>
 </generatorConfiguration>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.boot.sample.dal.mapper.SensitiveWordMapper">
+  <resultMap id="BaseResultMap" type="com.cn.boot.sample.api.model.po.SensitiveWord">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="word" jdbcType="VARCHAR" property="word" />
+    <result column="appId" jdbcType="VARCHAR" property="appId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, word, appId
+  </sql>
+</mapper>
