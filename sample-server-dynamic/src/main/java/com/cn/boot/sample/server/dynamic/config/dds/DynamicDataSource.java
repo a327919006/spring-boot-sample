@@ -4,8 +4,8 @@ import java.lang.annotation.*;
 
 /**
  * 动态数据源注解
- * @author Louis
- * @date Jun 17, 2019
+ *
+ * @author ChenNan
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
