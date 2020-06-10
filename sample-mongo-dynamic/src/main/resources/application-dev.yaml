@@ -1,0 +1,26 @@
+# 开发环境配置
+
+spring:
+  data:
+    mongodb:
+      db1:
+        uri: mongodb://127.0.0.1:27017/test?readPreference=primaryPreferred
+      db2:
+        uri: mongodb://127.0.0.1:27017/test2?readPreference=primaryPreferred
+
+
+# Dubbo配置
+dubbo:
+  application:
+    name: ${artifactId}
+    logger: slf4j
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  protocol:
+    name: dubbo
+    port: 20882
+    serialization: kryo
+  scan:
+    base-packages: com.cn.boot.sample.mongo.dynamic.service
+  consumer:
+    check: false
