@@ -173,6 +173,18 @@ CREATE TABLE `sensitiveword`  (
   INDEX `idx_appid`(`appId`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '敏感词' ROW_FORMAT = Compact;
 
+-- ----------------------------
+-- Table structure for room
+-- ----------------------------
+CREATE TABLE `room`  (
+   `id` bigint(21) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
+   `name` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '名称',
+   `appId` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '应用id',
+   PRIMARY KEY (`id`) USING BTREE,
+   INDEX `idx_appid`(`appId`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '敏感词' ROW_FORMAT = Compact;
+
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
