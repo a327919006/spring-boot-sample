@@ -1,9 +1,12 @@
 package com.cn.boot.sample.business.controller;
 
 import com.cn.boot.sample.api.model.Constants;
+import com.cn.boot.sample.api.model.po.Room;
 import com.cn.boot.sample.api.model.po.SensitiveWord;
+import com.cn.boot.sample.api.model.po.Teacher;
 import com.cn.boot.sample.api.service.DynamicDataSourceService;
 import com.cn.boot.sample.api.service.SensitiveWordService;
+import com.cn.boot.sample.api.service.RoomService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -26,11 +29,20 @@ public class DynamicDataSourceController {
     private SensitiveWordService sensitiveWordService;
     @Reference
     private DynamicDataSourceService dynamicDataSourceService;
+    @Reference
+    private RoomService roomService;
 
-    @ApiOperation(value = "添加数据", notes = "appId为数据源key")
+    @ApiOperation(value = "添加数据-mybatis", notes = "appId为数据源key,传入1或2，传入其他则为默认数据源1")
     @PostMapping("/data")
     public int insertData(@RequestBody SensitiveWord req) {
         return sensitiveWordService.insertSensitiveWord(req.getAppId(), req);
+    }
+
+    @ApiOperation(value = "添加数据-jpa", notes = "appId为数据源key,传入1或2，传入其他则为默认数据源1")
+    @PostMapping("/jpa/data")
+    public int insertJpaData(@RequestBody Room req) {
+        roomService.insertRoom(req.getAppId(), req);
+        return 1;
     }
 
     @ApiOperation(value = "添加数据，事务", notes = "appId为数据源key，传入3会触发事务回滚")
