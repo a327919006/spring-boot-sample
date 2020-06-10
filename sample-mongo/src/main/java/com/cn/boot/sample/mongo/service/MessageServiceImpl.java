@@ -17,6 +17,11 @@ public class MessageServiceImpl extends BaseServiceImpl<MessageDao, Message, Str
         implements MessageService {
 
     @Override
+    public Message insertMessage(String appId, Message message) {
+        return null;
+    }
+
+    @Override
     public List<MessageCount> findMessageCount(LocalDateTime createTime, int count) {
         return dao.findMessageCount(createTime, count);
     }
