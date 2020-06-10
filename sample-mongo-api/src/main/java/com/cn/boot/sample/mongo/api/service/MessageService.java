@@ -11,6 +11,16 @@ import java.util.List;
  * @author Chen Nan
  */
 public interface MessageService extends BaseService<Message, String> {
+
+    /**
+     * 插入消息-动态数据源
+     *
+     * @param appId   数据源key
+     * @param message 消息内容
+     * @return 操作结果
+     */
+    Message insertMessage(String appId, Message message);
+
     /**
      * 获取最近各个状态消息数量
      *

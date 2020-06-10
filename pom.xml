@@ -42,6 +42,7 @@
         <module>sample-server-shard</module>
         <module>sample-server-dynamic</module>
         <module>sample-server-jpa-dynamic</module>
+        <module>sample-mongo-dynamic</module>
     </modules>
 
 
