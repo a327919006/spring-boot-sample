@@ -37,8 +37,7 @@ public abstract class BaseMongoDao<T, PK> {
      * @param id 根据主键删除
      */
     public int deleteByPrimaryKey(PK id) {
-        String key = DynamicDataSourceContextHolder.getDataSourceKey();
-        MongoTemplate mongoTemplate = mongoTemplateUtil.getMongoTemplate(key);
+        MongoTemplate mongoTemplate = mongoTemplateUtil.getMongoTemplate();
         return (int) mongoTemplate.remove(Query.query(Criteria.where("_id").is(id)), getEntityClass()).getDeletedCount();
     }
 
@@ -46,8 +45,7 @@ public abstract class BaseMongoDao<T, PK> {
      * 插入数据
      */
     public T insert(T record) {
-        String key = DynamicDataSourceContextHolder.getDataSourceKey();
-        MongoTemplate mongoTemplate = mongoTemplateUtil.getMongoTemplate(key);
+        MongoTemplate mongoTemplate = mongoTemplateUtil.getMongoTemplate();
         return mongoTemplate.insert(record);
     }
 
@@ -55,8 +53,7 @@ public abstract class BaseMongoDao<T, PK> {
      * 根据主键查询
      */
     public T selectByPrimaryKey(PK id) {
-        String key = DynamicDataSourceContextHolder.getDataSourceKey();
-        MongoTemplate mongoTemplate = mongoTemplateUtil.getMongoTemplate(key);
+        MongoTemplate mongoTemplate = mongoTemplateUtil.getMongoTemplate();
         return mongoTemplate.findOne(Query.query(Criteria.where("_id").is(id)), getEntityClass());
     }
 
@@ -84,8 +81,7 @@ public abstract class BaseMongoDao<T, PK> {
         }
         Query query = Query.query(Criteria.where("_id").is(id));
 
-        String key = DynamicDataSourceContextHolder.getDataSourceKey();
-        MongoTemplate mongoTemplate = mongoTemplateUtil.getMongoTemplate(key);
+        MongoTemplate mongoTemplate = mongoTemplateUtil.getMongoTemplate();
         return (int) mongoTemplate.updateFirst(query, update, getEntityClass()).getModifiedCount();
     }
 
@@ -93,8 +89,7 @@ public abstract class BaseMongoDao<T, PK> {
      * 获取数量
      */
     public int count(T record) {
-        String key = DynamicDataSourceContextHolder.getDataSourceKey();
-        MongoTemplate mongoTemplate = mongoTemplateUtil.getMongoTemplate(key);
+        MongoTemplate mongoTemplate = mongoTemplateUtil.getMongoTemplate();
         return (int) mongoTemplate.count(Query.query(Criteria.byExample(record)), getEntityClass());
     }
 
@@ -102,8 +97,7 @@ public abstract class BaseMongoDao<T, PK> {
      * 获取单条数据
      */
     public T get(T record) {
-        String key = DynamicDataSourceContextHolder.getDataSourceKey();
-        MongoTemplate mongoTemplate = mongoTemplateUtil.getMongoTemplate(key);
+        MongoTemplate mongoTemplate = mongoTemplateUtil.getMongoTemplate();
         return mongoTemplate.findOne(Query.query(Criteria.byExample(record)), getEntityClass());
     }
 
@@ -111,8 +105,7 @@ public abstract class BaseMongoDao<T, PK> {
      * 获取列表
      */
     public List<T> list(T record) {
-        String key = DynamicDataSourceContextHolder.getDataSourceKey();
-        MongoTemplate mongoTemplate = mongoTemplateUtil.getMongoTemplate(key);
+        MongoTemplate mongoTemplate = mongoTemplateUtil.getMongoTemplate();
         return mongoTemplate.find(Query.query(Criteria.byExample(record)), getEntityClass());
     }
 }
