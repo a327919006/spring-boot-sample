@@ -16,6 +16,7 @@ import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
  * 广播消息消费者
  * 消费者需设置为广播模式consumer.setMessageModel(MessageModel.BROADCASTING);
  * 启动多个consumer，每个consumer都能收到相同的消息
+ * 另外需注意：广播模式只会消费一次，失败不会重试，需自己在业务上实现重试逻辑
  *
  * @author Chen Nan
  */

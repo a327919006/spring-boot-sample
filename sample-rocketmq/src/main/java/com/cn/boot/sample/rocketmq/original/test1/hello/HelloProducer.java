@@ -20,14 +20,12 @@ import javax.annotation.PreDestroy;
  * @author Chen Nan
  */
 @Slf4j
-//@Component
 public class HelloProducer {
     public static final String TAG = "test1";
 
     private static DefaultMQProducer producer;
 
-    @PostConstruct
-    public void init() throws MQClientException, RemotingException, InterruptedException, MQBrokerException {
+    public static void main(String[] args) throws MQClientException, RemotingException, InterruptedException, MQBrokerException {
         log.info("【HelloProducer】init");
 
         producer = new DefaultMQProducer(TAG + "_producer_group");
@@ -49,11 +47,5 @@ public class HelloProducer {
             // {"traceOn":true,"regionId":"DefaultRegion","msgId":"C0A81F411BEC18B4AAC26B2653F70000","messageQueue":{"queueId":3,"topic":"test1_topic","brokerName":"Hasee-PC"},"sendStatus":"SEND_OK","queueOffset":0,"offsetMsgId":"C0A81F4100002A9F0000000000000C4A"}
             log.info("【HelloProducer】sendResult = {}", JSONUtil.toJsonStr(sendResult));
         }
-    }
-
-    @PreDestroy
-    public void destroy() throws Exception {
-        log.info("【HelloProducer】destroy");
-        producer.shutdown();
     }
 }

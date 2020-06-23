@@ -23,14 +23,12 @@ import java.util.List;
  * @author Chen Nan
  */
 @Slf4j
-//@Component
 public class HelloConsumer {
     public static final String TAG = "test1";
 
     private static DefaultMQPushConsumer consumer;
 
-    @PostConstruct
-    public void init() throws MQClientException {
+    public static void main(String[] args) throws MQClientException {
         log.info("【HelloConsumer】init");
 
         consumer = new DefaultMQPushConsumer(TAG + "_consumer_group");
@@ -38,6 +36,7 @@ public class HelloConsumer {
         consumer.setNamesrvAddr(MqConstant.NAME_SERVER_ADDRESS);
 
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
+        consumer.setMaxReconsumeTimes(5);
 
         consumer.subscribe(TAG + "_topic", "*");
 
@@ -65,7 +64,7 @@ public class HelloConsumer {
                     int reconsumeTimes = msg.getReconsumeTimes();
                     log.error("【HelloConsumer】error reconsumeTimes={}, ", reconsumeTimes, e);
 
-                    if (2 == reconsumeTimes) {
+                    if (3 == reconsumeTimes) {
                         // 当重试达到一定次数，任无法消费，记录日志，做补偿
                         log.error("【HelloConsumer】msg={}", JSONUtil.toJsonStr(msg));
                         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
@@ -78,11 +77,5 @@ public class HelloConsumer {
         });
 
         consumer.start();
-    }
-
-    @PreDestroy
-    public void destroy() {
-        log.info("【HelloConsumer】destroy");
-        consumer.shutdown();
     }
 }
