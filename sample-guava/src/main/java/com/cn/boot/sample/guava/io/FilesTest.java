@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,5 +101,42 @@ public class FilesTest {
 
         String result = Files.asCharSource(file, StandardCharsets.UTF_8).read();
         log.info("result = {}", result);
+    }
+
+    /**
+     * 监听文件夹下所有文件变化，新建、更新、删除文件事件
+     */
+    @Test
+    public void listener() throws IOException {
+        String uri = "E:\\testDir";
+        Path path = Paths.get(uri);
+
+        WatchService watchService = FileSystems.getDefault().newWatchService();
+        path.register(watchService,
+                StandardWatchEventKinds.ENTRY_CREATE,
+                StandardWatchEventKinds.ENTRY_DELETE,
+                StandardWatchEventKinds.ENTRY_MODIFY
+        );
+
+        while (true) {
+            WatchKey watchKey = null;
+            try {
+                watchKey = watchService.take();
+                watchKey.pollEvents().forEach(event -> {
+                    log.info("kind={}", event.kind());
+                    Path eventPath = (Path) event.context();
+                    log.info("eventPath={}", eventPath);
+                    Path child = path.resolve(eventPath);
+                    log.info("child={}", child);
+                });
+            } catch (InterruptedException e) {
+                log.error("error=", e);
+                break;
+            } finally {
+                if (watchKey != null) {
+                    watchKey.reset();
+                }
+            }
+        }
     }
 }
