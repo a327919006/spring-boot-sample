@@ -141,7 +141,16 @@ public class RegisterUtil {
     private void nodeOffline(String path, byte[] data) {
         String node = pathToNode(path);
         log.info("【RegisterUtil】节点下线,node={},data={}", node, new String(data));
-        nodeSet.remove(node);
+        if (serverConfig.getNodeName().equals(node)) {
+            String parentNode = serverConfig.getParentNode();
+            try {
+                reportNode(parentNode);
+            } catch (Exception e) {
+                log.error("nodeOffline reportNode error:", e);
+            }
+        } else {
+            nodeSet.remove(node);
+        }
     }
 
     /**
