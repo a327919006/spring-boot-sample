@@ -51,8 +51,8 @@ public class MessageController {
     @GetMapping("/{id}")
     public Message find(@PathVariable String id) {
         Message message = messageService.selectByPrimaryKey(id);
-        String data = new String(message.getData().getData());
-        log.info("binaryData={}", data);
+        String binaryData = new String(message.getData().getData());
+        log.info("binaryData={}", binaryData);
         return message;
     }
 
