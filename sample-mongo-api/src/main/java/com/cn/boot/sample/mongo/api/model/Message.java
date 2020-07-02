@@ -1,6 +1,7 @@
 package com.cn.boot.sample.mongo.api.model;
 
 import lombok.Data;
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,6 +17,7 @@ public class Message {
     private String id;
     private String content;
     private Integer status;
+    private Binary data;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 }

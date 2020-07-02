@@ -5,6 +5,7 @@ import com.cn.boot.sample.mongo.api.model.MessageCount;
 import com.cn.boot.sample.mongo.api.service.MessageService;
 import com.cn.boot.sample.mongo.dao.MessageDao;
 import org.apache.dubbo.config.annotation.Service;
+import org.bson.types.Binary;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,7 +19,8 @@ public class MessageServiceImpl extends BaseServiceImpl<MessageDao, Message, Str
 
     @Override
     public Message insertMessage(String appId, Message message) {
-        return null;
+        message.setData(new Binary("test111".getBytes()));
+        return dao.insert(message);
     }
 
     @Override

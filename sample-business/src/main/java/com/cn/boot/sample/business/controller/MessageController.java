@@ -50,7 +50,10 @@ public class MessageController {
     @ApiOperation("根据ID获取")
     @GetMapping("/{id}")
     public Message find(@PathVariable String id) {
-        return messageService.selectByPrimaryKey(id);
+        Message message = messageService.selectByPrimaryKey(id);
+        String data = new String(message.getData().getData());
+        log.info("binaryData={}", data);
+        return message;
     }
 
     @ApiOperation("删除")
