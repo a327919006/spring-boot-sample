@@ -5,12 +5,12 @@ spring:
   datasource:
     db1:
       #注意：如果使用druid数据库连接池，配置为url，如果是默认的hikari，要配置jdbc-url
-      jdbc-url: jdbc:mysql://localhost:3306/boot_sample?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      jdbc-url: jdbc:mysql://localhost:3306/boot_sample?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
       username: root
       password: chennan
       driver-class-name: com.mysql.jdbc.Driver
     db2:
-      jdbc-url: jdbc:mysql://localhost:3306/boot_sample2?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      jdbc-url: jdbc:mysql://localhost:3306/boot_sample2?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
       username: root
       password: chennan
       driver-class-name: com.mysql.jdbc.Driver
