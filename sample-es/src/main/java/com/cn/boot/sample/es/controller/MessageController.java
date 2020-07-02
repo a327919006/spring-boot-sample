@@ -25,6 +25,20 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
+    @ApiOperation("创建索引")
+    @PostMapping("/index")
+    public String createIndex() {
+        messageService.createIndex();
+        return Constants.MSG_SUCCESS;
+    }
+
+    @ApiOperation("删除索引")
+    @DeleteMapping("/index")
+    public String delete() {
+        messageService.deleteIndex();
+        return Constants.MSG_SUCCESS;
+    }
+
     @ApiOperation("添加")
     @PostMapping("")
     public String insert(@RequestBody Message req) {
@@ -44,11 +58,5 @@ public class MessageController {
         return messageService.findByContent(content).getContent();
     }
 
-    @ApiOperation("删除")
-    @DeleteMapping("/{index}")
-    public String delete(@PathVariable String index) {
-        messageService.deleteIndex(index);
-        return Constants.MSG_SUCCESS;
-    }
 
 }

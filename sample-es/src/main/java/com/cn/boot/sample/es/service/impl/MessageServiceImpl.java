@@ -11,7 +11,6 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * @author Chen Nan
@@ -32,18 +31,13 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public void deleteIndex(String index) {
-        template.deleteIndex(index);
+    public void deleteIndex() {
+        template.deleteIndex(Message.class);
     }
 
     @Override
     public void save(Message docBean) {
         dao.save(docBean);
-    }
-
-    @Override
-    public void saveAll(List<Message> list) {
-        dao.saveAll(list);
     }
 
     @Override
@@ -59,11 +53,5 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public Page<Message> findByUser(String firstCode) {
         return dao.findByUser(firstCode, pageable);
-    }
-
-
-    @Override
-    public Page<Message> query(String key) {
-        return dao.findByContent(key, pageable);
     }
 }

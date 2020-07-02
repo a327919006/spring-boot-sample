@@ -4,25 +4,48 @@ import com.cn.boot.sample.es.model.po.Message;
 import org.springframework.data.domain.Page;
 
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * @author Chen Nan
  */
 public interface MessageService {
+    /**
+     * 创建索引
+     */
     void createIndex();
 
-    void deleteIndex(String index);
+    /**
+     * 删除索引
+     */
+    void deleteIndex();
 
-    void save(Message docBean);
+    /**
+     * 保存消息
+     *
+     * @param message 消息内容
+     */
+    void save(Message message);
 
-    void saveAll(List<Message> list);
-
+    /**
+     * 获取所有消息
+     *
+     * @return 消息列表
+     */
     Iterator<Message> findAll();
 
+    /**
+     * 根据内容搜索
+     *
+     * @param content 消息内容
+     * @return 消息列表
+     */
     Page<Message> findByContent(String content);
 
-    Page<Message> findByUser(String firstCode);
-
-    Page<Message> query(String key);
+    /**
+     * 根据发送人搜索
+     *
+     * @param user 发送人
+     * @return 消息列表
+     */
+    Page<Message> findByUser(String user);
 }
