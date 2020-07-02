@@ -19,7 +19,7 @@ public class MessageServiceImpl extends BaseServiceImpl<MessageDao, Message, Str
 
     @Override
     public Message insertMessage(String appId, Message message) {
-        message.setData(new Binary("test111".getBytes()));
+        message.setData(new Binary("test".getBytes()));
         return dao.insert(message);
     }
 
