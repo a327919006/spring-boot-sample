@@ -8,7 +8,7 @@ spring:
     druid:
       db1:
         #注意：如果使用druid数据库连接池，配置为url，如果是默认的hikari，要配置jdbc-url
-        url: jdbc:mysql://localhost:3306?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        url: jdbc:mysql://localhost:3306?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&serverTimezone=Asia/Shanghai
         username: root
         password: chennan
         driver-class-name: com.mysql.jdbc.Driver
@@ -17,7 +17,7 @@ spring:
         max-active: 10
         max-wait: 60000
       db2:
-        url: jdbc:mysql://localhost:3306?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        url: jdbc:mysql://localhost:3306?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
         username: root
         password: chennan
         driver-class-name: com.mysql.jdbc.Driver
