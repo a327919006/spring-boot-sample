@@ -11,6 +11,8 @@ import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 import org.springframework.data.mongodb.core.SimpleMongoClientDbFactory;
 
 /**
+ * MongoDB配置
+ *
  * @author Chen Nan
  */
 @Configuration
