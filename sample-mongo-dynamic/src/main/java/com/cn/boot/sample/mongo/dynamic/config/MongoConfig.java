@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 import org.springframework.data.mongodb.core.SimpleMongoClientDbFactory;
 
 /**
@@ -21,13 +23,13 @@ public class MongoConfig {
 
     @Bean
     @Primary
-    public MongoDbFactory db1MongoDbFactory() {
-        return new SimpleMongoClientDbFactory(db1Uri);
+    public MongoDatabaseFactory db1MongoDbFactory() {
+        return new SimpleMongoClientDatabaseFactory(db1Uri);
     }
 
     @Bean
-    public MongoDbFactory db2MongoDbFactory() {
-        return new SimpleMongoClientDbFactory(db2Uri);
+    public MongoDatabaseFactory db2MongoDbFactory() {
+        return new SimpleMongoClientDatabaseFactory(db2Uri);
     }
 
     @Bean
