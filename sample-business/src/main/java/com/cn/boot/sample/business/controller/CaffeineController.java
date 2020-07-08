@@ -1,9 +1,11 @@
 package com.cn.boot.sample.business.controller;
 
+import cn.hutool.core.thread.ThreadUtil;
 import com.cn.boot.sample.api.model.Constants;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
+import com.github.benmanes.caffeine.cache.RemovalListener;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +39,13 @@ public class CaffeineController {
             .maximumSize(2000)//最大数量
             .expireAfterWrite(7, TimeUnit.DAYS)//过期时间
             .build(key -> getDataFromDb(key));
+
+    private static Cache<String, String> listenerCache = Caffeine.newBuilder()
+            .expireAfterWrite(2000, TimeUnit.MILLISECONDS)
+            .removalListener((RemovalListener<String, String>) (key, value, cause) -> {
+                log.info("onRemoval key={} value={} cause={}", key, value, cause.name());
+            })
+            .build();
 
     @ApiOperation("添加元素")
     @PostMapping
@@ -89,6 +98,26 @@ public class CaffeineController {
         list.add("3");
         list.add("4");
         return loadCache.getAll(list);
+    }
+
+    @ApiOperation("添加元素")
+    @PostMapping("/listenercache/put")
+    public String listenerCachePut(String key, String value) {
+        listenerCache.put(key, value);
+
+        return Constants.MSG_SUCCESS;
+    }
+
+    @ApiOperation("获取")
+    @GetMapping("/listenercache/get/{key}")
+    public String listenerCacheGet(@PathVariable String key) {
+        return listenerCache.getIfPresent(key);
+
+//        for (int i = 0; i < 10000000; i++) {
+//            listenerCache.getIfPresent(key);
+//            ThreadUtil.sleep(100);
+//        }
+//        return Constants.MSG_SUCCESS;
     }
 
     /**
