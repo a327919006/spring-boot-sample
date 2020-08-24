@@ -44,6 +44,8 @@
         <module>sample-server-jpa-dynamic</module>
         <module>sample-mongo-dynamic</module>
         <module>sample-es</module>
+        <module>sample-netty-protobuf</module>
+        <module>sample-netty-mqtt</module>
     </modules>
 
 
@@ -129,10 +131,13 @@
         <jna.version>5.4.0</jna.version>
 
         <!--netty-->
-        <netty.version>4.1.43.Final</netty.version>
+        <netty.version>4.1.51.Final</netty.version>
 
         <!--sharding-sphere-->
         <sharding-sphere.version>4.1.0</sharding-sphere.version>
+
+        <!--protobuf-->
+        <protobuf-java.version>3.13.0</protobuf-java.version>
 
         <!-- plugins -->
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -497,6 +502,19 @@
                 <groupId>org.apache.shardingsphere</groupId>
                 <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
                 <version>${sharding-sphere.version}</version>
+            </dependency>
+
+            <!--sharding-sphere-->
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>${protobuf-java.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.moquette</groupId>
+                <artifactId>moquette-broker</artifactId>
+                <version>0.13</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
