@@ -139,6 +139,11 @@
         <!--protobuf-->
         <protobuf-java.version>3.13.0</protobuf-java.version>
 
+        <!--mqtt-broker-->
+        <moquette-broker.version>0.13</moquette-broker.version>
+        <!--mqtt-client-->
+        <mqtt-client.version>1.16</mqtt-client.version>
+
         <!-- plugins -->
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
         <maven-jar-plugin.version>2.3.1</maven-jar-plugin.version>
@@ -514,7 +519,12 @@
             <dependency>
                 <groupId>io.moquette</groupId>
                 <artifactId>moquette-broker</artifactId>
-                <version>0.13</version>
+                <version>${moquette-broker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fusesource.mqtt-client</groupId>
+                <artifactId>mqtt-client</artifactId>
+                <version>${mqtt-client.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
