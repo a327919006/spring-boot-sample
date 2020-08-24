@@ -37,6 +37,18 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
+        <!--netty-->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+        </dependency>
+
+        <!--protobuf-->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+        </dependency>
+
         <!--mqtt-->
         <!--<dependency>
             <groupId>org.springframework.integration</groupId>
@@ -51,23 +63,10 @@
             <artifactId>moquette-broker</artifactId>
         </dependency>
 
-        <!--netty-->
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-        </dependency>
-
-        <!--protobuf-->
-        <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-        </dependency>
-
         <!-- mqtt-client -->
         <dependency>
             <groupId>org.fusesource.mqtt-client</groupId>
             <artifactId>mqtt-client</artifactId>
-            <version>1.16</version>
         </dependency>
 
         <!-- modules -->

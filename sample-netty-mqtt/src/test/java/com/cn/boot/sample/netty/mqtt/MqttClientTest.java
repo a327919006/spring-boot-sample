@@ -10,6 +10,9 @@ import org.fusesource.mqtt.client.*;
 
 import java.util.List;
 
+/**
+ * 使用第三方封装好的mqtt-client连接mqtt服务端
+ */
 @Slf4j
 public class MqttClientTest implements Listener {
     private final String userId;
