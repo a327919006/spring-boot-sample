@@ -24,7 +24,7 @@ import org.junit.Test;
  * @see ClientHandler
  */
 @Slf4j
-public class NettyClientTest {
+public class ProtoBufClientTest {
     @Test
     public void runProtoClient() {
         log.info("客户端开始连接");
