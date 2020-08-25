@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option java_package = "com.cn.boot.sample.netty.proto.model";
+option java_outer_classname = "ReqDeviceData";
+
+message DeviceData {
+  string tag = 1;
+  string deviceNo = 2;
+  string data = 3;
+}
