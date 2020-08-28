@@ -17,7 +17,7 @@
 ------------
 
 #### 介绍
-SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurity、RabbitMQ、RocketMQ、Kafka、Redis、MongoDB、Hazelcast、Apollo等
+SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurity、RabbitMQ、RocketMQ、Kafka、Redis、MongoDB、Hazelcast、Apollo等
 
 如果感觉有帮助，帮忙点个star！
 
@@ -31,16 +31,16 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10081         | sample-business           | 业务接口，整合Swagger，详情查看该模块README |
 | -----         | sample-dal                | mapper、sql语句，整合tk-mybatis |
 | 10090         | sample-geoip2             | 整合GeoIP2,实现根据IP地址获取对应城市 |
-| 10095         | sample-guava              | 整合Guava |
+| 10095         | sample-guava              | 整合Guava，常用工具类使用示例 |
 | 10091         | sample-hazelcast          | 整合hazelcase,分布式缓存 |
 | 10094         | sample-hazelcast-client   | 整合hazelcase,此模块只作为缓存客户端，不加入缓存集群 |
 | 10088         | sample-kafka              | 整合Kafka，使用框架spring-kafka |
 | 10089         | sample-kafka-origin       | 整合Kafka，使用原生kafka-client |
 | 20882         | sample-mongo              | 整合MongoDB、SpringDataMongodb |
 | -----         | sample-mongo-api          | MongoDB实体类、服务接口 |
-| 10097,50001   | sample-netty              | 整合Netty |
+| 10097,50001   | sample-netty              | 整合Netty，实现长连接数据交互 |
 | 10097,50001   | sample-netty-mqtt         | 整合Netty+MQTT+ProtoBuf |
-| 10097,50001   | sample-netty-protobuf     | 整合Netty+ProtoBuf |
+| 10097,50001   | sample-netty-protobuf     | 整合Netty+ProtoBuf，实现长连接数据交互 |
 | 20883,10096   | sample-redis              | 整合Redis、SpringDataRedis和Jedis两种方式 |
 | 10092         | sample-rocketmq           | 整合RocketMQ |
 | 10083         | sample-security           | 整合SpringSecurity、SpringSession |
@@ -106,6 +106,7 @@ SpringBoot 2.1.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | ZooKeeper | 分布式协调服务 |
 | Guava | 常用工具类 |
 | ShardingSphere | 分库分表 |
+| Netty | 长连接数据交互 |
 
 #### 项目地址
 - https://gitee.com/NuLiing/spring-boot-sample
