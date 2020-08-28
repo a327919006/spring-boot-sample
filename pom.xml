@@ -46,6 +46,8 @@
         <module>sample-es</module>
         <module>sample-netty-protobuf</module>
         <module>sample-netty-mqtt</module>
+        <module>sample-java-agent</module>
+        <module>sample-logback</module>
     </modules>
 
 
@@ -143,6 +145,10 @@
         <moquette-broker.version>0.13</moquette-broker.version>
         <!--mqtt-client-->
         <mqtt-client.version>1.16</mqtt-client.version>
+
+        <!--traceId-->
+        <transmittable-thread-local.version>2.11.5</transmittable-thread-local.version>
+        <logback-mdc-ttl.version>1.0.2</logback-mdc-ttl.version>
 
         <!-- plugins -->
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -525,6 +531,18 @@
                 <groupId>org.fusesource.mqtt-client</groupId>
                 <artifactId>mqtt-client</artifactId>
                 <version>${mqtt-client.version}</version>
+            </dependency>
+
+            <!--traceId-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${transmittable-thread-local.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ofpay</groupId>
+                <artifactId>logback-mdc-ttl</artifactId>
+                <version>${logback-mdc-ttl.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
