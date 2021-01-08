@@ -30,6 +30,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10087         | sample-apollo             | 整合Apollo配置中心 |
 | 10081         | sample-business           | 业务接口，整合Swagger，详情查看该模块README |
 | -----         | sample-dal                | mapper、sql语句，整合tk-mybatis |
+| 10099         | sample-elasticsearch      | 整合Elasticsearch7.10 |
 | 10090         | sample-geoip2             | 整合GeoIP2,实现根据IP地址获取对应城市 |
 | 10095         | sample-guava              | 整合Guava，常用工具类使用示例 |
 | 10091         | sample-hazelcast          | 整合hazelcase,分布式缓存 |
@@ -62,7 +63,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10093         | sample-zookeeper          | 整合ZooKeeper，使用ZkClient、Curator |
 
 ##### 说明
-- 当前已使用端口10081-10098,20881-20883
+- 当前已使用端口10081-10099,20881-20883
 ```
 端口为1xxxx的模块对外提供Http接口，并整合了Swagger，方便调试。
 端口为2xxxx的模块提供RPC服务，一般用于business模块调用，由business模块提供测试的http接口
@@ -107,6 +108,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | Guava | 常用工具类 |
 | ShardingSphere | 分库分表 |
 | Netty | 长连接数据交互 |
+| Elasticsearch | 全文检索 |
 
 #### 项目地址
 - https://gitee.com/NuLiing/spring-boot-sample
