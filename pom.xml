@@ -48,6 +48,7 @@
         <module>sample-netty-mqtt</module>
         <module>sample-java-agent</module>
         <module>sample-logback</module>
+        <module>sample-elasticsearch</module>
     </modules>
 
 
@@ -149,6 +150,8 @@
         <!--traceId-->
         <transmittable-thread-local.version>2.11.5</transmittable-thread-local.version>
         <logback-mdc-ttl.version>1.0.2</logback-mdc-ttl.version>
+
+        <elasticsearch.version>7.10.0</elasticsearch.version>
 
         <!-- plugins -->
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -544,6 +547,14 @@
                 <artifactId>logback-mdc-ttl</artifactId>
                 <version>${logback-mdc-ttl.version}</version>
             </dependency>
+
+            <!-- elasticsearch.client-transport -->
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
