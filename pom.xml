@@ -48,7 +48,6 @@
         <module>sample-netty-mqtt</module>
         <module>sample-java-agent</module>
         <module>sample-logback</module>
-        <module>sample-elasticsearch</module>
     </modules>
 
 
