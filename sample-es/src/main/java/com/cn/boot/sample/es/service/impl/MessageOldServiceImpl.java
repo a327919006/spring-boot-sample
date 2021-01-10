@@ -15,8 +15,8 @@ import java.util.Iterator;
 /**
  * @author Chen Nan
  */
-@Service("messageService")
-public class MessageServiceImpl implements MessageService {
+@Service
+public class MessageOldServiceImpl implements MessageService {
 
     private Pageable pageable = PageRequest.of(0, 10);
 
