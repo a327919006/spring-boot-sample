@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.DocWriteResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
+import org.elasticsearch.action.delete.DeleteRequest;
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
@@ -104,6 +106,9 @@ public class ElasticsearchUtil {
         return false;
     }
 
+    /**
+     * 新增文档
+     */
     public boolean save(String index, StudentAddReq req) {
         try {
             IndexRequest request = new IndexRequest(index);
@@ -115,6 +120,21 @@ public class ElasticsearchUtil {
                     || response.getResult() == DocWriteResponse.Result.UPDATED) {
                 return true;
             }
+        } catch (Exception e) {
+            log.error("save error:", e);
+        }
+        return false;
+    }
+
+    /**
+     * 删除文档
+     */
+    public boolean delete(String index, String id) {
+        try {
+            DeleteRequest request = new DeleteRequest(index, id);
+
+            DeleteResponse response = client.delete(request, RequestOptions.DEFAULT);
+            return true;
         } catch (Exception e) {
             log.error("save error:", e);
         }
