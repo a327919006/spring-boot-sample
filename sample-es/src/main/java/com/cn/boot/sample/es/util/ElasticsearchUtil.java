@@ -13,6 +13,8 @@ import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
+import org.elasticsearch.action.update.UpdateRequest;
+import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
@@ -116,6 +118,27 @@ public class ElasticsearchUtil {
                     .source(JsonUtil.toJson(req), XContentType.JSON);
 
             IndexResponse response = client.index(request, RequestOptions.DEFAULT);
+            if (response.getResult() == DocWriteResponse.Result.CREATED
+                    || response.getResult() == DocWriteResponse.Result.UPDATED) {
+                return true;
+            }
+        } catch (Exception e) {
+            log.error("save error:", e);
+        }
+        return false;
+    }
+
+    /**
+     * 更新文档
+     */
+    public boolean update(String index, StudentAddReq req) {
+        try {
+            UpdateRequest request = new UpdateRequest(index, req.getId());
+            request.doc(JsonUtil.toJson(req), XContentType.JSON);
+            // 不存在时插入
+            request.docAsUpsert(true);
+
+            UpdateResponse response = client.update(request, RequestOptions.DEFAULT);
             if (response.getResult() == DocWriteResponse.Result.CREATED
                     || response.getResult() == DocWriteResponse.Result.UPDATED) {
                 return true;

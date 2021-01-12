@@ -1,6 +1,5 @@
 package com.cn.boot.sample.es.controller;
 
-import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.es.model.dto.StudentAddReq;
 import com.cn.boot.sample.es.model.po.Student;
 import com.cn.boot.sample.es.util.ElasticsearchUtil;
@@ -42,16 +41,27 @@ public class StudentController {
 
     @ApiOperation("添加")
     @PostMapping("")
-    public String insert(@RequestBody StudentAddReq req) {
+    public boolean insert(@RequestBody StudentAddReq req) {
         req.setCreateTime(LocalDateTime.now());
-        elasticsearchUtil.save(INDEX, req);
-        return Constants.MSG_SUCCESS;
+        return elasticsearchUtil.save(INDEX, req);
+    }
+
+    @ApiOperation("更新")
+    @PutMapping("")
+    public boolean update(@RequestBody StudentAddReq req) {
+        return elasticsearchUtil.update(INDEX, req);
     }
 
     @ApiOperation("根据ID获取")
     @GetMapping("/{id}")
     public Student getById(@PathVariable String id) {
         return elasticsearchUtil.getById(INDEX, id);
+    }
+
+    @ApiOperation("根据ID删除")
+    @DeleteMapping("/{id}")
+    public boolean deleteById(@PathVariable String id) {
+        return elasticsearchUtil.delete(INDEX, id);
     }
 
     @ApiOperation("获取列表")

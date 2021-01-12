@@ -1,5 +1,7 @@
 package com.cn.boot.sample.es.model.dto;
 
+import com.cn.boot.sample.es.util.DateTimeSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -28,5 +30,6 @@ public class StudentAddReq implements Serializable {
     private Integer age;
 
     @ApiModelProperty(value = "创建时间")
+    @JsonSerialize(using = DateTimeSerializer.class)
     private LocalDateTime createTime;
 }
