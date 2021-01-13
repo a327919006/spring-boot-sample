@@ -46,6 +46,12 @@ public class StudentController {
         return elasticsearchUtil.save(INDEX, req);
     }
 
+    @ApiOperation("批量添加")
+    @PostMapping("/bulk")
+    public boolean insert(@RequestBody List<StudentAddReq> list) {
+        return elasticsearchUtil.bulk(INDEX, list);
+    }
+
     @ApiOperation("更新")
     @PutMapping("")
     public boolean update(@RequestBody StudentAddReq req) {

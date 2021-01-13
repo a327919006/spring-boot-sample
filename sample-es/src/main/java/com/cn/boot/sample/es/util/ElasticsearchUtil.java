@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.DocWriteResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
+import org.elasticsearch.action.bulk.BulkRequest;
+import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -122,6 +124,28 @@ public class ElasticsearchUtil {
                     || response.getResult() == DocWriteResponse.Result.UPDATED) {
                 return true;
             }
+        } catch (Exception e) {
+            log.error("save error:", e);
+        }
+        return false;
+    }
+
+    /**
+     * 批量新增文档（bulk本身支持批量操作，包括批量插入、更新、删除、混合等）
+     */
+    public boolean bulk(String index, List<StudentAddReq> list) {
+        try {
+            BulkRequest request = new BulkRequest(index);
+            for (StudentAddReq req : list) {
+                IndexRequest indexRequest = new IndexRequest(index);
+                indexRequest.id(req.getId()).source(JsonUtil.toJson(req), XContentType.JSON);
+
+                request.add(indexRequest);
+            }
+
+
+            BulkResponse response = client.bulk(request, RequestOptions.DEFAULT);
+            return !response.hasFailures();
         } catch (Exception e) {
             log.error("save error:", e);
         }
