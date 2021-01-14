@@ -6,6 +6,7 @@ import com.cn.boot.sample.es.util.ElasticsearchUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.search.aggregations.Aggregation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -80,6 +81,12 @@ public class StudentController {
     @GetMapping("/find")
     public List<Student> find(String name) {
         return elasticsearchUtil.findByName(INDEX, name);
+    }
+
+    @ApiOperation("获取平均年龄")
+    @GetMapping("/age/avg")
+    public List<Aggregation> getAvgAge() {
+        return elasticsearchUtil.getAvgAge(INDEX);
     }
 
 

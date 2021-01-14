@@ -30,6 +30,11 @@ import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.aggregations.Aggregation;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
+import org.elasticsearch.search.aggregations.metrics.AvgAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
@@ -250,6 +255,28 @@ public class ElasticsearchUtil {
                 list.add(JsonUtil.fromJson(json, Student.class));
             }
             return list;
+        } catch (Exception e) {
+            log.error("findByName error:", e);
+        }
+        return Collections.emptyList();
+    }
+
+    /**
+     * 获取平均年龄
+     */
+    public List<Aggregation> getAvgAge(String index) {
+        try {
+            SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+            AvgAggregationBuilder avgAggregation = AggregationBuilders.avg("average_age")
+                    .field("age");
+            searchSourceBuilder.aggregation(avgAggregation);
+
+            SearchRequest request = new SearchRequest(index);
+            request.source(searchSourceBuilder);
+            SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+            Aggregations aggregations = response.getAggregations();
+            return aggregations.asList();
         } catch (Exception e) {
             log.error("findByName error:", e);
         }
