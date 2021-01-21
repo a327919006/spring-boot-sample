@@ -25,6 +25,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 
 | 端口 | 模块名称 | 描述 |
 | --- | --- | --- |
+| 10100         | sample-actuator           | 整合Actuator、Micrometer、Prometheus |
 | 10082         | sample-amqp               | 整合RabbitMQ |
 | -----         | sample-api                | 服务接口、工具类、实体类 |
 | 10087         | sample-apollo             | 整合Apollo配置中心 |
@@ -63,7 +64,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10093         | sample-zookeeper          | 整合ZooKeeper，使用ZkClient、Curator |
 
 ##### 说明
-- 当前已使用端口10081-10099,20881-20883
+- 当前已使用端口10081-10100,20881-20883
 ```
 端口为1xxxx的模块对外提供Http接口，并整合了Swagger，方便调试。
 端口为2xxxx的模块提供RPC服务，一般用于business模块调用，由business模块提供测试的http接口
