@@ -27,7 +27,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/client")
-@Api(tags = "商户管理", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "Dubbo，UidGenerator测试-商户管理", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ClientController {
 
     @Reference

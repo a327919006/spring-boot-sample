@@ -1,6 +1,5 @@
 package com.cn.boot.sample.business.controller;
 
-import cn.hutool.core.thread.ThreadUtil;
 import com.cn.boot.sample.api.model.Constants;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;

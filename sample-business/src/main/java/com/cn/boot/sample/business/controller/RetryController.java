@@ -52,7 +52,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/retry")
-@Api(tags = "重试", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "测试重试", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RetryController {
 
     /**
