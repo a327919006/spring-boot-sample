@@ -19,7 +19,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/message")
-@Api(tags = "消息管理", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "消息管理(SpringData)", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MessageController {
 
     @Autowired

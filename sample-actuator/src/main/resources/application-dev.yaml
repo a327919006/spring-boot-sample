@@ -1,0 +1,16 @@
+server:
+  port: 10100
+  servlet:
+    context-path: /${artifactId}
+
+management:
+  metrics:
+    tags:
+      application: ${artifactId}
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+info:
+  author: ChenNan
