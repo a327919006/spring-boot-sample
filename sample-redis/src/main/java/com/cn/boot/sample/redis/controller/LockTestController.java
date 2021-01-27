@@ -65,7 +65,7 @@ public class LockTestController {
 
     @ApiOperation("测试（使用Redisson会自动延期）")
     @GetMapping("redisson")
-    public String redissonLock(String key, int count) {
+    public String redissonLock(String key, int count, long timeout, long businessTime) {
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
                 .setNamePrefix("test")
                 .build();
@@ -77,11 +77,18 @@ public class LockTestController {
         for (int i = 0; i < count; i++) {
             executor.execute(() -> {
                 RLock redissonLock = redisson.getLock(key);
-                redissonLock.lock();
+
+                if (0 == timeout) {
+                    // 会使用看门狗，自动续期，默认为30秒，也可修改Config
+                    redissonLock.lock();
+                } else {
+                    // 不会使用看门狗，到期自动释放锁
+                    redissonLock.lock(timeout, TimeUnit.MILLISECONDS);
+                }
                 try {
                     num++;
                     log.info("num={}", num);
-                    ThreadUtil.sleep(10);
+                    ThreadUtil.sleep(businessTime);
                 } finally {
                     log.info("out");
                     redissonLock.unlock();
