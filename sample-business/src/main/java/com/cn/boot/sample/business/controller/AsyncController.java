@@ -26,7 +26,7 @@ import java.util.concurrent.Callable;
 @Slf4j
 @RestController
 @RequestMapping("/async")
-@Api(tags = "异步接口", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "测试异步接口-Callable", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AsyncController {
 
     @Reference
