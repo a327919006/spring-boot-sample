@@ -11,10 +11,10 @@ import java.util.List;
  */
 @Data
 @Component
-@ConfigurationProperties(prefix = "test.config")
-public class TestConfigProperties {
-    private String address;
-    private List<UserProperties> users;
-    private FtpConfigProperties ftp;
+public class FtpConfigProperties {
+    private String ip;
+    private int port;
+    private String username;
+    private String password;
 
 }

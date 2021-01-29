@@ -100,6 +100,12 @@
             <artifactId>ant</artifactId>
         </dependency>
 
+        <!--FTP工具类-->
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+        </dependency>
+
         <!-- modules -->
         <dependency>
             <groupId>com.cn.boot</groupId>

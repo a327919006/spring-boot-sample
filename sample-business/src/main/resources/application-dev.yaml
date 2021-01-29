@@ -50,3 +50,8 @@ test:
         age: 11
       - name: user2
         age: 22
+    ftp:
+      ip: 127.0.0.1
+      port: 990
+      username: appter3_user3
+      password: 123456
