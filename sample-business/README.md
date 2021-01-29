@@ -1,6 +1,7 @@
 ### sample-business
 - 此模块依赖Zookeeper，启动本模块时请先启动Zookeeper
 - 此模块包含以下功能
+- http://localhost:10081/sample-business/swagger-ui.html
 
 #### 基础功能说明：
 - ControllerExceptionHandler：统一异常处理
