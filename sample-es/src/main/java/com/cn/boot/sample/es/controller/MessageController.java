@@ -28,15 +28,19 @@ public class MessageController {
     @ApiOperation("创建索引")
     @PostMapping("/index")
     public String createIndex() {
-        messageService.createIndex();
-        return Constants.MSG_SUCCESS;
+        if (messageService.createIndex()) {
+            return Constants.MSG_SUCCESS;
+        }
+        return Constants.MSG_FAIL;
     }
 
     @ApiOperation("删除索引")
     @DeleteMapping("/index")
     public String delete() {
-        messageService.deleteIndex();
-        return Constants.MSG_SUCCESS;
+        if (messageService.deleteIndex()) {
+            return Constants.MSG_SUCCESS;
+        }
+        return Constants.MSG_FAIL;
     }
 
     @ApiOperation("添加")
@@ -53,9 +57,17 @@ public class MessageController {
     }
 
     @ApiOperation("根据content获取")
-    @GetMapping("/{content}")
-    public List<Message> find(@PathVariable String content) {
-        return messageService.findByContent(content).getContent();
+    @GetMapping("/content")
+    public List<Message> findByContent(@RequestParam String content, @RequestParam int page,
+                                       @RequestParam int size) {
+        return messageService.findByContent(content, page, size).getContent();
+    }
+
+    @ApiOperation("根据user获取")
+    @GetMapping("/user")
+    public List<Message> findByUser(@RequestParam String user, @RequestParam int page,
+                                    @RequestParam int size) {
+        return messageService.findByUser(user, page, size).getContent();
     }
 
 

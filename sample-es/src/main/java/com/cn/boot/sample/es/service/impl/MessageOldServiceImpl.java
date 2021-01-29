@@ -26,13 +26,13 @@ public class MessageOldServiceImpl implements MessageService {
     private MessageDao dao;
 
     @Override
-    public void createIndex() {
-        template.createIndex(Message.class);
+    public boolean createIndex() {
+        return template.createIndex(Message.class);
     }
 
     @Override
-    public void deleteIndex() {
-        template.deleteIndex(Message.class);
+    public boolean deleteIndex() {
+        return template.deleteIndex(Message.class);
     }
 
     @Override
@@ -46,12 +46,12 @@ public class MessageOldServiceImpl implements MessageService {
     }
 
     @Override
-    public Page<Message> findByContent(String content) {
-        return dao.findByContent(content, pageable);
+    public Page<Message> findByContent(String content, int page, int size) {
+        return dao.findByContent(content, PageRequest.of(page - 1, size));
     }
 
     @Override
-    public Page<Message> findByUser(String firstCode) {
-        return dao.findByUser(firstCode, pageable);
+    public Page<Message> findByUser(String firstCode, int page, int size) {
+        return dao.findByUser(firstCode, PageRequest.of(page - 1, size));
     }
 }

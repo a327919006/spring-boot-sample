@@ -11,13 +11,17 @@ import java.util.Iterator;
 public interface MessageService {
     /**
      * 创建索引
+     *
+     * @return 操作结果
      */
-    void createIndex();
+    boolean createIndex();
 
     /**
      * 删除索引
+     *
+     * @return 操作结果
      */
-    void deleteIndex();
+    boolean deleteIndex();
 
     /**
      * 保存消息
@@ -39,7 +43,7 @@ public interface MessageService {
      * @param content 消息内容
      * @return 消息列表
      */
-    Page<Message> findByContent(String content);
+    Page<Message> findByContent(String content, int page, int size);
 
     /**
      * 根据发送人搜索
@@ -47,5 +51,5 @@ public interface MessageService {
      * @param user 发送人
      * @return 消息列表
      */
-    Page<Message> findByUser(String user);
+    Page<Message> findByUser(String user, int page, int size);
 }

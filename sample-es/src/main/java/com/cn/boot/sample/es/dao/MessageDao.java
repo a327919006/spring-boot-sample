@@ -14,10 +14,12 @@ public interface MessageDao extends ElasticsearchRepository<Message, Long> {
     /**
      * 根据内容搜索
      */
-    //@Query("{\"bool\" : {\"must\" : {\"field\" : {\"content\" : \"?\"}}}}")
     Page<Message> findByContent(String content, Pageable pageable);
 
-    @Query("{\"bool\" : {\"must\" : {\"field\" : {\"user.keyword\" : \"?\"}}}}")
-    Page<Message> findByUser(String firstCode, Pageable pageable);
+    /**
+     * 根据user搜索
+     */
+    @Query("{\"bool\" : {\"must\" : {\"match\" : {\"user\" : \"?0\"}}}}")
+    Page<Message> findByUser(String user, Pageable pageable);
 
 }

@@ -12,7 +12,8 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
  */
 @Data
 @Accessors(chain = true)
-@Document(indexName = "message", type = "_doc", shards = 1, replicas = 0)
+//@Document(indexName = "message", type = "_doc", shards = 1, replicas = 0)
+@Document(indexName = "message", shards = 1, replicas = 0)
 public class Message {
 
     @Id
@@ -26,4 +27,8 @@ public class Message {
 
     @Field(type = FieldType.Integer)
     private Integer type;
+
+    public static String getIndexName() {
+        return "message";
+    }
 }
