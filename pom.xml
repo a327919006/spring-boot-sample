@@ -80,6 +80,7 @@
         <!-- common tools-->
         <commons-lang3.version>3.10</commons-lang3.version>
         <commons-io.version>2.6</commons-io.version>
+        <commons-net.version>3.7.2</commons-net.version>
         <apache-ant.version>1.10.9</apache-ant.version>
 
         <!--dubbo-->
@@ -362,11 +363,18 @@
                 <artifactId>commons-io</artifactId>
                 <version>${commons-io.version}</version>
             </dependency>
+            <!--FTP工具类-->
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>${commons-net.version}</version>
+            </dependency>
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+            <!--zip工具类-->
             <dependency>
                 <groupId>org.apache.ant</groupId>
                 <artifactId>ant</artifactId>
