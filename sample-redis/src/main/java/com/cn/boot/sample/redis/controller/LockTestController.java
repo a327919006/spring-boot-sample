@@ -76,14 +76,15 @@ public class LockTestController {
 
         for (int i = 0; i < count; i++) {
             executor.execute(() -> {
-                RLock redissonLock = redisson.getLock(key);
+                RLock lock = redisson.getLock(key);
 
                 if (0 == timeout) {
                     // 会使用看门狗，自动续期，默认为30秒，也可修改Config
-                    redissonLock.lock();
+                    // 未获取到锁的线程阻塞等待
+                    lock.lock();
                 } else {
                     // 不会使用看门狗，到期自动释放锁
-                    redissonLock.lock(timeout, TimeUnit.MILLISECONDS);
+                    lock.lock(timeout, TimeUnit.MILLISECONDS);
                 }
                 try {
                     num++;
@@ -91,7 +92,42 @@ public class LockTestController {
                     ThreadUtil.sleep(businessTime);
                 } finally {
                     log.info("out");
-                    redissonLock.unlock();
+                    lock.unlock();
+                }
+            });
+        }
+
+        return Constants.MSG_SUCCESS;
+    }
+
+    @ApiOperation("测试（Redisson-TryLock）")
+    @GetMapping("redisson/tryLock")
+    public String redissonTryLock(String key, int count, long businessTime) {
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+                .setNamePrefix("test")
+                .build();
+        // 确认线程池参数
+        ExecutorService executor = new ThreadPoolExecutor(500, 500,
+                60000L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(102400), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+
+        for (int i = 0; i < count; i++) {
+            executor.execute(() -> {
+                RLock lock = redisson.getLock(key);
+
+                // 获取到锁的线程返回true，未获取锁的线程返回false
+                boolean result = lock.tryLock();
+                if (result) {
+                    try {
+                        num++;
+                        log.info("num={}", num);
+                        ThreadUtil.sleep(businessTime);
+                    } finally {
+                        log.info("out");
+                        lock.unlock();
+                    }
+                } else {
+                    log.info("未获取到锁000");
                 }
             });
         }
