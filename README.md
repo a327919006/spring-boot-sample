@@ -30,6 +30,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | -----         | sample-api                | 服务接口、工具类、实体类 |
 | 10087         | sample-apollo             | 整合Apollo配置中心 |
 | 10081         | sample-business           | 业务接口，整合Swagger，详情查看该模块README |
+| 10081         | sample-canal              | 整合canal，实现mysql的binlog日志订阅 |
 | -----         | sample-dal                | mapper、sql语句，整合tk-mybatis |
 | 10099         | sample-es                 | 整合Elasticsearch |
 | 10090         | sample-geoip2             | 整合GeoIP2,实现根据IP地址获取对应城市 |
@@ -110,6 +111,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | ShardingSphere | 分库分表 |
 | Netty | 长连接数据交互 |
 | Elasticsearch | 全文检索 |
+| Canal | MySQL binlog日志订阅 |
 
 #### 项目地址
 - https://gitee.com/NuLiing/spring-boot-sample
