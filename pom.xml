@@ -50,6 +50,7 @@
         <module>sample-logback</module>
         <module>sample-actuator</module>
         <module>sample-canal</module>
+        <module>sample-grpc</module>
     </modules>
 
 
