@@ -11,35 +11,33 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.concurrent.TimeUnit;
 
 /**
- * @author ChenNan
+ * @author Chen Nan
  */
 @Slf4j
 @Component
-public class GrpcClient {
-    @Value("${grpc.host}")
-    private String host;
+public class HelloWorldClient {
 
     @Value("${grpc.port}")
     private int port;
+    @Value("${grpc.host}")
+    private String host;
 
     private GreeterGrpc.GreeterBlockingStub blockingStub;
 
     @PostConstruct
-    public void start() {
-        String target = "127.0.0.1:10102";
+    public void init() {
+        String target = host + ":" + port;
+
         ManagedChannel channel = ManagedChannelBuilder.forTarget(target)
-                // Channels are secure by default (via SSL/TLS). For the example we disable TLS to avoid
-                // needing certificates.
                 .usePlaintext()
                 .build();
-
         blockingStub = GreeterGrpc.newBlockingStub(channel);
     }
 
     public void greet(String name) {
+        log.info("Will try to greet " + name + " ...");
         HelloRequest request = HelloRequest.newBuilder().setName(name).build();
         HelloReply response;
         try {
@@ -48,6 +46,6 @@ public class GrpcClient {
             log.warn("RPC failed: {}", e.getStatus());
             return;
         }
-        log.info("Message from gRPC-Server: " + response.getMessage());
+        log.info("Greeting: " + response.getMessage());
     }
 }
