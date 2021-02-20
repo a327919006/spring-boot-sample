@@ -1,8 +1,15 @@
 package com.cn.boot.sample.business.controller;
 
+import com.cn.boot.sample.api.model.po.Client;
+import com.cn.boot.sample.api.model.po.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipOutputStream;
 import org.springframework.http.MediaType;
@@ -12,6 +19,12 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author ChenNan
@@ -48,7 +61,7 @@ public class FileController {
         return filename;
     }
 
-    @ApiOperation("下载")
+    @ApiOperation("下载txt文件")
     @GetMapping("/download")
     public void download(HttpServletResponse response) throws IOException {
         String data = "123456";
@@ -61,6 +74,63 @@ public class FileController {
         outputStream.write(data.getBytes());
         outputStream.flush();
         outputStream.close();
+    }
+
+    @ApiOperation("下载Excel文件")
+    @GetMapping("/download/excel/hssf")
+    public void downloadExcel(HttpServletResponse response) throws IOException {
+        // 第一步，创建一个webbook，对应一个Excel文件
+        HSSFWorkbook wb = new HSSFWorkbook();
+        // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet
+        HSSFSheet sheet = wb.createSheet("查询结果");
+        // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short
+        HSSFRow row = sheet.createRow((int) 0);
+        // 第四步，创建单元格，并设置值表头 设置表头居中
+        HSSFCellStyle style = wb.createCellStyle();
+        style.setAlignment(HorizontalAlignment.CENTER); // 创建一个居中格式
+
+        Font font = wb.createFont();
+        font.setColor(IndexedColors.BLACK.index);
+        font.setBold(true);  // 粗体
+        style.setFont(font);
+
+        HSSFCell cell = row.createCell(0);
+        cell.setCellValue("商户ID");
+        cell.setCellStyle(style);
+        cell = row.createCell(1);
+        cell.setCellValue("商户名称");
+        cell.setCellStyle(style);
+        cell = row.createCell(2);
+        cell.setCellValue("创建时间");
+        cell.setCellStyle(style);
+
+
+        // 准备excel数据
+        String filename = "商户信息";
+        List<Client> list = new ArrayList<>();
+        list.add(new Client().setId("1").setName("商户1").setCreateTime(LocalDateTime.now()));
+        list.add(new Client().setId("2").setName("商户2").setCreateTime(LocalDateTime.now()));
+        list.add(new Client().setId("3").setName("商户3").setCreateTime(LocalDateTime.now()));
+
+        int i = 0;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        for (Client client : list) {
+            row = sheet.createRow(i + 1);
+
+            // 第四步，创建单元格，并设置值
+            row.createCell(0).setCellValue(client.getId());
+            row.createCell(1).setCellValue(client.getName());
+            row.createCell(2).setCellValue(client.getCreateTime().format(formatter));
+            i++;
+        }
+
+        // 第六步，输出Excel文件
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment; filename="
+                + new String(filename.getBytes(), StandardCharsets.ISO_8859_1) + ".xls");
+        response.setHeader("Connection", "close");
+
+        wb.write(response.getOutputStream());
     }
 
     @ApiOperation("下载ZIP")
