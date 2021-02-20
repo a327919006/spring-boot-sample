@@ -12,13 +12,14 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Chen Nan
  */
 @Slf4j
 @Component
-public class GrpcServer {
+public class HelloWorldServer {
 
     @Value("${grpc.port}")
     private int port;
@@ -26,48 +27,35 @@ public class GrpcServer {
     private Server server;
 
     @PostConstruct
-    public void start() throws IOException {
+    private void start() throws IOException {
         server = ServerBuilder.forPort(port)
                 .addService(new GreeterImpl())
                 .build()
                 .start();
         log.info("Server started, listening on " + port);
-
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-
-            @Override
-            public void run() {
-
-                log.error("*** shutting down gRPC server since JVM is shutting down");
-                GrpcServer.this.stop();
-                log.error("*** server shut down");
-            }
-        });
     }
 
-    private void stop() {
+    private void stop() throws InterruptedException {
         if (server != null) {
-            server.shutdown();
+            server.shutdown().awaitTermination(30, TimeUnit.SECONDS);
         }
     }
 
-    // block 一直到退出程序
-    protected void blockUntilShutdown() throws InterruptedException {
+    private void blockUntilShutdown() throws InterruptedException {
         if (server != null) {
             server.awaitTermination();
         }
     }
 
-    // 实现 定义一个实现服务接口的类
-    private class GreeterImpl extends GreeterGrpc.GreeterImplBase {
+    static class GreeterImpl extends GreeterGrpc.GreeterImplBase {
 
         @Override
         public void sayHello(HelloRequest req, StreamObserver<HelloReply> responseObserver) {
-            HelloReply reply = HelloReply.newBuilder().setMessage(("Hello " + req.getName())).build();
+            HelloReply reply = HelloReply.newBuilder().setMessage("Hello " + req.getName()).build();
             responseObserver.onNext(reply);
             responseObserver.onCompleted();
-            log.info("Message from gRPC-Client:" + req.getName());
+
+            log.info("req=" + req.getName());
         }
     }
-
 }
