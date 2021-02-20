@@ -84,6 +84,7 @@
         <commons-io.version>2.6</commons-io.version>
         <commons-net.version>3.7.2</commons-net.version>
         <apache-ant.version>1.10.9</apache-ant.version>
+        <apache-poi.version>5.0.0</apache-poi.version>
 
         <!--dubbo-->
         <dubbo.version>2.7.6</dubbo.version>
@@ -391,6 +392,12 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+            <!--poi-->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${apache-poi.version}</version>
             </dependency>
 
             <!--uid-->
