@@ -112,6 +112,13 @@
             <artifactId>poi</artifactId>
         </dependency>
 
+        <!--cglib-->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+
         <!-- modules -->
         <dependency>
             <groupId>com.cn.boot</groupId>
