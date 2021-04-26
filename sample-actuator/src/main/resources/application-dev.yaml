@@ -7,6 +7,9 @@ management:
   metrics:
     tags:
       application: ${artifactId}
+    enable:
+      # 自定义哪些metrice不暴露，已暴露哪些可以从/actuator/metrics查看
+      jvm: false
   endpoints:
     web:
       exposure:
