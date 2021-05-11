@@ -4,6 +4,11 @@ import com.cn.boot.sample.es.model.dto.StudentAddReq;
 import com.cn.boot.sample.es.model.po.Student;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.action.DocWriteResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -14,6 +19,7 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.search.SearchScrollRequest;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
@@ -26,8 +32,10 @@ import org.elasticsearch.client.core.GetSourceResponse;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.Scroll;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.aggregations.Aggregation;
@@ -37,6 +45,7 @@ import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilde
 import org.elasticsearch.search.aggregations.metrics.AvgAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
+import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.stereotype.Component;
 
@@ -59,6 +68,16 @@ public class ElasticsearchUtil {
     public void init() {
         HttpHost httpHost = new HttpHost("localhost", 9200, "http");
         RestClientBuilder builder = RestClient.builder(httpHost);
+
+        // （可选）设置账号密码，如果es未开启账号密码验证，则无需配置
+        UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("elastic", "123456");
+        CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        credentialsProvider.setCredentials(AuthScope.ANY, credentials);
+        builder.setHttpClientConfigCallback(httpAsyncClientBuilder -> {
+            httpAsyncClientBuilder.disableAuthCaching();
+            return httpAsyncClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+        });
+
         client = new RestHighLevelClient(builder);
     }
 
@@ -279,6 +298,47 @@ public class ElasticsearchUtil {
             return aggregations.asList();
         } catch (Exception e) {
             log.error("findByName error:", e);
+        }
+        return Collections.emptyList();
+    }
+
+    /**
+     * 滚动查询
+     */
+    public List<Student> scroll(String index, String name) {
+        try {
+            SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+            searchSourceBuilder.query(QueryBuilders.matchQuery("name", name));
+            searchSourceBuilder.sort("_doc", SortOrder.DESC);
+            searchSourceBuilder.size(3);
+
+            Scroll scroll = new Scroll(TimeValue.timeValueMinutes(1));
+            SearchRequest request = new SearchRequest(index);
+            request.scroll(scroll);
+            request.source(searchSourceBuilder);
+            SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+            SearchHits hits = response.getHits();
+            String scrollId = response.getScrollId();
+            List<Student> list = new LinkedList<>();
+
+            SearchHit[] searchHits = hits.getHits();
+            while (searchHits != null && searchHits.length > 0) {
+                for (SearchHit hit : searchHits) {
+                    String json = hit.getSourceAsString();
+                    list.add(JsonUtil.fromJson(json, Student.class));
+                }
+
+                SearchScrollRequest scrollRequest = new SearchScrollRequest(scrollId);
+                scrollRequest.scroll(scroll);
+                response = client.scroll(scrollRequest, RequestOptions.DEFAULT);
+                scrollId = response.getScrollId();
+                searchHits = response.getHits().getHits();
+            }
+
+            return list;
+        } catch (Exception e) {
+            log.error("scroll error:", e);
         }
         return Collections.emptyList();
     }

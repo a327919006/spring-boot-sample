@@ -83,11 +83,15 @@ public class StudentController {
         return elasticsearchUtil.findByName(INDEX, name);
     }
 
+    @ApiOperation("scroll")
+    @GetMapping("/scroll")
+    public List<Student> scroll(String name) {
+        return elasticsearchUtil.scroll(INDEX, name);
+    }
+
     @ApiOperation("获取平均年龄")
     @GetMapping("/age/avg")
     public List<Aggregation> getAvgAge() {
         return elasticsearchUtil.getAvgAge(INDEX);
     }
-
-
 }
