@@ -85,6 +85,7 @@
         <commons-net.version>3.7.2</commons-net.version>
         <apache-ant.version>1.10.9</apache-ant.version>
         <apache-poi.version>5.0.0</apache-poi.version>
+        <easyexcel.version>2.2.10</easyexcel.version>
 
         <!--dubbo-->
         <dubbo.version>2.7.6</dubbo.version>
@@ -394,10 +395,16 @@
                 <version>${guava.version}</version>
             </dependency>
             <!--poi-->
-            <dependency>
+            <!--<dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi</artifactId>
                 <version>${apache-poi.version}</version>
+            </dependency>-->
+            <!--EasyExcel，包含apache-poi-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easyexcel.version}</version>
             </dependency>
 
             <!--uid-->
