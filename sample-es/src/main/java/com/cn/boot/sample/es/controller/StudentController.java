@@ -1,6 +1,7 @@
 package com.cn.boot.sample.es.controller;
 
 import com.cn.boot.sample.es.model.dto.StudentAddReq;
+import com.cn.boot.sample.es.model.dto.StudentGetReq;
 import com.cn.boot.sample.es.model.po.Student;
 import com.cn.boot.sample.es.util.ElasticsearchUtil;
 import io.swagger.annotations.Api;
@@ -81,6 +82,12 @@ public class StudentController {
     @GetMapping("/find")
     public List<Student> find(String name) {
         return elasticsearchUtil.findByName(INDEX, name);
+    }
+
+    @ApiOperation("根据name和age获取")
+    @GetMapping("/findByNameAndAge")
+    public List<Student> findByNameAndAge(StudentGetReq req) {
+        return elasticsearchUtil.findByNameAndAge(INDEX, req.getNameList(), req.getAge());
     }
 
     @ApiOperation("scroll")

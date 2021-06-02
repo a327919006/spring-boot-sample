@@ -8,7 +8,6 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.action.DocWriteResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -34,20 +33,21 @@ import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermsQueryBuilder;
 import org.elasticsearch.search.Scroll;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
-import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.elasticsearch.search.aggregations.metrics.AvgAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
-import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -262,6 +262,47 @@ public class ElasticsearchUtil {
         try {
             SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
             searchSourceBuilder.query(QueryBuilders.matchQuery("name", name));
+
+            SearchRequest request = new SearchRequest(index);
+            request.source(searchSourceBuilder);
+            SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+            SearchHits hits = response.getHits();
+            List<Student> list = new ArrayList<>((int) hits.getTotalHits().value);
+            for (SearchHit hit : hits.getHits()) {
+                String json = hit.getSourceAsString();
+                list.add(JsonUtil.fromJson(json, Student.class));
+            }
+            return list;
+        } catch (Exception e) {
+            log.error("findByName error:", e);
+        }
+        return Collections.emptyList();
+    }
+
+
+    /**
+     * 根据name查询
+     */
+    public List<Student> findByNameAndAge(String index, List<String> nameList, Integer age) {
+        try {
+//            BoolQueryBuilder nameCondition = QueryBuilders.boolQuery();
+//            nameCondition.minimumShouldMatch(1);
+//            for (String name : nameList) {
+//                nameCondition.should(QueryBuilders.matchQuery("name", name));
+//            }
+            TermsQueryBuilder nameCondition = QueryBuilders.termsQuery("name", nameList);
+
+            BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
+            if (!CollectionUtils.isEmpty(nameList)) {
+                boolQuery.must(nameCondition);
+            }
+            if (null != age) {
+                boolQuery.must(QueryBuilders.matchQuery("age", age));
+            }
+
+            SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+            searchSourceBuilder.query(boolQuery);
 
             SearchRequest request = new SearchRequest(index);
             request.source(searchSourceBuilder);
