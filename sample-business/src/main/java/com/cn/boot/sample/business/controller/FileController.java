@@ -1,24 +1,30 @@
 package com.cn.boot.sample.business.controller;
 
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.read.builder.ExcelReaderBuilder;
+import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.api.model.po.Client;
-import com.cn.boot.sample.api.model.po.User;
+import com.cn.boot.sample.business.excel.ClientCsv;
+import com.cn.boot.sample.business.excel.ClientExcel;
+import com.cn.boot.sample.business.excel.listener.ClientImportListener;
+import com.opencsv.bean.CsvToBeanBuilder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipOutputStream;
 import org.springframework.http.MediaType;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
@@ -159,5 +165,78 @@ public class FileController {
 
         outputStream.flush();
         outputStream.close();
+    }
+
+    @ApiOperation("下载Excel文件-EasyExcel")
+    @GetMapping("/download/excel/easyexcel")
+    public void downloadEasyExcel(HttpServletResponse response) throws IOException {
+        // 准备excel数据
+        String filename = "商户信息";
+        List<ClientExcel> list = new ArrayList<>();
+        list.add(new ClientExcel("1", "商户1", LocalDateTime.now()));
+        list.add(new ClientExcel("2", "商户2", LocalDateTime.now()));
+        list.add(new ClientExcel("3", "商户3", LocalDateTime.now()));
+
+        // 输出Excel文件
+        response.setContentType("application/vnd.ms-excel");
+        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        response.setHeader("Content-Disposition", "attachment; filename="
+                + URLEncoder.encode(filename, StandardCharsets.UTF_8.name()) + ".xlsx");
+        response.setHeader("Connection", "close");
+
+        // (可选) 动态指定某些列不导出，列可根据前端或数据库配置动态指定
+        List<String> excludeList = new ArrayList<>();
+        excludeList.add("id");
+
+        EasyExcel.write(response.getOutputStream(), ClientExcel.class)
+                .excludeColumnFiledNames(excludeList)
+                .sheet(filename)
+                .doWrite(list);
+    }
+
+    @ApiOperation("上传并解析Excel")
+    @PostMapping("/upload/excel")
+    public String uploadExcel(@RequestParam("file") MultipartFile file) {
+        String filename = file.getOriginalFilename(); //上传的文件名
+        if (StringUtils.isEmpty(filename)) {
+            throw new RuntimeException("请上传文件!");
+        }
+        if (!StringUtils.endsWithIgnoreCase(filename, ".xls")
+                && !StringUtils.endsWithIgnoreCase(filename, ".xlsx")
+                && !StringUtils.endsWithIgnoreCase(filename, ".csv")) {
+            throw new RuntimeException("请上传正确的excel文件!");
+        }
+        String contentType = file.getContentType();// 文件类型
+        String name = file.getName(); // 字段名
+        long size = file.getSize(); // 大小 字节
+
+        log.info("filename={}", filename);
+        log.info("contentType={}", contentType);
+        log.info("name={}", name);
+        log.info("size={}", size);
+
+        try {
+            ClientImportListener importListener = new ClientImportListener();
+            InputStream inputStream = new BufferedInputStream(file.getInputStream());
+
+            ExcelReaderBuilder builder = EasyExcel.read(inputStream, ClientExcel.class, importListener);
+            builder.sheet().doRead();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return filename;
+    }
+
+    @ApiOperation("上传并解析Csv")
+    @PostMapping("/upload/csv")
+    public String uploadCsv(@RequestParam("file") MultipartFile file) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
+        List<ClientCsv> beans = new CsvToBeanBuilder(reader)
+                .withSeparator(',')
+                .withType(ClientCsv.class)
+                .build()
+                .parse();
+        log.info("data:{}", beans);
+        return Constants.MSG_SUCCESS;
     }
 }
