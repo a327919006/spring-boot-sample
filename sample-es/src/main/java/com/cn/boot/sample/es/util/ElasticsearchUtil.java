@@ -286,11 +286,16 @@ public class ElasticsearchUtil {
      */
     public List<Student> findByNameAndAge(String index, List<String> nameList, Integer age) {
         try {
+            // 实现类似mysql的IN的效果
+            // 方式一：使用bool+should
 //            BoolQueryBuilder nameCondition = QueryBuilders.boolQuery();
 //            nameCondition.minimumShouldMatch(1);
 //            for (String name : nameList) {
 //                nameCondition.should(QueryBuilders.matchQuery("name", name));
 //            }
+            // 方式二：termsQuery，注意：如果数据是大写英文（如AB12CD34），传入正确数据却查不到数据，可尝试转成小写后传入
+            // 原因：此字段在es定义为text类型，会被分词，分词后索引中为小写（可调用/_analyze测试，索引中为ab12cd34）
+            //      此时若传入原文AB12CD34进行term查询，term不会分词，所以按大写进行匹配，因此匹配不到数据
             TermsQueryBuilder nameCondition = QueryBuilders.termsQuery("name", nameList);
 
             BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
