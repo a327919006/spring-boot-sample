@@ -3,6 +3,7 @@ package com.cn.boot.sample.es.util;
 import com.cn.boot.sample.es.model.dto.StudentAddReq;
 import com.cn.boot.sample.es.model.po.Student;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -39,10 +40,13 @@ import org.elasticsearch.index.query.TermsQueryBuilder;
 import org.elasticsearch.search.Scroll;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
-import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
-import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms;
+import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
+import org.elasticsearch.search.aggregations.metrics.Avg;
 import org.elasticsearch.search.aggregations.metrics.AvgAggregationBuilder;
+import org.elasticsearch.search.aggregations.metrics.Max;
+import org.elasticsearch.search.aggregations.metrics.Min;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
@@ -97,9 +101,15 @@ public class ElasticsearchUtil {
             Map<String, Object> mapping = new HashMap<>();
             Map<String, Object> properties = new HashMap<>();
             Map<String, Object> name = new HashMap<>();
+            Map<String, Object> nameFields = new HashMap<>();
+            Map<String, Object> keyword = new HashMap<>();
             Map<String, Object> age = new HashMap<>();
             Map<String, Object> createTime = new HashMap<>();
             name.put("type", "text");
+            name.put("fields", nameFields);
+            nameFields.put("keyword", keyword);
+            keyword.put("type", "keyword");
+            keyword.put("ignore_above", 256);
             age.put("type", "integer");
             createTime.put("type", "date");
 
@@ -326,26 +336,70 @@ public class ElasticsearchUtil {
         return Collections.emptyList();
     }
 
+
     /**
-     * 获取平均年龄
+     * 获取某个姓名的所有人的平均年龄
+     *
+     * @return
      */
-    public List<Aggregation> getAvgAge(String index) {
+    public Double getAvgAge(String index, String name) {
         try {
             SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-            AvgAggregationBuilder avgAggregation = AggregationBuilders.avg("average_age")
-                    .field("age");
-            searchSourceBuilder.aggregation(avgAggregation);
+            // 无需返回原始数据，只返回聚合结果
+            searchSourceBuilder.size(0);
+
+            // 过滤
+            if (StringUtils.isNotEmpty(name)) {
+                searchSourceBuilder.query(QueryBuilders.matchQuery("name", name));
+            }
+
+            // 聚合查询
+            AvgAggregationBuilder aggregation = AggregationBuilders.avg("average_age").field("age");
+            searchSourceBuilder.aggregation(aggregation);
 
             SearchRequest request = new SearchRequest(index);
             request.source(searchSourceBuilder);
             SearchResponse response = client.search(request, RequestOptions.DEFAULT);
 
-            Aggregations aggregations = response.getAggregations();
-            return aggregations.asList();
+            Avg avg = response.getAggregations().get("average_age");
+            return avg.getValue();
         } catch (Exception e) {
             log.error("findByName error:", e);
         }
-        return Collections.emptyList();
+        return null;
+    }
+
+    /**
+     * 按姓名分组，求每个名字的最大、最小年龄
+     */
+    public Map<String, String> getAgeGroupByName(String index) {
+        try {
+            SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+            // 无需返回原始数据，只返回聚合结果
+            searchSourceBuilder.size(0);
+
+            // 聚合查询
+            TermsAggregationBuilder aggregation = AggregationBuilders.terms("group_by_name").field("name.keyword");
+            aggregation.subAggregation(AggregationBuilders.min("min_age").field("age"));
+            aggregation.subAggregation(AggregationBuilders.max("max_age").field("age"));
+            searchSourceBuilder.aggregation(aggregation);
+
+            SearchRequest request = new SearchRequest(index);
+            request.source(searchSourceBuilder);
+            SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+            Terms terms = response.getAggregations().get("group_by_name");
+            Map<String, String> result = new HashMap<>();
+            for (Terms.Bucket bucket : terms.getBuckets()) {
+                Min min = bucket.getAggregations().get("min_age");
+                Max max = bucket.getAggregations().get("max_age");
+                result.put(bucket.getKeyAsString(), min.getValue() + "->" + max.getValue());
+            }
+            return result;
+        } catch (Exception e) {
+            log.error("findByName error:", e);
+        }
+        return null;
     }
 
     /**

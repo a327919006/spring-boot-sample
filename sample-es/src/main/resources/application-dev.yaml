@@ -6,6 +6,8 @@ spring:
   elasticsearch:
     rest:
       uris: http://localhost:9200
+      username: elastic
+      password: 123456
 
 swagger:
   enabled: true

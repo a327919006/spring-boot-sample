@@ -7,13 +7,13 @@ import com.cn.boot.sample.es.util.ElasticsearchUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.elasticsearch.search.aggregations.Aggregation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Chen Nan
@@ -98,7 +98,13 @@ public class StudentController {
 
     @ApiOperation("获取平均年龄")
     @GetMapping("/age/avg")
-    public List<Aggregation> getAvgAge() {
-        return elasticsearchUtil.getAvgAge(INDEX);
+    public Double getAvgAge(String name) {
+        return elasticsearchUtil.getAvgAge(INDEX, name);
+    }
+
+    @ApiOperation("获取年龄范围")
+    @GetMapping("/age/min")
+    public Map<String, String> getMinAgeGroupByName() {
+        return elasticsearchUtil.getAgeGroupByName(INDEX);
     }
 }
