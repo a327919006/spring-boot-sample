@@ -51,6 +51,7 @@
         <module>sample-actuator</module>
         <module>sample-canal</module>
         <module>sample-grpc</module>
+        <module>sample-design-pattern</module>
     </modules>
 
 
