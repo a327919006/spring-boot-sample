@@ -8,6 +8,9 @@ package com.cn.boot.sample.design.pattern.singleton;
 public class SingletonHungry {
     private static volatile SingletonHungry instance = new SingletonHungry();
 
+    /**
+     * 构造函数私有化
+     */
     private SingletonHungry() {
     }
 
