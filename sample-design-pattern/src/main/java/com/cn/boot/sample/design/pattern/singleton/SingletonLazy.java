@@ -41,6 +41,6 @@ public class SingletonLazy {
     }
 
     public void business() {
-        System.out.println("处理业务");
+        System.out.println("懒汉-处理业务");
     }
 }

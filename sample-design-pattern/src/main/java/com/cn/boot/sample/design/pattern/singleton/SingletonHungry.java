@@ -19,6 +19,6 @@ public class SingletonHungry {
     }
 
     public void business() {
-        System.out.println("处理业务");
+        System.out.println("饿汉-处理业务");
     }
 }
