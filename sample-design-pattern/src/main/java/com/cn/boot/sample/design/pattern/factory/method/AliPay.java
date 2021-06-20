@@ -1,4 +1,4 @@
-package com.cn.boot.sample.design.pattern.factory;
+package com.cn.boot.sample.design.pattern.factory.method;
 
 /**
  * @author Chen Nan

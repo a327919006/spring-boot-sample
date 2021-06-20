@@ -1,34 +1,34 @@
-import com.cn.boot.sample.design.pattern.factory.Pay;
+import com.cn.boot.sample.design.pattern.factory.abstrac.FactoryProducer;
+import com.cn.boot.sample.design.pattern.factory.abstrac.OrderFactory;
 import com.cn.boot.sample.design.pattern.factory.method.AliPayFactory;
+import com.cn.boot.sample.design.pattern.factory.method.Pay;
 import com.cn.boot.sample.design.pattern.factory.method.PayFactory;
 import com.cn.boot.sample.design.pattern.factory.method.WechatPayFactory;
 import com.cn.boot.sample.design.pattern.factory.simple.SimplePayFactory;
-import com.cn.boot.sample.design.pattern.singleton.SingletonHungry;
-import com.cn.boot.sample.design.pattern.singleton.SingletonLazy;
 import org.junit.Test;
 
 /**
- * 设计模式测试类
+ * 工厂模式
  *
  * @author Chen Nan
  */
-public class DesignPatternTest {
+public class FactoryTest {
 
+    /**
+     * 简单工厂模式
+     */
     @Test
-    public void singleton() {
-        SingletonLazy lazy = SingletonLazy.getInstance();
-        lazy.business();
-
-        SingletonHungry hungry = SingletonHungry.getInstance();
-        hungry.business();
-    }
-
-    @Test
-    public void factory() {
+    public void simple() {
         Pay pay = SimplePayFactory.createPay(0);
         assert pay != null;
         pay.unifiedOrder();
+    }
 
+    /**
+     * 工厂方法模式
+     */
+    @Test
+    public void method() {
         PayFactory aliPayFactory = new AliPayFactory();
         Pay alipay = aliPayFactory.createPay();
         alipay.unifiedOrder();
@@ -36,5 +36,16 @@ public class DesignPatternTest {
         PayFactory wechatPayFactory = new WechatPayFactory();
         Pay wechatPay = wechatPayFactory.createPay();
         wechatPay.unifiedOrder();
+    }
+
+    /**
+     * 抽象工厂模式
+     */
+    @Test
+    public void abstrac() {
+        OrderFactory orderFactory = FactoryProducer.getOrderFactory(0);
+        assert orderFactory != null;
+        orderFactory.createPay().pay();
+        orderFactory.createRefund().refund();
     }
 }

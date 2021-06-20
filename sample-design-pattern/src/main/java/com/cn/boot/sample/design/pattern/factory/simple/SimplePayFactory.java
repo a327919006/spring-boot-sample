@@ -1,8 +1,8 @@
 package com.cn.boot.sample.design.pattern.factory.simple;
 
-import com.cn.boot.sample.design.pattern.factory.AliPay;
-import com.cn.boot.sample.design.pattern.factory.Pay;
-import com.cn.boot.sample.design.pattern.factory.WechatPay;
+import com.cn.boot.sample.design.pattern.factory.method.AliPay;
+import com.cn.boot.sample.design.pattern.factory.method.Pay;
+import com.cn.boot.sample.design.pattern.factory.method.WechatPay;
 
 /**
  * 简单工厂模式
