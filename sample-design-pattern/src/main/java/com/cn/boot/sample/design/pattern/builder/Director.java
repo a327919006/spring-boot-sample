@@ -5,7 +5,7 @@ package com.cn.boot.sample.design.pattern.builder;
  */
 public class Director {
 
-    public static Computer createComputer(Builder builder) {
+    public static Computer createComputer(ComputerBuilder builder) {
         return builder.buildCpu()
                 .buildDisk()
                 .buildMemory()
