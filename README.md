@@ -32,6 +32,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10081         | sample-business           | 业务接口，整合Swagger，详情查看该模块README |
 | 10081         | sample-canal              | 整合canal，实现mysql的binlog日志订阅 |
 | -----         | sample-dal                | mapper、sql语句，整合tk-mybatis |
+| -----         | sample-design-pattern     | 实现常见设计模式，如单例、工厂、适配器等等 |
 | 10099         | sample-es                 | 整合Elasticsearch |
 | 10090         | sample-geoip2             | 整合GeoIP2,实现根据IP地址获取对应城市 |
 | 10095         | sample-guava              | 整合Guava，常用工具类使用示例 |
