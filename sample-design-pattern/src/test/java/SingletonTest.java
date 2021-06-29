@@ -3,7 +3,7 @@ import com.cn.boot.sample.design.pattern.singleton.SingletonLazy;
 import org.junit.Test;
 
 /**
- * 单例模式测试类
+ * 单例模式
  *
  * @author Chen Nan
  */

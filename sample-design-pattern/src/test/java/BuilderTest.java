@@ -4,7 +4,7 @@ import com.cn.boot.sample.design.pattern.builder.HighComputerBuilder;
 import org.junit.Test;
 
 /**
- * 建造者设计模式
+ * 建造者模式
  *
  * @author Chen Nan
  */

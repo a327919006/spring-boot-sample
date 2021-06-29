@@ -5,6 +5,8 @@ import com.cn.boot.sample.design.pattern.decorator.SuonaDecorator;
 import org.junit.Test;
 
 /**
+ * 装饰器模式
+ *
  * @author Chen Nan
  */
 public class DecoratorTest {
