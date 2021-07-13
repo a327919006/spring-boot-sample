@@ -44,7 +44,12 @@ public class Query implements RuntimeWiringBuilderCustomizer {
 
     @Override
     public void customize(RuntimeWiring.Builder builder) {
-        builder.type("Query", wiring ->
-                wiring.dataFetcher("countBooks", env -> bookDao.count()));
+        builder.type("Query", wiring -> wiring
+                .dataFetcher("findAuthorById", env -> findAuthorById(env.getArgument("id")))
+                .dataFetcher("findAllAuthors", env -> findAllAuthors())
+                .dataFetcher("countAuthors", env -> countAuthors())
+                .dataFetcher("findAllBooks", env -> findAllBooks())
+                .dataFetcher("countBooks", env -> countBooks())
+        );
     }
 }
