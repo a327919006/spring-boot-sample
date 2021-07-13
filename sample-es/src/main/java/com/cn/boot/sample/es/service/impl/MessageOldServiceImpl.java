@@ -27,12 +27,12 @@ public class MessageOldServiceImpl implements MessageService {
 
     @Override
     public boolean createIndex() {
-        return template.createIndex(Message.class);
+        return false;
     }
 
     @Override
     public boolean deleteIndex() {
-        return template.deleteIndex(Message.class);
+        return false;
     }
 
     @Override
