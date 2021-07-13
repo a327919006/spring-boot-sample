@@ -4,8 +4,9 @@ import com.cn.boot.sample.graphql.dao.AuthorDao;
 import com.cn.boot.sample.graphql.dao.BookDao;
 import com.cn.boot.sample.graphql.entity.Author;
 import com.cn.boot.sample.graphql.entity.Book;
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import graphql.schema.idl.RuntimeWiring;
 import lombok.AllArgsConstructor;
+import org.springframework.graphql.boot.RuntimeWiringBuilderCustomizer;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @Component
 @AllArgsConstructor
-public class Query implements GraphQLQueryResolver {
+public class Query implements RuntimeWiringBuilderCustomizer {
 
     private AuthorDao authorDao;
 
@@ -39,5 +40,11 @@ public class Query implements GraphQLQueryResolver {
 
     public Long countBooks() {
         return bookDao.count();
+    }
+
+    @Override
+    public void customize(RuntimeWiring.Builder builder) {
+        builder.type("Query", wiring ->
+                wiring.dataFetcher("countBooks", env -> bookDao.count()));
     }
 }

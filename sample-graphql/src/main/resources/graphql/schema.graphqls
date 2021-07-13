@@ -1,6 +1,20 @@
+#查询入口
+type Query {
+    ####### Author相关 #########
+    findAuthorById(id:Int!): Author
+
+    findAllAuthors: [Author]!
+
+    countAuthors: Int!
+
+    ####### Book相关 #########
+    findAllBooks: [Book]!
+    countBooks: Int!
+}
+
 type Author {
     #作者Id
-    id: Long!
+    id: Int!
     #创建时间
     createdTime: String
     #名
@@ -11,17 +25,18 @@ type Author {
     books: [Book]
 }
 
-input BookInput {
-    title: String!
-    isbn: String!
-    pageCount: Int
-    authorId: Long
-}
-
 type Book {
-    id: Long!
+    id: Int!
     title: String!
     isbn: String!
     pageCount: Int
     author: Author
 }
+
+input BookInput {
+    title: String!
+    isbn: String!
+    pageCount: Int
+    authorId: Int
+}
+
