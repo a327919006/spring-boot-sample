@@ -1,0 +1,11 @@
+server:
+  port: 10081
+
+spring:
+  graphql:
+    schema:
+      locations: classpath:graphql/
+      printer:
+        # The GraphQL schema can be viewed over HTTP at "/graphql/schema"
+        enabled: true
+
