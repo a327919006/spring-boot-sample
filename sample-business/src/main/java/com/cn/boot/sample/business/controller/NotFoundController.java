@@ -23,7 +23,6 @@ public class NotFoundController implements ErrorController {
      */
     private static final String path_default = "/error";
 
-    @Override
     public String getErrorPath() {
         return path_default;
     }
