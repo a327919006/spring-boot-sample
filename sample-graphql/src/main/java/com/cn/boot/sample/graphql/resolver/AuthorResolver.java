@@ -33,6 +33,6 @@ public class AuthorResolver implements RuntimeWiringBuilderCustomizer {
     @Override
     public void customize(RuntimeWiring.Builder builder) {
         builder.type("Query", wiring ->
-                wiring.dataFetcher("books", env -> bookDao.findByAuthorId(env.getArgument("id"))));
+                wiring.dataFetcher("books", env -> getBooks(env.getArgument("id"))));
     }
 }

@@ -1,7 +1,7 @@
 #查询入口
 type Query {
     ####### Author相关 #########
-    findAuthorById(id:Int!): Author
+    findAuthorById(id:String!): Author
 
     findAllAuthors: [Author]!
 
@@ -14,7 +14,7 @@ type Query {
 
 type Author {
     #作者Id
-    id: Int!
+    id: String!
     #创建时间
     createdTime: String
     #名
@@ -26,7 +26,7 @@ type Author {
 }
 
 type Book {
-    id: Int!
+    id: String!
     title: String!
     isbn: String!
     pageCount: Int

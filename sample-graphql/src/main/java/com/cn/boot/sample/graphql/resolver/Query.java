@@ -22,8 +22,8 @@ public class Query implements RuntimeWiringBuilderCustomizer {
 
     private BookDao bookDao;
 
-    public Author findAuthorById(Long id) {
-        return authorDao.findAuthorById(id);
+    public Author findAuthorById(String id) {
+        return authorDao.findAuthorById(Long.parseLong(id));
     }
 
     public List<Author> findAllAuthors() {
