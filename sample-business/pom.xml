@@ -11,10 +11,6 @@
 
     <artifactId>sample-business</artifactId>
 
-    <properties>
-        <sample-business.version>1.0</sample-business.version>
-    </properties>
-
     <dependencies>
         <!-- spring boot -->
         <dependency>
