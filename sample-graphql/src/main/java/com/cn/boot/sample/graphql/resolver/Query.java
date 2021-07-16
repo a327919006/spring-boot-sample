@@ -4,9 +4,7 @@ import com.cn.boot.sample.graphql.dao.AuthorDao;
 import com.cn.boot.sample.graphql.dao.BookDao;
 import com.cn.boot.sample.graphql.entity.Author;
 import com.cn.boot.sample.graphql.entity.Book;
-import graphql.schema.idl.RuntimeWiring;
-import lombok.AllArgsConstructor;
-import org.springframework.graphql.boot.RuntimeWiringBuilderCustomizer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,11 +13,12 @@ import java.util.List;
  * @author Chen Nan
  */
 @Component
-@AllArgsConstructor
-public class Query implements RuntimeWiringBuilderCustomizer {
+public class Query {
 
+    @Autowired
     private AuthorDao authorDao;
 
+    @Autowired
     private BookDao bookDao;
 
     public Author findAuthorById(String id) {
@@ -40,16 +39,5 @@ public class Query implements RuntimeWiringBuilderCustomizer {
 
     public Long countBooks() {
         return bookDao.count();
-    }
-
-    @Override
-    public void customize(RuntimeWiring.Builder builder) {
-        builder.type("Query", wiring -> wiring
-                .dataFetcher("findAuthorById", env -> findAuthorById(env.getArgument("id")))
-                .dataFetcher("findAllAuthors", env -> findAllAuthors())
-                .dataFetcher("countAuthors", env -> countAuthors())
-                .dataFetcher("findAllBooks", env -> findAllBooks())
-                .dataFetcher("countBooks", env -> countBooks())
-        );
     }
 }
