@@ -18,8 +18,8 @@ public class AuthorDao {
         author.setId(id);
         author.setFirstName("1111");
         author.setLastName("222");
-        author.setCreatedTime(new Date());
-        author.setUpdatedTime(new Date());
+        author.setCreateTime(new Date());
+        author.setUpdateTime(new Date());
 
         return author;
     }
@@ -29,8 +29,8 @@ public class AuthorDao {
         author.setId(1L);
         author.setFirstName("1111");
         author.setLastName("222");
-        author.setCreatedTime(new Date());
-        author.setUpdatedTime(new Date());
+        author.setCreateTime(new Date());
+        author.setUpdateTime(new Date());
 
         return Lists.newArrayList(author);
     }

@@ -21,8 +21,8 @@ public class BookDao {
         book.setPageCount(1);
         book.setAuthorId(id);
         book.setId(1L);
-        book.setCreatedTime(new Date());
-        book.setUpdatedTime(new Date());
+        book.setCreateTime(new Date());
+        book.setUpdateTime(new Date());
 
         return Lists.newArrayList(book);
     }
@@ -34,8 +34,8 @@ public class BookDao {
         book.setPageCount(2);
         book.setAuthorId(2);
         book.setId(id);
-        book.setCreatedTime(new Date());
-        book.setUpdatedTime(new Date());
+        book.setCreateTime(new Date());
+        book.setUpdateTime(new Date());
         return book;
     }
 
@@ -46,8 +46,8 @@ public class BookDao {
         book.setPageCount(1);
         book.setAuthorId(1);
         book.setId(1L);
-        book.setCreatedTime(new Date());
-        book.setUpdatedTime(new Date());
+        book.setCreateTime(new Date());
+        book.setUpdateTime(new Date());
 
         return Lists.newArrayList(book);
     }

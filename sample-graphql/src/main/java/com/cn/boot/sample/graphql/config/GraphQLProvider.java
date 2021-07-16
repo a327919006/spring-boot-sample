@@ -1,5 +1,7 @@
 package com.cn.boot.sample.graphql.config;
 
+import cn.hutool.core.date.DateUtil;
+import com.cn.boot.sample.graphql.entity.Author;
 import com.cn.boot.sample.graphql.resolver.AuthorResolver;
 import com.cn.boot.sample.graphql.resolver.BookResolver;
 import com.cn.boot.sample.graphql.resolver.Query;
@@ -22,13 +24,17 @@ import java.net.URL;
 /**
  * @author Chen Nan
  */
-//@Component
+@Component
 public class GraphQLProvider {
 
     private GraphQL graphQL;
 
     @Autowired
     private Query query;
+    @Autowired
+    private BookResolver bookResolver;
+    @Autowired
+    private AuthorResolver authorResolver;
 
     @Bean
     public GraphQL graphQL() {
@@ -62,7 +68,15 @@ public class GraphQLProvider {
                         .dataFetcher("findAllAuthors", env -> query.findAllAuthors())
                         .dataFetcher("countAuthors", env -> query.countAuthors())
                         .dataFetcher("findAllBooks", env -> query.findAllBooks())
-                        .dataFetcher("countBooks", env -> query.countBooks()))
+                        .dataFetcher("countBooks", env -> query.countBooks())
+                )
+                .type("Author", wiring -> wiring
+                        .dataFetcher("books", env -> authorResolver.getBooks(env.getSource()))
+                        .dataFetcher("updateTime", env -> DateUtil.formatDateTime(((Author) env.getSource()).getUpdateTime()))
+                )
+                .type("Book", wiring -> wiring
+                        .dataFetcher("author", env -> bookResolver.getAuthor(env.getSource()))
+                )
                 .build();
     }
 }

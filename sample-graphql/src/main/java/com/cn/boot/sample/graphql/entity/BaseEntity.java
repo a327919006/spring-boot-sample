@@ -1,5 +1,7 @@
 package com.cn.boot.sample.graphql.entity;
 
+import cn.hutool.core.date.DateUtil;
+import graphql.schema.DataFetchingEnvironment;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -20,20 +22,23 @@ public class BaseEntity implements Serializable {
     /**
      * 创建时间戳 (单位:秒)
      */
-    protected Date createdTime;
+    protected Date createTime;
 
     /**
      * 更新时间戳 (单位:秒)
      */
-    protected Date updatedTime;
-
+    protected Date updateTime;
 
     public BaseEntity() {
-        createdTime = new Date();
-        updatedTime = createdTime;
+        createTime = new Date();
+        updateTime = createTime;
+    }
+
+    public String getCreateTime(DataFetchingEnvironment evn) {
+        return DateUtil.formatDateTime(createTime);
     }
 
     private void doPreUpdate() {
-        updatedTime = new Date();
+        updateTime = new Date();
     }
 }

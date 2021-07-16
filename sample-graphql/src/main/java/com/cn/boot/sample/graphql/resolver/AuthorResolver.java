@@ -21,7 +21,7 @@ public class AuthorResolver {
     private BookDao bookDao;
 
     public String getCreatedTime(Author author) {
-        return sdf.format(author.getCreatedTime());
+        return sdf.format(author.getCreateTime());
     }
 
     public List<Book> getBooks(Author author) {

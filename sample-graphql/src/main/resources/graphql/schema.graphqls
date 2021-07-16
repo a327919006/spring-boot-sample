@@ -1,42 +1,48 @@
-##查询入口
-#type Query {
-#    ####### Author相关 #########
-#    findAuthorById(id:String!): Author
-#
-#    findAllAuthors: [Author]!
-#
-#    countAuthors: Int!
-#
-#    ####### Book相关 #########
-#    findAllBooks: [Book]!
-#    countBooks: Int!
-#}
-#
-#type Author {
-#    #作者Id
-#    id: String!
-#    #创建时间
-#    createdTime: String
-#    #名
-#    firstName: String
-#    #姓
-#    lastName: String
-#    #该作者的所有书籍
-#    books: [Book]
-#}
-#
-#type Book {
-#    id: String!
-#    title: String!
-#    isbn: String!
-#    pageCount: Int
-#    author: Author
-#}
-#
-#input BookInput {
-#    title: String!
-#    isbn: String!
-#    pageCount: Int
-#    authorId: Int
-#}
-#
+#查询入口
+type Query {
+    ####### Author相关 #########
+    findAuthorById(id:String!): Author
+
+    findAllAuthors: [Author]!
+
+    countAuthors: Int!
+
+    ####### Book相关 #########
+    findAllBooks: [Book]!
+    countBooks: Int!
+}
+
+type Author {
+    #作者Id
+    id: String!
+    #该作者的所有书籍
+    books: [Book]
+    #名
+    firstName: String
+    #姓
+    lastName: String
+    #创建时间
+    createTime: String
+    #更新时间戳
+    updateTime: String
+}
+
+type Book {
+    id: String!
+    author: Author
+    title: String!
+    isbn: String!
+    pageCount: Int
+    #创建时间
+    createTime: String
+    #更新时间戳
+    updateTime: String
+}
+
+input BookInput {
+    title: String!
+    isbn: String!
+    pageCount: Int
+    authorId: Int
+}
+
