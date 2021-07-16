@@ -1,5 +1,5 @@
 server:
-  port: 10081
+  port: 10102
 
 spring:
   graphql:
