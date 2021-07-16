@@ -20,15 +20,39 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
 
-    @ApiOperation("获取json数据")
+    @ApiOperation("获取str")
     @GetMapping("str")
     public String getStr() {
         return "aaaa";
+    }
+
+    @ApiOperation("获取空str")
+    @GetMapping("str/empty")
+    public String getStrEmpty() {
+        return "";
+    }
+
+    @ApiOperation("获取null")
+    @GetMapping("str/null")
+    public String getStrNull() {
+        return null;
     }
 
     @ApiOperation("获取json数据")
     @GetMapping("str/base")
     public RspBase<String> getStrRsp() {
         return RspBase.data("123");
+    }
+
+    @ApiOperation("获取json数据")
+    @GetMapping("str/base/empty")
+    public RspBase<String> getStrEmptyRsp() {
+        return RspBase.data("");
+    }
+
+    @ApiOperation("获取json数据")
+    @GetMapping("str/base/null")
+    public RspBase<String> getStrNullRsp() {
+        return RspBase.data(null);
     }
 }
