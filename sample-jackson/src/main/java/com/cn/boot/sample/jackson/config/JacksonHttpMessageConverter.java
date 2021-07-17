@@ -126,7 +126,6 @@ class JacksonHttpMessageConverter extends MappingJackson2HttpMessageConverter {
             return CharSequence.class.isAssignableFrom(clazz) || Character.class.isAssignableFrom(clazz);
         }
 
-
         /**
          * 是否是int
          */

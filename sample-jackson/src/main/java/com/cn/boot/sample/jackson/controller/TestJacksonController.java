@@ -34,6 +34,9 @@ public class TestJacksonController {
         data.setName("test1");
         data.setCreateTime(LocalDateTime.now());
         data.setUpdateTime(new Date());
+        data.setHide("hide");
+        data.setNumber(1);
+
         return objectMapper.writeValueAsString(data);
     }
 
@@ -45,8 +48,10 @@ public class TestJacksonController {
         data.setName("test2");
         data.setCreateTime(LocalDateTime.now());
         data.setUpdateTime(new Date());
-        String json = objectMapper.writeValueAsString(data);
+        data.setHide("hide");
+        data.setNumber(1);
 
+        String json = objectMapper.writeValueAsString(data);
         return objectMapper.readValue(json, TestData.class);
     }
 
