@@ -8,11 +8,11 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  * @author Chen Nan
@@ -33,9 +33,9 @@ public class TestJacksonController {
         data.setId(System.currentTimeMillis());
         data.setName("test1");
         data.setCreateTime(LocalDateTime.now());
+        data.setUpdateTime(new Date());
         return objectMapper.writeValueAsString(data);
     }
-
 
     @ApiOperation("jsonStr转Obj")
     @GetMapping("j2o")
@@ -44,8 +44,22 @@ public class TestJacksonController {
         data.setId(System.currentTimeMillis());
         data.setName("test2");
         data.setCreateTime(LocalDateTime.now());
+        data.setUpdateTime(new Date());
         String json = objectMapper.writeValueAsString(data);
 
         return objectMapper.readValue(json, TestData.class);
+    }
+
+    /**
+     * LocalDateTime使用自定义的序列化
+     * Date根据yaml中配置的date-format
+     */
+    @ApiOperation("查看LocalDateTime反序列化")
+    @PostMapping("")
+    public TestData j2o(@RequestBody TestData data) {
+        log.info("data={}", data);
+        log.info("createTime={}", data.getCreateTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        log.info("updateTime={}", data.getUpdateTime());
+        return data;
     }
 }
