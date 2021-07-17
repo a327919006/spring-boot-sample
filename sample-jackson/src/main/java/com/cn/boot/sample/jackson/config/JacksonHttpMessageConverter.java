@@ -40,7 +40,6 @@ class JacksonHttpMessageConverter extends MappingJackson2HttpMessageConverter {
         }
     }
 
-
     /**
      * 处理字符串等类型的null值
      */
@@ -74,6 +73,18 @@ class JacksonHttpMessageConverter extends MappingJackson2HttpMessageConverter {
         }
     }
 
+    /**
+     * 处理Object类型的null值
+     */
+    public static class NullObjectJsonSerializer extends JsonSerializer<Object> {
+
+        @Override
+        public void serialize(Object o, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
+            jsonGenerator.writeStartObject();
+            jsonGenerator.writeEndObject();
+        }
+    }
+
 
     public static class MyBeanSerializerModifier extends BeanSerializerModifier {
 
@@ -92,6 +103,8 @@ class JacksonHttpMessageConverter extends MappingJackson2HttpMessageConverter {
                     writer.assignNullSerializer(new NullBooleanJsonSerializer());
                 } else if (isStringType(writer)) {
                     writer.assignNullSerializer(new NullStringJsonSerializer());
+                } else {
+                    writer.assignNullSerializer(new NullObjectJsonSerializer());
                 }
             }
             return beanProperties;

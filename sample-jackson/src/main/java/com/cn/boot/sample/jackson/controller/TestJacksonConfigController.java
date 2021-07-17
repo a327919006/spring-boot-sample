@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@RequestMapping("/test")
-@Api(tags = "jackson测试", produces = MediaType.APPLICATION_JSON_VALUE)
-public class TestController {
+@RequestMapping("/test/config")
+@Api(tags = "jackson配置测试", produces = MediaType.APPLICATION_JSON_VALUE)
+public class TestJacksonConfigController {
 
 
     @ApiOperation("获取str")
