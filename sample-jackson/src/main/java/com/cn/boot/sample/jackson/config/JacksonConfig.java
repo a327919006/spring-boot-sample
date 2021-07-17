@@ -41,5 +41,8 @@ public class JacksonConfig {
         simpleModule.addSerializer(LocalDateTime.class, LocalDateTimeSerializer.INSTANCE);
         simpleModule.addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE);
         objectMapper.registerModule(simpleModule);
+
+        // 空值返回{}
+//        objectMapper.getSerializerProvider().setNullValueSerializer(new JacksonHttpMessageConverter.NullObjectJsonSerializer());
     }
 }
