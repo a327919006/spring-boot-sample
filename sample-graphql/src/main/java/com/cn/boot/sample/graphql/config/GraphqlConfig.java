@@ -1,5 +1,6 @@
 package com.cn.boot.sample.graphql.config;
 
+import cn.hutool.core.io.FileUtil;
 import com.cn.boot.sample.graphql.config.wiring.AuthorWiring;
 import com.cn.boot.sample.graphql.config.wiring.BookWiring;
 import com.cn.boot.sample.graphql.config.wiring.QueryWiring;
@@ -11,6 +12,7 @@ import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -18,10 +20,12 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 /**
  * @author Chen Nan
  */
+@Slf4j
 @Component
 public class GraphqlConfig {
 
@@ -40,25 +44,33 @@ public class GraphqlConfig {
     }
 
     @PostConstruct
-    public void init() throws IOException {
-        String queryPath = getResourcePath("graphql/schema.graphqls");
-//        String authorPath = getResourcePath("graphql/schema.graphqls");
-//        String bookPath = getResourcePath("graphql/schema.graphqls");
+    public void init() {
+        String dir = "graphql";
+        List<String> list = FileUtil.listFileNames(dir);
 
         SchemaParser schemaParser = new SchemaParser();
         SchemaGenerator schemaGenerator = new SchemaGenerator();
         TypeDefinitionRegistry typeRegistry = new TypeDefinitionRegistry();
 
-        typeRegistry.merge(schemaParser.parse(queryPath));
-//        typeRegistry.merge(schemaParser.parse(authorPath));
-//        typeRegistry.merge(schemaParser.parse(bookPath));
+        list.forEach(filename -> {
+            String resource = dir + "/" + filename;
+            try {
+                String resourceContent = getResourceContent(resource);
+                typeRegistry.merge(schemaParser.parse(resourceContent));
+            } catch (IOException e) {
+                log.error("get schema error:", e);
+            }
+        });
 
         RuntimeWiring runtimeWiring = buildWiring();
         GraphQLSchema schema = schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
         graphQL = GraphQL.newGraphQL(schema).build();
     }
 
-    private String getResourcePath(String resource) throws IOException {
+    /**
+     * 获取graphql配置文件内容
+     */
+    private String getResourceContent(String resource) throws IOException {
         URL url = Resources.getResource(resource);
         return Resources.toString(url, Charsets.UTF_8);
     }

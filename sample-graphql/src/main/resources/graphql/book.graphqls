@@ -1,0 +1,25 @@
+#查询入口
+extend type Query {
+    findAllBooks: [Book]!
+    countBooks: Int!
+}
+
+type Book {
+    id: String!
+    author: Author
+    title: String!
+    isbn: String!
+    pageCount: Int
+    #创建时间
+    createTime: String
+    #更新时间戳
+    updateTime: String
+}
+
+input BookInput {
+    title: String!
+    isbn: String!
+    pageCount: Int
+    authorId: Int
+}
+
