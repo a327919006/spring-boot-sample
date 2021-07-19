@@ -20,6 +20,10 @@ public class BookResolver {
         return DateUtil.formatDateTime(book.getUpdateTime());
     }
 
+    public Integer getPrice() {
+        return 100;
+    }
+
     public Author getAuthor(Book book) {
         return authorDao.findAuthorById(book.getAuthorId());
     }

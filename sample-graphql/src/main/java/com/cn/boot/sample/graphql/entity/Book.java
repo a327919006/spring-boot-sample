@@ -13,7 +13,9 @@ public class Book extends BaseEntity {
 
     private String isbn;
 
-    private int pageCount;
+    private Integer pageCount;
 
-    private long authorId;
+    private Long authorId;
+
+    private Integer price;
 }

@@ -32,7 +32,7 @@ public class BookDao {
         book.setTitle("title2");
         book.setIsbn("isbn2");
         book.setPageCount(2);
-        book.setAuthorId(2);
+        book.setAuthorId(2L);
         book.setId(id);
         book.setCreateTime(new Date());
         book.setUpdateTime(new Date());
@@ -44,7 +44,7 @@ public class BookDao {
         book.setTitle("title1");
         book.setIsbn("isbn1");
         book.setPageCount(1);
-        book.setAuthorId(1);
+        book.setAuthorId(1L);
         book.setId(1L);
         book.setCreateTime(new Date());
         book.setUpdateTime(new Date());
