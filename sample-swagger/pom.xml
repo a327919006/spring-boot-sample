@@ -31,11 +31,13 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
         </dependency>
-        <!--<dependency>
+        <!--原生swagger界面，访问地址为/swagger-ui.html，不引入此依赖无法访问此地址-->
+        <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-        </dependency>-->
-        <!-- 可选，第三方封装的一个更友好的swagger界面,与原生兼容 -->
+        </dependency>
+        <!-- 可选，第三方封装的一个更友好的swagger界面,访问地址为/doc.html，
+        与原生兼容，同时引入原生依赖则两个地址都可访问-->
         <!--旧版-->
         <!--<dependency>
             <groupId>com.github.xiaoymin</groupId>
