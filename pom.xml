@@ -72,9 +72,8 @@
         <pagehelper.version>5.1.11</pagehelper.version>
 
         <!--swagger-->
-        <swagger-starter.version>1.0.3-RELEASE</swagger-starter.version>
+        <swagger-starter.version>1.1.2</swagger-starter.version>
         <swagger.version>2.9.2</swagger.version>
-        <swagger-bootstrap-ui.version>1.9.6</swagger-bootstrap-ui.version>
 
         <!-- main -->
         <mybatis-generator-core.version>1.3.7</mybatis-generator-core.version>
