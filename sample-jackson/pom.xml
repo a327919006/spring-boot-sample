@@ -22,10 +22,16 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!--swagger-->
-        <dependency>
+        <!--<dependency>
             <groupId>io.github.wilson-he</groupId>
             <artifactId>swagger2-spring-boot-starter</artifactId>
+        </dependency>-->
+        <dependency>
+            <groupId>com.spring4all</groupId>
+            <artifactId>swagger-spring-boot-starter</artifactId>
+            <version>1.9.1.RELEASE</version>
         </dependency>
+
         <!--config-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -17,24 +17,55 @@ spring:
     #常用，全局设置pojo或被@JsonInclude注解的属性的序列化方式
 #    default-property-inclusion: NON_NULL #不为空的属性才会序列化,具体属性可看JsonInclude.Include
 
+# 官方文档： https://github.com/Wilson-He/swagger2-spring-boot-starter
+#swagger:
+#  enabled: true
+#  print-init: true
+#  docket:
+#    base-package: com.cn.boot.sample.jackson.controller
+#    group-name: ${artifactId}
+#    path-selectors:
+#      exclude-patterns: [/error]
+#    api-info:
+#      contact:
+#        name: ChenNan
+#        email: 327919006@qq.com
+#        url: https://gitee.com/NuLiing
+#      title: ${artifactId}
+#      description: ${artifactId}-接口文档
+#      license: Apache License, Version 2.0
+#      license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+#      version: ${project.version}
+#      terms-of-service-url: https://gitee.com/NuLiing
+#    response-message-language: cn
+
+# 官方文档： https://github.com/SpringForAll/spring-boot-starter-swagger
 swagger:
   enabled: true
-  print-init: true
-  docket:
-    base-package: com.cn.boot.sample.jackson.controller
-    group-name: ${artifactId}
-    path-selectors:
-      exclude-patterns: [/error]
-    api-info:
-      contact:
-        name: ChenNan
-        email: 327919006@qq.com
-        url: https://gitee.com/NuLiing
-      title: ${artifactId}
-      description: ${artifactId}-接口文档
-      license: Apache License, Version 2.0
-      license-url: https://www.apache.org/licenses/LICENSE-2.0.html
-      version: ${project.version}
-      terms-of-service-url: https://gitee.com/NuLiing
-    response-message-language: cn
-
+  base-package: com.cn.boot.sample.jackson.controller
+  exclude-path: /error
+  title: ${artifactId}
+  description: ${artifactId}-接口文档
+  version: ${project.version}
+  license: Apache License, Version 2.0
+  license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+  terms-of-service-url: https://gitee.com/NuLiing
+  contact:
+    name: ChenNan
+    email: 327919006@qq.com
+    url: https://gitee.com/NuLiing
+  # 全局请求参数
+  global-operation-parameters:
+  - name: access_token
+    description: 测试
+    modelRef: string
+    parameterType: header
+    required: true
+  ui-config:
+    json-editor: true
+    show-request-headers: true
+    request-timeout: 10000
+  # 鉴权配置
+  authorization:
+    key-name: BasicAuth
+    type: ApiKey
