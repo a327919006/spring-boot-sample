@@ -9,7 +9,7 @@ type Book {
     author: Author
     title: String!
     isbn: String!
-    price: Int
+    price(city:String!): Int
     pageCount: Int
     #创建时间
     createTime: String

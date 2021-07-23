@@ -18,6 +18,8 @@ public class BookWiring implements UnaryOperator<Builder> {
     @Override
     public Builder apply(Builder builder) {
         return builder
-                .dataFetcher("author", env -> bookResolver.getAuthor(env.getSource()));
+                .dataFetcher("author", env -> bookResolver.getAuthor(env.getSource()))
+                .dataFetcher("price", env -> bookResolver.getPrice(env))
+                ;
     }
 }
