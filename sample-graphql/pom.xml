@@ -50,11 +50,12 @@
             <artifactId>graphql-java-spring-boot-starter-webmvc</artifactId>
             <version>2021-03-29T16-31-33-ae4bd96</version>
         </dependency>
-        <dependency>
+        <!--可视化 访问地址/graphiql-->
+        <!--<dependency>
             <groupId>com.graphql-java</groupId>
             <artifactId>graphiql-spring-boot-starter</artifactId>
             <version>5.0.2</version>
-        </dependency>
+        </dependency>-->
 
 
         <!-- spring boot -->

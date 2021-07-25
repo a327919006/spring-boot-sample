@@ -18,7 +18,9 @@ public class QueryWiring implements UnaryOperator<Builder> {
 
     @Override
     public TypeRuntimeWiring.Builder apply(TypeRuntimeWiring.Builder builder) {
-        return builder.dataFetcher("findAuthorById", env -> query.findAuthorById(env.getArgument("id")))
+        return builder
+                .dataFetcher("test", env -> "sample-graphql")
+                .dataFetcher("findAuthorById", env -> query.findAuthorById(env.getArgument("id")))
                 .dataFetcher("findAllAuthors", env -> query.findAllAuthors())
                 .dataFetcher("countAuthors", env -> query.countAuthors())
                 .dataFetcher("findAllBooks", env -> query.findAllBooks())
