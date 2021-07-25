@@ -6,7 +6,10 @@ import com.cn.boot.sample.graphql.config.wiring.BookWiring;
 import com.cn.boot.sample.graphql.config.wiring.QueryWiring;
 import com.google.common.io.Resources;
 import graphql.GraphQL;
+import graphql.GraphQLError;
+import graphql.GraphqlErrorBuilder;
 import graphql.com.google.common.base.Charsets;
+import graphql.execution.DataFetcherExceptionHandlerResult;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
@@ -64,7 +67,24 @@ public class GraphqlConfig {
 
         RuntimeWiring runtimeWiring = buildWiring();
         GraphQLSchema schema = schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
-        graphQL = GraphQL.newGraphQL(schema).build();
+        graphQL = GraphQL.newGraphQL(schema).defaultDataFetcherExceptionHandler(parameters -> {
+            Throwable exception = parameters.getException();
+            GraphQLError error = GraphqlErrorBuilder.newError()
+                    .message(exception.getMessage())
+                    .location(parameters.getSourceLocation())
+                    .path(parameters.getPath())
+                    .build();
+            log.error("获取数据异常:", exception);
+            return DataFetcherExceptionHandlerResult.newResult(error).build();
+        }).build();
+    }
+
+    private RuntimeWiring buildWiring() {
+        return RuntimeWiring.newRuntimeWiring()
+                .type("Query", queryWiring)
+                .type("Author", authorWiring)
+                .type("Book", bookWiring)
+                .build();
     }
 
     /**
@@ -75,11 +95,4 @@ public class GraphqlConfig {
         return Resources.toString(url, Charsets.UTF_8);
     }
 
-    private RuntimeWiring buildWiring() {
-        return RuntimeWiring.newRuntimeWiring()
-                .type("Query", queryWiring)
-                .type("Author", authorWiring)
-                .type("Book", bookWiring)
-                .build();
-    }
 }

@@ -21,6 +21,14 @@ public class Query {
     @Autowired
     private BookDao bookDao;
 
+    public String test() {
+        return "sample-graphql";
+    }
+
+    public String testError() {
+        throw new RuntimeException("testError");
+    }
+
     public Author findAuthorById(String id) {
         return authorDao.findAuthorById(Long.parseLong(id));
     }
