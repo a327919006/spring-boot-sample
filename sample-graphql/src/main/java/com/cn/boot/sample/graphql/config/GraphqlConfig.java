@@ -10,6 +10,9 @@ import graphql.GraphQLError;
 import graphql.GraphqlErrorBuilder;
 import graphql.com.google.common.base.Charsets;
 import graphql.execution.DataFetcherExceptionHandlerResult;
+import graphql.execution.instrumentation.ChainedInstrumentation;
+import graphql.execution.instrumentation.Instrumentation;
+import graphql.execution.instrumentation.tracing.TracingInstrumentation;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
@@ -23,6 +26,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,6 +46,8 @@ public class GraphqlConfig {
     private AuthorWiring authorWiring;
     @Autowired
     private GraphqlExceptionHandler exceptionHandler;
+    @Autowired
+    private GraphqlInstrumentation instrumentation;
 
     @Bean
     public GraphQL graphQL() {
@@ -67,10 +73,16 @@ public class GraphqlConfig {
             }
         });
 
+        List<Instrumentation> chainedList = new ArrayList<>();
+        chainedList.add(instrumentation);
+        chainedList.add(new TracingInstrumentation());
+        ChainedInstrumentation chainedInstrumentation = new ChainedInstrumentation(chainedList);
+
         RuntimeWiring runtimeWiring = buildWiring();
         GraphQLSchema schema = schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
         graphQL = GraphQL.newGraphQL(schema)
                 .defaultDataFetcherExceptionHandler(exceptionHandler)
+                .instrumentation(chainedInstrumentation)
                 .build();
     }
 
