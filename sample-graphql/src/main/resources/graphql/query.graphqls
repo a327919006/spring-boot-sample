@@ -2,4 +2,5 @@
 type Query {
     test: String
     testError: String
+    testError2: String
 }

@@ -40,6 +40,8 @@ public class GraphqlConfig {
     private BookWiring bookWiring;
     @Autowired
     private AuthorWiring authorWiring;
+    @Autowired
+    private GraphqlExceptionHandler exceptionHandler;
 
     @Bean
     public GraphQL graphQL() {
@@ -67,16 +69,9 @@ public class GraphqlConfig {
 
         RuntimeWiring runtimeWiring = buildWiring();
         GraphQLSchema schema = schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
-        graphQL = GraphQL.newGraphQL(schema).defaultDataFetcherExceptionHandler(parameters -> {
-            Throwable exception = parameters.getException();
-            GraphQLError error = GraphqlErrorBuilder.newError()
-                    .message(exception.getMessage())
-                    .location(parameters.getSourceLocation())
-                    .path(parameters.getPath())
-                    .build();
-            log.error("获取数据异常:", exception);
-            return DataFetcherExceptionHandlerResult.newResult(error).build();
-        }).build();
+        graphQL = GraphQL.newGraphQL(schema)
+                .defaultDataFetcherExceptionHandler(exceptionHandler)
+                .build();
     }
 
     private RuntimeWiring buildWiring() {

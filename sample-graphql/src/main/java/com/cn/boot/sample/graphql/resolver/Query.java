@@ -4,6 +4,7 @@ import com.cn.boot.sample.graphql.dao.AuthorDao;
 import com.cn.boot.sample.graphql.dao.BookDao;
 import com.cn.boot.sample.graphql.entity.Author;
 import com.cn.boot.sample.graphql.entity.Book;
+import com.cn.boot.sample.graphql.exception.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +27,11 @@ public class Query {
     }
 
     public String testError() {
-        throw new RuntimeException("testError");
+        throw new BusinessException("testError");
+    }
+
+    public String testError2() {
+        throw new RuntimeException("testError2");
     }
 
     public Author findAuthorById(String id) {
