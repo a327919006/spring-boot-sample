@@ -34,6 +34,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | -----         | sample-dal                | mapper、sql语句，整合tk-mybatis |
 | -----         | sample-design-pattern     | 实现常见设计模式，如单例、工厂、适配器等等 |
 | 10099         | sample-es                 | 整合Elasticsearch |
+| 10104         | sample-fastdfs            | 整合FastDFS |
 | 10090         | sample-geoip2             | 整合GeoIP2,实现根据IP地址获取对应城市 |
 | 10095         | sample-guava              | 整合Guava，常用工具类使用示例 |
 | 10102         | sample-graphql            | 整合GraphQL，图查询 |
@@ -70,7 +71,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10093         | sample-zookeeper          | 整合ZooKeeper，使用ZkClient、Curator |
 
 ##### 说明
-- 当前已使用端口10081-10103,20881-20883
+- 当前已使用端口10081-10104,20881-20883
 ```
 端口为1xxxx的模块对外提供Http接口，并整合了Swagger，方便调试。
 端口为2xxxx的模块提供RPC服务，一般用于business模块调用，由business模块提供测试的http接口
