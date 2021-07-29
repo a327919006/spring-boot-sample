@@ -54,6 +54,7 @@
         <module>sample-design-pattern</module>
         <module>sample-graphql</module>
         <module>sample-jackson</module>
+        <module>sample-fastdfs</module>
     </modules>
 
 
