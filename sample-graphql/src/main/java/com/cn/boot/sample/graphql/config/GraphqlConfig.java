@@ -48,6 +48,8 @@ public class GraphqlConfig {
     private GraphqlExceptionHandler exceptionHandler;
     @Autowired
     private GraphqlInstrumentation instrumentation;
+    @Autowired
+    private GraphqlPreparsedDocumentProvider preparsedDocumentProvider;
 
     @Bean
     public GraphQL graphQL() {
@@ -82,6 +84,7 @@ public class GraphqlConfig {
         GraphQLSchema schema = schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
         graphQL = GraphQL.newGraphQL(schema)
                 .defaultDataFetcherExceptionHandler(exceptionHandler)
+                .preparsedDocumentProvider(preparsedDocumentProvider)
                 .instrumentation(chainedInstrumentation)
                 .build();
     }

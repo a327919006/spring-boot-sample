@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.CompletableFuture;
 
 /**
+ * 类似拦截器，根据需要增加对应业务逻辑
+ *
  * @author Chen Nan
  */
 @Component
@@ -29,13 +31,11 @@ public class GraphqlInstrumentation extends SimpleInstrumentation {
 
     @Override
     public InstrumentationContext<ExecutionResult> beginExecution(InstrumentationExecutionParameters parameters) {
-        CustomInstrumentationState state = parameters.getInstrumentationState();
-        state.add();
         return new SimpleInstrumentationContext<ExecutionResult>() {
             @Override
             public void onCompleted(ExecutionResult result, Throwable t) {
                 CustomInstrumentationState state = parameters.getInstrumentationState();
-                state.add();
+                state.cost();
             }
         };
     }

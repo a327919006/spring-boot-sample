@@ -10,12 +10,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @Slf4j
 public class CustomInstrumentationState implements InstrumentationState {
-    private AtomicInteger count;
+    private long start = System.currentTimeMillis();
 
-    public int add() {
-        int num = count.getAndIncrement();
-        log.info("count");
-        return num;
+    public void cost() {
+        log.info("cost={}ms", System.currentTimeMillis() - start);
     }
 }
 

@@ -10,11 +10,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
+ * 图查询异常处理类，可在发生异常时获取异常信息，可用于异常上报或其他异常处理流程
+ *
  * @author Chen Nan
  */
 @Slf4j
 @Component
 public class GraphqlExceptionHandler implements DataFetcherExceptionHandler {
+
     @Override
     public DataFetcherExceptionHandlerResult onException(DataFetcherExceptionHandlerParameters parameters) {
         Throwable exception = parameters.getException();
