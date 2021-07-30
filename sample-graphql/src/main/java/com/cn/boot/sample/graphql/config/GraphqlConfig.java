@@ -6,10 +6,9 @@ import com.cn.boot.sample.graphql.config.wiring.BookWiring;
 import com.cn.boot.sample.graphql.config.wiring.QueryWiring;
 import com.google.common.io.Resources;
 import graphql.GraphQL;
-import graphql.GraphQLError;
-import graphql.GraphqlErrorBuilder;
 import graphql.com.google.common.base.Charsets;
-import graphql.execution.DataFetcherExceptionHandlerResult;
+import graphql.execution.AsyncExecutionStrategy;
+import graphql.execution.AsyncSerialExecutionStrategy;
 import graphql.execution.instrumentation.ChainedInstrumentation;
 import graphql.execution.instrumentation.Instrumentation;
 import graphql.execution.instrumentation.tracing.TracingInstrumentation;
@@ -83,8 +82,15 @@ public class GraphqlConfig {
         RuntimeWiring runtimeWiring = buildWiring();
         GraphQLSchema schema = schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
         graphQL = GraphQL.newGraphQL(schema)
+                // 自定义异常处理器
                 .defaultDataFetcherExceptionHandler(exceptionHandler)
+                // 自定义查询缓存
                 .preparsedDocumentProvider(preparsedDocumentProvider)
+                // 默认Query执行策略
+                .queryExecutionStrategy(new AsyncExecutionStrategy())
+                // 默认Mutation执行策略
+                .mutationExecutionStrategy(new AsyncSerialExecutionStrategy())
+                // 类似拦截器，在执行GraphQL各个流程前后定义自己的业务流程
                 .instrumentation(chainedInstrumentation)
                 .build();
     }
