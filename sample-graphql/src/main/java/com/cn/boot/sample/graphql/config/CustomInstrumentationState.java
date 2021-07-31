@@ -3,9 +3,9 @@ package com.cn.boot.sample.graphql.config;
 import graphql.execution.instrumentation.InstrumentationState;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
+ * 在整个执行过程中都会传递这个State对象
+ *
  * @author Chen Nan
  */
 @Slf4j

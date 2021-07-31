@@ -20,12 +20,11 @@ import java.util.concurrent.CompletableFuture;
 @Component
 public class GraphqlInstrumentation extends SimpleInstrumentation {
 
+    /**
+     * 创建状态对象
+     */
     @Override
     public InstrumentationState createState() {
-        //
-        // instrumentation state is passed during each invocation of an Instrumentation method
-        // and allows you to put stateful data away and reference it during the query execution
-        //
         return new CustomInstrumentationState();
     }
 
