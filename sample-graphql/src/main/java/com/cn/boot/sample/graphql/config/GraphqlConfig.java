@@ -11,6 +11,7 @@ import graphql.execution.AsyncExecutionStrategy;
 import graphql.execution.AsyncSerialExecutionStrategy;
 import graphql.execution.instrumentation.ChainedInstrumentation;
 import graphql.execution.instrumentation.Instrumentation;
+import graphql.execution.instrumentation.fieldvalidation.FieldValidationInstrumentation;
 import graphql.execution.instrumentation.tracing.TracingInstrumentation;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
@@ -49,6 +50,8 @@ public class GraphqlConfig {
     private GraphqlInstrumentation instrumentation;
     @Autowired
     private GraphqlPreparsedDocumentProvider preparsedDocumentProvider;
+    @Autowired
+    private TestSimpleFieldValidation fieldValidation;
 
     @Bean
     public GraphQL graphQL() {
@@ -77,6 +80,7 @@ public class GraphqlConfig {
         List<Instrumentation> chainedList = new ArrayList<>();
         chainedList.add(instrumentation);
         chainedList.add(new TracingInstrumentation());
+        chainedList.add(new FieldValidationInstrumentation(fieldValidation));
         ChainedInstrumentation chainedInstrumentation = new ChainedInstrumentation(chainedList);
 
         RuntimeWiring runtimeWiring = buildWiring();
