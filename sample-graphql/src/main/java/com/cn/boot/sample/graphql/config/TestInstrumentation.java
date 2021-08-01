@@ -22,10 +22,6 @@ import java.util.concurrent.CompletableFuture;
 @Component
 public class TestInstrumentation extends SimpleInstrumentation {
 
-    public TestInstrumentation() {
-        super();
-    }
-
     @Override
     public InstrumentationContext<ExecutionResult> beginExecution(InstrumentationExecutionParameters parameters) {
         return super.beginExecution(parameters);
