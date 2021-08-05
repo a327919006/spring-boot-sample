@@ -1,6 +1,5 @@
-package com.cn.boot.sample.graphql.entity;
+package com.cn.boot.sample.graphql.subscribe.data;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

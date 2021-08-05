@@ -1,10 +1,12 @@
 package com.cn.boot.sample.graphql.config;
 
 import cn.hutool.core.io.FileUtil;
+import com.cn.boot.sample.graphql.config.instrumentation.GraphqlInstrumentation;
+import com.cn.boot.sample.graphql.config.instrumentation.TestSimpleFieldValidation;
 import com.cn.boot.sample.graphql.config.wiring.AuthorWiring;
 import com.cn.boot.sample.graphql.config.wiring.BookWiring;
 import com.cn.boot.sample.graphql.config.wiring.QueryWiring;
-import com.cn.boot.sample.graphql.config.wiring.SubscriptionWiring;
+import com.cn.boot.sample.graphql.subscribe.SubscriptionWiring;
 import com.google.common.io.Resources;
 import graphql.GraphQL;
 import graphql.com.google.common.base.Charsets;

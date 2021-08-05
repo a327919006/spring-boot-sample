@@ -1,6 +1,6 @@
-package com.cn.boot.sample.graphql.config.wiring;
+package com.cn.boot.sample.graphql.subscribe;
 
-import com.cn.boot.sample.graphql.config.StockTickerPublisher;
+import com.cn.boot.sample.graphql.subscribe.data.StockTickerPublisher;
 import graphql.schema.idl.TypeRuntimeWiring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

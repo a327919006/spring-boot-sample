@@ -13,7 +13,7 @@ public class CustomInstrumentationState implements InstrumentationState {
     private long start = System.currentTimeMillis();
 
     public void cost() {
-        log.info("cost={}ms", System.currentTimeMillis() - start);
+//        log.info("cost={}ms", System.currentTimeMillis() - start);
     }
 }
 

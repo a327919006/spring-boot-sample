@@ -1,6 +1,5 @@
-package com.cn.boot.sample.graphql.config;
+package com.cn.boot.sample.graphql.subscribe.data;
 
-import com.cn.boot.sample.graphql.entity.StockPriceUpdate;
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;

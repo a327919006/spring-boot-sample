@@ -1,4 +1,4 @@
-package com.cn.boot.sample.graphql.config;
+package com.cn.boot.sample.graphql.config.instrumentation;
 
 import graphql.execution.ResultPath;
 import graphql.execution.instrumentation.fieldvalidation.SimpleFieldValidation;

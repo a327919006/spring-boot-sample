@@ -1,5 +1,6 @@
-package com.cn.boot.sample.graphql.config;
+package com.cn.boot.sample.graphql.config.instrumentation;
 
+import com.cn.boot.sample.graphql.config.CustomInstrumentationState;
 import graphql.ExecutionResult;
 import graphql.execution.instrumentation.InstrumentationContext;
 import graphql.execution.instrumentation.InstrumentationState;
