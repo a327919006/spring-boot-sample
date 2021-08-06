@@ -25,11 +25,18 @@ public class QueryParameters {
     }
 
     public static QueryParameters from(String queryMessage) {
+        String query = "subscription StockCodeSubscription { " +
+                "    stockQuotes {" +
+                "       dateTime" +
+                "       stockCode" +
+                "       stockPrice" +
+                "       stockPriceChange" +
+                "     }" +
+                "}";
+
         QueryParameters parameters = new QueryParameters();
-        Map<String, Object> json = JsonKit.toMap(queryMessage);
-        parameters.query = (String) json.get("query");
-        parameters.operationName = (String) json.get("operationName");
-        parameters.variables = getVariables(json.get("variables"));
+        parameters.query = query;
+        parameters.operationName = "stockQuotes";
         return parameters;
     }
 

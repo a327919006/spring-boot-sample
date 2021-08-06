@@ -24,7 +24,7 @@ import graphql.schema.idl.TypeDefinitionRegistry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -36,7 +36,7 @@ import java.util.List;
  * @author Chen Nan
  */
 @Slf4j
-@Component
+@Configuration
 public class GraphqlConfig {
 
     private GraphQL graphQL;
@@ -102,6 +102,8 @@ public class GraphqlConfig {
                 // 类似拦截器，在执行GraphQL各个流程前后定义自己的业务流程
                 .instrumentation(chainedInstrumentation)
                 .build();
+
+        log.info("===初始化GraphQL完成===");
     }
 
     private RuntimeWiring buildWiring() {

@@ -18,16 +18,21 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
+
 /**
  * @author Chen Nan
  */
-@Component
 @Slf4j
-@ServerEndpoint(value = "/graphql")
+@Component
+@ServerEndpoint(value = "/test")
 public class WebSocketServer {
 
     @Autowired
-    private GraphQL graphQL;
+    private static GraphQL graphQL;
+
+    public WebSocketServer() {
+        log.info("=====WebSocketServer=====");
+    }
 
     /**
      * 记录当前在线连接数
