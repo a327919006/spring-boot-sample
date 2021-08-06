@@ -27,8 +27,7 @@ import java.util.concurrent.atomic.AtomicReference;
 @ServerEndpoint(value = "/test")
 public class WebSocketServer {
 
-    @Autowired
-    private static GraphQL graphQL;
+    public static GraphQL graphQL;
 
     public WebSocketServer() {
         log.info("=====WebSocketServer=====");

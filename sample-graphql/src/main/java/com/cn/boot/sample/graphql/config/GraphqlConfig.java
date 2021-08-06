@@ -7,6 +7,7 @@ import com.cn.boot.sample.graphql.config.wiring.AuthorWiring;
 import com.cn.boot.sample.graphql.config.wiring.BookWiring;
 import com.cn.boot.sample.graphql.config.wiring.QueryWiring;
 import com.cn.boot.sample.graphql.subscribe.SubscriptionWiring;
+import com.cn.boot.sample.graphql.subscribe.WebSocketServer;
 import com.google.common.io.Resources;
 import graphql.GraphQL;
 import graphql.com.google.common.base.Charsets;
@@ -104,6 +105,7 @@ public class GraphqlConfig {
                 .build();
 
         log.info("===初始化GraphQL完成===");
+        WebSocketServer.graphQL = graphQL;
     }
 
     private RuntimeWiring buildWiring() {
