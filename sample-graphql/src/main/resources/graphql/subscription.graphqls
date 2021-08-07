@@ -1,3 +1,10 @@
 type Subscription {
-    stockQuotes(stockCodes: String) : [String]
+    stockQuotes(stockCodes: String) : [StockPriceUpdate]
+}
+
+type StockPriceUpdate {
+    stockCode: String
+    dateTime: String
+    stockPrice: Float
+    stockPriceChange: Float
 }

@@ -111,9 +111,9 @@ public class GraphqlConfig {
     private RuntimeWiring buildWiring() {
         return RuntimeWiring.newRuntimeWiring()
                 .type("Query", queryWiring)
-                .type("Subscription", subscriptionWiring)
                 .type("Author", authorWiring)
                 .type("Book", bookWiring)
+                .type("Subscription", subscriptionWiring)
                 .build();
     }
 
