@@ -1,4 +1,4 @@
-package com.cn.boot.sample.graphql.config;
+package com.cn.boot.sample.graphql.config.instrumentation;
 
 import graphql.execution.instrumentation.InstrumentationState;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author Chen Nan
  */
 @Slf4j
-public class CustomInstrumentationState implements InstrumentationState {
+public class SampleInstrumentationState implements InstrumentationState {
     private long start = System.currentTimeMillis();
 
     public void cost() {

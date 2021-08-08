@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class GraphqlExceptionHandler implements DataFetcherExceptionHandler {
+public class SampleExceptionHandler implements DataFetcherExceptionHandler {
 
     @Override
     public DataFetcherExceptionHandlerResult onException(DataFetcherExceptionHandlerParameters parameters) {

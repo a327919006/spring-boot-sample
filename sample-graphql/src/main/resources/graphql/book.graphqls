@@ -11,9 +11,7 @@ type Book {
     isbn: String!
     price(city:String!): Int
     pageCount: Int
-    #创建时间
     createTime: String
-    #更新时间戳
     updateTime: String
 }
 

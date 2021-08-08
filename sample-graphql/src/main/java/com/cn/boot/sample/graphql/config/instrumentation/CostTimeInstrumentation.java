@@ -1,6 +1,5 @@
 package com.cn.boot.sample.graphql.config.instrumentation;
 
-import com.cn.boot.sample.graphql.config.CustomInstrumentationState;
 import graphql.ExecutionResult;
 import graphql.execution.instrumentation.InstrumentationContext;
 import graphql.execution.instrumentation.InstrumentationState;
@@ -19,14 +18,14 @@ import java.util.concurrent.CompletableFuture;
  * @author Chen Nan
  */
 @Component
-public class GraphqlInstrumentation extends SimpleInstrumentation {
+public class CostTimeInstrumentation extends SimpleInstrumentation {
 
     /**
      * 创建状态对象
      */
     @Override
     public InstrumentationState createState() {
-        return new CustomInstrumentationState();
+        return new SampleInstrumentationState();
     }
 
     @Override
@@ -34,7 +33,7 @@ public class GraphqlInstrumentation extends SimpleInstrumentation {
         return new SimpleInstrumentationContext<ExecutionResult>() {
             @Override
             public void onCompleted(ExecutionResult result, Throwable t) {
-                CustomInstrumentationState state = parameters.getInstrumentationState();
+                SampleInstrumentationState state = parameters.getInstrumentationState();
                 state.cost();
             }
         };

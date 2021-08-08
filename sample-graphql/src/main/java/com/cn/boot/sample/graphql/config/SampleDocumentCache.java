@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 import java.util.function.Function;
 
 /**
- * 作用：相同的语句，只要解析、校验一次，提高性能
+ * 作用：通过使用缓存，相同的语句，只要解析、校验一次，提高性能
  *
  * @author Chen Nan
  */
 @Component
-public class GraphqlPreparsedDocumentProvider implements PreparsedDocumentProvider {
+public class SampleDocumentCache implements PreparsedDocumentProvider {
     private final Cache<String, PreparsedDocumentEntry> CACHE = Caffeine.newBuilder().maximumSize(10_000).build();
 
     @Override

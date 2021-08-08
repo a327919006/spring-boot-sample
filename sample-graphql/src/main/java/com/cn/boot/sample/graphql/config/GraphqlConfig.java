@@ -1,7 +1,7 @@
 package com.cn.boot.sample.graphql.config;
 
 import cn.hutool.core.io.FileUtil;
-import com.cn.boot.sample.graphql.config.instrumentation.GraphqlInstrumentation;
+import com.cn.boot.sample.graphql.config.instrumentation.CostTimeInstrumentation;
 import com.cn.boot.sample.graphql.config.instrumentation.TestSimpleFieldValidation;
 import com.cn.boot.sample.graphql.config.wiring.AuthorWiring;
 import com.cn.boot.sample.graphql.config.wiring.BookWiring;
@@ -22,6 +22,8 @@ import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
+import graphql.schema.visibility.BlockedFields;
+import graphql.schema.visibility.GraphqlFieldVisibility;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -45,19 +47,24 @@ public class GraphqlConfig {
     @Autowired
     private QueryWiring queryWiring;
     @Autowired
-    private SubscriptionWiring subscriptionWiring;
-    @Autowired
     private BookWiring bookWiring;
     @Autowired
     private AuthorWiring authorWiring;
     @Autowired
-    private GraphqlExceptionHandler exceptionHandler;
+    private SubscriptionWiring subscriptionWiring;
+
     @Autowired
-    private GraphqlInstrumentation instrumentation;
+    private SampleExceptionHandler exceptionHandler;
     @Autowired
-    private GraphqlPreparsedDocumentProvider preparsedDocumentProvider;
+    private SampleFieldVisibility fieldVisibility;
+
+    @Autowired
+    private CostTimeInstrumentation instrumentation;
+    @Autowired
+    private SampleDocumentCache preparsedDocumentProvider;
     @Autowired
     private TestSimpleFieldValidation fieldValidation;
+
 
     @Bean
     public GraphQL graphQL() {
@@ -91,6 +98,7 @@ public class GraphqlConfig {
 
         RuntimeWiring runtimeWiring = buildWiring();
         GraphQLSchema schema = schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
+
         graphQL = GraphQL.newGraphQL(schema)
                 // 自定义异常处理器
                 .defaultDataFetcherExceptionHandler(exceptionHandler)
@@ -114,6 +122,10 @@ public class GraphqlConfig {
                 .type("Author", authorWiring)
                 .type("Book", bookWiring)
                 .type("Subscription", subscriptionWiring)
+                // 字段可见性，方式一：
+//                .fieldVisibility(getBlockedFields())
+                // 字段可见性，方式二：
+//                .fieldVisibility(fieldVisibility)
                 .build();
     }
 
@@ -125,4 +137,12 @@ public class GraphqlConfig {
         return Resources.toString(url, Charsets.UTF_8);
     }
 
+
+    private GraphqlFieldVisibility getBlockedFields() {
+        GraphqlFieldVisibility blockedFields = BlockedFields.newBlock()
+                .addPattern("Book.updateTime")
+                .addPattern(".*\\.updateTime") // it uses regular expressions
+                .build();
+        return blockedFields;
+    }
 }
