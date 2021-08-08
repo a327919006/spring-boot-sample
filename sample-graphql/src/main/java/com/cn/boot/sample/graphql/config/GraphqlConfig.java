@@ -137,7 +137,9 @@ public class GraphqlConfig {
         return Resources.toString(url, Charsets.UTF_8);
     }
 
-
+    /**
+     * 获取字段可见性配置
+     */
     private GraphqlFieldVisibility getBlockedFields() {
         GraphqlFieldVisibility blockedFields = BlockedFields.newBlock()
                 .addPattern("Book.updateTime")
