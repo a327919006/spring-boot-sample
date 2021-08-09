@@ -14,6 +14,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
+ * 使用controller调用GraphQL接口
+ *
  * @author Chen Nan
  */
 @Slf4j

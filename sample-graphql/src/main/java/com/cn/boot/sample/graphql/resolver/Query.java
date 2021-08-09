@@ -53,6 +53,7 @@ public class Query {
     }
 
     public List<Book> findAllBooks(DataFetchingEnvironment env) {
+        // 获取上下文信息
         Object context = env.getContext();
         if (context instanceof User) {
             User user = (User) context;
@@ -60,7 +61,6 @@ public class Query {
         } else {
             log.info(context.toString());
         }
-
 
         // 查看本次调用请求的字段列表
         DataFetchingFieldSelectionSet selectionSet = env.getSelectionSet();
