@@ -24,7 +24,7 @@ public class QueryWiring implements UnaryOperator<Builder> {
                 .dataFetcher("findAuthorById", env -> query.findAuthorById(env.getArgument("id")))
                 .dataFetcher("findAllAuthors", env -> query.findAllAuthors())
                 .dataFetcher("countAuthors", env -> query.countAuthors())
-                .dataFetcher("findAllBooks", env -> query.findAllBooks())
+                .dataFetcher("findAllBooks", env -> query.findAllBooks(env))
                 .dataFetcher("countBooks", env -> query.countBooks());
     }
 }

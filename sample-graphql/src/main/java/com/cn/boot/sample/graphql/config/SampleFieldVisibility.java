@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
+ * 字段可见性，根据业务需要设置，比如：admin才可看见某些字段和接口
+ *
  * @author Chen Nan
  */
 @Slf4j
