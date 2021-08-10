@@ -2,7 +2,8 @@ package com.cn.boot.sample.graphql.config;
 
 import cn.hutool.core.io.FileUtil;
 import com.cn.boot.sample.graphql.config.instrumentation.CostTimeInstrumentation;
-import com.cn.boot.sample.graphql.config.instrumentation.TestSimpleFieldValidation;
+import com.cn.boot.sample.graphql.config.instrumentation.SampleFieldValidation;
+import com.cn.boot.sample.graphql.config.instrumentation.SampleInstrumentation;
 import com.cn.boot.sample.graphql.config.wiring.AuthorWiring;
 import com.cn.boot.sample.graphql.config.wiring.BookWiring;
 import com.cn.boot.sample.graphql.config.wiring.QueryWiring;
@@ -57,13 +58,17 @@ public class GraphqlConfig {
     private SampleExceptionHandler exceptionHandler;
     @Autowired
     private SampleFieldVisibility fieldVisibility;
+    @Autowired
+    private AuthDirective authDirective;
 
     @Autowired
-    private CostTimeInstrumentation instrumentation;
+    private CostTimeInstrumentation costTimeInstrumentation;
+    @Autowired
+    private SampleInstrumentation sampleInstrumentation;
     @Autowired
     private SampleDocumentCache preparsedDocumentProvider;
     @Autowired
-    private TestSimpleFieldValidation fieldValidation;
+    private SampleFieldValidation fieldValidation;
 
 
     @Bean
@@ -91,7 +96,8 @@ public class GraphqlConfig {
         });
 
         List<Instrumentation> chainedList = new ArrayList<>();
-        chainedList.add(instrumentation);
+        chainedList.add(costTimeInstrumentation);
+//        chainedList.add(sampleInstrumentation);
         chainedList.add(new TracingInstrumentation());
         chainedList.add(new FieldValidationInstrumentation(fieldValidation));
         ChainedInstrumentation chainedInstrumentation = new ChainedInstrumentation(chainedList);
@@ -122,6 +128,7 @@ public class GraphqlConfig {
                 .type("Author", authorWiring)
                 .type("Book", bookWiring)
                 .type("Subscription", subscriptionWiring)
+                .directive("auth", authDirective)
                 // 字段可见性，方式一：
 //                .fieldVisibility(getBlockedFields())
                 // 字段可见性，方式二：

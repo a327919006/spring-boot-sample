@@ -18,4 +18,6 @@ public class Book extends BaseEntity {
     private Long authorId;
 
     private Integer price;
+
+    private Integer costPrice;
 }

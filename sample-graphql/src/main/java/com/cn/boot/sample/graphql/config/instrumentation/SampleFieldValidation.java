@@ -10,9 +10,9 @@ import java.util.Optional;
  * @author Chen Nan
  */
 @Component
-public class TestSimpleFieldValidation extends SimpleFieldValidation {
+public class SampleFieldValidation extends SimpleFieldValidation {
 
-    public TestSimpleFieldValidation() {
+    public SampleFieldValidation() {
         ResultPath fieldPath = ResultPath.parse("/findAuthorById");
         this.addRule(fieldPath, (fieldAndArguments, environment) -> {
             String id = fieldAndArguments.getArgumentValue("id");

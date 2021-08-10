@@ -4,12 +4,22 @@ extend type Query {
     countBooks: Int!
 }
 
+directive @auth(role : String!) on FIELD_DEFINITION
+
+# 书籍
 type Book {
     id: String!
+    # 作者
     author: Author
+    # 标题
     title: String!
+    # 书籍ISBN
     isbn: String!
+    # 销售价
     price(city:String!): Int
+    # 成本价
+    costPrice: Int @auth(role : "admin")
+    # 页数
     pageCount: Int
     createTime: String
     updateTime: String

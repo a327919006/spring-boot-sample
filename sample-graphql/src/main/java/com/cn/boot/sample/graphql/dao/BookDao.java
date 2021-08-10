@@ -16,11 +16,12 @@ public class BookDao {
 
     public List<Book> findByAuthorId(Long id) {
         Book book = new Book();
-        book.setTitle("title1");
-        book.setIsbn("isbn1");
-        book.setPageCount(1);
-        book.setAuthorId(id);
         book.setId(1L);
+        book.setAuthorId(id);
+        book.setTitle("title" + id);
+        book.setIsbn("isbn" + id);
+        book.setCostPrice(10);
+        book.setPageCount(1);
         book.setCreateTime(new Date());
         book.setUpdateTime(new Date());
 
@@ -29,11 +30,12 @@ public class BookDao {
 
     public Book findBookById(Long id) {
         Book book = new Book();
+        book.setId(id);
+        book.setAuthorId(2L);
         book.setTitle("title2");
         book.setIsbn("isbn2");
+        book.setCostPrice(10);
         book.setPageCount(2);
-        book.setAuthorId(2L);
-        book.setId(id);
         book.setCreateTime(new Date());
         book.setUpdateTime(new Date());
         return book;
@@ -41,11 +43,12 @@ public class BookDao {
 
     public List<Book> findAll() {
         Book book = new Book();
+        book.setId(1L);
+        book.setAuthorId(1L);
         book.setTitle("title1");
         book.setIsbn("isbn1");
+        book.setCostPrice(10);
         book.setPageCount(1);
-        book.setAuthorId(1L);
-        book.setId(1L);
         book.setCreateTime(new Date());
         book.setUpdateTime(new Date());
 
