@@ -45,7 +45,7 @@ public class StudentController {
     @PostMapping("")
     public boolean insert(@RequestBody StudentAddReq req) {
         req.setCreateTime(LocalDateTime.now());
-        return elasticsearchUtil.save(INDEX, req);
+        return elasticsearchUtil.save(INDEX, req.getId(), req);
     }
 
     @ApiOperation("批量添加")

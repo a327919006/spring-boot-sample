@@ -1,5 +1,6 @@
 package com.cn.boot.sample.es.util;
 
+import cn.hutool.core.collection.ListUtil;
 import com.cn.boot.sample.es.model.dto.StudentAddReq;
 import com.cn.boot.sample.es.model.po.Student;
 import lombok.extern.slf4j.Slf4j;
@@ -70,11 +71,11 @@ public class ElasticsearchUtil {
      */
     @PostConstruct
     public void init() {
-        HttpHost httpHost = new HttpHost("localhost", 9200, "http");
+        HttpHost httpHost = new HttpHost("192.168.5.131", 15591, "http");
         RestClientBuilder builder = RestClient.builder(httpHost);
 
         // （可选）设置账号密码，如果es未开启账号密码验证，则无需配置
-        UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("elastic", "123456");
+        UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("elastic", "kXu418c7boV8Y096zTOA1lo6");
         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY, credentials);
         builder.setHttpClientConfigCallback(httpAsyncClientBuilder -> {
@@ -147,11 +148,29 @@ public class ElasticsearchUtil {
     /**
      * 新增文档
      */
-    public boolean save(String index, StudentAddReq req) {
+    public boolean save(String index, String id, Object req) {
         try {
             IndexRequest request = new IndexRequest(index);
-            request.id(req.getId())
-                    .source(JsonUtil.toJson(req), XContentType.JSON);
+            request.id(id).source(JsonUtil.toJson(req), XContentType.JSON);
+
+            IndexResponse response = client.index(request, RequestOptions.DEFAULT);
+            if (response.getResult() == DocWriteResponse.Result.CREATED
+                    || response.getResult() == DocWriteResponse.Result.UPDATED) {
+                return true;
+            }
+        } catch (Exception e) {
+            log.error("save error:", e);
+        }
+        return false;
+    }
+
+    /**
+     * 新增文档
+     */
+    public boolean save(String index, String json) {
+        try {
+            IndexRequest request = new IndexRequest(index);
+            request.source(json, XContentType.JSON);
 
             IndexResponse response = client.index(request, RequestOptions.DEFAULT);
             if (response.getResult() == DocWriteResponse.Result.CREATED
@@ -177,13 +196,32 @@ public class ElasticsearchUtil {
                 request.add(indexRequest);
             }
 
-
             BulkResponse response = client.bulk(request, RequestOptions.DEFAULT);
             return !response.hasFailures();
         } catch (Exception e) {
             log.error("save error:", e);
         }
         return false;
+    }
+
+
+    /**
+     * 批量新增文档
+     */
+    public boolean bulkSave(String index, List<String> jsonList) {
+        List<List<String>> split = ListUtil.split(jsonList, 1000);
+        split.forEach(list -> {
+            try {
+                BulkRequest request = new BulkRequest(index);
+                jsonList.forEach(json -> request.add(new IndexRequest(index).source(json, XContentType.JSON)));
+
+                BulkResponse response = client.bulk(request, RequestOptions.DEFAULT);
+            } catch (Exception e) {
+                log.error("save error:", e);
+            }
+        });
+
+        return true;
     }
 
     /**
