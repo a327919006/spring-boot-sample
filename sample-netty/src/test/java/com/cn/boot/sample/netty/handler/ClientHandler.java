@@ -24,9 +24,9 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         ctx.writeAndFlush(reqDeviceData);
 
         // 连接10秒后客户端主动断开
-        ThreadUtil.sleep(10000);
-        log.info("测试10s后客户端主动断开连接");
-        ctx.close();
+//        ThreadUtil.sleep(10000);
+//        log.info("测试10s后客户端主动断开连接");
+//        ctx.close();
     }
 
     @Override
