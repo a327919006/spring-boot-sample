@@ -56,6 +56,7 @@
         <module>sample-jackson</module>
         <module>sample-fastdfs</module>
         <module>sample-websocket</module>
+        <module>sample-netty-byte</module>
     </modules>
 
 
