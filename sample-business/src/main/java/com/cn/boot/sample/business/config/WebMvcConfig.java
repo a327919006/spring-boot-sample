@@ -14,8 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.concurrent.Callable;
 
 /**
- * <p>Title:</p>
- * <p>Description:</p>
+ * Async相关配置
  *
  * @author Chen Nan
  * @date 2018/10/8.
