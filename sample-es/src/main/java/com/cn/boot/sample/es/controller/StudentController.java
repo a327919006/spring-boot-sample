@@ -84,6 +84,12 @@ public class StudentController {
         return elasticsearchUtil.findByName(INDEX, name);
     }
 
+    @ApiOperation("根据name获取数量")
+    @GetMapping("/count")
+    public long count(String name) {
+        return elasticsearchUtil.countByName(INDEX, name);
+    }
+
     @ApiOperation("根据name和age获取")
     @GetMapping("/findByNameAndAge")
     public List<Student> findByNameAndAge(StudentGetReq req) {

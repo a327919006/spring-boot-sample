@@ -28,6 +28,8 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.core.CountRequest;
+import org.elasticsearch.client.core.CountResponse;
 import org.elasticsearch.client.core.GetSourceRequest;
 import org.elasticsearch.client.core.GetSourceResponse;
 import org.elasticsearch.client.indices.CreateIndexRequest;
@@ -71,11 +73,11 @@ public class ElasticsearchUtil {
      */
     @PostConstruct
     public void init() {
-        HttpHost httpHost = new HttpHost("192.168.5.131", 15591, "http");
+        HttpHost httpHost = new HttpHost("192.168.5.131", 64944, "http");
         RestClientBuilder builder = RestClient.builder(httpHost);
 
         // （可选）设置账号密码，如果es未开启账号密码验证，则无需配置
-        UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("elastic", "kXu418c7boV8Y096zTOA1lo6");
+        UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("elastic", "21LeQz2L0jaFb5941e02sIde");
         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY, credentials);
         builder.setHttpClientConfigCallback(httpAsyncClientBuilder -> {
@@ -328,6 +330,21 @@ public class ElasticsearchUtil {
         return Collections.emptyList();
     }
 
+    /**
+     * 根据name获取数量
+     */
+    public long countByName(String index, String name){
+        try {
+            CountRequest request = new CountRequest(index);
+            request.query(QueryBuilders.matchQuery("name", name));
+            CountResponse response = client.count(request, RequestOptions.DEFAULT);
+
+            return response.getCount();
+        } catch (Exception e) {
+            log.error("findByName error:", e);
+        }
+        return 0;
+    }
 
     /**
      * 根据name查询
