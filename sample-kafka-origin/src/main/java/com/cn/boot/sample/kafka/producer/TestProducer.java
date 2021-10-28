@@ -1,13 +1,17 @@
 package com.cn.boot.sample.kafka.producer;
 
+import com.cn.boot.sample.kafka.partitioner.TestPartitioner;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.stereotype.Component;
 
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * @author Chen Nan
@@ -23,6 +27,8 @@ public class TestProducer {
         p.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka-broker-0.mydomain.com:443");//kafka地址，多个地址用逗号分割
         p.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         p.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        // 指定自定义分区器，不指定则为DefaultPartitioner
+        p.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, TestPartitioner.class);
         // 仅SASL
 //        p.put("security.protocol", "SASL_PLAINTEXT");
         // 仅SSL
@@ -51,5 +57,16 @@ public class TestProducer {
                 log.error("【Kafka】发送异常:" + e.getMessage(), e);
             }
         });
+    }
+
+    public void sendSync(String topic, String msg) {
+        ProducerRecord<String, String> record = new ProducerRecord<>(topic, msg);
+        Future<RecordMetadata> result = kafkaProducer.send(record);
+        try {
+            RecordMetadata recordMetadata = result.get();
+            log.info("【Kafka】同步发送消息，offset:{},partition:{}", recordMetadata.offset(), recordMetadata.partition());
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 }
