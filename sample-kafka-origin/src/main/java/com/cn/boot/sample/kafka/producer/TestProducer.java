@@ -49,6 +49,9 @@ public class TestProducer {
         System.out.println(kafkaProducer);
     }
 
+    /**
+     * 异步发送
+     */
     public void send(String topic, String msg) {
         ProducerRecord<String, String> record = new ProducerRecord<>(topic, msg);
         kafkaProducer.send(record, (recordMetadata, e) -> {
@@ -59,6 +62,9 @@ public class TestProducer {
         });
     }
 
+    /**
+     * 同步发送
+     */
     public void sendSync(String topic, String msg) {
         ProducerRecord<String, String> record = new ProducerRecord<>(topic, msg);
         Future<RecordMetadata> result = kafkaProducer.send(record);
