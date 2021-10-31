@@ -24,10 +24,16 @@ public class TestConsumer {
 
     public TestConsumer() {
         Properties p = new Properties();
-        p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka-broker-0.mydomain.com:443");
+        p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
         p.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         p.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         p.put(ConsumerConfig.GROUP_ID_CONFIG, KafkaConstant.GROUP_TEST);
+        // 新消费者组从哪个位置开始消费，earliest：从最旧，latest：从最新(默认)
+        p.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+        // 自动提交消费者offset，默认true
+        p.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
+        // 自动提交频率，默认5000ms
+        p.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
         // 仅SASL
 //        p.put("security.protocol", "SASL_PLAINTEXT");
         // 仅SSL

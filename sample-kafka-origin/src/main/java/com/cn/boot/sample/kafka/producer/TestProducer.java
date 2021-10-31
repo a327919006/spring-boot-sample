@@ -24,7 +24,7 @@ public class TestProducer {
 
     public TestProducer() {
         Properties p = new Properties();
-        p.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka-broker-0.mydomain.com:443");//kafka地址，多个地址用逗号分割
+        p.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");//kafka地址，多个地址用逗号分割
         p.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         p.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         // 指定自定义分区器，不指定则为DefaultPartitioner

@@ -30,4 +30,11 @@ public class SendController {
         return msg;
     }
 
+    @ApiOperation("同步发送消息")
+    @PostMapping("sync")
+    public String sendSync(String msg) {
+        testProducer.send(KafkaConstant.TOPIC_TEST, msg);
+        return msg;
+    }
+
 }
