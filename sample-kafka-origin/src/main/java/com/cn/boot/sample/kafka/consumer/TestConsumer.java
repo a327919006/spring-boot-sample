@@ -3,15 +3,15 @@ package com.cn.boot.sample.kafka.consumer;
 import cn.hutool.core.thread.ThreadFactoryBuilder;
 import com.cn.boot.sample.kafka.constant.KafkaConstant;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.consumer.*;
+import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.*;
 
@@ -50,7 +50,28 @@ public class TestConsumer {
 //        System.setProperty("java.security.auth.login.config", "E:\\software\\kafka_2.13-2.8.0\\config\\kafka_client_jaas_scram.conf");
 
         KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<>(p);
-        kafkaConsumer.subscribe(Collections.singletonList(KafkaConstant.TOPIC_TEST));// 订阅消息
+        // 订阅消息
+        kafkaConsumer.subscribe(Collections.singletonList(KafkaConstant.TOPIC_TEST));
+
+        // 订阅消息，同时监听Rebalance事件
+//        kafkaConsumer.subscribe(Collections.singletonList(KafkaConstant.TOPIC_TEST),
+//                new ConsumerRebalanceListener() {
+//                    /**
+//                     * Rebalance之前调用
+//                     */
+//                    @Override
+//                    public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
+//
+//                    }
+//
+//                    /**
+//                     * Rebalance之后调用
+//                     */
+//                    @Override
+//                    public void onPartitionsAssigned(Collection<TopicPartition> partitions) {
+//
+//                    }
+//                });
 
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().
                 setNamePrefix("consumer-pool-")
@@ -65,6 +86,15 @@ public class TestConsumer {
                 for (ConsumerRecord<String, String> record : records) {
                     log.info("【Kafka】收到消息，topic:{},offset:{},消息:{}", record.topic(), record.offset(), record.value());
                 }
+
+                // 手动-同步提交offset，需先关闭自动提交，调用此方法后会阻塞直到提交完成
+//                kafkaConsumer.commitSync();
+                // 手动-异步提交offset，需先关闭自动提交，调用此方法后不会阻塞
+//                kafkaConsumer.commitAsync((offsets, exception) -> {
+//                    if (exception != null) {
+//                        log.error("error={}", exception);
+//                    }
+//                });
             }
         });
     }

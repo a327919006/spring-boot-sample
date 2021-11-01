@@ -1,6 +1,9 @@
 package com.cn.boot.sample.kafka.producer;
 
+import com.cn.boot.sample.kafka.interceptor.CounterInterceptor;
+import com.cn.boot.sample.kafka.interceptor.TimeInterceptor;
 import com.cn.boot.sample.kafka.partitioner.TestPartitioner;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -9,6 +12,7 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -29,6 +33,8 @@ public class TestProducer {
         p.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         // 指定自定义分区器，不指定则为DefaultPartitioner
         p.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, TestPartitioner.class);
+        // 添加自定义拦截器，默认为空
+        p.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, Lists.newArrayList(TimeInterceptor.class, CounterInterceptor.class));
         // 仅SASL
 //        p.put("security.protocol", "SASL_PLAINTEXT");
         // 仅SSL
