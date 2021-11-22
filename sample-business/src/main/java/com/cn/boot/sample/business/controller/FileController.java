@@ -5,13 +5,11 @@ import com.alibaba.excel.read.builder.ExcelReaderBuilder;
 import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.api.model.po.Client;
 import com.cn.boot.sample.business.excel.ClientCsv;
+import com.cn.boot.sample.business.excel.ClientCsvIn;
 import com.cn.boot.sample.business.excel.ClientExcel;
 import com.cn.boot.sample.business.excel.listener.ClientImportListener;
 import com.opencsv.CSVWriter;
-import com.opencsv.bean.ColumnPositionMappingStrategy;
-import com.opencsv.bean.CsvToBeanBuilder;
-import com.opencsv.bean.StatefulBeanToCsv;
-import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.bean.*;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import io.swagger.annotations.Api;
@@ -36,6 +34,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -177,7 +176,10 @@ public class FileController {
     @GetMapping("/download/excel/easyexcel")
     public void downloadEasyExcel(HttpServletResponse response) throws IOException {
         String filename = "商户信息";
-        List<ClientExcel> list = generateData();
+        List<ClientExcel> list = new ArrayList<>();
+        list.add(new ClientExcel("1", "商户1", LocalDateTime.now()));
+        list.add(new ClientExcel("2", "商户2", LocalDateTime.now()));
+        list.add(new ClientExcel("3", "商户3", LocalDateTime.now()));
 
         // 输出Excel文件
         response.setContentType("application/vnd.ms-excel");
@@ -232,10 +234,10 @@ public class FileController {
     @ApiOperation("上传并解析Csv")
     @PostMapping("/upload/csv")
     public String uploadCsv(@RequestParam("file") MultipartFile file) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
-        List<ClientCsv> beans = new CsvToBeanBuilder(reader)
+        BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), "GBK"));
+        List<ClientCsvIn> beans = new CsvToBeanBuilder<ClientCsvIn>(reader)
                 .withSeparator(',')
-                .withType(ClientCsv.class)
+                .withType(ClientCsvIn.class)
                 .build()
                 .parse();
         log.info("data:{}", beans);
@@ -243,48 +245,76 @@ public class FileController {
     }
 
     @ApiOperation("下载Csv")
-    @PostMapping("/download/csv")
+    @GetMapping("/download/csv")
     public void downloadCsv(HttpServletResponse response) throws Exception {
-        String filename = "商户信息";
-        List<ClientExcel> list = generateData();
+        String filename = "test";
+        List<ClientCsv> list = new ArrayList<>();
+        list.add(new ClientCsv("商户1", new Date()));
+        list.add(new ClientCsv("商户2", new Date()));
+        list.add(new ClientCsv("商户3", new Date()));
 
-        // 输出Excel文件
+        // 输出CSV文件
         response.setContentType("text/csv");
-        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        response.setHeader("Content-Disposition", "attachment; filename="
-                + URLEncoder.encode(filename, StandardCharsets.UTF_8.name()) + ".xlsx");
-        response.setHeader("Connection", "close");
+        response.setCharacterEncoding("GBK");
+        response.setHeader("Content-Disposition", "attachment; filename=" + filename + ".csv");
 
-        StatefulBeanToCsv<ClientExcel> beanToCsv = new StatefulBeanToCsvBuilder<ClientExcel>(response.getWriter()).build();
-        beanToCsv.write(list);
+//        StatefulBeanToCsv<ClientCsv> beanToCsv = new StatefulBeanToCsvBuilder<ClientCsv>(response.getWriter()).build();
+//        beanToCsv.write(list);
 
+        HeaderColumnNameMappingStrategy strategy = new HeaderColumnNameMappingStrategy();
+        strategy.setType(ClientCsv.class);
 
-//        ColumnPositionMappingStrategy mapStrategy = new ColumnPositionMappingStrategy();
-//
-//        mapStrategy.setType(ClientExcel.class);
-//
-//        //和字段名对应
-//        String[] columns = new String[]{"id", "name", "createTime"};
-//        mapStrategy.setColumnMapping(columns);
-//
-//        StatefulBeanToCsv btcsv = new StatefulBeanToCsvBuilder(response.getWriter())
-//                .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
-//                .withMappingStrategy(mapStrategy)
-//                .withSeparator(',')
-//                .withLineEnd(CSVWriter.RFC4180_LINE_END)
-//                .build();
-//
-//        btcsv.write(list);
+        PrintWriter writer = response.getWriter();
+        StatefulBeanToCsv btcsv = new StatefulBeanToCsvBuilder<ClientCsv>(writer)
+                .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+                .withMappingStrategy(strategy)
+                .withSeparator(',')
+                .build();
+
+        btcsv.write(list);
+        writer.close();
     }
 
-    /**
-     * 生成随机数据
-     */
-    private List<ClientExcel> generateData() {
-        List<ClientExcel> list = new ArrayList<>();
-        list.add(new ClientExcel("1", "商户1", LocalDateTime.now()));
-        list.add(new ClientExcel("2", "商户2", LocalDateTime.now()));
-        list.add(new ClientExcel("3", "商户3", LocalDateTime.now()));
-        return list;
+    @ApiOperation("下载csv且ZIP")
+    @GetMapping("/download/csv/zip")
+    public void downloadCsvZip(HttpServletResponse response) throws Exception {
+        List<ClientCsv> list = new ArrayList<>();
+        list.add(new ClientCsv("商户1", new Date()));
+        list.add(new ClientCsv("商户2", new Date()));
+        list.add(new ClientCsv("商户3", new Date()));
+        String fileName = "test";
+
+        writeDate(list, fileName, ClientCsv.class, response);
+    }
+
+    private void writeDate(List list, String fileName, Class clazz, HttpServletResponse response) throws Exception {
+        ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();
+        OutputStreamWriter outWriter = new OutputStreamWriter(byteArrayOut, "GBK");
+
+        HeaderColumnNameMappingStrategy strategy = new HeaderColumnNameMappingStrategy();
+        strategy.setType(clazz);
+        StatefulBeanToCsv btcsv = new StatefulBeanToCsvBuilder(outWriter)
+                .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+                .withMappingStrategy(strategy)
+                .withSeparator(',')
+                .build();
+        btcsv.write(list);
+        outWriter.close();
+        byte[] data = byteArrayOut.toByteArray();
+
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName + ".zip");
+        ServletOutputStream writer = response.getOutputStream();
+
+        ZipOutputStream outputStream = new ZipOutputStream(writer);
+        ZipEntry zipFile = new ZipEntry(fileName + ".csv");
+
+        outputStream.putNextEntry(zipFile);
+        outputStream.write(data);
+        outputStream.closeEntry();
+
+        outputStream.flush();
+        outputStream.close();
     }
 }

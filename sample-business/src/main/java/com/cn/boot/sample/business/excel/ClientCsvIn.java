@@ -4,26 +4,22 @@ import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
  * @author Chen Nan
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Accessors(chain = true)
-public class ClientCsv implements Serializable {
+public class ClientCsvIn implements Serializable {
 
-    @CsvBindByName(column = "名称")
+    @CsvBindByName
     private String name;
 
-    @CsvBindByName(column = "日期")
+    @CsvBindByName
     @CsvDate("yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 }
