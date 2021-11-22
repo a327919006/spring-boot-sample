@@ -7,7 +7,13 @@ import com.cn.boot.sample.api.model.po.Client;
 import com.cn.boot.sample.business.excel.ClientCsv;
 import com.cn.boot.sample.business.excel.ClientExcel;
 import com.cn.boot.sample.business.excel.listener.ClientImportListener;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -170,12 +176,8 @@ public class FileController {
     @ApiOperation("下载Excel文件-EasyExcel")
     @GetMapping("/download/excel/easyexcel")
     public void downloadEasyExcel(HttpServletResponse response) throws IOException {
-        // 准备excel数据
         String filename = "商户信息";
-        List<ClientExcel> list = new ArrayList<>();
-        list.add(new ClientExcel("1", "商户1", LocalDateTime.now()));
-        list.add(new ClientExcel("2", "商户2", LocalDateTime.now()));
-        list.add(new ClientExcel("3", "商户3", LocalDateTime.now()));
+        List<ClientExcel> list = generateData();
 
         // 输出Excel文件
         response.setContentType("application/vnd.ms-excel");
@@ -238,5 +240,51 @@ public class FileController {
                 .parse();
         log.info("data:{}", beans);
         return Constants.MSG_SUCCESS;
+    }
+
+    @ApiOperation("下载Csv")
+    @PostMapping("/download/csv")
+    public void downloadCsv(HttpServletResponse response) throws Exception {
+        String filename = "商户信息";
+        List<ClientExcel> list = generateData();
+
+        // 输出Excel文件
+        response.setContentType("text/csv");
+        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        response.setHeader("Content-Disposition", "attachment; filename="
+                + URLEncoder.encode(filename, StandardCharsets.UTF_8.name()) + ".xlsx");
+        response.setHeader("Connection", "close");
+
+        StatefulBeanToCsv<ClientExcel> beanToCsv = new StatefulBeanToCsvBuilder<ClientExcel>(response.getWriter()).build();
+        beanToCsv.write(list);
+
+
+//        ColumnPositionMappingStrategy mapStrategy = new ColumnPositionMappingStrategy();
+//
+//        mapStrategy.setType(ClientExcel.class);
+//
+//        //和字段名对应
+//        String[] columns = new String[]{"id", "name", "createTime"};
+//        mapStrategy.setColumnMapping(columns);
+//
+//        StatefulBeanToCsv btcsv = new StatefulBeanToCsvBuilder(response.getWriter())
+//                .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+//                .withMappingStrategy(mapStrategy)
+//                .withSeparator(',')
+//                .withLineEnd(CSVWriter.RFC4180_LINE_END)
+//                .build();
+//
+//        btcsv.write(list);
+    }
+
+    /**
+     * 生成随机数据
+     */
+    private List<ClientExcel> generateData() {
+        List<ClientExcel> list = new ArrayList<>();
+        list.add(new ClientExcel("1", "商户1", LocalDateTime.now()));
+        list.add(new ClientExcel("2", "商户2", LocalDateTime.now()));
+        list.add(new ClientExcel("3", "商户3", LocalDateTime.now()));
+        return list;
     }
 }
