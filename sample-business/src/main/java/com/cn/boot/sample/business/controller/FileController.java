@@ -234,10 +234,14 @@ public class FileController {
     @ApiOperation("上传并解析Csv")
     @PostMapping("/upload/csv")
     public String uploadCsv(@RequestParam("file") MultipartFile file) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), "GBK"));
-        List<ClientCsvIn> beans = new CsvToBeanBuilder<ClientCsvIn>(reader)
+        BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), "UTF-8"));
+
+        HeaderColumnNameMappingStrategy<ClientCsv> strategy = new HeaderColumnNameMappingStrategy<>();
+        strategy.setType(ClientCsv.class);
+
+        List<ClientCsv> beans = new CsvToBeanBuilder<ClientCsv>(reader)
                 .withSeparator(',')
-                .withType(ClientCsvIn.class)
+                .withMappingStrategy(strategy)
                 .build()
                 .parse();
         log.info("data:{}", beans);
@@ -249,23 +253,23 @@ public class FileController {
     public void downloadCsv(HttpServletResponse response) throws Exception {
         String filename = "test";
         List<ClientCsv> list = new ArrayList<>();
-        list.add(new ClientCsv("商户1", new Date()));
-        list.add(new ClientCsv("商户2", new Date()));
-        list.add(new ClientCsv("商户3", new Date()));
+        list.add(new ClientCsv("12345678900001", "商户1", new Date(), LocalDateTime.now()));
+        list.add(new ClientCsv("12345678900002", "商户2", new Date(), LocalDateTime.now()));
+        list.add(new ClientCsv("12345678900003", "商户3", new Date(), LocalDateTime.now()));
 
         // 输出CSV文件
         response.setContentType("text/csv");
-        response.setCharacterEncoding("GBK");
+        response.setCharacterEncoding("UTF-8");
         response.setHeader("Content-Disposition", "attachment; filename=" + filename + ".csv");
 
 //        StatefulBeanToCsv<ClientCsv> beanToCsv = new StatefulBeanToCsvBuilder<ClientCsv>(response.getWriter()).build();
 //        beanToCsv.write(list);
 
-        HeaderColumnNameMappingStrategy strategy = new HeaderColumnNameMappingStrategy();
+        HeaderColumnNameMappingStrategy<ClientCsv> strategy = new HeaderColumnNameMappingStrategy<>();
         strategy.setType(ClientCsv.class);
 
         PrintWriter writer = response.getWriter();
-        StatefulBeanToCsv btcsv = new StatefulBeanToCsvBuilder<ClientCsv>(writer)
+        StatefulBeanToCsv<ClientCsv> btcsv = new StatefulBeanToCsvBuilder<ClientCsv>(writer)
                 .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
                 .withMappingStrategy(strategy)
                 .withSeparator(',')
@@ -279,21 +283,21 @@ public class FileController {
     @GetMapping("/download/csv/zip")
     public void downloadCsvZip(HttpServletResponse response) throws Exception {
         List<ClientCsv> list = new ArrayList<>();
-        list.add(new ClientCsv("商户1", new Date()));
-        list.add(new ClientCsv("商户2", new Date()));
-        list.add(new ClientCsv("商户3", new Date()));
+        list.add(new ClientCsv("12345678900001", "商户1", new Date(), LocalDateTime.now()));
+        list.add(new ClientCsv("12345678900002", "商户2", new Date(), LocalDateTime.now()));
+        list.add(new ClientCsv("12345678900003", "商户3", new Date(), LocalDateTime.now()));
         String fileName = "test";
 
         writeDate(list, fileName, ClientCsv.class, response);
     }
 
-    private void writeDate(List list, String fileName, Class clazz, HttpServletResponse response) throws Exception {
+    private <T> void writeDate(List<T> list, String fileName, Class<T> clazz, HttpServletResponse response) throws Exception {
         ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();
-        OutputStreamWriter outWriter = new OutputStreamWriter(byteArrayOut, "GBK");
+        OutputStreamWriter outWriter = new OutputStreamWriter(byteArrayOut, "UTF-8");
 
-        HeaderColumnNameMappingStrategy strategy = new HeaderColumnNameMappingStrategy();
+        HeaderColumnNameMappingStrategy<T> strategy = new HeaderColumnNameMappingStrategy<>();
         strategy.setType(clazz);
-        StatefulBeanToCsv btcsv = new StatefulBeanToCsvBuilder(outWriter)
+        StatefulBeanToCsv<T> btcsv = new StatefulBeanToCsvBuilder<T>(outWriter)
                 .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
                 .withMappingStrategy(strategy)
                 .withSeparator(',')

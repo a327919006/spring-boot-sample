@@ -20,10 +20,17 @@ import java.util.Date;
 @Accessors(chain = true)
 public class ClientCsv implements Serializable {
 
+    @CsvBindByName(column = "ID")
+    private String id;
+
     @CsvBindByName(column = "名称")
     private String name;
 
-    @CsvBindByName(column = "日期")
+    @CsvBindByName(column = "创建时间")
     @CsvDate("yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+
+    @CsvBindByName(column = "更新时间")
+    @CsvDate("yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updateTime;
 }
