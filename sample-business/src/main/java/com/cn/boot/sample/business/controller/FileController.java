@@ -5,16 +5,17 @@ import com.alibaba.excel.read.builder.ExcelReaderBuilder;
 import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.api.model.po.Client;
 import com.cn.boot.sample.business.excel.ClientCsv;
-import com.cn.boot.sample.business.excel.ClientCsvIn;
 import com.cn.boot.sample.business.excel.ClientExcel;
 import com.cn.boot.sample.business.excel.listener.ClientImportListener;
 import com.opencsv.CSVWriter;
-import com.opencsv.bean.*;
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.bean.HeaderColumnNameMappingStrategy;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
@@ -35,6 +36,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -250,12 +252,9 @@ public class FileController {
 
     @ApiOperation("下载Csv")
     @GetMapping("/download/csv")
-    public void downloadCsv(HttpServletResponse response) throws Exception {
+    public void downloadCsv(int dataCount, HttpServletResponse response) throws Exception {
         String filename = "test";
-        List<ClientCsv> list = new ArrayList<>();
-        list.add(new ClientCsv("12345678900001", "商户1", new Date(), LocalDateTime.now()));
-        list.add(new ClientCsv("12345678900002", "商户2", new Date(), LocalDateTime.now()));
-        list.add(new ClientCsv("12345678900003", "商户3", new Date(), LocalDateTime.now()));
+        List<ClientCsv> list = generateData(dataCount);
 
         // 输出CSV文件
         response.setContentType("text/csv");
@@ -281,18 +280,15 @@ public class FileController {
 
     @ApiOperation("下载csv且ZIP")
     @GetMapping("/download/csv/zip")
-    public void downloadCsvZip(HttpServletResponse response) throws Exception {
-        List<ClientCsv> list = new ArrayList<>();
-        list.add(new ClientCsv("12345678900001", "商户1", new Date(), LocalDateTime.now()));
-        list.add(new ClientCsv("12345678900002", "商户2", new Date(), LocalDateTime.now()));
-        list.add(new ClientCsv("12345678900003", "商户3", new Date(), LocalDateTime.now()));
+    public void downloadCsvZip(int dataCount, HttpServletResponse response) throws Exception {
         String fileName = "test";
+        List<ClientCsv> list = generateData(dataCount);
 
         writeDate(list, fileName, ClientCsv.class, response);
     }
 
     private <T> void writeDate(List<T> list, String fileName, Class<T> clazz, HttpServletResponse response) throws Exception {
-        ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();
+        ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream(1024 * 1024);
         OutputStreamWriter outWriter = new OutputStreamWriter(byteArrayOut, "UTF-8");
 
         HeaderColumnNameMappingStrategy<T> strategy = new HeaderColumnNameMappingStrategy<>();
@@ -320,5 +316,14 @@ public class FileController {
 
         outputStream.flush();
         outputStream.close();
+    }
+
+    public List<ClientCsv> generateData(int count) {
+        List<ClientCsv> list = new LinkedList<>();
+
+        for (int i = 0; i < count; i++) {
+            list.add(new ClientCsv("1234567890000" + i, "商户" + i, new Date(), LocalDateTime.now()));
+        }
+        return list;
     }
 }
