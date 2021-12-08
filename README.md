@@ -30,6 +30,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | -----         | sample-api                | 服务接口、工具类、实体类 |
 | 10087         | sample-apollo             | 整合Apollo配置中心 |
 | 10081         | sample-business           | 业务接口，整合Swagger，详情查看该模块README |
+| 10106         | sample-cadence            | 整合cadence，实现工作流 |
 | 10081         | sample-canal              | 整合canal，实现mysql的binlog日志订阅 |
 | -----         | sample-dal                | mapper、sql语句，整合tk-mybatis |
 | -----         | sample-design-pattern     | 实现常见设计模式，如单例、工厂、适配器等等 |
@@ -72,7 +73,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10093         | sample-zookeeper          | 整合ZooKeeper，使用ZkClient、Curator |
 
 ##### 说明
-- 当前已使用端口10081-10105,20881-20883
+- 当前已使用端口10081-10106,20881-20883
 ```
 端口为1xxxx的模块对外提供Http接口，并整合了Swagger，方便调试。
 端口为2xxxx的模块提供RPC服务，一般用于business模块调用，由business模块提供测试的http接口
