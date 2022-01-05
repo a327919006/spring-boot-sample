@@ -42,6 +42,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10101         | sample-grpc               | 整合Grpc，远程过程调用 |
 | 10091         | sample-hazelcast          | 整合hazelcase,分布式缓存 |
 | 10094         | sample-hazelcast-client   | 整合hazelcase,此模块只作为缓存客户端，不加入缓存集群 |
+| 10107         | sample-iotdb              | 整合IotDB，时序数据库 |
 | 10103         | sample-jackson            | 整合Jackson，json序列化 |
 | -----         | sample-java-agent         | 自定义java-agent |
 | 10088         | sample-kafka              | 整合Kafka，使用框架spring-kafka |
@@ -73,7 +74,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10093         | sample-zookeeper          | 整合ZooKeeper，使用ZkClient、Curator |
 
 ##### 说明
-- 当前已使用端口10081-10106,20881-20883
+- 当前已使用端口10081-10107,20881-20883
 ```
 端口为1xxxx的模块对外提供Http接口，并整合了Swagger，方便调试。
 端口为2xxxx的模块提供RPC服务，一般用于business模块调用，由business模块提供测试的http接口
