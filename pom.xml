@@ -153,7 +153,7 @@
         <sharding-sphere.version>4.1.0</sharding-sphere.version>
 
         <!--protobuf-->
-        <protobuf-java.version>3.13.0</protobuf-java.version>
+        <protobuf-java.version>3.16.1</protobuf-java.version>
 
         <!--mqtt-broker-->
         <moquette-broker.version>0.13</moquette-broker.version>
