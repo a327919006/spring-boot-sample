@@ -10,7 +10,25 @@ spring:
     ip: 127.0.0.1
     port: 6667
     maxSize: 100
+  # 数据库连接配置
+  datasource:
+    url: jdbc:iotdb://127.0.0.1:6667
+    username: root
+    password: root
+    driver-class-name: org.apache.iotdb.jdbc.IoTDBDriver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5    #初始化连接个数
+      min-idle: 5        #最小空闲连接个数
+      max-active: 10     #最大连接个数
+      max-wait: 60000    #获取连接时最大等待时间，单位毫秒。
+      validation-query: show version
 
+mybatis:
+  typeAliasesPackage: com.cn.boot.sample.iotdb.model.po
+  mapperLocations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
 
 swagger:
   enabled: true
