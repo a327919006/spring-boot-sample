@@ -26,11 +26,6 @@
             <groupId>io.github.wilson-he</groupId>
             <artifactId>swagger2-spring-boot-starter</artifactId>
         </dependency>
-        <!--aop-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
         <!--config-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
