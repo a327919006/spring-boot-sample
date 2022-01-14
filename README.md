@@ -49,6 +49,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10089         | sample-kafka-origin       | 整合Kafka，使用原生kafka-client |
 | 20882         | sample-mongo              | 整合MongoDB、SpringDataMongodb |
 | -----         | sample-mongo-api          | MongoDB实体类、服务接口 |
+| 10108         | sample-mqtt               | 整合MQTT |
 | 10097,50001   | sample-netty              | 整合Netty，实现长连接数据交互 |
 | 10097,50001   | sample-netty-mqtt         | 整合Netty+MQTT+ProtoBuf |
 | 10097,50001   | sample-netty-protobuf     | 整合Netty+ProtoBuf，实现长连接数据交互 |
@@ -74,7 +75,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10093         | sample-zookeeper          | 整合ZooKeeper，使用ZkClient、Curator |
 
 ##### 说明
-- 当前已使用端口10081-10107,20881-20883
+- 当前已使用端口10081-10108,20881-20883
 ```
 端口为1xxxx的模块对外提供Http接口，并整合了Swagger，方便调试。
 端口为2xxxx的模块提供RPC服务，一般用于business模块调用，由business模块提供测试的http接口
