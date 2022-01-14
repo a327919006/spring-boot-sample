@@ -59,6 +59,7 @@
         <module>sample-netty-byte</module>
         <module>sample-cadence</module>
         <module>sample-iotdb</module>
+        <module>sample-mqtt</module>
     </modules>
 
 
