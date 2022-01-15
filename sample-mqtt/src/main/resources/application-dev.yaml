@@ -1,0 +1,35 @@
+server:
+  port: 10108
+  servlet:
+    context-path: /${artifactId}
+
+spring:
+  mqtt:
+    host: tcp://192.168.5.131:1883
+    clientId: test1
+    username: sll
+    password: sll
+    connectionTimeout: 10
+    automaticReconnect: true
+    cleanSession: true
+
+swagger:
+  enabled: true
+  print-init: true
+  docket:
+    base-package: com.cn.boot.sample.mqtt.controller
+    group-name: ${artifactId}
+    path-selectors:
+      exclude-patterns: [/error]
+    api-info:
+      contact:
+        name: ChenNan
+        email: 327919006@qq.com
+        url: https://gitee.com/NuLiing
+      title: ${artifactId}
+      description: ${artifactId}-接口文档
+      license: Apache License, Version 2.0
+      license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+      version: ${project.version}
+      terms-of-service-url: https://gitee.com/NuLiing
+    response-message-language: cn
