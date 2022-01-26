@@ -3,6 +3,7 @@ package com.cn.boot.sample.guava.cache;
 import com.cn.boot.sample.api.model.po.User;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -27,8 +28,32 @@ public class CacheTest {
         for (int i = 0; i < max + 3; i++) {
             String key = "user" + i;
             users.put(key, new User().setUsername(key));
-            users.getIfPresent("user1");
         }
+        User user = users.getIfPresent("user1");
         log.info(users.asMap().values().toString());
+    }
+
+    public static void main(String[] args) {
+        int max = 5;
+        Cache<String, User> users = CacheBuilder.newBuilder()
+                .maximumSize(max)
+                .expireAfterWrite(7, TimeUnit.DAYS)
+                .build(new CacheLoader<String, User>() {
+                    @Override
+                    public User load(String key) throws Exception {
+                        return getUser(key);
+                    }
+                });
+
+//        for (int i = 0; i < max + 3; i++) {
+//            String key = "user" + i;
+//            users.put(key, new User().setUsername(key));
+//        }
+        User user = users.getIfPresent("user1");
+        log.info(users.asMap().values().toString());
+    }
+
+    public static User getUser(String key) {
+        return new User().setUsername(key);
     }
 }
