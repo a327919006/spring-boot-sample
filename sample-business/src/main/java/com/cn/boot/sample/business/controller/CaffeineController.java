@@ -42,7 +42,7 @@ public class CaffeineController {
     private static Cache<String, String> listenerCache = Caffeine.newBuilder()
             .expireAfterWrite(2000, TimeUnit.MILLISECONDS)
             .removalListener((RemovalListener<String, String>) (key, value, cause) -> {
-                log.info("onRemoval key={} value={} cause={}", key, value, cause.name());
+                CaffeineController.log.info("onRemoval key={} value={} cause={}", key, value, cause.name());
             })
             .build();
 
