@@ -35,11 +35,13 @@ public class MqttReceiver {
             log.info("topic={}, message={}", topic, payload);
             MqttMsg mqttMsg = JSONUtil.toBean(payload, MqttMsg.class);
             if (StringUtils.endsWith(topic, "post")) {
+                // 收到mqtt消息后，发回一个reply消息
                 mqttMsg.setPayload("ok");
                 String data = JSONUtil.toJsonStr(mqttMsg);
                 String replyTopic = topic + "_reply";
                 mqttGateway.publish(replyTopic, data);
             } else {
+                // 收到reply消息后，释放同步等待锁
                 RspBase<Object> result = new RspBase<>();
                 result.setMsg(mqttMsg.getPayload());
                 MqttUtils.unlock(mqttMsg.getId(), result);
