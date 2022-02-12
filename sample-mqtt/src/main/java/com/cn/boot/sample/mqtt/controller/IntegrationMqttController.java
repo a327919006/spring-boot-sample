@@ -41,6 +41,13 @@ public class IntegrationMqttController {
     @ApiOperation("发送消息")
     @PostMapping("")
     public RspBase<Object> publish(String topic, String message) throws Exception {
+        mqttGateway.publish(topic, message);
+        return RspBase.success();
+    }
+
+    @ApiOperation("发送消息并等待响应")
+    @PostMapping("publishAndSubscribe")
+    public RspBase<Object> publishAndSubscribe(String topic, String message) throws Exception {
         String id = ObjectId.next();
         MqttMsg mqttMsg = new MqttMsg();
         mqttMsg.setId(id);
@@ -53,7 +60,7 @@ public class IntegrationMqttController {
             adapter.addTopic(topic + "_reply");
         }
         CountDownLatch countDownLatch = new CountDownLatch(1);
-        mqttGateway.sendToMqtt(topic, data);
+        mqttGateway.publish(topic, data);
         MqttUtils.lock(id, countDownLatch);
         boolean success = countDownLatch.await(2, TimeUnit.SECONDS);
         if (success) {
@@ -70,7 +77,7 @@ public class IntegrationMqttController {
 
     @ApiOperation("订阅主题")
     @GetMapping("")
-    public RspBase<Integer> publish(String topic) {
+    public RspBase<Integer> subscribe(String topic) {
         String[] topics = adapter.getTopic();
         boolean exist = ArrayUtils.contains(topics, topic);
         if (!exist) {

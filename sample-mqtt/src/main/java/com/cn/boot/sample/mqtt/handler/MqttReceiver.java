@@ -38,7 +38,7 @@ public class MqttReceiver {
                 mqttMsg.setPayload("ok");
                 String data = JSONUtil.toJsonStr(mqttMsg);
                 String replyTopic = topic + "_reply";
-                mqttGateway.sendToMqtt(replyTopic, data);
+                mqttGateway.publish(replyTopic, data);
             } else {
                 RspBase<Object> result = new RspBase<>();
                 result.setMsg(mqttMsg.getPayload());
