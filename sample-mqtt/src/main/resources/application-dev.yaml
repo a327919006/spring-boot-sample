@@ -9,7 +9,7 @@ spring:
     clientId: test1
     username: sll
     password: sll
-    connectionTimeout: 10
+    connectionTimeout: 10000
     automaticReconnect: true
     cleanSession: true
 

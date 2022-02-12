@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * MqttClient配置类
+ *
  * @author Chen Nan
  */
 @Slf4j
