@@ -73,11 +73,11 @@ public class ElasticsearchUtil {
      */
     @PostConstruct
     public void init() {
-        HttpHost httpHost = new HttpHost("192.168.5.131", 64944, "http");
+        HttpHost httpHost = new HttpHost("192.168.5.134", 9200, "http");
         RestClientBuilder builder = RestClient.builder(httpHost);
 
         // （可选）设置账号密码，如果es未开启账号密码验证，则无需配置
-        UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("elastic", "21LeQz2L0jaFb5941e02sIde");
+        UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("elastic", "0n5J385m65gbu6x4ZCnF8Nrd");
         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY, credentials);
         builder.setHttpClientConfigCallback(httpAsyncClientBuilder -> {
@@ -214,10 +214,13 @@ public class ElasticsearchUtil {
         List<List<String>> split = ListUtil.split(jsonList, 1000);
         split.forEach(list -> {
             try {
+                // 旧版需指定type，新版无需指定
+//                BulkRequest request = new BulkRequest(index, "mydata");
                 BulkRequest request = new BulkRequest(index);
-                jsonList.forEach(json -> request.add(new IndexRequest(index).source(json, XContentType.JSON)));
+                list.forEach(json -> request.add(new IndexRequest(index).source(json, XContentType.JSON)));
 
                 BulkResponse response = client.bulk(request, RequestOptions.DEFAULT);
+                log.info("hasFail={}", response.hasFailures());
             } catch (Exception e) {
                 log.error("save error:", e);
             }
@@ -333,7 +336,7 @@ public class ElasticsearchUtil {
     /**
      * 根据name获取数量
      */
-    public long countByName(String index, String name){
+    public long countByName(String index, String name) {
         try {
             CountRequest request = new CountRequest(index);
             request.query(QueryBuilders.matchQuery("name", name));
