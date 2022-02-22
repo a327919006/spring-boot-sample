@@ -27,7 +27,7 @@ import java.security.cert.X509Certificate;
 @Slf4j
 @RestController
 @RequestMapping("/ftp")
-@Api(tags = "测试FtpClient功能", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "测试09-FtpClient功能", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FtpController {
 
     @Autowired

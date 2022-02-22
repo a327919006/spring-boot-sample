@@ -22,7 +22,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/dynamic/ds")
-@Api(tags = "动态数据源测试", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "测试07-动态数据源", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DynamicDataSourceController {
 
     @Reference

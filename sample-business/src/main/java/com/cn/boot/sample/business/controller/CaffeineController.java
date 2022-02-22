@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @RestController
 @RequestMapping("/caffeine")
-@Api(tags = "咖啡因缓存", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "测试04-咖啡因缓存", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CaffeineController {
     private static Cache<String, List<String>> cache = Caffeine.newBuilder()
             .initialCapacity(2000)//初始大小

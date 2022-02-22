@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/redis")
-@Api(tags = "Redis测试", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "测试13-Redis", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RedisController {
 
     @Reference

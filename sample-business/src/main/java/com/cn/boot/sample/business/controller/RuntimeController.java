@@ -28,7 +28,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/runtime")
-@Api(tags = "oshi获取系统运行状态，内存、cpu等", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "测试15-oshi-获取系统运行状态，内存、cpu等", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RuntimeController {
 
     /**

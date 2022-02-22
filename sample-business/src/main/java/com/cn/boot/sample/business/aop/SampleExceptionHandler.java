@@ -23,7 +23,22 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 @ControllerAdvice
 @Slf4j
-public class ControllerExceptionHandler extends HttpStatusHandler {
+public class SampleExceptionHandler extends HttpStatusHandler {
+
+
+    /**
+     * 控制器异常处理入口
+     *
+     * @param e 异常信息
+     */
+    @ExceptionHandler(BusinessException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    public Object businessException(Exception e) {
+        log.error("【业务异常】", e);
+        BusinessException exception = (BusinessException) ExceptionUtil.getCausedBy(e, BusinessException.class);
+        return error(HttpStatus.BAD_REQUEST, exception.getCode(), exception.getMsg());
+    }
 
     /**
      * 控制器异常处理入口
@@ -42,10 +57,6 @@ public class ControllerExceptionHandler extends HttpStatusHandler {
             log.error("【参数校验异常】:" + e);
             MethodArgumentNotValidException exs = (MethodArgumentNotValidException) e;
             return error(getArgumentError(exs.getBindingResult().getFieldErrors()));
-        } else if (ExceptionUtil.isCausedBy(e, BusinessException.class)) {
-            log.error("【业务异常】", e);
-            BusinessException exception = (BusinessException) ExceptionUtil.getCausedBy(e, BusinessException.class);
-            return error(HttpStatus.BAD_REQUEST, exception.getCode(), exception.getMsg());
         }
         log.error(e.getMessage(), e);
         return error(HttpStatus.INTERNAL_SERVER_ERROR, "服务器开小差");

@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/order")
-@Api(tags = "ShardJDBC测试-订单管理", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "测试12-ShardJDBC-订单管理", produces = MediaType.APPLICATION_JSON_VALUE)
 public class OrderController {
 
     @Reference

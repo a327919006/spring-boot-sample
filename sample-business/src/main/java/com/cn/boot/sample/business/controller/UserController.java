@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/user")
-@Api(tags = "用户管理", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "测试18-用户管理", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
     @Reference

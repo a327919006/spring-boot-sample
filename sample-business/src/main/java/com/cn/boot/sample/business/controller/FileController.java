@@ -45,7 +45,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/file")
-@Api(tags = "文件上传、下载测试", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "测试08-文件上传、下载", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FileController {
 
     @ApiOperation("单文件上传")

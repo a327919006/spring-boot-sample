@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/multiversion")
-@Api(tags = "测试多版本接口", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "测试11-多版本接口", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MultiVersionController {
 
     @ApiOperation("测试默认")
