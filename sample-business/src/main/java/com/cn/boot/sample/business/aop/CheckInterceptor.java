@@ -21,7 +21,8 @@ public class CheckInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        InputStream inputStream = request.getInputStream();
+        SampleRequestWrapper sampleRequestWrapper = new SampleRequestWrapper(request);
+        InputStream inputStream = sampleRequestWrapper.getInputStream();
         byte[] bytes = IOUtils.toByteArray(inputStream);
         String jsonStr = new String(bytes);
         ReqDTO reqDTO = JSONObject.parseObject(jsonStr, ReqDTO.class);

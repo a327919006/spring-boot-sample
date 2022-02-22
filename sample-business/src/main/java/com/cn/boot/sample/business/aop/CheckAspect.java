@@ -27,7 +27,7 @@ public class CheckAspect {
     @Before("check()")
     public void doBefore(JoinPoint joinPoint) {
         ReqDTO reqDTO = (ReqDTO) joinPoint.getArgs()[0];
-        if (!reqDTO.getCheckSig()) {
+        if (reqDTO.getCheckSig() == null || !reqDTO.getCheckSig()) {
             throw new BusinessException(ErrorCode.ERROR_SIG);
         }
     }

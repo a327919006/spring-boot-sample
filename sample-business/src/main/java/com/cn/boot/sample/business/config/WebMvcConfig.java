@@ -39,7 +39,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         //注册TestInterceptor拦截器
         InterceptorRegistration registration = registry.addInterceptor(new CheckInterceptor());
-        registration.addPathPatterns("/**")                      //所有路径都被拦截
+        registration.addPathPatterns("/aop/**")                      //所有路径都被拦截
                 .excludePathPatterns(                         //添加不拦截路径
                         "/**/*.html",
                         "/**/*.js"
@@ -50,7 +50,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         // 配置自定义参数处理器
-//        resolvers.add(dataArgumentResolver);
+       resolvers.add(dataArgumentResolver);
     }
 
     @Override
