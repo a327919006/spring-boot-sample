@@ -1,0 +1,6 @@
+server:
+  port: 10081
+  servlet:
+    context-path: /${artifactId}
+
+quartz
