@@ -19,7 +19,7 @@ import java.util.Map;
  * @author Chen Nan
  */
 @ControllerAdvice
-public class CommonRspAdvice implements ResponseBodyAdvice<Object> {
+public class SampleRspAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
