@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct;
 /**
  * @author Chen Nan
  */
-@Configuration
+// @Configuration
 public class QuartzConfig {
 
     @PostConstruct
