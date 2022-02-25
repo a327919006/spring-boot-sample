@@ -48,14 +48,14 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <!--<table catalog="boot_sample" tableName="client" enableSelectByExample="false"-->
-               <!--enableDeleteByExample="false" enableCountByExample="false"-->
-               <!--enableUpdateByExample="false"/>-->
+        <table catalog="quartz_test" tableName="qrtz_cron_job" enableSelectByExample="false"
+               enableDeleteByExample="false" enableCountByExample="false"
+               enableUpdateByExample="false" domainObjectName="CronJob"/>
 
-        <table tableName="sensitiveword" enableSelectByExample="false"
+        <!--<table tableName="sensitiveword" enableSelectByExample="false"
                enableDeleteByExample="false" enableCountByExample="false"
                enableUpdateByExample="false" domainObjectName="SensitiveWord">
             <property name="useActualColumnNames" value="true"></property>
-        </table>
+        </table>-->
     </context>
 </generatorConfiguration>
