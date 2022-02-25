@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BusinessService {
 
-    public void doJob() {
-        log.info("doJob");
+    public void doJob(String business) {
+        log.info("doJob:{}", business);
     }
 }

@@ -2,7 +2,19 @@ server:
   port: 10081
   servlet:
     context-path: /${artifactId}
-#spring:
-#  quartz:
-#    job-store-type: jdbc
 
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/quartz_test?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&tinyInt1isBit=false&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: root
+    password: chennan
+    druid:
+      keep-alive: true
+      keep-alive-between-time-millis: 120000
+      max-evictable-idle-time-millis: 1800000
+      time-between-eviction-runs-millis: 60000
+      stat-view-servlet:
+        enabled: false
+      web-stat-filter:
+        enabled: false
