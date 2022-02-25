@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
-import org.springframework.scheduling.quartz.JobDetailFactoryBean;
-import org.springframework.scheduling.quartz.SchedulerFactoryBean;
-import org.springframework.scheduling.quartz.SimpleTriggerFactoryBean;
+import org.springframework.scheduling.quartz.*;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -27,6 +24,8 @@ public class SpringQuartzConfig {
 
     @Autowired
     private DataSource dataSource;
+    @Autowired
+    private CustomJobFactory customJobFactory;
 
     @Bean
     public JobDetailFactoryBean myJob1() {
@@ -78,8 +77,8 @@ public class SpringQuartzConfig {
     }
 
     @Bean
-    public SchedulerFactoryBean schedulerFactoryBean(SimpleTriggerFactoryBean myTrigger1,
-                                                     CronTriggerFactoryBean myTrigger2) throws IOException {
+    public SchedulerFactoryBean scheduler(SimpleTriggerFactoryBean myTrigger1,
+                                          CronTriggerFactoryBean myTrigger2) throws IOException {
         ClassPathResource classPathResource = new ClassPathResource("quartz.properties");
 
         InputStream inputStream = classPathResource.getInputStream();
@@ -88,6 +87,15 @@ public class SpringQuartzConfig {
 
         SchedulerFactoryBean scheduler = new SchedulerFactoryBean();
         scheduler.setDataSource(dataSource);
+        // 可选，QuartzScheduler 启动时更新己存在的Job，这样就不用每次修改targetObject后删除qrtz_job_details表对应记录了
+        scheduler.setOverwriteExistingJobs(true);
+        // 必须的，QuartzScheduler 延时启动，应用启动完后 QuartzScheduler 再启动
+        scheduler.setStartupDelay(10);
+        // 让任务在程序启动时加载
+        scheduler.setAutoStartup(true);
+        scheduler.setJobFactory(customJobFactory);
+        scheduler.setApplicationContextSchedulerContextKey("applicationContextKey");
+
         scheduler.setQuartzProperties(properties);
         scheduler.setTriggers(myTrigger1.getObject(), myTrigger2.getObject());
         return scheduler;

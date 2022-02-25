@@ -14,8 +14,7 @@ import java.util.Date;
  * @author Chen Nan
  */
 @Slf4j
-public class SampleJobTwo implements Job {
-
+public class SampleJobTwo implements BaseJob {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
