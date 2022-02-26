@@ -2,6 +2,7 @@ package com.cn.boot.sample.quartz.config;
 
 import com.cn.boot.sample.quartz.job.SampleJob;
 import com.cn.boot.sample.quartz.job.SampleJobTwo;
+import org.quartz.CronTrigger;
 import org.quartz.JobDataMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -73,6 +74,10 @@ public class SpringQuartzConfig {
         trigger.setCronExpression("0/10 * * * * ? ");
         trigger.setJobDetail(Objects.requireNonNull(myJob2.getObject()));
 
+        // 设置错过的策略，错过(1-N次)后只执行一次
+        // MISFIRE_INSTRUCTION_DO_NOTHING错过后不执行
+        // 默认：错过后都执行
+        trigger.setMisfireInstruction(CronTrigger.MISFIRE_INSTRUCTION_FIRE_ONCE_NOW);
         return trigger;
     }
 
@@ -90,7 +95,7 @@ public class SpringQuartzConfig {
         // 可选，QuartzScheduler 启动时更新己存在的Job，这样就不用每次修改targetObject后删除qrtz_job_details表对应记录了
         scheduler.setOverwriteExistingJobs(true);
         // 必须的，QuartzScheduler 延时启动，应用启动完后 QuartzScheduler 再启动
-        scheduler.setStartupDelay(10);
+        scheduler.setStartupDelay(3);
         // 让任务在程序启动时加载
         scheduler.setAutoStartup(true);
         scheduler.setJobFactory(customJobFactory);
