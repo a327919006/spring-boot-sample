@@ -1,12 +1,12 @@
 package com.cn.boot.sample.quartz.job;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.extra.spring.SpringUtil;
 import com.cn.boot.sample.quartz.service.BusinessService;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
@@ -15,6 +15,9 @@ import java.util.Date;
  */
 @Slf4j
 public class SampleJob implements BaseJob {
+
+    @Autowired
+    private BusinessService businessService;
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
@@ -25,7 +28,7 @@ public class SampleJob implements BaseJob {
         dataMap.forEach((key, value) -> {
             log.info("key={} value={}", key, value);
         });
-        BusinessService bean = SpringUtil.getBean(BusinessService.class);
-        bean.doJob("one");
+//        BusinessService businessService = SpringUtil.getBean(BusinessService.class);
+        businessService.doJob("one");
     }
 }
