@@ -17,6 +17,7 @@
 ------------
 
 #### 介绍
+
 SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurity、RabbitMQ、RocketMQ、Kafka、Redis、MongoDB、Hazelcast、Apollo等
 
 如果感觉有帮助，帮忙点个star！
@@ -53,6 +54,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10097,50001   | sample-netty              | 整合Netty，实现长连接数据交互 |
 | 10097,50001   | sample-netty-mqtt         | 整合Netty+MQTT+ProtoBuf |
 | 10097,50001   | sample-netty-protobuf     | 整合Netty+ProtoBuf，实现长连接数据交互 |
+| 10109         | sample-quartz             | 整合Quartz，实现分布式定时任务 |
 | 20883,10096   | sample-redis              | 整合Redis、SpringDataRedis和Jedis两种方式 |
 | 10092         | sample-rocketmq           | 整合RocketMQ |
 | 10083         | sample-security           | 整合SpringSecurity、SpringSession |
@@ -75,7 +77,9 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10093         | sample-zookeeper          | 整合ZooKeeper，使用ZkClient、Curator |
 
 ##### 说明
-- 当前已使用端口10081-10108,20881-20883
+
+- 当前已使用端口10081-10109,20881-20883
+
 ```
 端口为1xxxx的模块对外提供Http接口，并整合了Swagger，方便调试。
 端口为2xxxx的模块提供RPC服务，一般用于business模块调用，由business模块提供测试的http接口
@@ -85,6 +89,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 ------------
 
 #### sql文件说明
+
 | sql文件 | 描述 |
 | --- | --- |
 | boot-sample-init.sql | 基础数据库表结构 |
@@ -93,6 +98,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 ------------
 
 #### 已整合框架
+
 | 框架 | 描述 |
 | --- | --- |
 | SpringBoot | SpringBoot |
@@ -124,6 +130,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | Canal | MySQL binlog日志订阅 |
 
 #### 项目地址
+
 - https://gitee.com/NuLiing/spring-boot-sample
 - https://github.com/a327919006/spring-boot-sample
 
