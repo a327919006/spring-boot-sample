@@ -70,7 +70,7 @@ public class SpringQuartzConfig {
         CronTriggerFactoryBean trigger = new CronTriggerFactoryBean();
         trigger.setName("sample_trigger2");
         trigger.setGroup("sample_group");
-        trigger.setCronExpression("0/2 * * * * ? ");
+        trigger.setCronExpression("0/10 * * * * ? ");
         trigger.setJobDetail(Objects.requireNonNull(myJob2.getObject()));
 
         return trigger;

@@ -18,7 +18,8 @@ public class SampleJobTwo implements BaseJob {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        log.info("SampleJobTwo:" + DateUtil.formatDateTime(new Date()));
+        String name = context.getJobDetail().getKey().getName();
+        log.info("{}:{}", name, DateUtil.formatDateTime(new Date()));
 
         BusinessService bean = SpringUtil.getBean(BusinessService.class);
         bean.doJob("two");

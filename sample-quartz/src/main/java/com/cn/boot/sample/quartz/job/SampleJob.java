@@ -18,12 +18,13 @@ public class SampleJob implements BaseJob {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        log.info("SampleJob:" + DateUtil.formatDateTime(new Date()));
+        String name = context.getJobDetail().getKey().getName();
+        log.info("{}:{}", name, DateUtil.formatDateTime(new Date()));
 
         JobDataMap dataMap = context.getMergedJobDataMap();
-        String param1 = dataMap.getString("param1");
-        int param2 = dataMap.getInt("param2");
-        log.info("param1={} param2={}", param1, param2);
+        dataMap.forEach((key, value) -> {
+            log.info("key={} value={}", key, value);
+        });
         BusinessService bean = SpringUtil.getBean(BusinessService.class);
         bean.doJob("one");
     }
