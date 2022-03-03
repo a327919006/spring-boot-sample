@@ -18,6 +18,8 @@ import java.util.Objects;
 import java.util.Properties;
 
 /**
+ * 使用Spring封装的QuartzApi声明定时任务
+ *
  * @author Chen Nan
  */
 @Configuration

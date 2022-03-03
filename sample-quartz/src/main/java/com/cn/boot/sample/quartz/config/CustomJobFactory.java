@@ -7,6 +7,8 @@ import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 import org.springframework.stereotype.Component;
 
 /**
+ * 生成的Job对象会注入依赖的SpringBean，如service等
+ *
  * @author Chen Nan
  */
 @Component

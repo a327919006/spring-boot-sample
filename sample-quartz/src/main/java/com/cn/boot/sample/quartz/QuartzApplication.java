@@ -6,9 +6,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import tk.mybatis.spring.annotation.MapperScan;
 
 /**
+ * 整合SpringTask需使用EnableScheduling注解
+ *
  * @author Chen Nan
  */
-// 整合SpringTask需使用此注解
 @EnableScheduling
 @SpringBootApplication
 @MapperScan({"com.cn.boot.sample.dal.mapper"})

@@ -5,6 +5,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
+ * 使用SpringTask框架提供的定时任务
  *
  * @author Chen Nan
  */

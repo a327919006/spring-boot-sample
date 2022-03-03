@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
+ * 使用Quartz原生API创建定时任务
  * @author Chen Nan
  */
 //@Configuration
