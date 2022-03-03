@@ -8,6 +8,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 /**
  * @author Chen Nan
  */
+// 整合SpringTask需使用此注解
 @EnableScheduling
 @SpringBootApplication
 @MapperScan({"com.cn.boot.sample.dal.mapper"})
