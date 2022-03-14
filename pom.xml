@@ -620,12 +620,14 @@
             </activation>
             <properties>
                 <profileActive>dev</profileActive>
+                <testAddress>北京</testAddress>
             </properties>
         </profile>
         <profile>
             <id>test</id>
             <properties>
                 <profileActive>test</profileActive>
+                <testAddress>上海</testAddress>
             </properties>
         </profile>
     </profiles>
