@@ -42,14 +42,16 @@ spring:
       pool:
         max-size: 100
 
+# 用于测试代码中获取yaml中配置
 test:
   config:
-    address: 北京
+    # 此配置配置在pom.xml中，根据不同环境获取不同配置值，可用于从pom中读取配置中心地址
+    address: '@testAddress@'
     users:
-      - name: user1
-        age: 11
-      - name: user2
-        age: 22
+    - name: user1
+      age: 11
+    - name: user2
+      age: 22
     ftp:
       ip: 127.0.0.1
       port: 990
