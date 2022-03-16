@@ -57,3 +57,6 @@ test:
       port: 990
       username: appter3_user3
       password: 123456
+    data:
+      aaaa: bbbb
+      cccc: dddd

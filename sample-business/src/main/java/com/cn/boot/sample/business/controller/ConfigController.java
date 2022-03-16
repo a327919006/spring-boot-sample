@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/config")
-@Api(tags = "测试06-加载yaml中自定义配置", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "测试06-config-加载yaml中自定义配置", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ConfigController {
 
     @Autowired
