@@ -1,7 +1,9 @@
 package com.cn.boot.sample.actuator.task;
 
 import com.cn.boot.sample.actuator.metric.TestMetrics;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,9 @@ public class TestTask {
 
     @Autowired
     private TestMetrics testMetrics;
+
+    @Autowired
+    private MeterRegistry registry;
 
     private long count1;
     private long count2;
@@ -40,4 +45,13 @@ public class TestTask {
         testMetrics.counter3.increment();
         log.info("increment3:{}", count3);
     }
+
+
+    @Scheduled(fixedDelay = 1000)
+    public void random() {
+        int num = RandomUtils.nextInt(0, 2);
+        testMetrics.gauge.set(num);
+        log.info("gauge:{}", num);
+    }
+
 }
