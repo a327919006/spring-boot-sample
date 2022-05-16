@@ -61,6 +61,7 @@
         <module>sample-iotdb</module>
         <module>sample-mqtt</module>
         <module>sample-quartz</module>
+        <module>sample-tdengine</module>
     </modules>
 
 
