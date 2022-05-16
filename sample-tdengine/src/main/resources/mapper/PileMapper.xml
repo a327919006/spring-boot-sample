@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.boot.sample.tdengine.mapper.PileMapper">
+    <resultMap id="BaseResultMap" type="com.cn.boot.sample.tdengine.model.po.Pile">
+        <result column="Time" property="timestamp"/>
+        <result column="root.station.pile.nd.status" property="status"/>
+        <result column="root.station.pile.nd.power" property="power"/>
+    </resultMap>
+
+    <insert id="insertPile" parameterType="com.cn.boot.sample.tdengine.model.po.Pile">
+        INSERT INTO pile (`timestamp`, status, power)
+        VALUES (#{timestamp}, #{status}, #{power});
+    </insert>
+
+    <select id="list" resultMap="BaseResultMap">
+        SELECT *
+        FROM pile LIMIT 3
+        OFFSET 0
+    </select>
+</mapper>
