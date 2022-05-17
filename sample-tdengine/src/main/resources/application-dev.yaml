@@ -4,11 +4,6 @@ server:
     context-path: /${artifactId}
 
 spring:
-  tdengine:
-#    driver: com.taosdata.jdbc.TSDBDriver
-#    url: jdbc:TAOS://h1.dev.com:6030/demo?user=root&password=taosdata
-    driver: com.taosdata.jdbc.rs.RestfulDriver
-    url: jdbc:TAOS-RS://h1.dev.com:6041/demo?user=root&password=taosdata&charset=UTF-8&locale=en_US.UTF-8&timezone=UTC-8
   # 数据库连接配置
   datasource:
 #    driver-class-name: com.taosdata.jdbc.TSDBDriver
