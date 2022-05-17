@@ -14,24 +14,14 @@ import java.sql.DriverManager;
 @Slf4j
 @Configuration
 public class TDEngineConfig {
-    @Value("${spring.tdengine.username}")
-    private String username;
-
-    @Value("${spring.tdengine.password}")
-    private String password;
-
-    @Value("${spring.tdengine.ip}")
-    private String ip;
-
-    @Value("${spring.tdengine.port}")
-    private int port;
+    @Value("${spring.tdengine.url}")
+    private String url;
+    @Value("${spring.tdengine.driver}")
+    private String driver;
 
     @Bean
     public Connection connection() throws Exception {
-        Class.forName("com.taosdata.jdbc.TSDBDriver");
-        String jdbcUrl = "jdbc:TAOS://" + ip + ":" + port +
-                "/demo?user=" + username + "&password=" + password +
-                "&charset=UTF-8&locale=en_US.UTF-8&timezone=UTC-8";
-        return DriverManager.getConnection(jdbcUrl);
+        Class.forName(driver);
+        return DriverManager.getConnection(url);
     }
 }
