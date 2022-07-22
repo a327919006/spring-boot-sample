@@ -4,24 +4,19 @@ server:
     context-path: /${artifactId}
 
 spring:
-  tdengine:
-    username: root
-    password: taosdata
-    ip: h1.dev.com
-    port: 6030
   # 数据库连接配置
   datasource:
-    url: jdbc:TAOS://h1.dev.com:6030/demo?user=root&password=taosdata&charset=UTF-8&locale=en_US.UTF-8&timezone=UTC-8
-    username:
-    password:
-    driver-class-name: com.taosdata.jdbc.TSDBDriver
+#    driver-class-name: com.taosdata.jdbc.TSDBDriver
+#    url: jdbc:TAOS://h1.dev.com:6030/demo?user=root&password=taosdata
+    driver-class-name: com.taosdata.jdbc.rs.RestfulDriver
+    url: jdbc:TAOS-RS://h1.dev.com:6041/demo?user=root&password=taosdata&charset=UTF-8&locale=en_US.UTF-8&timezone=UTC-8
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       initial-size: 5    #初始化连接个数
       min-idle: 5        #最小空闲连接个数
       max-active: 10     #最大连接个数
       max-wait: 60000    #获取连接时最大等待时间，单位毫秒。
-      validation-query: select 1
+      validation-query: select server_status()
 
 mybatis:
   typeAliasesPackage: com.cn.boot.sample.tdengine.model.po
