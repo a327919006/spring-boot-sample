@@ -47,6 +47,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10103         | sample-jackson            | 整合Jackson，json序列化 |
 | -----         | sample-java-agent         | 自定义java-agent |
 | 10088         | sample-kafka              | 整合Kafka，使用框架spring-kafka |
+| 10089         | sample-kafka-avro         | 整合Kafka、Avro |
 | 10089         | sample-kafka-origin       | 整合Kafka，使用原生kafka-client |
 | 20882         | sample-mongo              | 整合MongoDB、SpringDataMongodb |
 | -----         | sample-mongo-api          | MongoDB实体类、服务接口 |
