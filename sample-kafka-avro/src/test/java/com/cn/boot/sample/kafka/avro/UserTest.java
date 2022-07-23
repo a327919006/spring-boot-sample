@@ -3,6 +3,7 @@ package com.cn.boot.sample.kafka.avro;
 import cn.hutool.core.io.FileUtil;
 import com.cn.boot.sample.kafka.avro.model.UserAvro;
 import lombok.extern.slf4j.Slf4j;
+import net.minidev.json.JSONObject;
 import org.apache.avro.Schema;
 import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.DataFileWriter;
@@ -10,16 +11,19 @@ import org.apache.avro.generic.GenericData;
 import org.apache.avro.generic.GenericDatumReader;
 import org.apache.avro.generic.GenericDatumWriter;
 import org.apache.avro.generic.GenericRecord;
-import org.apache.avro.io.DatumReader;
-import org.apache.avro.io.DatumWriter;
+import org.apache.avro.io.*;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Chen Nan
@@ -123,4 +127,150 @@ public class UserTest {
         log.info("schema={}", schema);
         log.info("user={}", user);
     }
+
+    @Test
+    public void testEncodeJson() throws IOException {
+        //直接将字符串转为二进制流
+        Map<String, Object> hashMap = new HashMap<>();
+        hashMap.put("id", "user1");
+        hashMap.put("username", "username1");
+        String json = JSONObject.toJSONString(hashMap);
+        log.info("json={}", json);
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        BinaryEncoder binaryEncoder = EncoderFactory.get().binaryEncoder(out, null);
+        binaryEncoder.writeString(json);
+        binaryEncoder.flush();
+
+        byte[] bytes = out.toByteArray();
+        log.info("bytes={}", bytes);
+        log.info("data={}", new String(bytes));
+    }
+
+    @Test
+    public void testSerializable() {
+        UserAvro user = new UserAvro();
+        user.setId("user1");
+        user.setUsername("username1");
+        byte[] bytes = binarySerializable(user);
+        log.info("bytes={}", bytes);
+        UserAvro user1 = binaryDeserialize(bytes, UserAvro.class);
+        UserAvro user2 = binaryDeserialize(bytes, UserAvro.getClassSchema());
+        log.info("user1={}", user1);
+        log.info("user2={}", user2);
+
+        byte[] bytes1 = jsonSerializable(user1, UserAvro.getClassSchema());
+        UserAvro user3 = jsonDeserialize(UserAvro.getClassSchema(), new ByteArrayInputStream(bytes1));
+        log.info("user3={}", user3);
+    }
+
+    /**
+     * 二进制序列化
+     *
+     * @param t   AVRO生成的对象
+     * @param <T> AVRO类型
+     * @return
+     */
+    public static <T> byte[] binarySerializable(T t) {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        BinaryEncoder binaryEncoder = EncoderFactory.get().binaryEncoder(out, null);
+        DatumWriter<T> writer = new SpecificDatumWriter<T>((Class<T>) t.getClass());
+        try {
+            writer.write(t, binaryEncoder);
+            binaryEncoder.flush();
+            out.flush();
+        } catch (IOException e) {
+            log.error("binarySerializable error");
+            e.printStackTrace();
+        }
+        log.debug("ByteArrayOutputStream = {}", new String(out.toByteArray()));
+        return out.toByteArray();
+    }
+
+    /**
+     * 二进制反序列化
+     *
+     * @param bytes
+     * @param tClass
+     * @param <T>
+     * @return
+     */
+    public static <T> T binaryDeserialize(byte[] bytes, Class<T> tClass) {
+        try {
+            BinaryDecoder binaryDecoder = DecoderFactory.get().binaryDecoder(bytes, null);
+            DatumReader<T> datumReader = new SpecificDatumReader<T>(tClass);
+            T read = datumReader.read(null, binaryDecoder);
+            return read;
+        } catch (IOException e) {
+            log.error("binaryDeserialize error");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 二进制反序列化
+     *
+     * @param bytes
+     * @param schema
+     * @param <T>
+     * @return
+     */
+    public static <T> T binaryDeserialize(byte[] bytes, Schema schema) {
+        try {
+            BinaryDecoder binaryDecoder = DecoderFactory.get().binaryDecoder(bytes, null);
+            DatumReader<T> datumReader = new SpecificDatumReader<T>(schema);
+            T read = datumReader.read(null, binaryDecoder);
+            return read;
+        } catch (IOException e) {
+            log.error("binaryDeserialize error");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * json序列化
+     *
+     * @param t
+     * @param <T>
+     * @return
+     */
+    public static <T> byte[] jsonSerializable(T t, Schema schema) {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try {
+            Encoder jsonEncoder = EncoderFactory.get().jsonEncoder(schema, out);
+            DatumWriter<T> writer = new SpecificDatumWriter<T>(schema);
+            writer.write(t, jsonEncoder);
+            jsonEncoder.flush();
+            out.flush();
+        } catch (IOException e) {
+            log.error("jsonSerializable error");
+            e.printStackTrace();
+        }
+        log.info("json序列化的String为 = {}", new String(out.toByteArray()));
+        return out.toByteArray();
+    }
+
+    /**
+     * json反序列化
+     *
+     * @param schema
+     * @param byteArrayInputStream
+     * @param <T>
+     * @return
+     */
+    public static <T> T jsonDeserialize(Schema schema, ByteArrayInputStream byteArrayInputStream) {
+        try {
+            Decoder jsonDecoder = DecoderFactory.get().jsonDecoder(schema, byteArrayInputStream);
+            DatumReader<T> datumReader = new SpecificDatumReader<T>(schema);
+            T read = datumReader.read(null, jsonDecoder);
+            return read;
+        } catch (Exception e) {
+            log.error("jsonDeserialize error");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
