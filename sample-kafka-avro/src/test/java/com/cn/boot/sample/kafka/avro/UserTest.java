@@ -1,9 +1,9 @@
 package com.cn.boot.sample.kafka.avro;
 
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.kafka.avro.model.UserAvro;
 import lombok.extern.slf4j.Slf4j;
-import net.minidev.json.JSONObject;
 import org.apache.avro.Schema;
 import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.DataFileWriter;
@@ -134,7 +134,7 @@ public class UserTest {
         Map<String, Object> hashMap = new HashMap<>();
         hashMap.put("id", "user1");
         hashMap.put("username", "username1");
-        String json = JSONObject.toJSONString(hashMap);
+        String json = JSONUtil.toJsonStr(hashMap);
         log.info("json={}", json);
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
