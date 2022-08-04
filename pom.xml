@@ -62,6 +62,7 @@
         <module>sample-mqtt</module>
         <module>sample-quartz</module>
         <module>sample-tdengine</module>
+        <module>sample-agent</module>
     </modules>
 
 
