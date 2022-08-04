@@ -5,8 +5,8 @@ package com.cn.boot.sample.agent;
  */
 public class MyMain2 {
 
-    public static void main(String[] args) {
-        CompactDefinition compactDefinition = new CompactDefinition();
-        compactDefinition.test();
-    }
+    // public static void main(String[] args) {
+    //     CompactDefinition compactDefinition = new CompactDefinition();
+    //     compactDefinition.test();
+    // }
 }
