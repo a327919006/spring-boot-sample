@@ -1,0 +1,8 @@
+{"namespace": "com.cn.boot.sample.kafka.avro.model",
+ "type": "record",
+ "name": "UserAvro",
+ "fields": [
+     {"name":"id","type":["null","string"],"default": null},
+     {"name":"username","type":["null","string"],"default": null}
+    ]
+}
