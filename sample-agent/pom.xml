@@ -16,6 +16,14 @@
         <maven.configuration.manifestFile>src/main/resources/META-INF/MANIFEST.MF</maven.configuration.manifestFile>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.27.0-GA</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>

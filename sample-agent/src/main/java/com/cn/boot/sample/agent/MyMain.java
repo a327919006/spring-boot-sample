@@ -6,6 +6,8 @@ package com.cn.boot.sample.agent;
 public class MyMain {
 
     public static void main(String[] args) {
-        System.out.println("=====main=====");
+        User user = new User(1, "test1");
+        String schoolName = user.getSchoolName(1);
+        System.out.println("school=" + schoolName);
     }
 }

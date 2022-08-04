@@ -1,3 +1,3 @@
 Manifest-Version: 2.0
-Premain-Class: com.cn.boot.sample.agent.MyAgent
+Premain-Class: com.cn.boot.sample.agent.MyAgent2
 Can-Redefine-Classes: true
