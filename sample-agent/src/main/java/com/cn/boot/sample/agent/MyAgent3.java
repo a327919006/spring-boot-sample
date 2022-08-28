@@ -31,7 +31,7 @@ public class MyAgent3 {
             String loadClassName = modifyClassName.replace(".", "/");
             // 表示找到了这个类
             if (loadClassName.equals(className)) {
-                System.out.println("find");
+                System.out.println("findClass=" + className);
                 // 开始使用当前的javassist修改字节码文件
                 try {
                     ClassPool pool = ClassPool.getDefault();
@@ -46,7 +46,7 @@ public class MyAgent3 {
                     e.printStackTrace();
                 }
             } else {
-                System.out.println("notFind");
+                System.out.println("notFindClass=" + className);
             }
             return classfileBuffer;
         }
