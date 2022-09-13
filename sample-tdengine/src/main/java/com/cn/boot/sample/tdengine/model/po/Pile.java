@@ -8,6 +8,6 @@ import lombok.Data;
 @Data
 public class Pile {
     private Long timestamp;
-    private Float status;
-    private Float power;
+    private Double status;
+    private Double power;
 }
