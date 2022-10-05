@@ -170,7 +170,7 @@
         <logback-mdc-ttl.version>1.0.2</logback-mdc-ttl.version>
 
         <!--elasticsearch-->
-        <elasticsearch.version>7.10.0</elasticsearch.version>
+        <elasticsearch.version>7.14.0</elasticsearch.version>
 
         <!--canal-->
         <canal.version>1.1.4</canal.version>
