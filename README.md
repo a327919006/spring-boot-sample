@@ -55,6 +55,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10097,50001   | sample-netty              | 整合Netty，实现长连接数据交互 |
 | 10097,50001   | sample-netty-mqtt         | 整合Netty+MQTT+ProtoBuf |
 | 10097,50001   | sample-netty-protobuf     | 整合Netty+ProtoBuf，实现长连接数据交互 |
+| 10110         | sample-pulsar             | 整合Pulsar |
 | 10109         | sample-quartz             | 整合Quartz，实现分布式定时任务 |
 | 20883,10096   | sample-redis              | 整合Redis、SpringDataRedis和Jedis两种方式 |
 | 10092         | sample-rocketmq           | 整合RocketMQ |
@@ -79,7 +80,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 
 ##### 说明
 
-- 当前已使用端口10081-10109,20881-20883
+- 当前已使用端口10081-10110,20881-20883
 
 ```
 端口为1xxxx的模块对外提供Http接口，并整合了Swagger，方便调试。
