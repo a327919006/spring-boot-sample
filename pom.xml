@@ -64,6 +64,7 @@
         <module>sample-tdengine</module>
         <module>sample-kafka-avro</module>
         <module>sample-agent</module>
+        <module>sample-pulsar</module>
     </modules>
 
 
