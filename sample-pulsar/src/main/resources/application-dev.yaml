@@ -1,0 +1,36 @@
+server:
+  port: 10110
+  servlet:
+    context-path: /${artifactId}
+
+# pulsar配置
+pulsar:
+  # pulsar服务端地址
+  url: pulsar://192.168.5.131:60026
+  # 多个topic以逗号分隔
+  topic: cntest1
+  # 消费者组
+  subscription: testGroup
+
+
+
+swagger:
+  enabled: true
+  print-init: true
+  docket:
+    base-package: com.cn.boot.sample.pulsar.controller
+    group-name: ${artifactId}
+    path-selectors:
+      exclude-patterns: [/error]
+    api-info:
+      contact:
+        name: ChenNan
+        email: 327919006@qq.com
+        url: https://gitee.com/NuLiing
+      title: ${artifactId}
+      description: ${artifactId}-接口文档
+      license: Apache License, Version 2.0
+      license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+      version: ${project.version}
+      terms-of-service-url: https://gitee.com/NuLiing
+    response-message-language: cn
