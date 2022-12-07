@@ -1,7 +1,7 @@
 package com.cn.boot.sample.tdengine.mapper;
 
-import com.cn.boot.sample.tdengine.model.dto.TableFieldDTO;
-import com.cn.boot.sample.tdengine.model.dto.TableInfoDTO;
+import com.cn.boot.sample.tdengine.model.dto.TableFieldVO;
+import com.cn.boot.sample.tdengine.model.dto.TableInfoVO;
 import com.cn.boot.sample.tdengine.model.po.Pile;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,7 +15,7 @@ public interface PileMapper {
 
     List<Pile> list(Pile pile);
 
-    List<TableInfoDTO> listTable();
+    List<TableInfoVO> listTable();
 
-    List<TableFieldDTO> desc(@Param("tableName") String tableName);
+    List<TableFieldVO> desc(@Param("tableName") String tableName);
 }

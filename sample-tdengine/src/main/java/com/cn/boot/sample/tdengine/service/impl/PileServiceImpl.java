@@ -1,8 +1,8 @@
 package com.cn.boot.sample.tdengine.service.impl;
 
 import com.cn.boot.sample.tdengine.mapper.PileMapper;
-import com.cn.boot.sample.tdengine.model.dto.TableFieldDTO;
-import com.cn.boot.sample.tdengine.model.dto.TableInfoDTO;
+import com.cn.boot.sample.tdengine.model.dto.TableFieldVO;
+import com.cn.boot.sample.tdengine.model.dto.TableInfoVO;
 import com.cn.boot.sample.tdengine.model.po.Pile;
 import com.cn.boot.sample.tdengine.service.PileService;
 import lombok.extern.slf4j.Slf4j;
@@ -33,12 +33,12 @@ public class PileServiceImpl implements PileService {
     }
 
     @Override
-    public List<TableInfoDTO> listTable() {
+    public List<TableInfoVO> listTable() {
         return mapper.listTable();
     }
 
     @Override
-    public List<TableFieldDTO> desc(String tableName) {
+    public List<TableFieldVO> desc(String tableName) {
         return mapper.desc(tableName);
     }
 }

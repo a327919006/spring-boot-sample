@@ -6,7 +6,7 @@ import lombok.Data;
  * @author Chen Nan
  */
 @Data
-public class TableFieldDTO {
+public class TableFieldVO {
     private String Field;
     private String Type;
     private Integer Length;

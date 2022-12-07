@@ -18,11 +18,11 @@
         OFFSET 0
     </select>
 
-    <select id="listTable" resultType="com.cn.boot.sample.tdengine.model.dto.TableInfoDTO">
+    <select id="listTable" resultType="com.cn.boot.sample.tdengine.model.dto.TableInfoVO">
         show stables
     </select>
 
-    <select id="desc" resultType="com.cn.boot.sample.tdengine.model.dto.TableFieldDTO">
+    <select id="desc" resultType="com.cn.boot.sample.tdengine.model.dto.TableFieldVO">
         desc ${tableName}
     </select>
 </mapper>

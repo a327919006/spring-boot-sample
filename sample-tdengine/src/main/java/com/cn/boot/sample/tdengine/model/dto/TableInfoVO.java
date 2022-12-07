@@ -8,7 +8,7 @@ import java.util.Date;
  * @author Chen Nan
  */
 @Data
-public class TableInfoDTO {
+public class TableInfoVO {
     private String name;
     private Date createdTime;
     private Integer columns;
