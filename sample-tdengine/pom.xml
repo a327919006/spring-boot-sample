@@ -41,7 +41,13 @@
         <dependency>
             <groupId>com.taosdata.jdbc</groupId>
             <artifactId>taos-jdbcdriver</artifactId>
-            <version>2.0.38</version>
+            <version>2.0.41</version>
+        </dependency>
+        <!--taos带的fastjson版本1.2.60会导致show tables命令抛异常，因此升级至1.2.83-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.83</version>
         </dependency>
         <!--druid-->
         <dependency>
