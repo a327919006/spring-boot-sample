@@ -80,7 +80,7 @@
 
         <!--pagehelper-->
         <pagehelper-spring-boot-starter.version>1.2.13</pagehelper-spring-boot-starter.version>
-        <pagehelper.version>5.1.11</pagehelper.version>
+        <pagehelper.version>5.3.1</pagehelper.version>
 
         <!--swagger-->
         <swagger-starter.version>1.1.2</swagger-starter.version>
