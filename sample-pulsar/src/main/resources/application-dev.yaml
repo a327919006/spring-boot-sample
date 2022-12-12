@@ -8,9 +8,12 @@ pulsar:
   # pulsar服务端地址
   url: pulsar://192.168.5.131:60026
   # 多个topic以逗号分隔
-  topic: cntest1
-  # 消费者组
-  subscription: testGroup
+  producer:
+    topic: test1
+  consumer:
+    topic: test1,test2
+    # 消费者组
+    subscription: testGroup
 
 
 
@@ -21,7 +24,7 @@ swagger:
     base-package: com.cn.boot.sample.pulsar.controller
     group-name: ${artifactId}
     path-selectors:
-      exclude-patterns: [/error]
+      exclude-patterns: [ /error ]
     api-info:
       contact:
         name: ChenNan
