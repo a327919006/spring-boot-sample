@@ -138,7 +138,7 @@
         <kafka-clients.version>2.5.1</kafka-clients.version>
 
         <!--hazelcast-->
-        <hazelcast.version>3.12.3</hazelcast.version>
+        <hazelcast.version>3.12.13</hazelcast.version>
         <hazelcast-zookeeper.version>3.6.3</hazelcast-zookeeper.version>
 
         <!--zookeeper-->
