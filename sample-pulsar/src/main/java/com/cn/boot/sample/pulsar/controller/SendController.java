@@ -24,8 +24,8 @@ public class SendController {
     private TestProducer testProducer;
 
     @ApiOperation("发送消息")
-    @PostMapping("/{key}")
-    public String sendTopicMsg(@PathVariable String key, String msg) {
+    @PostMapping("/")
+    public String sendTopicMsg(String key, String msg) {
         testProducer.sendMsg(key, msg);
         return msg;
     }

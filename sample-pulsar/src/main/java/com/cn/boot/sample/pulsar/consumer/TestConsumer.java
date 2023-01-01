@@ -18,9 +18,9 @@ public class TestConsumer {
 
     @Value("${pulsar.url}")
     private String url;
-    @Value("${pulsar.topic}")
+    @Value("${pulsar.consumer.topic}")
     private String topic;
-    @Value("${pulsar.subscription}")
+    @Value("${pulsar.consumer.subscription}")
     private String subscription;
 
 
