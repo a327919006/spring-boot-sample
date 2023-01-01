@@ -27,9 +27,6 @@ public class TestConsumer {
     private PulsarClient client = null;
     private Consumer consumer = null;
 
-    /**
-     * 使用@PostConstruct注解用于在依赖关系注入完成之后需要执行的方法上，以执行任何初始化
-     */
     @PostConstruct
     public void initPulsar() throws Exception {
         try {
@@ -42,8 +39,8 @@ public class TestConsumer {
             consumer = client.newConsumer()
                     .topic(topic.split(","))
                     .subscriptionName(subscription)
-                    .subscriptionType(SubscriptionType.Shared)//指定消费模式，包含：Exclusive，Failover，Shared，Key_Shared。默认Exclusive模式
-                    .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)//指定从哪里开始消费还有Latest，valueof可选，默认Latest
+                    .subscriptionType(SubscriptionType.Exclusive)//指定消费模式，包含：Exclusive，Failover，Shared，Key_Shared。默认Exclusive模式
+                    .subscriptionInitialPosition(SubscriptionInitialPosition.Latest)//指定从哪里开始消费还有Latest，valueof可选，默认Latest
                     .negativeAckRedeliveryDelay(60, TimeUnit.SECONDS)//指定消费失败后延迟多久broker重新发送消息给consumer，默认60s
                     .subscribe();
 
