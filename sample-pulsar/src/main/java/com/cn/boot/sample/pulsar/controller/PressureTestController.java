@@ -4,11 +4,12 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.api.model.po.User;
-import com.cn.boot.sample.pulsar.producer.TestProducer;
+import com.cn.boot.sample.pulsar.producer.StringProducer;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.pulsar.client.api.PulsarClientException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,11 +24,11 @@ import java.util.concurrent.*;
 @Slf4j
 @RestController
 @RequestMapping("/pressure/test")
-@Api(tags = "压力测试", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "5、压力测试", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PressureTestController {
 
     @Autowired
-    private TestProducer testProducer;
+    private StringProducer testProducer;
 
     /**
      * 写入数据：1000万，QPS：51577/s，并发线程数：10
@@ -59,7 +60,11 @@ public class PressureTestController {
             String data = JSONUtil.toJsonStr(user);
             log.info("key = {}", key);
             for (int i = 0; i < count; i++) {
-                testProducer.sendMsg(key, data);
+                try {
+                    testProducer.send(key, data);
+                } catch (PulsarClientException e) {
+                    log.error("发送异常:", e);
+                }
                 if (0 == i % printStep) {
                     log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
                     temp = System.currentTimeMillis();

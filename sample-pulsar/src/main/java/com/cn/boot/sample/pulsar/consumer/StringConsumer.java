@@ -3,6 +3,7 @@ package com.cn.boot.sample.pulsar.consumer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.pulsar.client.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Component
-public class TestConsumer {
+public class StringConsumer {
 
     @Value("${pulsar.url}")
     private String url;
@@ -23,18 +24,13 @@ public class TestConsumer {
     @Value("${pulsar.consumer.subscription}")
     private String subscription;
 
-
-    private PulsarClient client = null;
+    @Autowired
+    private PulsarClient client;
     private Consumer consumer = null;
 
     @PostConstruct
     public void initPulsar() throws Exception {
         try {
-            //构造Pulsar client
-            client = PulsarClient.builder()
-                    .serviceUrl(url)
-                    .build();
-
             //创建consumer
             consumer = client.newConsumer()
                     .topic(topic.split(","))
@@ -70,11 +66,12 @@ public class TestConsumer {
             if (StringUtils.isNotEmpty(msg)) {
                 try {
                     handle(key, msg);
+                    consumer.acknowledge(message);
                 } catch (Exception e) {
                     log.error("消费Pulsar数据异常，key【{}】，msg【{}】：", key, msg, e);
+                    consumer.negativeAcknowledge(message);
                 }
             }
-            consumer.acknowledge(message);
         }
     }
 
