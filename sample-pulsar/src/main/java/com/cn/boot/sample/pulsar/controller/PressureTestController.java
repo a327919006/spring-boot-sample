@@ -45,7 +45,7 @@ public class PressureTestController {
                 new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 
         int count = total / threadCount;
-        String data = "{\"deviceName\":\"时代星云厂站\",\"did\":\"350105000001\",\"id\":\"9af05a316d884f64ab7af0119fd3122b\",\"identifier\":\"property\",\"manufacturerId\":\"1466649541076131842\",\"manufacturerName\":\"北京索英电气技术有限公司\",\"method\":\"module.property.post\",\"mid\":\"CHARGE-5\",\"moduleId\":\"9\",\"moduleIdentify\":\"CHARGE\",\"moduleManufacturerId\":\"1546747265628569601\",\"moduleModelId\":\"1586924348355420161\",\"params\":{\"time\":1668646045945,\"value\":{\"STATUS\":{\"CaptureTime\":1668646045945,\"ChPileID\":\"5\",\"PileWarn\":\"200\",\"RunAllSta\":0,\"ChGunID\":\"1\",\"PileSta\":0}}},\"productId\":\"1\",\"productModuleIdentify\":\"CHARGE\",\"topic\":\"/alink/350105000001/CHARGE-5/module/property/post\",\"version\":\"1.1.3\"}";
+        String data = "1234567890123456789012345678901234567890123456789012345678901234567890";
 
         Runnable task = () -> {
             long start = System.currentTimeMillis();
