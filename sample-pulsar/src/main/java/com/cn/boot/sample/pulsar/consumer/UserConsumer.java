@@ -27,7 +27,7 @@ public class UserConsumer {
     private Consumer<User> consumer = null;
 
     @PostConstruct
-    public void initPulsar() throws Exception {
+    public void initConsumer() throws Exception {
         try {
             //创建consumer，指定schema，可以是自定义类型，支持JSON、AVRO、PROTOBUF
             consumer = client.newConsumer(Schema.JSON(User.class))

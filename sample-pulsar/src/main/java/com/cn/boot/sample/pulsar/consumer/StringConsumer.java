@@ -27,7 +27,7 @@ public class StringConsumer {
     private Consumer consumer = null;
 
     @PostConstruct
-    public void initPulsar() throws Exception {
+    public void initConsumer() throws Exception {
         try {
             //创建consumer
             consumer = client.newConsumer()
