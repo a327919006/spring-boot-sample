@@ -3,6 +3,7 @@ package com.cn.boot.sample.pulsar.consumer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.pulsar.client.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Component
-public class TestConsumer {
+public class StringConsumer {
 
     @Value("${pulsar.url}")
     private String url;
@@ -23,27 +24,19 @@ public class TestConsumer {
     @Value("${pulsar.consumer.subscription}")
     private String subscription;
 
-
-    private PulsarClient client = null;
+    @Autowired
+    private PulsarClient client;
     private Consumer consumer = null;
 
-    /**
-     * 使用@PostConstruct注解用于在依赖关系注入完成之后需要执行的方法上，以执行任何初始化
-     */
     @PostConstruct
     public void initPulsar() throws Exception {
         try {
-            //构造Pulsar client
-            client = PulsarClient.builder()
-                    .serviceUrl(url)
-                    .build();
-
             //创建consumer
             consumer = client.newConsumer()
                     .topic(topic.split(","))
                     .subscriptionName(subscription)
-                    .subscriptionType(SubscriptionType.Shared)//指定消费模式，包含：Exclusive，Failover，Shared，Key_Shared。默认Exclusive模式
-                    .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)//指定从哪里开始消费还有Latest，valueof可选，默认Latest
+                    .subscriptionType(SubscriptionType.Exclusive)//指定消费模式，包含：Exclusive，Failover，Shared，Key_Shared。默认Exclusive模式
+                    .subscriptionInitialPosition(SubscriptionInitialPosition.Latest)//指定从哪里开始消费还有Latest，valueof可选，默认Latest
                     .negativeAckRedeliveryDelay(60, TimeUnit.SECONDS)//指定消费失败后延迟多久broker重新发送消息给consumer，默认60s
                     .subscribe();
 
@@ -73,11 +66,12 @@ public class TestConsumer {
             if (StringUtils.isNotEmpty(msg)) {
                 try {
                     handle(key, msg);
+                    consumer.acknowledge(message);
                 } catch (Exception e) {
                     log.error("消费Pulsar数据异常，key【{}】，msg【{}】：", key, msg, e);
+                    consumer.negativeAcknowledge(message);
                 }
             }
-            consumer.acknowledge(message);
         }
     }
 

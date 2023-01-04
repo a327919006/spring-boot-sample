@@ -2,6 +2,8 @@ package com.cn.boot.sample.pulsar.producer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pulsar.client.api.*;
+import org.apache.pulsar.client.impl.BatchMessageIdImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -14,22 +16,18 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Component
-public class TestProducer {
+public class StringProducer {
     @Value("${pulsar.url}")
     private String url;
     @Value("${pulsar.producer.topic}")
     private String topic;
 
-    PulsarClient client = null;
-    Producer<byte[]> producer = null;
+    @Autowired
+    private PulsarClient client;
+    private Producer<byte[]> producer = null;
 
     @PostConstruct
-    public void initPulsar() throws Exception{
-        //构造Pulsar client
-        client = PulsarClient.builder()
-                .serviceUrl(url)
-                .build();
-
+    public void initPulsar() throws Exception {
         //创建producer
         producer = client.newProducer()
                 .topic(topic)
@@ -45,19 +43,42 @@ public class TestProducer {
                 .create();
     }
 
-    public void sendMsg(String key, String data){
+    /**
+     * 同步发送
+     */
+    public void send(String key, String data) throws PulsarClientException {
+        BatchMessageIdImpl messageId = (BatchMessageIdImpl) producer.newMessage()
+                .key(key)
+                .value(data.getBytes())
+                .send();
+        long ledgerId = messageId.getLedgerId();
+        long entryId = messageId.getEntryId();
+        int partitionIndex = messageId.getPartitionIndex();
+        log.info("【Producer】ledgerId={} entryId={} partition={} data={}",
+                ledgerId, entryId, partitionIndex, data);
+    }
+
+    /**
+     * 异步发送
+     */
+    public void sendAsync(String key, String data) {
         CompletableFuture<MessageId> future = producer.newMessage()
                 .key(key)
-                .value(data.getBytes()).sendAsync();//异步发送
-        future.handle((v, ex) -> {
+                .value(data.getBytes())
+                .sendAsync();
+        future.handle((msgId, ex) -> {
+            BatchMessageIdImpl messageId = (BatchMessageIdImpl) msgId;
             if (ex == null) {
-                log.info("Message persisted2: {}", data);
+                long ledgerId = messageId.getLedgerId();
+                long entryId = messageId.getEntryId();
+                int partitionIndex = messageId.getPartitionIndex();
+                log.info("【Producer】ledgerId={} entryId={} partition={} data={}",
+                        ledgerId, entryId, partitionIndex, data);
             } else {
-                log.error("发送Pulsar消息失败msg:【{}】 ", data, ex);
+                String msg = "【Producer】data=" + data;
+                log.error(msg, ex);
             }
             return null;
         });
-        // future.join();
-        log.info("Message persisted: {}", data);
     }
 }

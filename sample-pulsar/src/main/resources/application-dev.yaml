@@ -6,11 +6,12 @@ server:
 # pulsar配置
 pulsar:
   # pulsar服务端地址
-  url: pulsar://192.168.5.131:60026
-  # 多个topic以逗号分隔
+  url: pulsar://192.168.157.144:6650
+  admin-url: http://192.168.157.144:8080
   producer:
     topic: test1
   consumer:
+    # 多个topic以逗号分隔
     topic: test1,test2
     # 消费者组
     subscription: testGroup

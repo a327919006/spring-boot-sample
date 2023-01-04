@@ -1,12 +1,15 @@
 package com.cn.boot.sample.pulsar.controller;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.json.JSONUtil;
 import com.cn.boot.sample.api.model.Constants;
-import com.cn.boot.sample.pulsar.producer.TestProducer;
+import com.cn.boot.sample.api.model.po.User;
+import com.cn.boot.sample.pulsar.producer.StringProducer;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.pulsar.client.api.PulsarClientException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,21 +24,21 @@ import java.util.concurrent.*;
 @Slf4j
 @RestController
 @RequestMapping("/pressure/test")
-@Api(tags = "压力测试", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "5、压力测试", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PressureTestController {
 
     @Autowired
-    private TestProducer testProducer;
+    private StringProducer testProducer;
 
     /**
-     * 写入数据：1000万，TPS：166655/s，并发线程数：10
+     * 写入数据：1000万，QPS：166655/s，并发线程数：10
      *
      * @param threadCount 线程数
      * @param total       数据总量
      * @param printStep   打印日志步长
      */
-    @ApiOperation("发送")
-    @PostMapping("/producer")
+    @ApiOperation("1、set命令测试")
+    @PostMapping("/product")
     public String set(int threadCount, int total, int printStep) {
         // 初始化线程池
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
@@ -45,16 +48,23 @@ public class PressureTestController {
                 new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 
         int count = total / threadCount;
-        String data = "1234567890123456789012345678901234567890123456789012345678901234567890";
 
         Runnable task = () -> {
             long start = System.currentTimeMillis();
             long temp = System.currentTimeMillis();
 
+            User user = new User();
             String key = IdUtil.simpleUUID();
+            user.setId(key);
+            user.setUsername("test");
+            String data = JSONUtil.toJsonStr(user);
             log.info("key = {}", key);
             for (int i = 0; i < count; i++) {
-                testProducer.sendMsg(key, data);
+                try {
+                    testProducer.send(key, data);
+                } catch (PulsarClientException e) {
+                    log.error("发送异常:", e);
+                }
                 if (0 == i % printStep) {
                     log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
                     temp = System.currentTimeMillis();
@@ -69,4 +79,5 @@ public class PressureTestController {
         }
         return Constants.MSG_SUCCESS;
     }
+
 }
