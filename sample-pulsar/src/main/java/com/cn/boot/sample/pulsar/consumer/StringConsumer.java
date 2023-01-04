@@ -17,8 +17,6 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class StringConsumer {
 
-    @Value("${pulsar.url}")
-    private String url;
     @Value("${pulsar.consumer.topic}")
     private String topic;
     @Value("${pulsar.consumer.subscription}")
