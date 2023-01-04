@@ -88,10 +88,5 @@ public class StringConsumer {
         } catch (PulsarClientException e) {
             log.error("关闭Pulsar消费者失败：", e);
         }
-        try {
-            client.close();
-        } catch (PulsarClientException e) {
-            log.error("关闭Pulsar连接失败：", e);
-        }
     }
 }
