@@ -6,8 +6,9 @@ server:
 # pulsar配置
 pulsar:
   # pulsar服务端地址
-  url: pulsar://192.168.157.144:6650
-  admin-url: http://192.168.157.144:8080
+  url: pulsar://192.168.5.141:16650
+  admin-url: http://192.168.5.144:16680
+  token: eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiJ9.me_HN1DI9hgM8-MbmYtHogXyJ8vtkbffiiw-KOALKsgBgsQ22uUWwH7EfsCfPEbKWor39fQ_wqS6q2AwwUON0Qrjq1u9WW2Vu4U52voSOofywSUqGaodAsAwxygHu-EQB53p8fr2UFA5jtgod4H5bfKI6Ikrm_ah2LdvfvH7omfoEwyssVUjMCxQcHiVofqe7VMZxCzlVgL2vCXZj8tTuEtZa9hJ2K5hSI5abDgkV6hp_2fBoA3zLelnKGblP2npEEtaIr8jY0O_q7yKO0LV16qh7iXUN946QJxBEKkbP2bd4Fi2Ur0t2ERiQ1iP1Yx6vdAIYXMWUpdhxEwWA0Ze5w
   producer:
     topic: test1
   consumer:

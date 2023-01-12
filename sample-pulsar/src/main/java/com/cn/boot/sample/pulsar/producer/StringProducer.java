@@ -2,7 +2,7 @@ package com.cn.boot.sample.pulsar.producer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pulsar.client.api.*;
-import org.apache.pulsar.client.impl.BatchMessageIdImpl;
+import org.apache.pulsar.client.impl.MessageIdImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -17,8 +17,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Component
 public class StringProducer {
-    @Value("${pulsar.url}")
-    private String url;
+
     @Value("${pulsar.producer.topic}")
     private String topic;
 
@@ -47,7 +46,7 @@ public class StringProducer {
      * 同步发送
      */
     public void send(String key, String data) throws PulsarClientException {
-        BatchMessageIdImpl messageId = (BatchMessageIdImpl) producer.newMessage()
+        MessageIdImpl messageId = (MessageIdImpl) producer.newMessage()
                 .key(key)
                 .value(data.getBytes())
                 .send();
@@ -67,7 +66,7 @@ public class StringProducer {
                 .value(data.getBytes())
                 .sendAsync();
         future.handle((msgId, ex) -> {
-            BatchMessageIdImpl messageId = (BatchMessageIdImpl) msgId;
+            MessageIdImpl messageId = (MessageIdImpl) msgId;
             if (ex == null) {
                 long ledgerId = messageId.getLedgerId();
                 long entryId = messageId.getEntryId();

@@ -6,9 +6,8 @@ import org.apache.pulsar.client.api.Producer;
 import org.apache.pulsar.client.api.PulsarClient;
 import org.apache.pulsar.client.api.PulsarClientException;
 import org.apache.pulsar.client.api.Schema;
-import org.apache.pulsar.client.impl.BatchMessageIdImpl;
+import org.apache.pulsar.client.impl.MessageIdImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -19,8 +18,7 @@ import javax.annotation.PostConstruct;
 @Slf4j
 @Component
 public class UserProducer {
-    @Value("${pulsar.url}")
-    private String url;
+
     @Autowired
     private PulsarClient client;
 
@@ -34,7 +32,7 @@ public class UserProducer {
     }
 
     public void send(User data) throws PulsarClientException {
-        BatchMessageIdImpl messageId = (BatchMessageIdImpl) producer.newMessage()
+        MessageIdImpl messageId = (MessageIdImpl) producer.newMessage()
                 .value(data)
                 .send();
         long ledgerId = messageId.getLedgerId();

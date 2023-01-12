@@ -30,7 +30,11 @@ public class TenantController {
     @ApiOperation("创建")
     @PostMapping("/")
     public RspBase<String> create(TenantInfoDTO dto) throws PulsarAdminException {
-        TenantInfo tenantInfo = new TenantInfo(dto.getRoles(), dto.getClusters());
+        TenantInfo tenantInfo = TenantInfo.builder()
+                .adminRoles(dto.getRoles())
+                .allowedClusters(dto.getClusters())
+                .build();
+
         client.tenants().createTenant(dto.getTenantName(), tenantInfo);
         return RspBase.success();
     }

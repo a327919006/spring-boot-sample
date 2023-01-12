@@ -1,7 +1,11 @@
 package com.cn.boot.sample.pulsar.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.pulsar.client.admin.PulsarAdmin;
+import org.apache.pulsar.client.admin.PulsarAdminBuilder;
+import org.apache.pulsar.client.api.AuthenticationFactory;
+import org.apache.pulsar.client.api.ClientBuilder;
 import org.apache.pulsar.client.api.PulsarClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -18,19 +22,29 @@ public class PulsarConfig {
     private String url;
     @Value("${pulsar.admin-url}")
     private String adminUrl;
+    @Value("${pulsar.token}")
+    private String token;
 
     @Bean
     public PulsarClient pulsarClient() throws Exception {
-        return PulsarClient.builder()
-                .serviceUrl(url)
-                .build();
+        ClientBuilder clientBuilder = PulsarClient.builder()
+                .serviceUrl(url);
+        // 未开启Authentication，不需要设置token
+        if (StringUtils.isNotEmpty(token)) {
+            clientBuilder.authentication(AuthenticationFactory.token(token));
+        }
+        return clientBuilder.build();
     }
 
     @Bean
     public PulsarAdmin pulsarAdmin() throws Exception {
-        return PulsarAdmin.builder()
-                .serviceHttpUrl(adminUrl)
-                .build();
+        PulsarAdminBuilder pulsarAdminBuilder = PulsarAdmin.builder()
+                .serviceHttpUrl(adminUrl);
+        // 未开启Authentication，不需要设置token
+        if (StringUtils.isNotEmpty(token)) {
+            pulsarAdminBuilder.authentication(AuthenticationFactory.token(token));
+        }
+        return pulsarAdminBuilder.build();
     }
 
 }
