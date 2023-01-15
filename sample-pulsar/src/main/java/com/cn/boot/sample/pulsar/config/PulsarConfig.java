@@ -33,6 +33,8 @@ public class PulsarConfig {
         if (StringUtils.isNotEmpty(token)) {
             clientBuilder.authentication(AuthenticationFactory.token(token));
         }
+        // 开启事务
+        // clientBuilder.enableTransaction(true);
         return clientBuilder.build();
     }
 

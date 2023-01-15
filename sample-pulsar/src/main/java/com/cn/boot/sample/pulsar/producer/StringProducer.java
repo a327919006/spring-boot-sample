@@ -2,6 +2,7 @@ package com.cn.boot.sample.pulsar.producer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pulsar.client.api.*;
+import org.apache.pulsar.client.api.transaction.Transaction;
 import org.apache.pulsar.client.impl.MessageIdImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -79,5 +81,32 @@ public class StringProducer {
             }
             return null;
         });
+    }
+
+    /**
+     * 事务发送，待完善，结合消费数据一起组成事务
+     */
+    public void sendTransaction(String key, String data) throws PulsarClientException, ExecutionException, InterruptedException {
+        Transaction txn = client.newTransaction()
+                .withTransactionTimeout(5, TimeUnit.MINUTES)
+                .build()
+                .get();
+
+        try {
+            MessageIdImpl messageId = (MessageIdImpl) producer.newMessage(txn)
+                    .key(key)
+                    .value(data.getBytes())
+                    .send();
+            long ledgerId = messageId.getLedgerId();
+            long entryId = messageId.getEntryId();
+            int partitionIndex = messageId.getPartitionIndex();
+            log.info("【Producer】ledgerId={} entryId={} partition={} data={}",
+                    ledgerId, entryId, partitionIndex, data);
+
+            txn.commit();
+        } catch (Exception e) {
+            log.error("事务处理异常:", e);
+            txn.abort();
+        }
     }
 }
