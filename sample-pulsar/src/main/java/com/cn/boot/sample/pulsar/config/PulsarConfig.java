@@ -24,6 +24,8 @@ public class PulsarConfig {
     private String adminUrl;
     @Value("${pulsar.token}")
     private String token;
+    @Value("${pulsar.transaction}")
+    private boolean transaction;
 
     @Bean
     public PulsarClient pulsarClient() throws Exception {
@@ -34,7 +36,7 @@ public class PulsarConfig {
             clientBuilder.authentication(AuthenticationFactory.token(token));
         }
         // 开启事务
-        // clientBuilder.enableTransaction(true);
+        clientBuilder.enableTransaction(transaction);
         return clientBuilder.build();
     }
 

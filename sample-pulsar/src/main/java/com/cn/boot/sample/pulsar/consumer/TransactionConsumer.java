@@ -9,6 +9,7 @@ import org.apache.pulsar.client.api.PulsarClient;
 import org.apache.pulsar.client.api.PulsarClientException;
 import org.apache.pulsar.client.api.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +21,9 @@ import java.util.concurrent.TimeUnit;
 // @Component
 public class TransactionConsumer {
 
+    @Value("${pulsar.transaction}")
+    private boolean transaction;
+
     @Autowired
     private PulsarClient client;
     @Autowired
@@ -28,6 +32,9 @@ public class TransactionConsumer {
 
     @PostConstruct
     public void initConsumer() throws Exception {
+        if (!transaction) {
+            return;
+        }
         try {
             //创建consumer
             consumer = client.newConsumer()

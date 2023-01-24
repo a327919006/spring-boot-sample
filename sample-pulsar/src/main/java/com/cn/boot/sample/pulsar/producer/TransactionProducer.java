@@ -7,6 +7,8 @@ import org.apache.pulsar.client.api.PulsarClientException;
 import org.apache.pulsar.client.api.transaction.Transaction;
 import org.apache.pulsar.client.impl.MessageIdImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
@@ -14,8 +16,11 @@ import javax.annotation.PostConstruct;
  * @author Chen Nan
  */
 @Slf4j
-// @Component
+@Component
 public class TransactionProducer {
+
+    @Value("${pulsar.transaction}")
+    private boolean transaction;
 
     @Autowired
     private PulsarClient client;
@@ -23,6 +28,9 @@ public class TransactionProducer {
 
     @PostConstruct
     public void initPulsar() throws Exception {
+        if (!transaction) {
+            return;
+        }
         //创建producer
         producer = client.newProducer()
                 .topic("test2")
