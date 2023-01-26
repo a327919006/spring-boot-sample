@@ -6,8 +6,8 @@ server:
 # pulsar配置
 pulsar:
   # pulsar服务端地址
-  url: pulsar://192.168.157.144:6650
-  admin-url: http://192.168.157.144:8080
+  url: pulsar://192.168.230.128:6650
+  admin-url: http://192.168.230.128:8080
   token:
 #  token: eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiJ9.me_HN1DI9hgM8-MbmYtHogXyJ8vtkbffiiw-KOALKsgBgsQ22uUWwH7EfsCfPEbKWor39fQ_wqS6q2AwwUON0Qrjq1u9WW2Vu4U52voSOofywSUqGaodAsAwxygHu-EQB53p8fr2UFA5jtgod4H5bfKI6Ikrm_ah2LdvfvH7omfoEwyssVUjMCxQcHiVofqe7VMZxCzlVgL2vCXZj8tTuEtZa9hJ2K5hSI5abDgkV6hp_2fBoA3zLelnKGblP2npEEtaIr8jY0O_q7yKO0LV16qh7iXUN946QJxBEKkbP2bd4Fi2Ur0t2ERiQ1iP1Yx6vdAIYXMWUpdhxEwWA0Ze5w
 #  token: eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJleHAiOjE2NzQxNzY0NzB9.Ouw_AHENcdAb4r-TfE1rGJj-cudykltDrjjV-MIX1zOVYpyoPsww6lRNl47RlpPG9J82rB5VYCKlSF3wnVmOMDAoHLYWTXpXC-WVyyhiUbUHJHb4EHi3lZZcd3rRUN6TwK015hMYitb9CW-2HLk4sDs9jSU00ebriRjqvETTL8JiNYgw3y_mG7PWy1otxv3riS7SsPXt4wn3MlsOSCDyTUfAQHTX_NeZ9jGqWXs-zqBM9ipxKZueilghKbjKfoDB5D1tGpehTrhhRvMLMn7xDQHkM5f7utFrhmKSY8oV_Qp1S2aAiCc1ULoTHPXBm-AOKhHUMQeadsVWtrqklwftvQ
