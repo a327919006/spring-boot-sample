@@ -44,6 +44,14 @@ public class StringConsumer {
                     // .subscriptionTopicsMode(RegexSubscriptionMode.AllTopics)
                     //指定订阅名称
                     .subscriptionName(subscription)
+                    //指定订阅类型
+                    // Exclusive 独占（默认）：相同名称的消费者组只允许起一个消费者;
+                    // Failover 灾备：相同名称的消费者组可以起多个消费者实现灾备（主备），当主消费者挂掉后，备消费者可以继续消费消息
+                    // Shared 共享：相同名称的消费者组可以起多个消费者，消息以轮询方式让多个消费者都能处理消息，一条消息只会由其中一个消费者处理
+                    // Key_Shared 按key共享：类似Shared，不同的是Key_Shared保证相同的key发往同一个消费者
+                    .subscriptionType(SubscriptionType.Shared)
+                    //指定订阅模式：(默认)Durable持久化消费位置（存储在BookKeeper）,NonDurable不保存消费位置
+                    .subscriptionMode(SubscriptionMode.Durable)
                     //消费方式二：MessageListener
                     .messageListener(new MessageListener<byte[]>() {
                         @Override
@@ -57,12 +65,6 @@ public class StringConsumer {
                     //         .maxNumBytes(10 * 1024 * 1024)
                     //         .timeout(100, TimeUnit.MILLISECONDS)
                     //         .build())
-                    //指定订阅类型
-                    // Exclusive 独占（默认）：相同名称的消费者组只允许起一个消费者;
-                    // Failover 灾备：相同名称的消费者组可以起多个消费者实现灾备（主备），当主消费者挂掉后，备消费者可以继续消费消息
-                    // Shared 共享：相同名称的消费者组可以起多个消费者，消息以轮询方式让多个消费者都能处理消息，一条消息只会由其中一个消费者处理
-                    // Key_Shared 按key共享：类似Shared，不同的是Key_Shared保证相同的key发往同一个消费者
-                    .subscriptionType(SubscriptionType.Shared)
                     //缓冲队列大小，默认1000，Consumer端有一个队列，用于接收从broker端push过来的消息，receive时从缓冲区出队
                     .receiverQueueSize(1000)
                     //指定从哪里开始消费，Latest/Earliest，不指定时从上次消费位置开始消费
