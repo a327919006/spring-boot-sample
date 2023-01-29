@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/send")
-@Api(tags = "4、发送端管理", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "1、发送端管理", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SendController {
 
     @Autowired
@@ -42,11 +42,17 @@ public class SendController {
         return RspBase.success();
     }
 
-
     @ApiOperation("发送对象")
     @PostMapping("/user/sync")
     public RspBase<String> sendUser(User user) throws PulsarClientException {
         userProducer.send(user);
+        return RspBase.success();
+    }
+
+    @ApiOperation("延迟发送")
+    @PostMapping("/delay")
+    public RspBase<String> delay(String key, String msg, long delayMillSeconds) throws PulsarClientException {
+        stringProducer.sendDelay(key, msg, delayMillSeconds);
         return RspBase.success();
     }
 }

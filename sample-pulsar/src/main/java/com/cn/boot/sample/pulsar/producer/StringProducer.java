@@ -100,4 +100,23 @@ public class StringProducer {
             return null;
         });
     }
+
+    /**
+     * 延迟发送
+     */
+    public void sendDelay(String key, String data, long delayMillSeconds) throws PulsarClientException {
+        MessageIdImpl messageId = (MessageIdImpl) producer.newMessage()
+                .key(key)
+                .value(data.getBytes())
+                // 方式一：延迟x毫秒发送
+                .deliverAfter(delayMillSeconds, TimeUnit.MILLISECONDS)
+                // 方式二：指定发送时间
+                // .deliverAt(System.currentTimeMillis() + delayMillSeconds)
+                .send();
+        long ledgerId = messageId.getLedgerId();
+        long entryId = messageId.getEntryId();
+        int partitionIndex = messageId.getPartitionIndex();
+        log.info("【Producer】ledgerId={} entryId={} partition={} data={}",
+                ledgerId, entryId, partitionIndex, data);
+    }
 }
