@@ -18,7 +18,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/topic")
-@Api(tags = "3、主题", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "6、主题", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TopicController {
 
     @Autowired

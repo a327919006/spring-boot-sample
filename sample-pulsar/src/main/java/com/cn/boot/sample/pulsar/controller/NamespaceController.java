@@ -20,7 +20,7 @@ import java.util.Set;
 @Slf4j
 @RestController
 @RequestMapping("/namespace")
-@Api(tags = "2、命名空间", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "5、命名空间", produces = MediaType.APPLICATION_JSON_VALUE)
 public class NamespaceController {
 
     @Autowired

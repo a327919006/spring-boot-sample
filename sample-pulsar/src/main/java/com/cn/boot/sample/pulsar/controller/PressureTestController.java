@@ -24,7 +24,7 @@ import java.util.concurrent.*;
 @Slf4j
 @RestController
 @RequestMapping("/pressure/test")
-@Api(tags = "5、压力测试", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "8、压力测试", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PressureTestController {
 
     @Autowired

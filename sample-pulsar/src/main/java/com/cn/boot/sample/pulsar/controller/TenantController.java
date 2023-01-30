@@ -21,7 +21,7 @@ import java.util.Set;
 @Slf4j
 @RestController
 @RequestMapping("/tenant")
-@Api(tags = "1、租户", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "4、租户", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TenantController {
 
     @Autowired

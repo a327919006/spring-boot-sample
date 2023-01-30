@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/permission")
-@Api(tags = "6、授权", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "7、授权", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PermissionController {
 
     @Autowired
