@@ -7,11 +7,16 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pulsar.client.admin.PulsarAdmin;
 import org.apache.pulsar.client.admin.PulsarAdminException;
+import org.apache.pulsar.common.policies.data.AuthAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Chen Nan
@@ -37,5 +42,11 @@ public class PermissionController {
     public RspBase<String> revoke(String topic, String role) throws PulsarAdminException {
         client.topics().revokePermissions(topic, role);
         return RspBase.success();
+    }
+
+    @ApiOperation("获取")
+    @GetMapping("/")
+    public RspBase<Map<String, Set<AuthAction>>> get(String topic) throws PulsarAdminException {
+        return RspBase.data(client.topics().getPermissions(topic));
     }
 }

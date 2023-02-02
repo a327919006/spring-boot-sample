@@ -6,10 +6,14 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pulsar.client.admin.PulsarAdmin;
 import org.apache.pulsar.client.admin.PulsarAdminException;
+import org.apache.pulsar.client.api.Message;
+import org.apache.pulsar.common.policies.data.PersistentTopicInternalStats;
+import org.apache.pulsar.common.policies.data.TopicStats;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -74,5 +78,26 @@ public class TopicController {
         String topicStr = persistent + "://" + tenant + "/" + namespace + "/" + topic;
         client.topics().deletePartitionedTopic(topicStr);
         return RspBase.success();
+    }
+
+    @ApiOperation("获取统计信息")
+    @GetMapping("/stats")
+    public RspBase<TopicStats> getStats(String topic) throws PulsarAdminException {
+        return RspBase.data(client.topics().getStats(topic));
+    }
+
+    @ApiOperation("获取统计信息")
+    @GetMapping("/internalStats")
+    public RspBase<PersistentTopicInternalStats> getInternalStats(String topic) throws PulsarAdminException {
+        return RspBase.data(client.topics().getInternalStats(topic));
+    }
+
+    @ApiOperation("查看消息")
+    @GetMapping("/peekMessages")
+    public RspBase<List<String>> peekMessages(String topic, String subName, int num) throws PulsarAdminException {
+        List<Message<byte[]>> messages = client.topics().peekMessages(topic, subName, num);
+        List<String> list = new ArrayList<>();
+        messages.forEach(msg -> list.add(new String(msg.getValue())));
+        return RspBase.data(list);
     }
 }
