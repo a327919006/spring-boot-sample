@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.pulsar.client.admin.PulsarAdmin;
 import org.apache.pulsar.client.admin.PulsarAdminException;
 import org.apache.pulsar.client.api.Message;
+import org.apache.pulsar.client.api.MessageId;
+import org.apache.pulsar.client.impl.MessageIdImpl;
 import org.apache.pulsar.common.policies.data.PersistentTopicInternalStats;
 import org.apache.pulsar.common.policies.data.TopicStats;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,5 +101,39 @@ public class TopicController {
         List<String> list = new ArrayList<>();
         messages.forEach(msg -> list.add(new String(msg.getValue())));
         return RspBase.data(list);
+    }
+
+    @ApiOperation("跳过消息")
+    @PostMapping("/skipMessages")
+    public RspBase<String> skipMessages(String topic, String subName, int num) throws PulsarAdminException {
+        client.topics().skipMessages(topic, subName, num);
+        return RspBase.success();
+    }
+
+    @ApiOperation("跳过所有消息")
+    @PostMapping("/skipAllMessages")
+    public RspBase<String> skipAllMessages(String topic, String subName) throws PulsarAdminException {
+        client.topics().skipAllMessages(topic, subName);
+        return RspBase.success();
+    }
+
+    @ApiOperation(value = "重置游标至指定时间", notes = "重置后消费者会立刻收到该时间后的消息")
+    @PostMapping("/resetCursor")
+    public RspBase<String> resetCursor(String topic, String subName, long timestamp) throws PulsarAdminException {
+        client.topics().resetCursor(topic, subName, timestamp);
+        return RspBase.success();
+    }
+
+    @ApiOperation("获取主题下所有订阅组名称")
+    @GetMapping("/getSubscriptions")
+    public RspBase<List<String>> getSubscriptions(String topic) throws PulsarAdminException {
+        return RspBase.data(client.topics().getSubscriptions(topic));
+    }
+
+    @ApiOperation("获取最后一条消息ID")
+    @GetMapping("/getLastMessageId")
+    public RspBase<MessageId> getLastMessageId(String topic) throws PulsarAdminException {
+        MessageIdImpl lastMessageId = (MessageIdImpl) client.topics().getLastMessageId(topic);
+        return RspBase.data(lastMessageId);
     }
 }
