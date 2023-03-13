@@ -102,6 +102,16 @@ public class StringProducer {
     }
 
     /**
+     * 异步发送忽略发送结果
+     */
+    public void sendAsyncIgnoreResult(String key, String data) {
+        producer.newMessage()
+                .key(key)
+                .value(data.getBytes())
+                .sendAsync();
+    }
+
+    /**
      * 延迟发送
      */
     public void sendDelay(String key, String data, long delayMillSeconds) throws PulsarClientException {

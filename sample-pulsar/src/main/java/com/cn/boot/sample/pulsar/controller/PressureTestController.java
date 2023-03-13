@@ -31,15 +31,15 @@ public class PressureTestController {
     private StringProducer testProducer;
 
     /**
-     * 写入数据：1000万，QPS：166655/s，并发线程数：10
+     *
      *
      * @param threadCount 线程数
      * @param total       数据总量
      * @param printStep   打印日志步长
      */
-    @ApiOperation("1、set命令测试")
-    @PostMapping("/product")
-    public String set(int threadCount, int total, int printStep) {
+    @ApiOperation("1、同步发送")
+    @PostMapping("/product/send")
+    public String send(int threadCount, int total, int printStep) {
         // 初始化线程池
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
                 .setNameFormat("demo-pool-%d").build();
@@ -80,4 +80,49 @@ public class PressureTestController {
         return Constants.MSG_SUCCESS;
     }
 
+    /**
+     * 写入数据：1000万，TPS：166655/s，并发线程数：10
+     *
+     * @param threadCount 线程数
+     * @param total       数据总量
+     * @param printStep   打印日志步长
+     */
+    @ApiOperation("2、异步发送")
+    @PostMapping("/product/sendAsync")
+    public String sendAsync(int threadCount, int total, int printStep) {
+        // 初始化线程池
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("demo-pool-%d").build();
+        ExecutorService threadPool = new ThreadPoolExecutor(threadCount, threadCount,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+
+        int count = total / threadCount;
+
+        Runnable task = () -> {
+            long start = System.currentTimeMillis();
+            long temp = System.currentTimeMillis();
+
+            User user = new User();
+            String key = IdUtil.simpleUUID();
+            user.setId(key);
+            user.setUsername("test");
+            String data = JSONUtil.toJsonStr(user);
+            log.info("key = {}", key);
+            for (int i = 0; i < count; i++) {
+                testProducer.sendAsyncIgnoreResult(key, data);
+                if (0 == i % printStep) {
+                    log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
+                    temp = System.currentTimeMillis();
+                }
+            }
+            log.info("总耗时:{}", System.currentTimeMillis() - start);
+        };
+
+        for (int j = 0; j < threadCount; j++) {
+            // 多线程操作
+            threadPool.execute(task);
+        }
+        return Constants.MSG_SUCCESS;
+    }
 }
