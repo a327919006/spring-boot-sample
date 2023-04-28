@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.boot.sample.doris.mapper.UserMapper">
+
+    <insert id="insert" parameterType="com.cn.boot.sample.doris.model.User">
+        INSERT INTO ssb.`testuser4`
+            (
+             username,username1,username2,username3,username4,username5,username6,username7,username8,username9,
+             username10,username11,username12,username13,username14,username15,username16,username17,username18,username19,
+             username20,username21,username22,username23,username24,username25,username26,username27,username28,username29
+            )
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+             #{item.username},#{item.username1},#{item.username2},#{item.username3},#{item.username4},
+             #{item.username5},#{item.username6},#{item.username7},#{item.username8},#{item.username9},
+             #{item.username10},#{item.username11},#{item.username12},#{item.username13},#{item.username14},
+             #{item.username15},#{item.username16},#{item.username17},#{item.username18},#{item.username19},
+             #{item.username20},#{item.username21},#{item.username22},#{item.username23},#{item.username24},
+             #{item.username25},#{item.username26},#{item.username27},#{item.username28},#{item.username29}
+            )
+        </foreach>
+    </insert>
+</mapper>
