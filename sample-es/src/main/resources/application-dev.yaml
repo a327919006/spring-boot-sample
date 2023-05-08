@@ -5,9 +5,9 @@ server:
 spring:
   elasticsearch:
     rest:
-      uris: http://192.168.5.131:15591
+      uris: http://192.168.5.141:29200
       username: elastic
-      password: kXu418c7boV8Y096zTOA1lo6
+      password: Iz81J313qFfq8H46wgzQ57Wf
   servlet:
     multipart:
       max-file-size: 10MB

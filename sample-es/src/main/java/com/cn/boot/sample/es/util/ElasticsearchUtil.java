@@ -73,11 +73,11 @@ public class ElasticsearchUtil {
      */
     @PostConstruct
     public void init() {
-        HttpHost httpHost = new HttpHost("192.168.5.134", 9200, "http");
+        HttpHost httpHost = new HttpHost("192.168.5.141", 29200, "http");
         RestClientBuilder builder = RestClient.builder(httpHost);
 
         // （可选）设置账号密码，如果es未开启账号密码验证，则无需配置
-        UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("elastic", "0n5J385m65gbu6x4ZCnF8Nrd");
+        UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("elastic", "Iz81J313qFfq8H46wgzQ57Wf");
         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY, credentials);
         builder.setHttpClientConfigCallback(httpAsyncClientBuilder -> {
@@ -193,7 +193,7 @@ public class ElasticsearchUtil {
             BulkRequest request = new BulkRequest(index);
             for (StudentAddReq req : list) {
                 IndexRequest indexRequest = new IndexRequest(index);
-                indexRequest.id(req.getId()).source(JsonUtil.toJson(req), XContentType.JSON);
+                indexRequest.source(JsonUtil.toJson(req), XContentType.JSON);
 
                 request.add(indexRequest);
             }
