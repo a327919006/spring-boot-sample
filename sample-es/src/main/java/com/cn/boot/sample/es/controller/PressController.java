@@ -1,5 +1,6 @@
 package com.cn.boot.sample.es.controller;
 
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.es.model.dto.StudentAddReq;
@@ -77,7 +78,7 @@ public class PressController {
             long start = System.currentTimeMillis();
             long temp = System.currentTimeMillis();
 
-            String id = RandomUtil.randomNumbers(18);
+            String id = String.valueOf(IdUtil.getSnowflakeNextId());
             String data = RandomUtil.randomString(256);
             LocalDateTime now = LocalDateTime.now();
             StudentAddReq req = new StudentAddReq();
