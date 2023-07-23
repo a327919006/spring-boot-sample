@@ -3,6 +3,11 @@ server:
   servlet:
     context-path: /${artifactId}
 
+# 关闭钉钉SDK内部的失败error日志
+logging:
+  level:
+    topsdk: off
+
 dubbo:
   application:
     name: ${artifactId}
@@ -21,7 +26,7 @@ swagger:
     base-package: com.cn.boot.sample.business.controller
     group-name: ${artifactId}
     path-selectors:
-      exclude-patterns: [/error]
+      exclude-patterns: [ /error ]
     api-info:
       contact:
         name: ChenNan
@@ -48,10 +53,10 @@ test:
     # 此配置配置在pom.xml中，根据不同环境获取不同配置值，可用于从pom中读取配置中心地址
     address: '@testAddress@'
     users:
-    - name: user1
-      age: 11
-    - name: user2
-      age: 22
+      - name: user1
+        age: 11
+      - name: user2
+        age: 22
     ftp:
       ip: 127.0.0.1
       port: 990
