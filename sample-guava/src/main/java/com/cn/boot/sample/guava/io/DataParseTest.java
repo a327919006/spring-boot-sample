@@ -1,10 +1,8 @@
 package com.cn.boot.sample.guava.io;
 
-import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
-import com.google.common.hash.HashCode;
-import com.google.common.hash.Hashing;
 import com.google.common.io.CharSink;
 import com.google.common.io.FileWriteMode;
 import com.google.common.io.Files;
@@ -20,7 +18,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,11 +34,19 @@ import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
 @TestInstance(PER_CLASS)
 public class DataParseTest {
 
-    private File file;
+    private File sourceFile;
+    private File sinkFile;
 
     @BeforeAll
     public void init() throws FileNotFoundException {
-        file = ResourceUtils.getFile("classpath:test.csv");
+        // String sourceFilePath = "train_temp.csv";
+        // String sourceFilePath = "test_temp.csv";
+        // String sourceFilePath = "train_hudi.csv";
+        String sourceFilePath = "test_hudi.csv";
+        sourceFile = ResourceUtils.getFile("classpath:" + sourceFilePath);
+        String sinkFilePath = sourceFile.getParent() + "/result.csv";
+        FileUtil.del(sinkFilePath);
+        sinkFile = FileUtil.newFile(sinkFilePath);
     }
 
     /**
@@ -72,10 +77,18 @@ public class DataParseTest {
                     return true;
                 }
 
-                String[] split = line.split(",");
-                String timeStr = split[0];
-                DateTime date = DateUtil.parseDateTime(timeStr);
-
+                long currTime = getLineTime(line);
+                String lastLine = result.get(result.size() - 1);
+                String[] lastData = lastLine.split(",");
+                long lastTime = getLineTime(lastLine);
+                while (currTime - lastTime > 60 * 1000) {
+                    String fillTime = DateUtil.formatDateTime(new Date(lastTime + 60 * 1000));
+                    String fillLine = fillTime + "," + lastData[1] + "," + lastData[2];
+                    log.info("fillLine={}", fillLine);
+                    result.add(fillLine);
+                    lastTime = lastTime + 60 * 1000;
+                }
+                result.add(line);
                 return true;
             }
 
@@ -85,25 +98,16 @@ public class DataParseTest {
             }
         };
 
-        List<String> result = Files.asCharSource(file, StandardCharsets.UTF_8).readLines(lineProcessor);
-        // [test1_test, test2_test]
-        log.info("result = {}", result);
+        List<String> result = Files.asCharSource(sourceFile, StandardCharsets.UTF_8).readLines(lineProcessor);
+        // log.info("result = {}", result);
+        CharSink charSink = Files.asCharSink(sinkFile, StandardCharsets.UTF_8, FileWriteMode.APPEND);
+        charSink.writeLines(result);
     }
 
-    /**
-     * 文件追加内容
-     */
-    @Test
-    public void append() throws IOException {
-        String absolutePath = file.getAbsolutePath();
-        log.info(absolutePath);
-
-        CharSink charSink = Files.asCharSink(file, StandardCharsets.UTF_8, FileWriteMode.APPEND);
-        charSink.write("testAppend1");
-        charSink.write("testAppend2");
-
-        String result = Files.asCharSource(file, StandardCharsets.UTF_8).read();
-        log.info("result = {}", result);
+    private long getLineTime(String line) {
+        String[] split = line.split(",");
+        String timeStr = split[0];
+        return DateUtil.parseDateTime(timeStr).getTime();
     }
 
 }
