@@ -41,7 +41,12 @@ public class DataParseTest {
         // String sourceFilePath = "test_temp.csv";
         // String sourceFilePath = "train_hudi.csv";
 //        String sourceFilePath = "test_hudi.csv";
-        String sourceFilePath = "bms_temp_train.csv";
+//         String sourceFilePath = "bms_temp_train.csv";
+//         String sourceFilePath = "bms_temp_test.csv";
+//         String sourceFilePath = "bms_diff_train.csv";
+//         String sourceFilePath = "bms_diff_test.csv";
+//         String sourceFilePath = "bms_jueyuan_train.csv";
+        String sourceFilePath = "bms_jueyuan_test.csv";
 
         sourceFile = ResourceUtils.getFile("classpath:" + sourceFilePath);
         String sinkFilePath = sourceFile.getParent() + "/result.csv";
