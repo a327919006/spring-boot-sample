@@ -18,9 +18,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
 
@@ -42,7 +40,9 @@ public class DataParseTest {
         // String sourceFilePath = "train_temp.csv";
         // String sourceFilePath = "test_temp.csv";
         // String sourceFilePath = "train_hudi.csv";
-        String sourceFilePath = "test_hudi.csv";
+//        String sourceFilePath = "test_hudi.csv";
+        String sourceFilePath = "bms_temp_train.csv";
+
         sourceFile = ResourceUtils.getFile("classpath:" + sourceFilePath);
         String sinkFilePath = sourceFile.getParent() + "/result.csv";
         FileUtil.del(sinkFilePath);
@@ -57,6 +57,7 @@ public class DataParseTest {
         LineProcessor<List<String>> lineProcessor = new LineProcessor<List<String>>() {
 
             private final List<String> result = new ArrayList<>();
+            private final Set<Long> cache = new HashSet<>();
 
             /**
              *
@@ -78,6 +79,11 @@ public class DataParseTest {
                 }
 
                 long currTime = getLineTime(line);
+                if (cache.contains(currTime)) {
+                    log.info("duplicatedLine={}", line);
+                    return true;
+                }
+                cache.add(currTime);
                 String lastLine = result.get(result.size() - 1);
                 String[] lastData = lastLine.split(",");
                 long lastTime = getLineTime(lastLine);
