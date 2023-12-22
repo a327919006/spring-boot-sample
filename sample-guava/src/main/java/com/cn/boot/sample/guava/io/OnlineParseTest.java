@@ -52,10 +52,10 @@ public class OnlineParseTest {
         String firstStatus = null;
         String did = "500112000004";
         String deviceName = "重庆";
-        Date lastTime = null;
-        Date firstTime = null;
         Date startTime = DateUtil.parse("2023-12-02 00:00:00");
         Date endTime = DateUtil.parse("2023-12-09 00:00:00");
+        Date lastTime = null;
+        Date firstTime = null;
         long totalOfflineCount = 0;
         long totalOnlineCount = 0;
         long totalOfflineSecond = 0;
@@ -77,6 +77,13 @@ public class OnlineParseTest {
             if (firstTime == null) {
                 firstStatus = currStatus;
                 firstTime = currTime;
+                if (currTime.compareTo(startTime) > 0) {
+                    if (StringUtils.equals("online", currStatus)) {
+                        totalOfflineCount++;
+                    } else {
+                        totalOnlineCount++;
+                    }
+                }
             }
             if (lastStatus == null) {
                 lastStatus = currStatus;
@@ -113,17 +120,16 @@ public class OnlineParseTest {
             lastStatus = currStatus;
             lastTime = currTime;
         }
+
         long lastSecond = endTime.getTime() - lastTime.getTime();
         long firstSecond = firstTime.getTime() - startTime.getTime();
         if (onlineDataList.size() == 1) {
             if (StringUtils.equals("offline", onlineDataList.get(0).getStatus())) {
-                totalOnlineCount++;
                 maxOnlineSecond += firstSecond;
                 minOnlineSecond = maxOnlineSecond;
                 maxOfflineSecond += lastSecond;
                 minOfflineSecond = maxOfflineSecond;
             } else {
-                totalOfflineCount++;
                 maxOnlineSecond += lastSecond;
                 minOnlineSecond = maxOnlineSecond;
                 maxOfflineSecond += firstSecond;
