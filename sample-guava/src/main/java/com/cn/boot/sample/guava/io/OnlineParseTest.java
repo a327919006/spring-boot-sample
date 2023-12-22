@@ -66,9 +66,7 @@ public class OnlineParseTest {
         long maxOfflineSecond = 0;
 
         Map<String, Integer> hourCount = new TreeMap<>();
-        String format = "yyyy-MM-dd HH:mm:ss.SSS";
         for (OnlineData onlineData : onlineDataList) {
-//            System.out.println(onlineData.getTs() + " " + (StringUtils.equals("online", onlineData.getStatus()) ? "上线" : "离线"));
             String currStatus = onlineData.getStatus();
             Date currTime = DateUtil.parse(onlineData.getTs());
             if (StringUtils.equals("online", currStatus)) {
@@ -88,8 +86,6 @@ public class OnlineParseTest {
             long time = currTime.getTime() - lastTime.getTime();
             String formatTime = DateUtil.formatBetween(time);
             if (StringUtils.equals("offline", lastStatus) && StringUtils.equals("online", currStatus)) {
-//                System.out.println("'" + DateUtil.format(lastTime, format) + "\t" + "'" + DateUtil.format(currTime, format) + "\t离线\t" + formatTime);
-//                totalOfflineCount++;
                 totalOfflineSecond += time;
                 if (time < minOfflineSecond) {
                     minOfflineSecond = time;
@@ -107,9 +103,6 @@ public class OnlineParseTest {
                 hourCount.put(key, count);
             }
             if (StringUtils.equals("online", lastStatus) && StringUtils.equals("offline", currStatus)) {
-//                System.out.println("'" + DateUtil.format(lastTime, format) + "\t" + "'" + DateUtil.format(currTime, format) + "\t在线\t" + formatTime);
-
-//                totalOnlineCount++;
                 totalOnlineSecond += time;
                 if (time < minOnlineSecond) {
                     minOnlineSecond = time;
@@ -126,6 +119,21 @@ public class OnlineParseTest {
         if (onlineDataList.size() == 1) {
             if (StringUtils.equals("offline", onlineDataList.get(0).getStatus())) {
                 totalOnlineCount++;
+                maxOnlineSecond += firstSecond;
+                minOnlineSecond = maxOnlineSecond;
+                maxOfflineSecond += lastSecond;
+                minOfflineSecond = maxOfflineSecond;
+            } else {
+                totalOfflineCount++;
+                maxOnlineSecond += lastSecond;
+                minOnlineSecond = maxOnlineSecond;
+                maxOfflineSecond += firstSecond;
+                minOfflineSecond = maxOfflineSecond;
+            }
+        }
+
+        if (onlineDataList.size() == 1) {
+            if (StringUtils.equals("offline", onlineDataList.get(0).getStatus())) {
                 maxOnlineSecond += firstSecond;
                 minOnlineSecond = maxOnlineSecond;
                 maxOfflineSecond += lastSecond;
