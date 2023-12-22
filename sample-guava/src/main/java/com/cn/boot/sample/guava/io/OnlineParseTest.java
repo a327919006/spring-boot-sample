@@ -84,7 +84,6 @@ public class OnlineParseTest {
                 continue;
             }
             long time = currTime.getTime() - lastTime.getTime();
-            String formatTime = DateUtil.formatBetween(time);
             if (StringUtils.equals("offline", lastStatus) && StringUtils.equals("online", currStatus)) {
                 totalOfflineSecond += time;
                 if (time < minOfflineSecond) {
