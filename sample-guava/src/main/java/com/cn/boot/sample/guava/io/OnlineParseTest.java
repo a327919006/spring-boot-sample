@@ -132,21 +132,6 @@ public class OnlineParseTest {
             }
         }
 
-        if (onlineDataList.size() == 1) {
-            if (StringUtils.equals("offline", onlineDataList.get(0).getStatus())) {
-                maxOnlineSecond += firstSecond;
-                minOnlineSecond = maxOnlineSecond;
-                maxOfflineSecond += lastSecond;
-                minOfflineSecond = maxOfflineSecond;
-            } else {
-                totalOfflineCount++;
-                maxOnlineSecond += lastSecond;
-                minOnlineSecond = maxOnlineSecond;
-                maxOfflineSecond += firstSecond;
-                minOfflineSecond = maxOfflineSecond;
-            }
-        }
-
         if (StringUtils.equals("offline", firstStatus)) {
             totalOnlineSecond += firstSecond;
         } else {
