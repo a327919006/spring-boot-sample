@@ -1,5 +1,6 @@
 package com.cn.boot.sample.guava.io;
 
+import cn.hutool.core.date.BetweenFormatter;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.NumberUtil;
 import com.alibaba.fastjson.JSONArray;
@@ -48,22 +49,32 @@ public class OnlineParseTest {
     public void readLines() throws IOException {
         String logStr = Files.asCharSource(sourceFile, StandardCharsets.UTF_8).read();
         List<OnlineData> onlineDataList = JSONArray.parseArray(logStr, OnlineData.class);
-        String lastStatus = null;
-        String firstStatus = null;
         String did = "500112000004";
         String deviceName = "重庆";
         Date startTime = DateUtil.parse("2023-12-02 00:00:00");
         Date endTime = DateUtil.parse("2023-12-09 00:00:00");
+        OnlineData firstData = onlineDataList.get(0);
+
+        Date firstTime = DateUtil.parse(firstData.getTs());
+        String firstStatus = firstData.getStatus();
         Date lastTime = null;
-        Date firstTime = null;
+        String lastStatus = null;
         long totalOfflineCount = 0;
         long totalOnlineCount = 0;
         long totalOfflineSecond = 0;
         long totalOnlineSecond = 0;
-        long minOnlineSecond = Integer.MAX_VALUE;
-        long minOfflineSecond = Integer.MAX_VALUE;
+        long minOnlineSecond = endTime.getTime() - startTime.getTime();
+        long minOfflineSecond = endTime.getTime() - startTime.getTime();
         long maxOnlineSecond = 0;
         long maxOfflineSecond = 0;
+
+        if (firstTime.compareTo(startTime) > 0) {
+            if (StringUtils.equals("online", firstStatus)) {
+                totalOfflineCount++;
+            } else {
+                totalOnlineCount++;
+            }
+        }
 
         Map<String, Integer> hourCount = new TreeMap<>();
         for (OnlineData onlineData : onlineDataList) {
@@ -73,17 +84,6 @@ public class OnlineParseTest {
                 totalOnlineCount++;
             } else {
                 totalOfflineCount++;
-            }
-            if (firstTime == null) {
-                firstStatus = currStatus;
-                firstTime = currTime;
-                if (currTime.compareTo(startTime) > 0) {
-                    if (StringUtils.equals("online", currStatus)) {
-                        totalOfflineCount++;
-                    } else {
-                        totalOnlineCount++;
-                    }
-                }
             }
             if (lastStatus == null) {
                 lastStatus = currStatus;
@@ -121,32 +121,42 @@ public class OnlineParseTest {
             lastTime = currTime;
         }
 
-        long lastSecond = endTime.getTime() - lastTime.getTime();
         long firstSecond = firstTime.getTime() - startTime.getTime();
-        if (onlineDataList.size() == 1) {
-            if (StringUtils.equals("offline", onlineDataList.get(0).getStatus())) {
-                maxOnlineSecond += firstSecond;
-                minOnlineSecond = maxOnlineSecond;
-                maxOfflineSecond += lastSecond;
-                minOfflineSecond = maxOfflineSecond;
-            } else {
-                maxOnlineSecond += lastSecond;
-                minOnlineSecond = maxOnlineSecond;
-                maxOfflineSecond += firstSecond;
-                minOfflineSecond = maxOfflineSecond;
-            }
-        }
-
+        long lastSecond = endTime.getTime() - lastTime.getTime();
         if (StringUtils.equals("offline", firstStatus)) {
             totalOnlineSecond += firstSecond;
+            if (firstSecond < minOnlineSecond) {
+                minOnlineSecond = firstSecond;
+            }
+            if (firstSecond > maxOnlineSecond) {
+                maxOnlineSecond = firstSecond;
+            }
         } else {
             totalOfflineSecond += firstSecond;
+            if (firstSecond < minOfflineSecond) {
+                minOfflineSecond = firstSecond;
+            }
+            if (firstSecond > maxOfflineSecond) {
+                maxOfflineSecond = firstSecond;
+            }
         }
 
         if (StringUtils.equals("offline", lastStatus)) {
             totalOfflineSecond += lastSecond;
+            if (lastSecond < minOfflineSecond) {
+                minOfflineSecond = lastSecond;
+            }
+            if (lastSecond > maxOfflineSecond) {
+                maxOfflineSecond = lastSecond;
+            }
         } else {
             totalOnlineSecond += lastSecond;
+            if (lastSecond < minOnlineSecond) {
+                minOnlineSecond = lastSecond;
+            }
+            if (lastSecond > maxOnlineSecond) {
+                maxOnlineSecond = lastSecond;
+            }
         }
 
         BigDecimal onlineRate = NumberUtil.round(Double.parseDouble(totalOnlineSecond + "") / (totalOnlineSecond + totalOfflineSecond) * 100, 2);
@@ -189,28 +199,38 @@ public class OnlineParseTest {
         System.out.print("最短在线时长\t");
         System.out.println("最短离线时长\t");
 
+        String totalSecondFormat = formatSecond(totalSecond);
+        String totalOnlineSecondFormat = formatSecond(totalOnlineSecond);
+        String totalOfflineSecondFormat = formatSecond(totalOfflineSecond);
+        String avgOnlineSecondFormat = formatSecond(avgOnlineSecond);
+        String avgOfflineSecondFormat = formatSecond(avgOfflineSecond);
+        String maxOnlineSecondFormat = formatSecond(maxOnlineSecond);
+        String maxOfflineSecondFormat = formatSecond(maxOfflineSecond);
+        String minOnlineSecondFormat = formatSecond(minOnlineSecond);
+        String minOfflineSecondFormat = formatSecond(minOfflineSecond);
+
         System.out.print(deviceName + "\t");
         System.out.print("'" + did + "\t");
         System.out.print(onlineRate + "%" + "\t");
         System.out.print(totalOfflineCount + "\t");
         System.out.print(dayOfflineCount + "\t");
-        System.out.print(DateUtil.formatBetween(totalSecond) + "\t");
-        System.out.print(DateUtil.formatBetween(totalOnlineSecond) + "\t");
-        System.out.print(DateUtil.formatBetween(totalOfflineSecond) + "\t");
+        System.out.print(totalSecondFormat + "\t");
+        System.out.print(totalOnlineSecondFormat + "\t");
+        System.out.print(totalOfflineSecondFormat + "\t");
         if (avgOnlineSecond > 0) {
-            System.out.print(DateUtil.formatBetween(avgOnlineSecond) + "\t");
+            System.out.print(avgOnlineSecondFormat + "\t");
         } else {
             System.out.print("0秒" + "\t");
         }
         if (avgOfflineSecond > 0) {
-            System.out.print(DateUtil.formatBetween(avgOfflineSecond) + "\t");
+            System.out.print(avgOfflineSecondFormat + "\t");
         } else {
             System.out.print("0秒" + "\t");
         }
-        System.out.print(DateUtil.formatBetween(maxOnlineSecond) + "\t");
-        System.out.print(DateUtil.formatBetween(maxOfflineSecond) + "\t");
-        System.out.print(DateUtil.formatBetween(minOnlineSecond) + "\t");
-        System.out.print(DateUtil.formatBetween(minOfflineSecond));
+        System.out.print(maxOnlineSecondFormat + "\t");
+        System.out.print(maxOfflineSecondFormat + "\t");
+        System.out.print(minOnlineSecondFormat + "\t");
+        System.out.print(minOfflineSecondFormat);
     }
 
     private void printResult2(String did, String deviceName, long totalOfflineCount, BigDecimal dayOfflineCount, BigDecimal onlineRate,
@@ -227,30 +247,47 @@ public class OnlineParseTest {
             avgOfflineSecond = totalOfflineSecond / totalOfflineCount;
         }
 
+        String totalSecondFormat = formatSecond(totalSecond);
+        String totalOnlineSecondFormat = formatSecond(totalOnlineSecond);
+        String totalOfflineSecondFormat = formatSecond(totalOfflineSecond);
+        String avgOnlineSecondFormat = formatSecond(avgOnlineSecond);
+        String avgOfflineSecondFormat = formatSecond(avgOfflineSecond);
+        String maxOnlineSecondFormat = formatSecond(maxOnlineSecond);
+        String maxOfflineSecondFormat = formatSecond(maxOfflineSecond);
+        String minOnlineSecondFormat = formatSecond(minOnlineSecond);
+        String minOfflineSecondFormat = formatSecond(minOfflineSecond);
+
         System.out.println("在线率\t" + onlineRate + "%");
         System.out.println("总在线次数\t" + totalOnlineCount + "次");
         System.out.println("总离线次数\t" + totalOfflineCount + "次");
         System.out.println("日均离线次数\t" + dayOfflineCount + "次");
-        System.out.println("统计周期\t" + DateUtil.formatBetween(totalSecond));
-        System.out.println("总在线时长\t" + DateUtil.formatBetween(totalOnlineSecond));
-        System.out.println("总离线时长\t" + DateUtil.formatBetween(totalOfflineSecond));
+        System.out.println("统计周期\t" + totalSecondFormat);
+        System.out.println("总在线时长\t" + totalOnlineSecondFormat);
+        System.out.println("总离线时长\t" + totalOfflineSecondFormat);
         if (avgOnlineSecond > 0) {
-            System.out.println("平均在线时长\t" + DateUtil.formatBetween(totalOnlineSecond / totalOnlineCount));
+            System.out.println("平均在线时长\t" + avgOnlineSecondFormat);
         } else {
             System.out.println("平均在线时长\t" + "0秒" + "\t");
         }
         if (avgOfflineSecond > 0) {
-            System.out.println("平均离线时长\t" + DateUtil.formatBetween(totalOfflineSecond / totalOfflineCount));
+            System.out.println("平均离线时长\t" + avgOfflineSecondFormat);
         } else {
             System.out.println("平均离线时长\t" + "0秒" + "\t");
         }
-        System.out.println("最长在线时长\t" + DateUtil.formatBetween(maxOnlineSecond));
-        System.out.println("最长离线时长\t" + DateUtil.formatBetween(maxOfflineSecond));
-        System.out.println("最短在线时长\t" + DateUtil.formatBetween(minOnlineSecond));
-        System.out.println("最短离线时长\t" + DateUtil.formatBetween(minOfflineSecond));
+        System.out.println("最长在线时长\t" + maxOnlineSecondFormat);
+        System.out.println("最长离线时长\t" + maxOfflineSecondFormat);
+        System.out.println("最短在线时长\t" + minOnlineSecondFormat);
+        System.out.println("最短离线时长\t" + minOfflineSecondFormat);
         System.out.println(hourCount);
         for (String hour : hourCount.keySet()) {
 //            System.out.println(hour + "点\t" + hourCount.get(hour));
         }
+    }
+
+    private String formatSecond(long second) {
+        if (second < 1000) {
+            return DateUtil.formatBetween(second);
+        }
+        return DateUtil.formatBetween(second, BetweenFormatter.Level.SECOND);
     }
 }
