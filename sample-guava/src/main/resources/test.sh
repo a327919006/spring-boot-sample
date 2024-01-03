@@ -2,7 +2,7 @@
 
 zeroCommit='0000000000000000000000000000000000000000'
 mergeRegex='^(Merge)(.{1,})'
-contentRegex='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert):\[[0-9]+(,[0-9]+)*\].*'
+contentRegex='^(feat|fix):\[[0-9]+(,[0-9]+)*\].*|(docs|style|test|ci):.*'
 
 if [ "$GL_PROJECT_PATH" = "test/test1" -o "$GL_PROJECT_PATH" = "test/test2" ]; then
   while read -r oldrev newrev refname; do
