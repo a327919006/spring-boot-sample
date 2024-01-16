@@ -1,14 +1,18 @@
 #!/bin/bash
 
 zeroCommit='0000000000000000000000000000000000000000'
-mergeRegex='^(Merge)(.{1,})'
-contentRegex='^(feat|fix):\[[0-9]+(,[0-9]+)*\].*|(docs|style|test|ci):.*'
+mergeRegex='^(Merge|merge).*'
+contentRegex='^(feat|fix):\[[0-9]+(,[0-9]+)*\].*|(docs|test|ci|revert):.*'
+userInfoFile='/var/opt/gitlab/gitaly/user.info'
+urlSession='http://192.168.1.221:82/zentao/api-getsessionid.json'
+urlLogin='http://192.168.1.221:82/zentao/user-login.json?account=xxx&password=xxx'
 
-if [ "$GL_PROJECT_PATH" = "test/test1" -o "$GL_PROJECT_PATH" = "test/test2" ]; then
+if [[ "$GL_PROJECT_PATH" == "ai/cnte-algo-etl" || "$GL_PROJECT_PATH" == "ai/cnte-algo-vehicle-detection"
+|| "$GL_PROJECT_PATH" == "ems/commcomponents" || "$GL_PROJECT_PATH" == "test/test1" ]]; then
   while read -r oldrev newrev refname; do
 
-    echo "开始检查提交信息..."
-    echo "您提交的分支为：$refname"
+    echo "[INFO]开始检查提交信息..."
+    echo "[INFO]您提交的分支为：${refname#refs/heads/}"
 
     # Branch or tag got deleted, ignore the push
     [ "$newrev" = "$zeroCommit" ] && continue
@@ -20,21 +24,18 @@ if [ "$GL_PROJECT_PATH" = "test/test1" -o "$GL_PROJECT_PATH" = "test/test2" ]; t
     declare -A bugs
 
     for commit in $(git rev-list "$range" --not --all); do
-      user=$(git log --pretty=format:"%an" $commit -1)
-      commitDate=$(git log --pretty=format:"%cd" $commit -1)
+      commitDate=$(git log --pretty=format:"%ci" $commit -1)
       msg=$(git log --pretty=format:"%s" $commit -1)
       flagMerge=$(echo $msg | grep -E "$mergeRegex")
       flagPush=$(echo $msg | grep -E "$contentRegex")
       if [ -z "$flagPush" ] && [ -z "$flagMerge" ]; then
-        echo "[ERROR]"
-        echo "[ERROR]由于这份提交日志不规范，本次提交被拒绝"
-        echo "[ERROR]$commit in ${refname#refs/heads/}"
-        echo "[ERROR]提交者：$user"
+        echo "[ERROR]--------------------------------------------------------"
+        echo "[ERROR]提交失败：提交信息不规范，请按照规范修改提交信息后重新提交"
+        echo "[ERROR]提交信息：$msg"
+        echo "[ERROR]标准格式：类型:[编号]任意描述信息,类型为feat|fix|docs|test|ci"
+        echo "[ERROR]提交ID：$commit"
         echo "[ERROR]提交日期：$commitDate"
-        echo "[ERROR]提交日志：$msg"
-        echo "[ERROR]提交信息检查不通过!!!"
-        echo "[ERROR]请按照规范修改提交日志后重新尝试提交。"pre
-        echo "[ERROR]"
+        echo "[ERROR]--------------------------------------------------------"
         exit 1
       else
         if [[ ${msg:0:5} == "feat:" ]]; then
@@ -44,15 +45,20 @@ if [ "$GL_PROJECT_PATH" = "test/test1" -o "$GL_PROJECT_PATH" = "test/test2" ]; t
           for numStr in ${numArray[*]}; do
             if [ ! -n "${storys[$numStr]}" ]
             then
-              echo "[DEBUG]开始校验需求号："$numStr
-              result=$(curl -s -H "User-Agent=Mozilla/5.0" -c /var/opt/gitlab/gitaly/user.info -b /var/opt/gitlab/gitaly/user.info http://192.168.1.221:82/zentao/user-login.json?zentaosid=6gci293aa6eav8eap3i2l5bi51&password=cnte@123&account=ops)
-              result=$(curl -s -b /var/opt/gitlab/gitaly/user.info http://192.168.1.221:82/zentao/story-view-$numStr.json)
+              echo "[INFO]开始关联需求号："$numStr
+              result=$(curl -s -c $userInfoFile $urlSession)
+              result=$(curl -s -c $userInfoFile -b $userInfoFile $urlLogin)
+              result=$(curl -s -b $userInfoFile http://192.168.1.221:82/zentao/story-view-$numStr.json)
               if [[ ${result:0:1} == "{" ]]; then
-                echo "[DEBUG]需求号存在："$numStr
+                echo "[INFO]需求号关联成功："$numStr
                 storys[$numStr]=1
               else
-                echo "[ERROR]提交信息检查不通过!!!"
-                echo "[ERROR]请确认需求编号[$numStr]是否存在"
+                echo "[ERROR]--------------------------------------------------------"
+                echo "[ERROR]提交失败：请确认需求编号[$numStr]是否存在"
+                echo "[ERROR]提交信息：$msg"
+                echo "[ERROR]提交ID：$commit"
+                echo "[ERROR]提交日期：$commitDate"
+                echo "[ERROR]--------------------------------------------------------"
                 exit 1
               fi
             fi
@@ -67,15 +73,20 @@ if [ "$GL_PROJECT_PATH" = "test/test1" -o "$GL_PROJECT_PATH" = "test/test2" ]; t
           for numStr in ${numArray[*]}; do
             if [ ! -n "${bugs[$numStr]}" ]
             then
-              echo "[DEBUG]开始校验BUG号："$numStr
-              result=$(curl -s -H "User-Agent=Mozilla/5.0" -c /var/opt/gitlab/gitaly/user.info -b /var/opt/gitlab/gitaly/user.info http://192.168.1.221:82/zentao/user-login.json?zentaosid=6gci293aa6eav8eap3i2l5bi51&password=cnte@123&account=ops)
-              result=$(curl -s -b /var/opt/gitlab/gitaly/user.info http://192.168.1.221:82/zentao/bug-view-$numStr.json)
+              echo "[INFO]开始关联BUG号："$numStr
+              result=$(curl -s -c $userInfoFile $urlSession)
+              result=$(curl -s -c $userInfoFile -b $userInfoFile $urlLogin)
+              result=$(curl -s -b $userInfoFile http://192.168.1.221:82/zentao/bug-view-$numStr.json)
               if [[ ${result:0:1} == "{" ]]; then
-                echo "[DEBUG]BUG号存在："$numStr
+                echo "[INFO]BUG号关联成功："$numStr
                 bugs[$numStr]=1
               else
-                echo "[ERROR]提交信息检查不通过!!!"
-                echo "[ERROR]请确认BUG编号[$numStr]是否存在"
+                echo "[ERROR]--------------------------------------------------------"
+                echo "[ERROR]提交失败：请确认BUG编号[$numStr]是否存在"
+                echo "[ERROR]提交信息：$msg"
+                echo "[ERROR]提交ID：$commit"
+                echo "[ERROR]提交日期：$commitDate"
+                echo "[ERROR]--------------------------------------------------------"
                 exit 1
               fi
             else
@@ -90,9 +101,10 @@ if [ "$GL_PROJECT_PATH" = "test/test1" -o "$GL_PROJECT_PATH" = "test/test2" ]; t
     #msg=$(git log --topo-order --pretty=format:"%s" -1)
     #feat=${msg% *}
     #numStr=${feat#*:}
-    echo "本次提交关联禅道需求号："${!storys[*]}
-    echo "本次提交关联禅道BUG号："${!bugs[*]}
-
+    echo "[INFO]--------------------------------------------------------"
+    echo "[INFO]本次提交关联禅道需求号："${!storys[*]}
+    echo "[INFO]本次提交关联禅道BUG号："${!bugs[*]}
+    echo "[INFO]--------------------------------------------------------"
   done
 else
   echo "该项目无需校验"
