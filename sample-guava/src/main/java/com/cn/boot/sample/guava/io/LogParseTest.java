@@ -14,9 +14,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
 
@@ -35,7 +33,7 @@ public class LogParseTest {
 
     @BeforeAll
     public void init() throws FileNotFoundException {
-        String sourceFilePath = "log-20231105 215200.json";
+        String sourceFilePath = "Explore-logs-2024-01-07 22_12_37.json";
         sourceFile = ResourceUtils.getFile("classpath:" + sourceFilePath);
     }
 
@@ -65,8 +63,21 @@ public class LogParseTest {
             }
         }
         // log.info("result={}", pathMap);
+        Set<String> existSet = new HashSet<>();
+
         pathMap.forEach((path, lineTime) -> {
-            System.out.println(path + "\t" + lineTime.getDatetime() + "\t" + lineTime.getCost() + "\t" + lineTime.getTimes());
+            boolean exist = false;
+            for (String existPath : existSet) {
+                String subPath = StringUtils.substringBeforeLast(path, "?");
+                String subExistPath = StringUtils.substringBeforeLast(existPath, "?");
+                if (StringUtils.equals(subPath, subExistPath)) {
+                    exist = true;
+                    break;
+                }
+            }
+            if (!exist) {
+                System.out.println(path + "\t" + lineTime.getDatetime() + "\t" + lineTime.getCost() + "\t" + lineTime.getTimes());
+            }
         });
     }
 }
