@@ -3,7 +3,6 @@ package com.cn.boot.sample.guava.io;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
-import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.google.common.io.LineProcessor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +16,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
 
@@ -29,12 +28,23 @@ public class CommitParseTest {
 
     public static String typeFeat = "feat";
     public static String typeFix = "fix";
-    private File sourceFile;
+    private File commitFile;
+    private File planFeatFile;
+    private File planFixFile;
+    private final Comparator<Integer> reverseOrderComparator = Collections.reverseOrder();
+    private final Set<Integer> commitFeatSet = new TreeSet<>(reverseOrderComparator);
+    private final Set<Integer> commitFixSet = new TreeSet<>(reverseOrderComparator);
+    private final Set<Integer> planFeatSet = new TreeSet<>(reverseOrderComparator);
+    private final Set<Integer> planFixSet = new TreeSet<>(reverseOrderComparator);
 
     @BeforeAll
     public void init() throws FileNotFoundException {
-        String sourceFilePath = "commit_info.txt";
-        sourceFile = ResourceUtils.getFile("classpath:" + sourceFilePath);
+        String commitFilePath = "commit20240408.txt";
+        String planFeatFilePath = "commit_plan_feat-20240408.txt";
+        String planFixFilePath = "commit_plan_fix-20240408.txt";
+        commitFile = ResourceUtils.getFile("classpath:" + commitFilePath);
+        planFeatFile = ResourceUtils.getFile("classpath:" + planFeatFilePath);
+        planFixFile = ResourceUtils.getFile("classpath:" + planFixFilePath);
     }
 
     /**
@@ -42,10 +52,38 @@ public class CommitParseTest {
      */
     @Test
     public void readLines() throws IOException {
-        LineProcessor<String> lineProcessor = new LineProcessor<String>() {
+        commitParse();
+        planFeatParse();
+        planFixParse();
+        System.out.println("计划BUG：" + StrUtil.join(",", planFixSet));
+        System.out.println("提交BUG：" + StrUtil.join(",", commitFixSet));
+        System.out.println("计划需求：" + StrUtil.join(",", planFeatSet));
+        System.out.println("提交需求：" + StrUtil.join(",", commitFeatSet));
 
-            private final Map<String, CommitInfo> featMap = new HashMap<>();
-            private final Map<String, CommitInfo> fixMap = new HashMap<>();
+        Set<Integer> errorFeatSet = new TreeSet<>(reverseOrderComparator);
+        Set<Integer> errorFixSet = new TreeSet<>(reverseOrderComparator);
+        for (Integer num : commitFixSet) {
+            if (!planFixSet.contains(num)) {
+                errorFixSet.add(num);
+            }
+        }
+        for (Integer num : commitFeatSet) {
+            if (!planFeatSet.contains(num)) {
+                errorFeatSet.add(num);
+            }
+        }
+
+        System.out.println("未规划BUG：" + StrUtil.join(",", errorFixSet));
+        System.out.println("未规划需求：" + StrUtil.join(",", errorFeatSet));
+    }
+
+    private void commitParse() throws IOException {
+        LineProcessor<String> commitProcessor = new LineProcessor<String>() {
+
+            private final Comparator<Integer> reverseOrderComparator = Collections.reverseOrder();
+
+            private final Map<Integer, CommitInfo> featMap = new TreeMap<>(reverseOrderComparator);
+            private final Map<Integer, CommitInfo> fixMap = new TreeMap<>(reverseOrderComparator);
 
             @Override
             public boolean processLine(String line) throws IOException {
@@ -71,11 +109,12 @@ public class CommitParseTest {
 //                System.out.println(numStr);
                 String[] numArray = StringUtils.split(numStr, ",");
                 for (String num : numArray) {
+                    int numInt = Integer.parseInt(num);
                     CommitInfo commitInfo;
                     if (StringUtils.equals(type, typeFeat)) {
-                        commitInfo = featMap.get(num);
+                        commitInfo = featMap.get(numInt);
                     } else {
-                        commitInfo = fixMap.get(num);
+                        commitInfo = fixMap.get(numInt);
                     }
                     if (commitInfo == null) {
                         commitInfo = new CommitInfo();
@@ -89,9 +128,9 @@ public class CommitParseTest {
                         commitInfo.setFirst(DateUtil.parse(timeStr));
                     }
                     if (StringUtils.equals(type, typeFeat)) {
-                        featMap.put(num, commitInfo);
+                        featMap.put(numInt, commitInfo);
                     } else {
-                        fixMap.put(num, commitInfo);
+                        fixMap.put(numInt, commitInfo);
                     }
                 }
                 return true;
@@ -101,18 +140,66 @@ public class CommitParseTest {
             public String getResult() {
 //                System.out.println(featMap);
 //                System.out.println(fixMap);
-                for (String num : featMap.keySet()) {
-                    System.out.println(featMap.get(num));
+                for (Integer num : featMap.keySet()) {
+//                    System.out.println(featMap.get(num));
+                    commitFeatSet.add(num);
                 }
-                for (String num : fixMap.keySet()) {
-                    System.out.println(fixMap.get(num));
+                for (Integer num : fixMap.keySet()) {
+//                    System.out.println(fixMap.get(num));
+                    commitFixSet.add(num);
                 }
                 return "";
             }
         };
 
-        Files.asCharSource(sourceFile, StandardCharsets.UTF_8).readLines(lineProcessor);
+        Files.asCharSource(commitFile, StandardCharsets.UTF_8).readLines(commitProcessor);
     }
 
+    private void planFeatParse() throws IOException {
+        LineProcessor<String> planProcessor = new LineProcessor<String>() {
 
+            private final AtomicInteger lineNum = new AtomicInteger();
+
+            @Override
+            public boolean processLine(String line) throws IOException {
+                if (lineNum.getAndIncrement() % 3 != 0) {
+                    return true;
+                }
+//                System.out.println(line);
+                planFeatSet.add(Integer.parseInt(line));
+                return true;
+            }
+
+            @Override
+            public String getResult() {
+                return "";
+            }
+        };
+
+        Files.asCharSource(planFeatFile, StandardCharsets.UTF_8).readLines(planProcessor);
+    }
+
+    private void planFixParse() throws IOException {
+        LineProcessor<String> planProcessor = new LineProcessor<String>() {
+
+            private final AtomicInteger lineNum = new AtomicInteger();
+
+            @Override
+            public boolean processLine(String line) throws IOException {
+                if (lineNum.getAndIncrement() % 3 != 0) {
+                    return true;
+                }
+//                System.out.println(line);
+                planFixSet.add(Integer.parseInt(line));
+                return true;
+            }
+
+            @Override
+            public String getResult() {
+                return "";
+            }
+        };
+
+        Files.asCharSource(planFixFile, StandardCharsets.UTF_8).readLines(planProcessor);
+    }
 }
