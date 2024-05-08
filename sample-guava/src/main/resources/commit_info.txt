@@ -1,6 +1,1552 @@
-962ceb0 - chennan - 2024-01-01 23:47:21 +0800 - feat:[101,102]开发注册登录功能
-962ceb0 - wanghao - 2024-01-01 23:47:21 +0800 - feat:[102]开发注册功能
-962ceb0 - chennan - 2024-01-02 23:47:21 +0800 - fix:[1001,1002]修复后台bug
-962ceb0 - chennan - 2023-12-11 23:47:21 +0800 - feat:[102]开发注册功能
-962ceb0 - chennan - 2023-12-11 23:47:21 +0800 - test:添加测试用例
-962ceb0 - chennan - 2023-12-11 23:47:21 +0800 - ci:触发构建
+32014a0b6 - 林少中 - 2024-05-08 08:52:41 +0800 - Merge branch 'pre-release-v2.4.4.1-hotfix' into 'release-1.3.0'
+7113ae3ff - wanghao - 2024-05-08 08:52:41 +0800 - feat:[1241]ota 添加定时升级和业务升级功能
+d3104edb0 - 林少中 - 2024-05-08 08:52:41 +0800 - Merge branche pre-release-v2.4.4.1-hotfix into release-1.3.0
+5e897d13b - 林少中 - 2024-05-08 08:51:38 +0800 - Merge branch 'cherry-pick-f1cc32e5' into 'pre-release-v2.4.4.1-hotfix'
+cc0072989 - 林少中 - 2024-05-08 08:51:38 +0800 - Merge branch 'feature/wangh/20240507-1531-versionManager-merge' into 'beta-2.4.5'
+921a71256 - 林少中 - 2024-05-08 08:51:22 +0800 - Merge branch 'feature/wangh/20240507-1531-versionManager-merge' into 'beta-2.4.5'
+9c0a84aa7 - 林少中 - 2024-05-08 08:51:06 +0800 - Merge branch 'cherry-pick-ee205972' into 'pre-release-v2.4.4.1-hotfix'
+72457ab89 - 林少中 - 2024-05-08 08:51:06 +0800 - Merge branch 'feature/wangh/20240507-1531-versionManager' into 'beta-2.4.5'
+d0e91deb5 - 林少中 - 2024-05-08 08:50:49 +0800 - Merge branch 'feature/wangh/20240507-1531-versionManager' into 'beta-2.4.5'
+5bc627482 - 林少中 - 2024-05-08 08:50:06 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+f3449968c - 林少中 - 2024-05-08 08:50:06 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+d97faec5c - 林少中 - 2024-05-08 08:49:17 +0800 - Merge branch 'feature/240115-1351-pre-beta-v2.4.5' into 'pre-beta-v2.4.5'
+9c0fcbd78 - 周晨帆 - 2024-05-08 08:49:17 +0800 - feat:[1351]ci
+f942b73e7 - zcf - 2024-05-08 08:31:11 +0800 - Merge branch 'feature/zcf/20240415-1351-from-release-1.3.0' into feature/240115-1351-pre-beta-v2.4.5
+fd794caa7 - zcf - 2024-05-07 20:32:07 +0800 - feat:[1351]ci
+4869e44b3 - zcf - 2024-05-07 20:27:36 +0800 - feat:[1351]ci
+ede6abb30 - 林少中 - 2024-05-07 20:11:33 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+d58aade8e - 林少中 - 2024-05-07 20:11:33 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+00d5cccbf - 林少中 - 2024-05-07 20:11:18 +0800 - Merge branch 'beta-2.4.5' into 'pre-beta-v2.4.5'
+7e46f8994 - 林少中 - 2024-05-07 20:07:00 +0800 - Merge branch 'feature/240115-1351-pre-beta-v2.4.5' into 'pre-beta-v2.4.5'
+7a69f23a9 - 周晨帆 - 2024-05-07 20:06:59 +0800 - feat:[1351]AI检测-图表-算法曲线无数据需从检测库查询相关指标测定值响应
+5a40152db - zcf - 2024-05-07 20:04:37 +0800 - Merge branch 'feature/zcf/20240415-1351-from-release-1.3.0' into feature/240115-1351-pre-beta-v2.4.5
+aa5bfe1f1 - 周晨帆 - 2024-05-07 19:59:55 +0800 - Merge branch 'feature/zcf/20240415-1351-from-release-1.3.0' into 'alpha-1.3.0'
+1a6b02887 - zcf - 2024-05-07 19:57:35 +0800 - feat:[1351]AI检测-图表-算法曲线无数据需从检测库查询相关指标测定值响应
+f1cc32e51 - 林少中 - 2024-05-07 19:34:13 +0800 - Merge branch 'feature/wangh/20240507-1531-versionManager-merge' into 'beta-2.4.5'
+dc5842efa - 王豪 - 2024-05-07 19:34:13 +0800 - feat:[1531]设备版本管理
+dc978e61a - 林少中 - 2024-05-07 19:33:47 +0800 - Merge branch 'beta-2.4.5' into 'feature/wangh/20240507-1531-versionManager-merge'
+940d16fcb - wanghao - 2024-05-07 19:31:10 +0800 - Merge remote-tracking branch 'origin/beta-2.4.5' into feature/wangh/20240507-1531-versionManager-merge
+a5d33eff7 - 王豪 - 2024-05-07 19:28:01 +0800 - Merge branch 'feature/wangh/20240507-1531-versionManager' into 'alpha-1.3.0'
+77cd5a856 - wanghao - 2024-05-07 19:27:28 +0800 - feat:[1531]设备版本管理
+48c6dd264 - 吴志国 - 2024-05-07 18:46:30 +0800 - Merge branch 'feature/wzg/20240507-alpha1.3.0-temp' into 'alpha-1.3.0'
+ee2059728 - 林少中 - 2024-05-07 18:43:51 +0800 - Merge branch 'feature/wangh/20240507-1531-versionManager' into 'beta-2.4.5'
+194ae1577 - 王豪 - 2024-05-07 18:43:51 +0800 - feat:[1531]设备版本管理
+6b970fb54 - wuzhiguo - 2024-05-07 18:41:12 +0800 - Merge branch 'feature/wzg/20240429-bug-1209-release-1.3.0' into feature/wzg/20240507-alpha1.3.0-temp
+2e1df0999 - wuzhiguo - 2024-05-07 18:34:36 +0800 - feat:[1209]工商业储能国际化
+45938bbd7 - 王豪 - 2024-05-07 17:26:18 +0800 - Merge branch 'feature/wangh/20240507-1531-versionManager' into 'alpha-1.3.0'
+ba9697943 - wanghao - 2024-05-07 17:25:22 +0800 - feat:[1531]设备版本管理
+e958bde2d - 林少中 - 2024-05-07 17:17:52 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+c02af1734 - 林少中 - 2024-05-07 17:17:52 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+aa7c73a19 - 林少中 - 2024-05-07 17:17:09 +0800 - Merge branch 'feature/zxy/20240423-feat-1379-release-1.3.0' into 'pre-beta-v2.4.5'
+1d75351e6 - 张新宇 - 2024-05-07 17:17:09 +0800 - fix:[10430]【secp-V2.4.5】【运营中心-运营分析】四天整，未展示峰谷平，期望五天内都展示峰谷平
+2cf6de9f5 - linkai - 2024-05-07 16:48:45 +0800 - feat:[1207] 充电运营支持saas化改造：切换机构表到admin库的商户机构表
+d0dcfe750 - zhangxinyu - 2024-05-07 16:27:48 +0800 - Merge remote-tracking branch 'origin/pre-beta-v2.4.5' into feature/zxy/20240423-feat-1379-release-1.3.0
+d28296540 - 林少中 - 2024-05-07 16:27:13 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+7ee25e1da - 林少中 - 2024-05-07 16:27:13 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+15cd9b21b - 林少中 - 2024-05-07 16:25:17 +0800 - Merge branch 'feature/wjh/20240429-pre-beta-v2.4.5-temp' into 'pre-beta-v2.4.5'
+453383185 - 陈志祥 - 2024-05-07 16:25:17 +0800 - feat:[1329]时时运营2.0
+0998c6d49 - zhangxinyu - 2024-05-07 16:15:26 +0800 - Merge remote-tracking branch 'origin/beta-2.4.5' into feature/zxy/20240423-feat-1379-release-1.3.0
+b8a035fac - zhangxinyu - 2024-05-07 16:13:01 +0800 - fix:[10430]【secp-V2.4.5】【运营中心-运营分析】四天整，未展示峰谷平，期望五天内都展示峰谷平
+af54b6c6b - 林少中 - 2024-05-07 15:37:39 +0800 - Merge branch 'pre-release-v2.4.4.1-hotfix' into 'release-1.3.0'
+e22ce64d5 - 林少中 - 2024-05-07 15:37:39 +0800 - Merge branche pre-release-v2.4.4.1-hotfix into release-1.3.0
+43aaee279 - 林少中 - 2024-05-07 15:36:01 +0800 - Merge branch 'cherry-pick-275cd481' into 'pre-release-v2.4.4.1-hotfix'
+24c870dea - 林少中 - 2024-05-07 15:36:01 +0800 - Merge branch 'feature/zxy/20240506-fix-10432-release-1.3.0' into 'beta-2.4.5'
+55eaa80b9 - 林少中 - 2024-05-07 15:35:43 +0800 - Merge branch 'feature/zxy/20240506-fix-10432-release-1.3.0' into 'beta-2.4.5'
+7a4d4b0e5 - 林少中 - 2024-05-07 15:35:24 +0800 - Merge branch 'cherry-pick-b01c2a12' into 'pre-release-v2.4.4.1-hotfix'
+b8f75df58 - 林少中 - 2024-05-07 15:35:24 +0800 - Merge branch 'feature/zxy/20240506-fix-10432-release-1.3.0' into 'beta-2.4.5'
+a0a7bd61c - 林少中 - 2024-05-07 15:35:04 +0800 - Merge branch 'feature/zxy/20240506-fix-10432-release-1.3.0' into 'beta-2.4.5'
+e6e0292d6 - 林少中 - 2024-05-07 15:34:47 +0800 - Merge branch 'cherry-pick-1b57aba5' into 'pre-release-v2.4.4.1-hotfix'
+5e500be50 - 林少中 - 2024-05-07 15:34:47 +0800 - Merge branch 'feature/zxy/20240506-fix-10432-release-1.3.0' into 'beta-2.4.5'
+c49580e6e - 林少中 - 2024-05-07 15:34:28 +0800 - Merge branch 'feature/zxy/20240506-fix-10432-release-1.3.0' into 'beta-2.4.5'
+8ec18c13b - linkai - 2024-05-07 15:12:25 +0800 - feat:[1207] 充电运营支持saas化改造
+985e58c19 - cnte01027 - 2024-05-07 14:40:30 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+26790e460 - cnte01027 - 2024-05-07 14:39:52 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+534ccc207 - cnte01027 - 2024-05-07 14:39:41 +0800 - feat:[1329]时时运营2.0
+898f9ae68 - wjh - 2024-05-07 14:20:04 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+9c63736b8 - wjh - 2024-05-07 14:19:53 +0800 - Merge branch 'pre-beta-v2.4.5' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+96809f62a - wjh - 2024-05-07 14:18:45 +0800 - feat:[1329]注销功能
+e6f3b0d81 - 林少中 - 2024-05-07 13:17:16 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+32a58b014 - 林少中 - 2024-05-07 13:17:15 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+43895d31a - 林少中 - 2024-05-07 13:16:19 +0800 - Merge branch 'feature/wzg/2400429-pre-beta-2.4.5-temp' into 'pre-beta-v2.4.5'
+d95a7a272 - 吴志国 - 2024-05-07 13:16:19 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]模块状态新增状态枚举
+bd12782e1 - wuzhiguo - 2024-05-07 11:23:58 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wzg/2400429-pre-beta-2.4.5-temp
+603664ea0 - wuzhiguo - 2024-05-07 11:23:45 +0800 - Merge remote-tracking branch 'origin/pre-beta-v2.4.5' into feature/wzg/2400429-pre-beta-2.4.5-temp
+7407cb475 - wuzhiguo - 2024-05-07 11:21:42 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+7ad4ac592 - wuzhiguo - 2024-05-07 11:13:25 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]模块状态新增状态枚举
+403731078 - 林少中 - 2024-05-07 10:24:12 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+8324ecefd - 林少中 - 2024-05-07 10:24:12 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+9b8ef2b0d - 林少中 - 2024-05-07 10:23:16 +0800 - Merge branch 'release-1.3.0' into 'master'
+92ebbfa7d - 林楷 - 2024-05-07 10:23:16 +0800 - Merge branch 'release-1.3.0' into 'master'
+79f541fdc - 林少中 - 2024-05-07 10:22:57 +0800 - Merge branch 'master' into 'release-1.3.0'
+80b1daa8e - 林少中 - 2024-05-07 10:21:25 +0800 - Merge branch 'feature/wjh/20240429-pre-beta-v2.4.5-temp' into 'pre-beta-v2.4.5'
+8f19ce85d - 陈志祥 - 2024-05-07 10:21:25 +0800 - feat:[1329]时时运营2.0
+275cd4810 - 林少中 - 2024-05-07 08:44:06 +0800 - Merge branch 'feature/zxy/20240506-fix-10432-release-1.3.0' into 'beta-2.4.5'
+f7c0b22b2 - 张新宇 - 2024-05-07 08:44:06 +0800 - fix:[10441]【能效日报】电池充放电量及存储电量标红黄规则去掉
+77f86e191 - zhangxinyu - 2024-05-07 08:40:24 +0800 - fix:[10441]【能效日报】电池充放电量及存储电量标红黄规则去掉
+bd6e649b2 - zhangxinyu - 2024-05-07 08:37:41 +0800 - fix:[10441]【能效日报】电池充放电量及存储电量标红黄规则去掉
+d87df4e35 - 吴景华 - 2024-05-06 17:18:56 +0800 - Merge branch 'feature/wjh/20240506-temp-alpha1.3.0' into 'alpha-1.3.0'
+16cb90d6b - wjh - 2024-05-06 17:17:41 +0800 - Merge branch 'feature/wjh/20240429-story-1383-release1.3.0' into feature/wjh/20240506-temp-alpha1.3.0
+8cc0ee64c - cnte01027 - 2024-05-06 17:14:16 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+7aac5ea41 - cnte01027 - 2024-05-06 17:11:59 +0800 - feat:[1329]时时运营2.0
+b01c2a129 - 林少中 - 2024-05-06 16:48:32 +0800 - Merge branch 'feature/zxy/20240506-fix-10432-release-1.3.0' into 'beta-2.4.5'
+def39c77a - 张新宇 - 2024-05-06 16:48:32 +0800 - fix:[10441]【能效日报】电池充放电量及存储电量标红黄规则去掉
+4d92b2c3c - zhangxinyu - 2024-05-06 16:41:00 +0800 - fix:[10441]【能效日报】电池充放电量及存储电量标红黄规则去掉
+b8d4e70ff - zhangxinyu - 2024-05-06 16:38:27 +0800 - fix:[10441]【【能效日报】电池充放电量及存储电量标红黄规则去掉
+aea1a055d - wjh - 2024-05-06 16:31:16 +0800 - feat:[1383]stationMapper
+fba8441fb - wjh - 2024-05-06 16:30:29 +0800 - feat:[1383]stationMapper
+08c595ad2 - 陈志祥 - 2024-05-06 16:30:27 +0800 - Merge branch 'feature/czx/20240410-1249-EOLDeviceConfig-release-1.3.0' into 'alpha-1.3.0'
+5dab5aa74 - cnte01027 - 2024-05-06 16:29:45 +0800 - Merge remote-tracking branch 'origin/feature/czx/20240410-1249-EOLDeviceConfig-release-1.3.0' into feature/czx/20240410-1249-EOLDeviceConfig-release-1.3.0
+12c99fb19 - cnte01027 - 2024-05-06 16:29:36 +0800 - feat:[1249]EOL自动建站配置参数
+1b57aba5e - 林少中 - 2024-05-06 15:58:10 +0800 - Merge branch 'feature/zxy/20240506-fix-10432-release-1.3.0' into 'beta-2.4.5'
+53fabf9d2 - 张新宇 - 2024-05-06 15:58:10 +0800 - fix:[10432]【生产环境】【能效日报】PCS能效 阈值标红/黄不正确
+08ce4e182 - zhangxinyu - 2024-05-06 15:55:57 +0800 - Merge remote-tracking branch 'origin/beta-2.4.5' into feature/zxy/20240506-fix-10432-release-1.3.0
+7d3fba7e0 - cnte01027 - 2024-05-06 15:46:03 +0800 - feat:[1329]时时运营2.0
+876d7dc32 - zhangxinyu - 2024-05-06 14:17:23 +0800 - fix:[10432]【生产环境】【能效日报】PCS能效 阈值标红/黄不正确
+dd62c84af - 林少中 - 2024-05-06 14:16:03 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+f44852db8 - 林少中 - 2024-05-06 14:16:03 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+d59957cb1 - 林少中 - 2024-05-06 14:15:07 +0800 - Merge branch 'feature/wjh/20240429-pre-beta-v2.4.5-temp' into 'pre-beta-v2.4.5'
+2bd2be64b - 陈志祥 - 2024-05-06 14:15:07 +0800 - feat:[1329]时时运营2.0
+a35ae8a5e - cnte01027 - 2024-05-06 14:13:17 +0800 - Merge branch 'pre-beta-v2.4.5' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+f55162042 - 林少中 - 2024-05-06 14:12:12 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+4706f8ef6 - 林少中 - 2024-05-06 14:12:12 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+0aa4b3061 - cnte01027 - 2024-05-06 14:12:04 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+6f04d2fd6 - 林少中 - 2024-05-06 14:11:08 +0800 - Merge branch 'feature/wjh/20240429-pre-beta-v2.4.5-temp' into 'pre-beta-v2.4.5'
+3508fecef - 吴景华 - 2024-05-06 14:11:08 +0800 - feat:[1329]统计枪状态优化
+e33e2362c - cnte01027 - 2024-05-06 14:10:32 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+c0274819f - cnte01027 - 2024-05-06 14:10:18 +0800 - feat:[1329]时时运营2.0
+ef76ac5cc - wjh - 2024-05-06 14:08:08 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+547525112 - wjh - 2024-05-06 14:07:47 +0800 - Merge branch 'pre-beta-v2.4.5' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+6b5b62378 - wjh - 2024-05-06 14:05:16 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+a45150e89 - wjh - 2024-05-06 14:04:58 +0800 - feat:[1329]统计枪状态优化
+c640b99d0 - 林楷 - 2024-05-06 09:16:18 +0800 - Merge branch 'hotfix/link/20240506-bug-10374-release-1.3.0' into 'alpha-1.3.0'
+032c8892f - linkai - 2024-05-06 09:15:33 +0800 - fix:[10374] 解决家储绑定设备时判断设备所属产品逻辑需要修改,电箱产品应该提示绑定失败
+bd55185db - linkai - 2024-05-06 09:07:07 +0800 - fix:[10374] 解决家储绑定设备时判断设备所属产品逻辑需要修改,电箱产品应该提示绑定失败
+f0ee884ae - linkai - 2024-05-06 08:56:09 +0800 - feat:[1207] 充电运营支持saas化改造
+8820e9492 - 林少中 - 2024-04-30 17:34:05 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+8cb959e75 - 林少中 - 2024-04-30 17:34:05 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+4b7ae8818 - 林少中 - 2024-04-30 17:32:48 +0800 - Merge branch 'feature/zcf/20240415-1351-from-release-1.3.0' into 'pre-beta-v2.4.5'
+3ea958ca6 - 周晨帆 - 2024-04-30 17:32:48 +0800 - feat:[1351]AI检测
+0892c4d35 - 林少中 - 2024-04-30 17:31:38 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+c938c609a - 林少中 - 2024-04-30 17:31:38 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+a66fcea2d - 林少中 - 2024-04-30 17:31:23 +0800 - Merge branch 'beta-2.4.5' into 'pre-beta-v2.4.5'
+d408a67dc - 林少中 - 2024-04-30 17:30:02 +0800 - Merge branch 'feature/wjh/20240429-pre-beta-v2.4.5-temp' into 'pre-beta-v2.4.5'
+dd4ff8c87 - 陈志祥 - 2024-04-30 17:30:02 +0800 - feat:[1329]时时运营2.0
+ca6935e54 - cnte01027 - 2024-04-30 17:27:30 +0800 - Merge branch 'pre-beta-v2.4.5' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+26563de92 - 周晨帆 - 2024-04-30 17:26:22 +0800 - Merge branch 'feature/zcf/20240415-1351-from-release-1.3.0' into 'alpha-1.3.0'
+e135c12d7 - zcf - 2024-04-30 17:25:51 +0800 - feat:[1351]AI检测-图表
+c2d9d28a6 - cnte01027 - 2024-04-30 17:24:46 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+b771877ae - cnte01027 - 2024-04-30 17:24:12 +0800 - feat:[1329]时时运营2.0
+80c168498 - 林少中 - 2024-04-30 17:22:46 +0800 - Merge branch 'pre-beta-v2.4.4.2' into 'beta-2.4.5'
+0f2b824a5 - 林少中 - 2024-04-30 17:22:46 +0800 - Merge branche pre-beta-v2.4.4.2 into beta-2.4.5
+56a2521f7 - 林少中 - 2024-04-30 17:21:54 +0800 - Merge branch 'beta-2.4.5' into 'pre-beta-v2.4.4.2'
+b83994488 - 林少中 - 2024-04-30 17:15:00 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+d766271b9 - 林少中 - 2024-04-30 17:15:00 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+b01acb892 - 林少中 - 2024-04-30 17:14:53 +0800 - Merge branch 'beta-2.4.5' into 'pre-beta-v2.4.5'
+ae709d1e7 - 林少中 - 2024-04-30 17:13:28 +0800 - Merge branch 'feature/wjh/20240429-pre-beta-v2.4.5-temp' into 'pre-beta-v2.4.5'
+60d5b9531 - 吴景华 - 2024-04-30 17:13:28 +0800 - feat:[1329]获取持续时长iot接口优化
+8c3f62c3d - 林少中 - 2024-04-30 17:12:13 +0800 - Merge branch 'hotfix/zcf/20240301-bug-9431-release-1.3.0' into 'pre-beta-v2.4.4.2'
+db0166081 - 周晨帆 - 2024-04-30 17:12:13 +0800 - fix:[9431]行驶证注册日期-只兼容yyyy-MM-dd格式，其余都为非法格式
+6f0ae60f6 - 林少中 - 2024-04-30 17:12:00 +0800 - Merge branch 'hotfix/zcf/20240301-bug-9433-release-1.3.0' into 'pre-beta-v2.4.4.2'
+19bba8ee6 - 周晨帆 - 2024-04-30 17:12:00 +0800 - fix:[9433] 【在线巡检】【异常日志80】Ai充电策略
+4701a97a9 - 林少中 - 2024-04-30 17:11:34 +0800 - Merge branch 'hotfix/20240329-bug-9885-release-1.3.0' into 'pre-beta-v2.4.4.2'
+5e461f8ad - 周晨帆 - 2024-04-30 17:11:34 +0800 - fix:[9885]【异常日志113】检测服务-生产检测报告
+89940c33f - wjh - 2024-04-30 17:00:32 +0800 - Merge branch 'pre-beta-v2.4.5' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+761e4f173 - wjh - 2024-04-30 16:59:51 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+d54420142 - wjh - 2024-04-30 16:58:45 +0800 - feat:[1329]优化时间格式
+77a9e1502 - 林少中 - 2024-04-30 16:56:15 +0800 - Merge branch 'feature/czx/20240409-1281-deviceConfig-release-1.3.0' into 'pre-beta-v2.4.4.2'
+7203c2fa1 - 陈志祥 - 2024-04-30 16:56:15 +0800 - fix:[9973]设备管理-设备列表-配置管理，数组格式判断调整
+13885d70f - 林少中 - 2024-04-30 16:55:56 +0800 - Merge branch 'hotfix/wzg/20240422-bug-10225-release-1.3.0' into 'pre-beta-v2.4.4.2'
+ecb637a9f - 吴志国 - 2024-04-30 16:55:56 +0800 - fix:[10225,10226]【在线巡检】【异常日志128】【异常日志129】 工商业-运营分析-运营总览-站点概览: java.lang.NullPointerException: null
+669e30546 - 林少中 - 2024-04-30 16:53:38 +0800 - Merge branch 'hotfix/link/20240422-bug-10224-release-1.3.0' into 'pre-beta-v2.4.4.2'
+0e6858681 - 林楷 - 2024-04-30 16:53:38 +0800 - fix:[10224]secp system 中的用户新增和修改不用抛异常，导入的需要抛异常
+16c87eedb - wjh - 2024-04-30 16:53:01 +0800 - feat:[1329]获取持续时长iot接口优化
+649117aec - 林少中 - 2024-04-30 16:52:49 +0800 - Merge branch 'hotfix/wzg/20240323-bug-8241-release-1.3.0' into 'pre-beta-v2.4.4.2'
+a6914d9cb - 吴志国 - 2024-04-30 16:52:49 +0800 - fix:[8241]指针越界报错修复
+181486e98 - 吴景华 - 2024-04-30 16:52:28 +0800 - Merge branch 'feature/wjh/20240429-pre-beta-v2.4.5-temp' into 'pre-beta-v2.4.5'
+34d798e2c - 林少中 - 2024-04-30 16:52:13 +0800 - Merge branch 'fix/wangh/20240403-bug-9971-pushOpsJiGuang' into 'pre-beta-v2.4.4.2'
+9ab37d46e - wjh - 2024-04-30 16:51:38 +0800 - feat:[1329]cicd
+4fec1c734 - 林少中 - 2024-04-30 16:51:01 +0800 - Merge branch 'fix/wangh/20240430-bug-10228-merge' into 'pre-beta-v2.4.4.2'
+3ac4bf925 - 王豪 - 2024-04-30 16:51:01 +0800 - fix:[10228]设备版本消费异常到异常数据
+3f4aa9210 - 吴景华 - 2024-04-30 16:47:25 +0800 - Merge branch 'feature/wjh/20240429-pre-beta-v2.4.5-temp' into 'pre-beta-v2.4.5'
+351012cd0 - wjh - 2024-04-30 16:46:50 +0800 - Merge branch 'pre-beta-v2.4.5' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+d5ff95e91 - wjh - 2024-04-30 16:46:17 +0800 - feat:[1329]获取持续时长iot接口优化
+bb9e4dcdb - 周晨帆 - 2024-04-30 16:45:59 +0800 - Merge branch 'feature/240426-1351-alpha-1.3.0' into 'alpha-1.3.0'
+7acfeae1f - zcf - 2024-04-30 16:45:30 +0800 - feat:[1351]AI检测-图表
+b8e213505 - wanghao - 2024-04-30 16:38:03 +0800 - merge:解决冲突
+4ef8e6a2f - wanghao - 2024-04-30 16:34:11 +0800 - Merge remote-tracking branch 'origin/pre-beta-v2.4.4.2' into fix/wangh/20240430-bug-10228-merge
+db23c5539 - 吴志国 - 2024-04-30 16:34:09 +0800 - Merge branch 'feature/wzg/2400312-alpha-1.3.0-temp' into 'alpha-1.3.0'
+2bfce016b - wuzhiguo - 2024-04-30 16:33:03 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wzg/2400312-alpha-1.3.0-temp
+f64ec9786 - 林少中 - 2024-04-30 16:26:04 +0800 - Merge branch 'fix/wangh/20240422-bug-10227-pushError' into 'pre-beta-v2.4.4.2'
+c170db289 - 林少中 - 2024-04-30 16:25:26 +0800 - Merge branch 'fix/wangh/20240319-9627-versionConsumer' into 'pre-beta-v2.4.4.2'
+2b39b8574 - 王豪 - 2024-04-30 16:25:26 +0800 - fix:[9627] 修复设备版本上传的报错问题
+13d8f65bd - 林少中 - 2024-04-30 16:23:51 +0800 - Merge branch 'fix/wangh/20240319-9626-importExcel' into 'pre-beta-v2.4.4.2'
+f74ad2ffa - 王豪 - 2024-04-30 16:23:51 +0800 - fix:[9626] 降低导入报错的日志等级
+623cc0baa - 林少中 - 2024-04-30 16:22:06 +0800 - Merge branch 'feature/wjh/20240428-bug-10330-release1.3.0' into 'pre-beta-v2.4.4.2'
+3cb098018 - 吴景华 - 2024-04-30 16:22:06 +0800 - fix:[10330]修复计算电量/小时时ArithmeticException: / by zero
+618e0bcb5 - 林少中 - 2024-04-30 16:21:45 +0800 - Merge branch 'hotfix/link/20240423-bug-10223-release-1.3.0' into 'pre-beta-v2.4.4.2'
+75e1d7cde - 林楷 - 2024-04-30 16:21:45 +0800 - fix:[10223] 1、互联互通请求登录过期修复 2、在需求1092 调整枪状态是否允许充电逻辑 这个需求上 因为有redis不会进来iot模式，也补上真实的状态码
+7c89a6d09 - linkai - 2024-04-30 16:21:10 +0800 - feat:[1207] 充电运营支持saas化改造
+2546b3715 - 林少中 - 2024-04-30 16:20:31 +0800 - Merge branch 'hotfix/czx/20240409-bug-9974-release-1.3.0' into 'pre-beta-v2.4.4.2'
+1278a7033 - 林少中 - 2024-04-30 16:19:54 +0800 - Merge branch 'hotfix/czx/20240401-bug-9895-release-1.3.0' into 'pre-beta-v2.4.4.2'
+3829e8671 - 林少中 - 2024-04-30 16:19:20 +0800 - Merge branch 'hotfix/czx/20240401-bug-9893-release-1.3.0' into 'pre-beta-v2.4.4.2'
+21b49aff4 - 周晨帆 - 2024-04-30 16:05:55 +0800 - Merge branch 'feature/zcf/20240415-1351-from-release-1.3.0' into 'alpha-1.3.0'
+ab273d233 - zcf - 2024-04-30 16:01:48 +0800 - feat:[1351]AI检测-图表
+23934e356 - 吴景华 - 2024-04-30 15:49:36 +0800 - Merge branch 'feature/wjh/20240429-pre-beta-v2.4.5-temp' into 'pre-beta-v2.4.5'
+800c36d7f - wjh - 2024-04-30 15:48:46 +0800 - Merge branch 'pre-beta-v2.4.5' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+8594219c8 - wjh - 2024-04-30 15:47:33 +0800 - feat:[1329]cicd
+dde9dc7e2 - 林少中 - 2024-04-30 15:46:07 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+b9e40b678 - 林少中 - 2024-04-30 15:46:07 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+5878390f5 - 林少中 - 2024-04-30 15:45:50 +0800 - Merge branch 'beta-2.4.5' into 'pre-beta-v2.4.5'
+3ed01d1ea - 林少中 - 2024-04-30 15:43:01 +0800 - Merge branch 'feature/zxy/20240423-feat-1379-release-1.3.0' into 'pre-beta-v2.4.5'
+b407fca01 - 张新宇 - 2024-04-30 15:43:01 +0800 - feat:[1379]【充电运营-运营分析-运营监控-单元详情】：优化部分显示内容-新加跨天峰谷平电价
+8abd39bf8 - 林少中 - 2024-04-30 15:40:47 +0800 - Merge branch 'feature/wangh/20240430-1389-merge' into 'pre-beta-v2.4.5'
+f5bfa1dcc - 王豪 - 2024-04-30 15:40:47 +0800 - feat:[1389]绝缘监控功能
+91a0ddbe7 - zhangxinyu - 2024-04-30 15:39:57 +0800 - Merge remote-tracking branch 'origin/pre-beta-v2.4.5' into feature/zxy/20240423-feat-1379-release-1.3.0
+7009aa145 - zhangxinyu - 2024-04-30 15:30:47 +0800 - Merge branch 'release-1.3.0' into feature/zxy/20240423-feat-1379-release-1.3.0
+2ed3fe457 - 林少中 - 2024-04-30 15:28:35 +0800 - Merge branch 'feature/wjh/20240429-pre-beta-v2.4.5-temp' into 'pre-beta-v2.4.5'
+7508830d5 - 吴景华 - 2024-04-30 15:28:35 +0800 - feat:[1329]获取持续时长iot接口优化
+10fe7e480 - wjh - 2024-04-30 15:21:01 +0800 - Merge branch 'pre-beta-v2.4.5' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+e4e418a36 - wjh - 2024-04-30 15:20:10 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+46431d53e - wjh - 2024-04-30 15:19:46 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+351f988b0 - wjh - 2024-04-30 15:19:34 +0800 - feat:[1329]获取持续时长iot接口优化
+85057b17b - wanghao - 2024-04-30 15:19:14 +0800 - Merge remote-tracking branch 'origin/pre-beta-v2.4.5' into feature/wangh/20240430-1389-merge
+27e98ca17 - wuzhiguo - 2024-04-30 15:18:54 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0 冒烟测试bug
+c2df57e6e - 林少中 - 2024-04-30 15:14:54 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+5c4ac5b93 - 林少中 - 2024-04-30 15:14:54 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+34c00b532 - wanghao - 2024-04-30 15:13:40 +0800 - Merge branch 'release-1.3.0' into feature/wangh/20240417-1389-insulationAI
+44900fc3b - 林少中 - 2024-04-30 15:13:02 +0800 - Merge branch 'feature/240401-1210-release-1.3.0' into 'pre-beta-v2.4.5'
+a10e9d4b1 - 周晨帆 - 2024-04-30 15:13:02 +0800 - feat:[1210]检测报告底层数据- 国际化站点的兼容优化
+6ccb4263b - 林少中 - 2024-04-30 14:55:54 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+c663a1cca - 林少中 - 2024-04-30 14:55:54 +0800 - Merge branche  pre-beta-v2.4.5 into beta-2.4.5
+7d5bce4da - 林少中 - 2024-04-30 14:53:56 +0800 - Merge branch 'feature/wjh/20240429-pre-beta-v2.4.5-temp' into 'pre-beta-v2.4.5'
+7d50726bc - 吴景华 - 2024-04-30 14:53:56 +0800 - feat:[1329]时时运营2.0
+1b8a893d7 - wjh - 2024-04-30 14:44:16 +0800 - Merge branch 'pre-beta-v2.4.5' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+240528839 - wjh - 2024-04-30 14:43:03 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+9098e7f83 - wjh - 2024-04-30 14:40:17 +0800 - feat:[1329]获取持续时长iot接口优化
+56ba50060 - cnte01027 - 2024-04-30 14:34:16 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+acb2a8645 - zcf - 2024-04-30 14:27:00 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into feature/240401-1210-release-1.3.0
+27b4286c7 - cnte01027 - 2024-04-30 14:23:40 +0800 - feat:[1329]时时运营2.0
+1eac55922 - wjh - 2024-04-30 13:59:38 +0800 - fix:[9988]220V家储系统在APP上网侧负载数据显示在A相上
+a9e3960b9 - 林少中 - 2024-04-30 13:40:17 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+9c4b6c603 - 林少中 - 2024-04-30 13:40:17 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+4a3f3988f - 林少中 - 2024-04-30 13:39:18 +0800 - Merge branch 'feature/wjh/20240429-pre-beta-v2.4.5-temp' into 'pre-beta-v2.4.5'
+0a1875cbd - 吴景华 - 2024-04-30 13:39:18 +0800 - feat:[1329]获取持续时长iot接口优化
+18fbc61f7 - wjh - 2024-04-30 13:38:31 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+7918a67c5 - wuzhiguo - 2024-04-30 13:18:43 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+5f1b8ced8 - wuzhiguo - 2024-04-30 13:16:54 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wzg/2400429-pre-beta-2.4.5-temp
+b4d2bfe27 - wuzhiguo - 2024-04-30 13:16:25 +0800 - Merge remote-tracking branch 'origin/pre-beta-v2.4.5' into feature/wzg/2400429-pre-beta-2.4.5-temp
+960e16a51 - wjh - 2024-04-30 13:13:52 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+5a0e39a3e - wjh - 2024-04-30 13:13:43 +0800 - Merge remote-tracking branch 'origin/pre-beta-v2.4.5' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+4b2194ed7 - 林少中 - 2024-04-30 13:13:01 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+b214a8b7b - 林少中 - 2024-04-30 13:13:01 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+72ed76920 - 林少中 - 2024-04-30 13:11:14 +0800 - Merge branch 'feature/wjh/20240429-pre-beta-v2.4.5-temp' into 'pre-beta-v2.4.5'
+443fdba03 - 吴景华 - 2024-04-30 13:11:14 +0800 - feat:[1329]登录接口获取默认站点时判断用户是否存在
+01e8bd8ed - wjh - 2024-04-30 13:10:04 +0800 - feat:[1329]获取持续时长iot接口优化
+72c8f8032 - 林少中 - 2024-04-30 13:09:34 +0800 - Merge branch 'feature/wjh/20240329-story-1203-stationMonitor-release1.3.0' into 'pre-beta-v2.4.5'
+1372b3dbe - 吴景华 - 2024-04-30 13:09:34 +0800 - feat:[1203]后端赋值站点名称
+51c78a4c5 - wuzhiguo - 2024-04-30 13:08:47 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+8945a8837 - 林少中 - 2024-04-30 13:08:20 +0800 - Merge branch 'feature/wjh/20240426-story-1419-release1.3.0' into 'pre-beta-v2.4.5'
+0e8863b36 - 吴景华 - 2024-04-30 13:08:20 +0800 - feat:[1419]互联互通：统一处理所有运营商-枪状态(枪未归位，状态码151)应返回未插枪(失败码1).
+45eac009b - wuzhiguo - 2024-04-30 11:36:40 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0 冒烟测试bug
+139d32658 - 王豪 - 2024-04-30 11:33:13 +0800 - Merge branch 'feature/wangh/20240417-1389-insulationAI' into 'alpha-1.3.0'
+c949abbb2 - wanghao - 2024-04-30 11:32:44 +0800 - feat:[1389]绝缘监控功能
+e7064de58 - 林少中 - 2024-04-30 11:04:25 +0800 - Merge branch 'feature/link/20240415-story-1291-release-1.3.0' into 'pre-beta-v2.4.5'
+c1076eaec - 林楷 - 2024-04-30 11:04:25 +0800 - feat:[1291]菜单优化，提供父类的分页接口以及通过分类菜单id获取菜单列表
+6b302259e - 林少中 - 2024-04-30 10:53:03 +0800 - Merge branch 'hotfix/link/20240416-bug-9980-release-1.3.0' into 'pre-beta-v2.4.5'
+2c4b94e4c - 林楷 - 2024-04-30 10:53:03 +0800 - fix:[9980]非生产环境的订单，异步通知需要做过滤。修改充值订单号格式，加环境前缀。
+54da51100 - zcf - 2024-04-30 09:08:42 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into hotfix/20240329-bug-9885-release-1.3.0
+f726cc3ec - zcf - 2024-04-30 09:04:53 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into hotfix/zcf/20240301-bug-9433-release-1.3.0
+cd2b8be77 - zcf - 2024-04-30 09:03:53 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into hotfix/zcf/20240301-bug-9431-release-1.3.0
+d6275e93f - wuzhiguo - 2024-04-30 08:41:34 +0800 - feat:[1329]ssyy功率曲线精度
+bfad24953 - wjh - 2024-04-29 17:39:16 +0800 - feat:[1329]登录接口获取默认站点时判断用户是否存在
+fab7c9a56 - wjh - 2024-04-29 17:37:34 +0800 - feat:[1329]登录接口获取默认站点时判断用户是否存在
+645c62172 - wjh - 2024-04-29 17:36:46 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240429-pre-beta-v2.4.5-temp
+10eaeddf6 - wjh - 2024-04-29 17:32:57 +0800 - feat:[1329]登录接口获取默认站点时判断用户是否存在
+76771b591 - 王豪 - 2024-04-29 17:27:03 +0800 - Merge branch 'feature/wangh/20240417-1389-insulationAI' into 'alpha-1.3.0'
+459900bfb - wanghao - 2024-04-29 17:26:36 +0800 - feat:[1389]绝缘监控功能
+80a624345 - 王豪 - 2024-04-29 17:00:05 +0800 - Merge branch 'feature/wangh/20240417-1389-insulationAI-merge' into 'alpha-1.3.0'
+f1eda0a7f - wanghao - 2024-04-29 16:58:41 +0800 - Merge branch 'alpha-1.3.0' into feature/wangh/20240417-1389-insulationAI-merge
+6c30727d2 - wanghao - 2024-04-29 16:56:36 +0800 - Merge branch 'feature/wangh/20240417-1389-insulationAI' into feature/wangh/20240417-1389-insulationAI-merge
+6cca6171a - wanghao - 2024-04-29 16:55:46 +0800 - feat:[1389]绝缘监控功能
+705359193 - 吴景华 - 2024-04-29 16:45:32 +0800 - Merge branch 'feature/wjh/20240429-alpha1.3.0-temp' into 'alpha-1.3.0'
+430f6c47c - wjh - 2024-04-29 16:45:12 +0800 - Merge branch 'feature/wjh/20240429-story-1383-release1.3.0' into feature/wjh/20240429-alpha1.3.0-temp
+7def5770b - 林少中 - 2024-04-29 16:43:50 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+06fc56470 - 林少中 - 2024-04-29 16:43:50 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+e635c94fd - 林少中 - 2024-04-29 16:43:35 +0800 - Merge branch 'beta-2.4.5' into 'pre-beta-v2.4.5'
+4954d9dbc - wjh - 2024-04-29 16:43:01 +0800 - feat:[1383]【后端开发】充电运营-站点管理：优化高德地图对接内容维护
+c97c480d6 - wjh - 2024-04-29 16:42:36 +0800 - feat:[1383]【后端开发】充电运营-站点管理：优化高德地图对接内容维护
+0e1d6499e - 林少中 - 2024-04-29 16:42:01 +0800 - Merge branch 'feature/wzg/2400429-pre-beta-2.4.5-temp' into 'pre-beta-v2.4.5'
+ca288ce88 - 吴志国 - 2024-04-29 16:42:01 +0800 - feat:[1329]cicd
+35f320992 - wuzhiguo - 2024-04-29 16:40:10 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wzg/2400429-pre-beta-2.4.5-temp
+ad3feed17 - wuzhiguo - 2024-04-29 16:39:35 +0800 - feat:[1329]cicd
+cacb99727 - wuzhiguo - 2024-04-29 16:36:49 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into hotfix/wzg/20240423-bug-10266-release-1.3.0
+9a16181aa - wuzhiguo - 2024-04-29 16:35:15 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into hotfix/wzg/20240422-bug-10225-release-1.3.0
+122ef52f6 - wuzhiguo - 2024-04-29 16:32:40 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into hotfix/wzg/20240408-bug-9890-release-1.3.0
+5b95c5251 - wuzhiguo - 2024-04-29 16:30:16 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into hotfix/wzg/20240328-bug-9619-release-1.3.0
+66cf416dc - wuzhiguo - 2024-04-29 16:26:35 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into hotfix/wzg/20240323-bug-8241-release-1.3.0
+3dc307f1d - 林少中 - 2024-04-29 16:24:02 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+cdb7f8211 - 林少中 - 2024-04-29 16:24:02 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+ed1a0ba73 - 林少中 - 2024-04-29 16:22:19 +0800 - Merge branch 'feature/wzg/2400429-pre-beta-2.4.5-temp' into 'pre-beta-v2.4.5'
+e98d39a38 - 吴志国 - 2024-04-29 16:22:19 +0800 - feat:[1329]实时运营数据权限
+462d1ed90 - wuzhiguo - 2024-04-29 16:18:54 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wzg/2400429-pre-beta-2.4.5-temp
+a567998fa - wuzhiguo - 2024-04-29 16:17:53 +0800 - feat:[1329]时时运营数据权限
+2e517f8ee - wuzhiguo - 2024-04-29 16:10:06 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wzg/2400429-pre-beta-2.4.5-temp
+1c798f300 - 周晨帆 - 2024-04-29 16:08:56 +0800 - Merge branch 'feature/zcf/20240415-1351-from-release-1.3.0' into 'alpha-1.3.0'
+6d2070c99 - zcf - 2024-04-29 16:08:30 +0800 - feat:[1351]AI检测-图表
+30e8c7d43 - 林楷 - 2024-04-29 15:54:52 +0800 - Merge branch 'hotfix/link/20240429-bug-10334-release-1.3.0' into 'alpha-1.3.0'
+95c063e43 - 吴志国 - 2024-04-29 15:47:26 +0800 - Merge branch 'feature/wzg/2400312-alpha-1.3.0-temp' into 'alpha-1.3.0'
+29431757e - wuzhiguo - 2024-04-29 15:46:21 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]代码冲突
+d9200ea0b - 吴志国 - 2024-04-29 15:37:17 +0800 - Merge branch 'feature/wzg/2400312-alpha-1.3.0-temp' into 'alpha-1.3.0'
+2c02f8612 - wjh - 2024-04-29 15:36:02 +0800 - Merge branch 'release-1.3.0' into feature/wjh/20240329-story-1203-stationMonitor-release1.3.0
+fe5c79043 - wuzhiguo - 2024-04-29 15:35:57 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]代码冲突
+c57c8098a - wjh - 2024-04-29 15:35:32 +0800 - Merge branch 'release-1.3.0' into feature/wjh/20240428-bug-10330-release1.3.0
+f116d977a - wjh - 2024-04-29 15:34:33 +0800 - Merge branch 'release-1.3.0' into feature/wjh/20240426-story-1419-release1.3.0
+8e467a006 - linkai - 2024-04-29 15:29:38 +0800 - Merge branch 'release-1.3.0' into hotfix/link/20240422-bug-10224-release-1.3.0
+f1c76a9e0 - wuzhiguo - 2024-04-29 15:28:26 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wzg/2400312-alpha-1.3.0-temp
+f0db5835b - linkai - 2024-04-29 15:09:54 +0800 - Merge branch 'release-1.3.0' into hotfix/link/20240416-bug-9980-release-1.3.0
+0fc18fc2e - linkai - 2024-04-29 15:02:16 +0800 - fix:[10334] 解决返回的结果中rsp.getData()是对象不是字符串 抛异常问题
+a8edc9888 - wuzhiguo - 2024-04-29 14:53:20 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+3f5eb4707 - 林少中 - 2024-04-29 14:43:11 +0800 - Merge branch 'pre-beta-v2.4.5' into 'beta-2.4.5'
+c70ecc555 - 林少中 - 2024-04-29 14:43:11 +0800 - Merge branche pre-beta-v2.4.5 into beta-2.4.5
+eedbdc1d2 - 林少中 - 2024-04-29 14:40:34 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'pre-beta-v2.4.5'
+2f2d09d55 - 吴景华 - 2024-04-29 14:40:34 +0800 - feat:[1329]时时运营2.0
+a9709aa01 - wuzhiguo - 2024-04-29 14:08:05 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+b2d403301 - 陈志祥 - 2024-04-29 11:08:29 +0800 - Merge branch 'feature/czx/20240313-1942-passwordCheck-release-1.3.0' into 'alpha-1.3.0'
+e69fa2030 - cnte01027 - 2024-04-29 11:07:56 +0800 - feat:[1400]密码登录安全改造
+507a5f1ac - 周晨帆 - 2024-04-29 11:02:59 +0800 - Merge branch 'feature/zcf/20240415-1351-from-release-1.3.0' into 'alpha-1.3.0'
+295b50042 - zcf - 2024-04-29 11:02:37 +0800 - feat:[1351]AI检测-容量保持率图表
+baa0865f6 - wjh - 2024-04-29 10:36:55 +0800 - Merge branch 'release-1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+5192c7e64 - 陈志祥 - 2024-04-29 08:55:42 +0800 - Merge branch 'hotfix/czx/20240428-bug-10335-release-1.3.0' into 'alpha-1.3.0'
+aef4f5e9e - cnte01027 - 2024-04-29 08:54:30 +0800 - fix:[10335]代理商账号管理角色显示
+ff147735c - 吴志国 - 2024-04-29 08:38:55 +0800 - Merge branch 'feature/wzg/2400312-alpha-1.3.0-temp' into 'alpha-1.3.0'
+0e46cecdf - wuzhiguo - 2024-04-29 08:37:28 +0800 - Merge branch 'hotfix/wzg/20240428-bug-10322-release-1.3.0' into feature/wzg/2400312-alpha-1.3.0-temp
+554ee8693 - wuzhiguo - 2024-04-29 08:33:29 +0800 - fix:[10322]【时时充-检测报告】：订单列表中显示有检测报告，实际打开订单详情中检测报告按钮时，提示却没有报告
+d35420267 - zcf - 2024-04-28 20:24:24 +0800 - feat:[1351]AI检测-容量保持率图表
+99758ea74 - 林少中 - 2024-04-28 19:22:48 +0800 - Merge branch 'pre-release-v2.4.4.1' into 'release-1.3.0'
+d89e3e08d - 林少中 - 2024-04-28 19:22:48 +0800 - Merge branche pre-release-v2.4.4.1 into release-1.3.0
+56d106c95 - 林少中 - 2024-04-28 19:22:25 +0800 - Merge branch 'release-1.3.0' into 'pre-release-v2.4.4.1'
+5442e655e - 林少中 - 2024-04-28 19:20:24 +0800 - Merge branch 'beta-2.4.4' into 'pre-release-v2.4.4.1'
+fb934b3b0 - 林少中 - 2024-04-28 19:20:24 +0800 - Merge branche beta-2.4.4 into pre-release-v2.4.4.1
+da0b2613f - 林少中 - 2024-04-28 19:20:03 +0800 - Merge branch 'pre-release-v2.4.4.1' into 'beta-2.4.4'
+00030a9e3 - 林少中 - 2024-04-28 19:10:02 +0800 - Merge branch 'feature/czx/20240428-beta-2.4.4-temp' into 'beta-2.4.4'
+cbd6c58f7 - 林楷 - 2024-04-28 19:10:02 +0800 - feat:[1228]新增所属产品类目编码字段
+8f317f139 - linkai - 2024-04-28 19:07:40 +0800 - Merge branch 'beta-2.4.4' into feature/czx/20240428-beta-2.4.4-temp
+5f11e3bca - linkai - 2024-04-28 19:05:02 +0800 - Merge branch 'feature/hcb/20240329-demand-1228-after_sales' into feature/czx/20240428-beta-2.4.4-temp
+b75e81533 - 林楷 - 2024-04-28 19:02:50 +0800 - Merge branch 'feature/hcb/20240329-demand-1228-after_sales' into 'alpha-1.3.0'
+9dfd5f007 - linkai - 2024-04-28 19:01:27 +0800 - feat:[1228]新增所属产品类目编码字段
+322ab8cd8 - 林少中 - 2024-04-28 18:03:12 +0800 - Merge branch 'pre-release-v2.4.4.1' into 'release-1.3.0'
+f4df4f54d - 林少中 - 2024-04-28 18:03:12 +0800 - Merge branche pre-release-v2.4.4.1 into release-1.3.0
+d556dd55e - 林少中 - 2024-04-28 18:01:59 +0800 - Merge branch 'beta-2.4.4' into 'pre-release-v2.4.4.1'
+a00207740 - 林少中 - 2024-04-28 18:01:59 +0800 - Merge branche beta-2.4.4 into pre-release-v2.4.4.1
+6e9e4ae88 - 林少中 - 2024-04-28 18:01:36 +0800 - Merge branch 'pre-release-v2.4.4.1' into 'beta-2.4.4'
+4e69e66e9 - wuzhiguo - 2024-04-28 17:29:38 +0800 - Merge branch 'hotfix/wzg/20240428-bug-10322-release-1.3.0' into feature/wzg/2400312-alpha-1.3.0-temp
+6df03acd0 - wuzhiguo - 2024-04-28 17:29:00 +0800 - fix:[10322]【时时充-检测报告】：订单列表中显示有检测报告，实际打开订单详情中检测报告按钮时，提示却没有报告
+2aadfb946 - wuzhiguo - 2024-04-28 17:20:17 +0800 - Merge branch 'hotfix/wzg/20240428-bug-10322-release-1.3.0' into feature/wzg/2400312-alpha-1.3.0-temp
+8deee25e7 - wuzhiguo - 2024-04-28 17:18:02 +0800 - fix:[10322]【时时充-检测报告】：订单列表中显示有检测报告，实际打开订单详情中检测报告按钮时，提示却没有报告
+69469ece7 - zcf - 2024-04-28 17:14:16 +0800 - fix:[10322]生成检测订单成功，通知charge
+194b74e24 - zcf - 2024-04-28 17:05:20 +0800 - feat:[1351]
+24e952f28 - wuzhiguo - 2024-04-28 17:02:04 +0800 - Merge branch 'hotfix/wzg/20240428-bug-10322-release-1.3.0' into feature/wzg/2400312-alpha-1.3.0-temp
+c80710d89 - wuzhiguo - 2024-04-28 16:55:24 +0800 - fix:[10322]【时时充-检测报告】：订单列表中显示有检测报告，实际打开订单详情中检测报告按钮时，提示却没有报告
+2fa4d2bcd - 林少中 - 2024-04-28 16:28:52 +0800 - Merge branch 'feature/zxy/20240320-feat-1176-release-1.3.0' into 'beta-2.4.4'
+6ee816429 - 张新宇 - 2024-04-28 16:28:52 +0800 - feat:[1176]【能效日报】表格改造
+16e954c8d - 林少中 - 2024-04-28 16:25:36 +0800 - Merge branch 'feature/czx/20240428-beta-2.4.4-temp' into 'beta-2.4.4'
+855a95168 - 陈志祥 - 2024-04-28 16:25:36 +0800 - feat:[1228]售后记录列表
+c0a0e0973 - cnte01027 - 2024-04-28 16:21:45 +0800 - Merge branch 'feature/hcb/20240329-demand-1228-after_sales' into feature/czx/20240428-beta-2.4.4-temp
+2bd0da5c8 - 林少中 - 2024-04-28 16:15:05 +0800 - Merge branch 'feature/zxy/20240320-feat-1176-release-1.3.0' into 'beta-2.4.4'
+5a056d515 - 张新宇 - 2024-04-28 16:15:05 +0800 - feat:[1176]【能效日报】表格改造
+45610e4d5 - 林少中 - 2024-04-28 16:05:41 +0800 - Merge branch 'feature/zxy/20240320-feat-1176-release-1.3.0' into 'beta-2.4.4'
+be556543e - 张新宇 - 2024-04-28 16:05:41 +0800 - feat:[1176]【能效日报】表格改造
+3523ff695 - 陈志祥 - 2024-04-28 15:48:42 +0800 - Merge branch 'feature/czx/20240313-1942-passwordCheck-release-1.3.0' into 'alpha-1.3.0'
+9dbfa0808 - cnte01027 - 2024-04-28 15:48:11 +0800 - feat:[1400]密码登录安全改造
+12e2067b5 - 陈志祥 - 2024-04-28 15:18:56 +0800 - Merge branch 'feature/czx/20240428-alpha-1.3.0-temp' into 'alpha-1.3.0'
+2034c3548 - cnte01027 - 2024-04-28 15:14:34 +0800 - Merge branch 'feature/czx/20240313-1942-passwordCheck-release-1.3.0' into feature/czx/20240428-alpha-1.3.0-temp
+bfb659ca8 - 吴景华 - 2024-04-28 15:04:56 +0800 - Merge branch 'feature/wjh/20240428-bug-10330-release1.3.0' into 'alpha-1.3.0'
+23a481bf5 - 陈志祥 - 2024-04-28 14:53:58 +0800 - Merge branch 'feature/hcb/20240329-demand-1228-after_sales' into 'alpha-1.3.0'
+7d5f5f110 - cnte01027 - 2024-04-28 14:53:29 +0800 - feat:[1228]售后记录列表
+d3cea9432 - 陈志祥 - 2024-04-28 14:45:04 +0800 - Merge branch 'feature/czx/20240428-alpha-1.3.0-temp' into 'alpha-1.3.0'
+8d1158509 - cnte01027 - 2024-04-28 14:44:33 +0800 - Merge branch 'feature/hcb/20240329-demand-1228-after_sales' into feature/czx/20240428-alpha-1.3.0-temp
+fd24730b9 - cnte01027 - 2024-04-28 14:43:15 +0800 - feat:[1228]售后记录列表
+19cb3a049 - cnte01027 - 2024-04-28 14:34:07 +0800 - feat:[1400]密码登录安全改造
+114d7c94d - wjh - 2024-04-28 14:32:49 +0800 - fix:[10330]修复计算电量/小时时ArithmeticException: / by zero
+aa708b165 - zcf - 2024-04-28 14:22:52 +0800 - feat:[1351]
+f96099d96 - 陈志祥 - 2024-04-28 14:16:19 +0800 - Merge branch 'feature/czx/20240428-alpha-1.3.0-temp' into 'alpha-1.3.0'
+0bdf981c8 - cnte01027 - 2024-04-28 14:13:53 +0800 - Merge branch 'feature/hcb/20240329-demand-1228-after_sales' into feature/czx/20240428-alpha-1.3.0-temp
+77d5960e3 - 陈志祥 - 2024-04-28 13:58:23 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+5f8b72fe6 - cnte01027 - 2024-04-28 13:57:46 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+e0b480ebc - cnte01027 - 2024-04-28 13:57:34 +0800 - feat:[1329]时时运营2.0
+aeaaf4c23 - cnte01027 - 2024-04-28 13:53:11 +0800 - feat:[1228]售后记录列表
+2e6b44e5a - 王豪 - 2024-04-28 13:52:46 +0800 - Merge branch 'feature/wangh/20240417-1389-insulationAI-merge' into 'alpha-1.3.0'
+c50dff6db - 王豪 - 2024-04-28 13:52:46 +0800 - feat:[1389]绝缘监控功能
+f34f10998 - wanghao - 2024-04-28 13:52:11 +0800 - Merge branch 'alpha-1.3.0' into feature/wangh/20240417-1389-insulationAI-merge
+70ae8a8ef - wanghao - 2024-04-28 13:50:02 +0800 - Merge branch 'feature/wangh/20240417-1389-insulationAI' into feature/wangh/20240417-1389-insulationAI-merge
+e094c2d55 - wanghao - 2024-04-28 13:49:05 +0800 - feat:[1389]绝缘监控功能
+0ae85c72c - 吴志国 - 2024-04-28 13:16:05 +0800 - Merge branch 'feature/wjh/20240423-alpha1.3.0-temp' into 'alpha-1.3.0'
+1069d663d - wanghao - 2024-04-28 13:15:32 +0800 - feat:[1389]绝缘监控功能
+457a67ab1 - wuzhiguo - 2024-04-28 13:15:31 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+51529638d - wuzhiguo - 2024-04-28 13:14:54 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+86cc6ed4a - zcf - 2024-04-28 11:13:43 +0800 - fix:[10322]通过订单号集合获取检测成功订单号
+a503f27b0 - 吴志国 - 2024-04-28 11:12:21 +0800 - Merge branch 'feature/wjh/20240423-alpha1.3.0-temp' into 'alpha-1.3.0'
+43d6b22a9 - wuzhiguo - 2024-04-28 11:11:40 +0800 - Merge remote-tracking branch 'origin/alpha-1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+0803699d3 - wuzhiguo - 2024-04-28 11:11:08 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+e4c72c8f4 - wuzhiguo - 2024-04-28 11:08:59 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+54ed29d4b - wuzhiguo - 2024-04-28 11:01:06 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+7f0c6a272 - wuzhiguo - 2024-04-28 11:00:51 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+3c1d6ce7a - wjh - 2024-04-28 09:55:21 +0800 - feat:[1419]互联互通：统一处理所有运营商-枪状态(枪未归位，状态码151)应返回未插枪(失败码1).
+dbe905799 - zcf - 2024-04-28 08:58:41 +0800 - feat:[1351]AI检测报告
+6b311ef7b - 陈志祥 - 2024-04-28 08:52:59 +0800 - Merge branch 'feature/hcb/20240329-demand-1228-after_sales' into 'alpha-1.3.0'
+ccbee79b1 - 吴景华 - 2024-04-28 08:51:37 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+2f38e3f5c - cnte01027 - 2024-04-28 08:50:42 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+b4a3f74f9 - cnte01027 - 2024-04-28 08:50:27 +0800 - feat:[1329]时时运营2.0
+b9f6a31ab - cnte01027 - 2024-04-28 08:48:28 +0800 - feat:[1228]售后记录列表
+f29e3ec6d - wjh - 2024-04-28 08:45:50 +0800 - feat:[1329]注销接口
+4221dd58e - 王豪 - 2024-04-27 13:14:12 +0800 - Merge branch 'feature/wangh/20240417-1389-insulationAI-merge' into 'alpha-1.3.0'
+00fcaa241 - 王豪 - 2024-04-27 13:14:12 +0800 - feat:[1389]绝缘监控功能
+e290fbad2 - wanghao - 2024-04-27 13:11:49 +0800 - Merge remote-tracking branch 'origin/alpha-1.3.0' into feature/wangh/20240417-1389-insulationAI-merge
+89d2308f1 - wanghao - 2024-04-27 13:06:15 +0800 - feat:[1389]绝缘监控功能
+afe289a4c - wjh - 2024-04-26 17:08:50 +0800 - feat:[1419]统一处理运营商check接口枪状态信息
+d8e8f0c65 - cnte01027 - 2024-04-26 17:08:40 +0800 - feat:[1400]密码登录安全改造
+554c25046 - 林楷 - 2024-04-26 16:57:10 +0800 - Merge branch 'feature/link/20240415-story-1291-release-1.3.0' into 'alpha-1.3.0'
+818475181 - linkai - 2024-04-26 16:56:55 +0800 - feat:[1291]菜单优化，提供父类的分页接口以及通过分类菜单id获取菜单列表
+0d7652ebd - 林楷 - 2024-04-26 16:26:41 +0800 - Merge branch 'feature/link/20240415-story-1291-release-1.3.0' into 'alpha-1.3.0'
+50cfe6e94 - linkai - 2024-04-26 16:25:34 +0800 - feat:[1291]菜单优化，提供父类的分页接口以及通过分类菜单id获取菜单列表
+1e00fdebe - 陈志祥 - 2024-04-26 16:02:26 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+2e1d49f31 - cnte01027 - 2024-04-26 16:01:46 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+e1d44fa88 - cnte01027 - 2024-04-26 16:01:02 +0800 - feat:[1329]时时运营2.0
+b48389666 - 吴志国 - 2024-04-26 16:00:06 +0800 - Merge branch 'feature/wjh/20240423-alpha1.3.0-temp' into 'alpha-1.3.0'
+a52bf0e23 - wuzhiguo - 2024-04-26 15:59:49 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+09ceed58e - wuzhiguo - 2024-04-26 15:58:23 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+d7abd716e - 吴志国 - 2024-04-26 15:35:53 +0800 - Merge branch 'feature/wjh/20240423-alpha1.3.0-temp' into 'alpha-1.3.0'
+72c7aa082 - wuzhiguo - 2024-04-26 15:35:27 +0800 - Merge branch 'alpha-1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+301814ff1 - wuzhiguo - 2024-04-26 15:34:44 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+ebfcb47bc - wuzhiguo - 2024-04-26 15:33:43 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+d8462f0ab - wuzhiguo - 2024-04-26 15:33:26 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+3c73acc33 - 陈志祥 - 2024-04-26 15:14:49 +0800 - Merge branch 'feature/hcb/20240329-demand-1228-after_sales' into 'alpha-1.3.0'
+aba7ca8f3 - cnte01027 - 2024-04-26 15:09:53 +0800 - feat:[1225]售后记录列表
+4b6de5bcf - cnte01027 - 2024-04-26 14:46:46 +0800 - feat:[1400]密码登录安全改造
+553a127f7 - 周晨帆 - 2024-04-26 14:40:00 +0800 - Merge branch 'feature/240426-1351-alpha-1.3.0' into 'alpha-1.3.0'
+4a99caf03 - zcf - 2024-04-26 14:39:16 +0800 - Merge branch 'feature/zcf/20240415-1351-from-release-1.3.0' into feature/240426-1351-alpha-1.3.0
+152f14280 - zcf - 2024-04-26 14:31:37 +0800 - Merge branch 'release-1.3.0' into feature/zcf/20240415-1351-from-release-1.3.0
+2144727bf - zcf - 2024-04-26 14:21:47 +0800 - feat:[1351]AI检测报告
+12c28d417 - 张新宇 - 2024-04-26 13:33:16 +0800 - Merge branch 'feature/zxy/20240423-feat-1379-alpha-1.3.0' into 'alpha-1.3.0'
+0f390cc80 - zhangxinyu - 2024-04-26 13:33:07 +0800 - feat:[1379]【充电运营-运营分析-运营监控-单元详情】：优化部分显示内容-新加跨天峰谷平电价
+14a5e438a - 陈志祥 - 2024-04-26 13:32:10 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+cca08ce54 - cnte01027 - 2024-04-26 13:31:35 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+032f85c30 - cnte01027 - 2024-04-26 13:31:22 +0800 - feat:[1329]时时运营2.0
+9fbcf97f0 - zhangxinyu - 2024-04-26 13:30:36 +0800 - feat:[1379]【充电运营-运营分析-运营监控-单元详情】：优化部分显示内容-新加跨天峰谷平电价
+b6361b066 - zhangxinyu - 2024-04-26 13:30:11 +0800 - feat:[1379]【充电运营-运营分析-运营监控-单元详情】：优化部分显示内容-新加跨天峰谷平电价
+2006a06ef - 林少中 - 2024-04-26 13:23:11 +0800 - Merge branch 'feature/wjh/20240426-beta2.4.4-temp' into 'beta-2.4.4'
+1aa18d189 - 吴景华 - 2024-04-26 13:23:11 +0800 - fix:[9430]推送市级标准的订单只推送成功的订单
+01b4eaff1 - wjh - 2024-04-26 13:18:17 +0800 - Merge branch 'feature/wjh/20240304-fix-union-9430-release1.3.0' into feature/wjh/20240426-beta2.4.4-temp
+192e9bcb1 - wjh - 2024-04-26 13:15:13 +0800 - fix:[9430]推送市级标准的订单只推送成功的订单
+09175d127 - 周晨帆 - 2024-04-26 11:28:21 +0800 - Merge branch 'hotfix/zcf/20240426-bug-9967-release-1.3.0' into 'alpha-1.3.0'
+421be09cb - zcf - 2024-04-26 11:27:42 +0800 - fix:[9967]生成的图片名称用雪花算法
+0a486a163 - cnte01027 - 2024-04-26 11:04:24 +0800 - feat:[1400]密码登录安全改造
+5395ad154 - 林少中 - 2024-04-26 11:00:21 +0800 - Merge branch 'hotfix/zcf/20240426-bug-10317-beta-2.4.4' into 'beta-2.4.4'
+ac9ecfa54 - 周晨帆 - 2024-04-26 11:00:21 +0800 - fix:[10317]第九位为X先特殊处理，vin校验规则待产品统一
+340fcb1a8 - zcf - 2024-04-26 10:57:31 +0800 - Merge branch 'hotfix/zcf/20240426-bug-10317-release-1.3.0' into hotfix/zcf/20240426-bug-10317-beta-2.4.4
+57df6f794 - 周晨帆 - 2024-04-26 10:53:29 +0800 - Merge branch 'hotfix/zcf/20240426-bug-10317-release-1.3.0' into 'alpha-1.3.0'
+b682951d2 - zcf - 2024-04-26 10:52:48 +0800 - fix:[10317]第九位为X先特殊处理，vin校验规则待产品统一
+464cf2675 - zcf - 2024-04-26 10:40:13 +0800 - feat:[1351]
+38b7e0547 - 吴景华 - 2024-04-26 09:58:19 +0800 - Merge branch 'feature/czx/20240410-1249-EOLDeviceConfig-release-1.3.0' into 'alpha-1.3.0'
+80e52c831 - wjh - 2024-04-26 09:33:24 +0800 - feat:[1249]EOL自动建站接口
+da505f936 - wuzhiguo - 2024-04-25 21:03:45 +0800 - feat:[1207]权限配置
+c86959b5c - 吴志国 - 2024-04-25 19:33:33 +0800 - Merge branch 'feature/wjh/20240423-alpha1.3.0-temp' into 'alpha-1.3.0'
+d09d0b6ad - wuzhiguo - 2024-04-25 19:33:05 +0800 - Merge branch 'alpha-1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+edf6b4b51 - wuzhiguo - 2024-04-25 19:32:27 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+87436797b - wuzhiguo - 2024-04-25 19:31:20 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+b69d687d2 - 林少中 - 2024-04-25 19:02:31 +0800 - Merge branch 'cherry-pick-8e800bef' into 'release-1.3.0'
+ba00832ee - 林少中 - 2024-04-25 19:02:31 +0800 - Merge branch 'hotfix/link/20240425-bug-9967-beta-2.4.4' into 'beta-2.4.4'
+3188423f2 - 林少中 - 2024-04-25 19:02:06 +0800 - Merge branch 'hotfix/link/20240425-bug-9967-beta-2.4.4' into 'beta-2.4.4'
+8e800befc - 林少中 - 2024-04-25 18:56:37 +0800 - Merge branch 'hotfix/link/20240425-bug-9967-beta-2.4.4' into 'beta-2.4.4'
+9e0770491 - linkai - 2024-04-25 18:53:54 +0800 - fix:[9967] reportSn 判空会导致综合报告下载失败
+bf4d3ecb9 - linkai - 2024-04-25 18:48:09 +0800 - fix:[9967] reportSn 判空会导致综合报告下载失败
+e5a0bf154 - cnte01027 - 2024-04-25 17:02:56 +0800 - feat:[1249]EOL自动建站配置参数
+f458f2463 - cnte01027 - 2024-04-25 15:45:03 +0800 - feat:[1400]密码登录安全改造
+93ef50344 - 吴景华 - 2024-04-25 15:37:34 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+e503af176 - wjh - 2024-04-25 15:36:55 +0800 - feat:[1329]设置站点状态默认值"-1"
+5f28776e1 - 吴景华 - 2024-04-25 15:15:18 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+6edce2d54 - wjh - 2024-04-25 15:13:52 +0800 - feat:[1329]当前版本
+9451fb455 - wuzhiguo - 2024-04-25 14:52:30 +0800 - feat:[1207]新增数据类型
+4ad7b9e50 - 吴景华 - 2024-04-25 14:47:10 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+0e46fbf70 - wjh - 2024-04-25 14:46:51 +0800 - feat:[1329]cicd
+88add6bc4 - 吴景华 - 2024-04-25 14:36:37 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+a4d675441 - wjh - 2024-04-25 14:36:22 +0800 - feat:[1329]登录过去cnte-mms-app,ClientID
+01a8752d0 - wjh - 2024-04-25 14:24:47 +0800 - Merge branch 'feature/wjh/20240304-fix-union-9430-release1.3.0' into feature/wjh/20240425-beta2.4.4-temp
+6843fdec4 - wuzhiguo - 2024-04-25 14:20:53 +0800 - feat:[1207]新增数据类型
+f5d46c2f6 - 吴景华 - 2024-04-25 14:13:32 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+aa3c35a15 - wjh - 2024-04-25 14:13:08 +0800 - feat:[1329]登录过去cnte-mms-app,ClientID
+e5e3e03cf - 王豪 - 2024-04-25 13:56:22 +0800 - Merge branch 'feature/wangh/20240415-1325-ntp' into 'alpha-1.3.0'
+7d18fd5f8 - wanghao - 2024-04-25 13:55:26 +0800 - feat:[1325]对时功能
+9e4f93434 - 吴志国 - 2024-04-25 13:33:21 +0800 - Merge branch 'feature/wjh/20240423-alpha1.3.0-temp' into 'alpha-1.3.0'
+29f4414c8 - wuzhiguo - 2024-04-25 13:33:03 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+254f810ef - 吴志国 - 2024-04-25 11:09:33 +0800 - Merge branch 'feature/wjh/20240423-alpha1.3.0-temp' into 'alpha-1.3.0'
+4091e3ab2 - wuzhiguo - 2024-04-25 11:08:45 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240423-alpha1.3.0-temp' into feature/wjh/20240423-alpha1.3.0-temp
+2fa5caa05 - 林少中 - 2024-04-25 11:07:51 +0800 - Merge branch 'hotfix/zcf/20240425-bug-10278-beta-2.4.4' into 'beta-2.4.4'
+bb574ce07 - 周晨帆 - 2024-04-25 11:07:51 +0800 - fix:[10278]调用第三方vin接口增加失败日志打印
+539e4227f - 吴景华 - 2024-04-25 11:06:17 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+751e7b6f8 - wjh - 2024-04-25 11:05:40 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+1c01e5e35 - wjh - 2024-04-25 11:05:27 +0800 - feat:[1329]mms登录接口整合
+91e31b8d3 - zcf - 2024-04-25 11:04:21 +0800 - Merge branch 'hotfix/zcf/20240424-bug-10278-release-1.3.0' into hotfix/zcf/20240425-bug-10278-beta-2.4.4
+17de12b09 - 周晨帆 - 2024-04-25 11:03:50 +0800 - Merge branch 'hotfix/zcf/20240424-bug-10278-release-1.3.0' into 'alpha-1.3.0'
+e6b8ac0aa - zcf - 2024-04-25 11:03:26 +0800 - fix:[10278]调用第三方vin接口增加失败日志打印
+c647d205b - wuzhiguo - 2024-04-25 10:53:49 +0800 - Merge remote-tracking branch 'origin/feature/wzg/20240423-story-1372-release-1.3.0' into feature/wzg/20240423-story-1372-release-1.3.0
+b984d91ef - wuzhiguo - 2024-04-25 10:52:54 +0800 - feat:[1372]【后端开发】时时家APP V2.4.1-设备详情页面：显示优化
+4d48a9ee7 - 吴志国 - 2024-04-25 10:51:59 +0800 - Merge branch 'feature/wjh/20240423-alpha1.3.0-temp' into 'alpha-1.3.0'
+23b08f10b - wuzhiguo - 2024-04-25 10:50:53 +0800 - Merge branch 'feature/wzg/20240423-story-1372-release-1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+9b70e02de - wuzhiguo - 2024-04-25 10:49:52 +0800 - feat:[1327]【后端开发】时时家APP V2.4.1-设备详情页面：显示优化
+83e81ae3b - 林少中 - 2024-04-25 10:44:35 +0800 - Merge branch 'hotfix/zcf/20240425-bug-10278-beta-2.4.4' into 'beta-2.4.4'
+be89a464e - 周晨帆 - 2024-04-25 10:44:35 +0800 - fix:[10278]调用第三方vin接口增加失败日志打印
+9469ef6ca - 王豪 - 2024-04-25 10:33:48 +0800 - Merge branch 'feature/wangh/20240415-1325-ntp' into 'alpha-1.3.0'
+ec772d2cf - zcf - 2024-04-25 10:24:42 +0800 - Merge branch 'hotfix/zcf/20240424-bug-10278-release-1.3.0' into hotfix/zcf/20240425-bug-10278-beta-2.4.4
+00d82c25b - 周晨帆 - 2024-04-25 10:17:39 +0800 - Merge branch 'hotfix/zcf/20240424-bug-10278-release-1.3.0' into 'alpha-1.3.0'
+94613be3e - zcf - 2024-04-25 10:17:11 +0800 - fix:[10278]调用第三方vin接口增加失败日志打印
+1a959bbf1 - 陈志祥 - 2024-04-25 10:13:06 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+550668d9a - cnte01027 - 2024-04-25 10:12:24 +0800 - feat:[1329]时时运营2.0
+0cdfdd180 - cnte01027 - 2024-04-25 10:03:13 +0800 - feat:[1329]时时运营2.0
+a7be9e27f - 陈志祥 - 2024-04-25 10:02:30 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+44954f0f5 - cnte01027 - 2024-04-25 10:01:58 +0800 - feat:[1329]时时运营2.0
+86cf041b7 - wuzhiguo - 2024-04-25 10:01:49 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+c3add9980 - 陈志祥 - 2024-04-25 09:22:49 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+45f5b5a78 - cnte01027 - 2024-04-25 09:22:12 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+a07bbcd74 - cnte01027 - 2024-04-25 09:22:02 +0800 - feat:[1329]时时运营2.0
+086f0cf64 - wuzhiguo - 2024-04-25 09:17:19 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+8a9f79382 - 吴志国 - 2024-04-25 09:16:29 +0800 - Merge branch 'feature/wjh/20240423-alpha1.3.0-temp' into 'alpha-1.3.0'
+974e8022b - wuzhiguo - 2024-04-25 09:15:19 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+bf050ff3a - 吴志国 - 2024-04-25 08:46:22 +0800 - Merge branch 'feature/wjh/20240423-alpha1.3.0-temp' into 'alpha-1.3.0'
+2a18a8b6e - wuzhiguo - 2024-04-24 20:40:15 +0800 - Merge branch 'alpha-1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+b0f9486d8 - wuzhiguo - 2024-04-24 20:39:38 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+68bcc3e43 - wuzhiguo - 2024-04-24 20:38:39 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+df662129b - linkai - 2024-04-24 19:55:20 +0800 - feat:[1329] 充电运营支持saas化改造
+639f8a95a - 吴志国 - 2024-04-24 18:36:24 +0800 - Merge branch 'feature/wzg/240408-alpha-1.3.0-temp' into 'alpha-1.3.0'
+788417d6d - wuzhiguo - 2024-04-24 18:35:46 +0800 - Merge branch 'feature/wzg/20240424-bug-1404-release-1.3.0' into feature/wzg/240408-alpha-1.3.0-temp
+9e1a579b5 - 吴景华 - 2024-04-24 17:27:41 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+478e1f8cd - wjh - 2024-04-24 17:27:16 +0800 - feat:[1329]统计站点
+b8aa6b59f - wjh - 2024-04-24 17:15:48 +0800 - feat:[1329]302-充电中
+affc3b56e - cnte01027 - 2024-04-24 17:07:34 +0800 - feat:[1400]密码登录安全改造
+3ddd67b37 - wuzhiguo - 2024-04-24 16:20:09 +0800 - feat:[1404]【系统管理】用户管理，客户创建的用户，设置默认部门、岗位、昵称
+4da8761ea - 吴景华 - 2024-04-24 16:12:56 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+cb4fb070b - wjh - 2024-04-24 16:12:34 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+e4cd5e947 - wjh - 2024-04-24 16:12:23 +0800 - feat:[1329]设置默认站点
+0a4c81c7c - 吴志国 - 2024-04-24 16:08:03 +0800 - Merge branch 'feature/wjh/20240423-alpha1.3.0-temp' into 'alpha-1.3.0'
+0f3c190a1 - wuzhiguo - 2024-04-24 16:07:42 +0800 - Merge branch 'alpha-1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+371624e25 - wuzhiguo - 2024-04-24 16:06:51 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+edfb0b011 - wuzhiguo - 2024-04-24 16:06:10 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+b8407c444 - 吴景华 - 2024-04-24 16:00:04 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+77b5d43db - wjh - 2024-04-24 15:58:59 +0800 - feat:[1329]设置默认站点
+fdf14ee77 - wjh - 2024-04-24 15:55:14 +0800 - feat:[1329]初始化设置默认站点
+9c164243a - 林少中 - 2024-04-24 15:50:25 +0800 - Merge branch 'hotfix/zcf/20240423-bug-9999-beta-2.4.4' into 'beta-2.4.4'
+dc867acbf - 周晨帆 - 2024-04-24 15:50:25 +0800 - fix:[9999]空白页-去重
+51c49cd11 - zcf - 2024-04-24 15:48:44 +0800 - Merge branch 'hotfix/zcf/20240411-bug-9999-release-1.3.0' into hotfix/zcf/20240423-bug-9999-beta-2.4.4
+3c4b3b1a4 - 周晨帆 - 2024-04-24 15:34:34 +0800 - Merge branch 'hotfix/zcf/20240411-bug-9999-release-1.3.0' into 'alpha-1.3.0'
+70eb0fcf2 - zcf - 2024-04-24 15:33:53 +0800 - fix:[9999]空白页、导出关联网关
+a7fbed469 - 吴景华 - 2024-04-24 15:27:29 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+0b2152ae5 - wjh - 2024-04-24 15:27:03 +0800 - feat:[1329]初始化设置默认站点
+9e2c30988 - 吴景华 - 2024-04-24 15:11:45 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+f827cf8f7 - 张新宇 - 2024-04-24 15:08:06 +0800 - Merge branch 'feature/zxy/20240423-feat-1379-alpha-1.3.0' into 'alpha-1.3.0'
+e88061ea6 - wjh - 2024-04-24 15:07:35 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+132dff536 - zhangxinyu - 2024-04-24 15:07:28 +0800 - Merge remote-tracking branch 'origin/alpha-1.3.0' into feature/zxy/20240423-feat-1379-alpha-1.3.0
+699d977c1 - wjh - 2024-04-24 15:07:17 +0800 - feat:[1329]初始化设置默认站点
+dd54e422e - zhangxinyu - 2024-04-24 15:03:33 +0800 - Merge branch 'feature/zxy/20240423-feat-1379-release-1.3.0' into feature/zxy/20240423-feat-1379-alpha-1.3.0
+a3a06a1cb - zhangxinyu - 2024-04-24 15:00:52 +0800 - feat:[1379]【充电运营-运营分析-运营监控-单元详情】：优化部分显示内容-新加跨天峰谷平电价
+6c5655080 - 吴志国 - 2024-04-24 14:58:59 +0800 - Merge branch 'feature/wjh/20240423-alpha1.3.0-temp' into 'alpha-1.3.0'
+d555d53d1 - zhangxinyu - 2024-04-24 14:58:50 +0800 - feat:[1379]【充电运营-运营分析-运营监控-单元详情】：优化部分显示内容-新加跨天峰谷平电价
+271e43776 - wuzhiguo - 2024-04-24 14:58:31 +0800 - Merge branch 'alpha-1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+a2b8501a2 - wuzhiguo - 2024-04-24 14:58:06 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+db057c7c7 - zhangxinyu - 2024-04-24 14:52:20 +0800 - feat:[1379]【充电运营-运营分析-运营监控-单元详情】：优化部分显示内容-新加跨天峰谷平电价
+1537ef32b - wuzhiguo - 2024-04-24 14:39:55 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+9f787e904 - wuzhiguo - 2024-04-24 14:39:44 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+dd93bf68d - 林少中 - 2024-04-24 14:30:57 +0800 - Merge branch 'hotfix/zcf/20240423-bug-9999-beta-2.4.4' into 'beta-2.4.4'
+62cd35585 - 周晨帆 - 2024-04-24 14:30:57 +0800 - fix:[9999]空白页、导出关联网关
+4abf67a5a - 陈志祥 - 2024-04-24 14:27:00 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+395b2507b - cnte01027 - 2024-04-24 14:26:22 +0800 - feat:[1329]时时运营2.0
+76ca47e00 - 陈志祥 - 2024-04-24 14:14:22 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+721a63baa - cnte01027 - 2024-04-24 14:13:45 +0800 - feat:[1329]时时运营2.0
+0fe5d0348 - zcf - 2024-04-24 14:12:25 +0800 - fix:[9999]空白页、导出关联网关
+f33d74db2 - 林少中 - 2024-04-24 14:07:00 +0800 - Merge branch 'feature/wzg/240409-beta-2.4.4-temp' into 'beta-2.4.4'
+21a78676e - 吴志国 - 2024-04-24 14:07:00 +0800 - fix:[9427]绝缘检测正常判断bug修复
+39028f747 - cnte01027 - 2024-04-24 13:50:05 +0800 - feat:[1400]密码登录安全改造
+93547b732 - wjh - 2024-04-24 13:47:58 +0800 - feat:[1329]新增字段订阅消息类型 1-与默认站点一致 2-自选站点
+5e5521205 - 周晨帆 - 2024-04-24 13:45:02 +0800 - Merge branch 'hotfix/zcf/20240411-bug-9999-alpha-1.3.0' into 'alpha-1.3.0'
+ce21f2cf2 - zcf - 2024-04-24 13:44:33 +0800 - Merge branch 'hotfix/zcf/20240411-bug-9999-release-1.3.0' into hotfix/zcf/20240411-bug-9999-alpha-1.3.0
+3adf362db - zcf - 2024-04-24 13:43:43 +0800 - Merge remote-tracking branch 'origin/alpha-1.3.0' into hotfix/zcf/20240411-bug-9999-alpha-1.3.0
+6d66535a7 - zcf - 2024-04-24 13:42:31 +0800 - fix:[9999]空白页、导出关联网关
+4e3945164 - wuzhiguo - 2024-04-24 13:24:06 +0800 - Merge branch 'hotfix/zcf/20240320-bug-9427-release-1.3.0' into feature/wzg/240409-beta-2.4.4-temp
+e0b09b1a4 - wuzhiguo - 2024-04-24 13:18:59 +0800 - Merge branch 'beta-2.4.4' into feature/wzg/240409-beta-2.4.4-temp
+31f02bc20 - wuzhiguo - 2024-04-24 13:11:54 +0800 - Merge remote-tracking branch 'origin/hotfix/zcf/20240320-bug-9427-release-1.3.0' into hotfix/zcf/20240320-bug-9427-release-1.3.0
+3c6fd9067 - wuzhiguo - 2024-04-24 13:11:33 +0800 - fix:[9427]绝缘检测正常判断bug修复
+b40acaec8 - 林少中 - 2024-04-24 11:40:15 +0800 - Merge branch 'feature/hcb/20240329-demand-1228-after_sales' into 'beta-2.4.4'
+028e46cdb - 王豪 - 2024-04-24 11:40:15 +0800 - feat:[1228]售后登记导出添加字段
+bc3b0a3ea - wanghao - 2024-04-24 11:38:25 +0800 - feat:[1228]售后登记导出添加字段
+aaad5c0dd - 林少中 - 2024-04-24 11:35:49 +0800 - Merge branch 'hotfix/zcf/20240424-bug-10278-beta-2.4.4' into 'beta-2.4.4'
+5cebfef01 - 周晨帆 - 2024-04-24 11:35:49 +0800 - fix:[10278]根据VIN码获取车辆信息重试机制问题
+4995b34d3 - 王豪 - 2024-04-24 11:16:35 +0800 - Merge branch 'feature/wangh/20240424-10250-aftersale' into 'alpha-1.3.0'
+63a34d266 - wanghao - 2024-04-24 11:15:53 +0800 - feat:[1228]售后等级
+e5e3ef309 - 吴景华 - 2024-04-24 10:56:59 +0800 - Merge branch 'feature/wjh/20240423-alpha1.3.0-temp' into 'alpha-1.3.0'
+50d9a8818 - wjh - 2024-04-24 10:56:39 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+f2f8819d3 - wjh - 2024-04-24 10:53:46 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+ae6af63bc - wjh - 2024-04-24 10:53:31 +0800 - feat:[1329]桩列表优化
+afb4be3f7 - 周晨帆 - 2024-04-24 10:47:38 +0800 - Merge branch 'hotfix/zcf/20240424-bug-10278-release-1.3.0' into 'alpha-1.3.0'
+4a346ecbf - zcf - 2024-04-24 10:47:01 +0800 - fix:[10278]根据VIN码获取车辆信息重试机制问题
+65bb9078e - wjh - 2024-04-24 10:43:40 +0800 - feat:[1329]桩列表优化
+b7b14930c - 陈志祥 - 2024-04-24 10:28:16 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+adaf11249 - cnte01027 - 2024-04-24 10:26:34 +0800 - feat:[1329]时时运营2.0
+eaee3eb35 - 王豪 - 2024-04-24 10:25:37 +0800 - Merge branch 'feature/wangh/20240424-10250-aftersale' into 'alpha-1.3.0'
+789cf4d38 - wanghao - 2024-04-24 10:24:11 +0800 - feat:[1228]售后等级
+abc69c482 - cnte01027 - 2024-04-24 10:07:57 +0800 - feat:[1400]密码登录安全改造
+e9908a342 - 林楷 - 2024-04-24 08:48:39 +0800 - Merge branch 'hotfix/link/20240422-bug-10236-release-1.3.0' into 'alpha-1.3.0'
+a7ddc4d5c - linkai - 2024-04-24 08:48:09 +0800 - fix:[10236] 原始桩表中的额定功率配置不要了
+638dd9e27 - 林少中 - 2024-04-24 08:43:39 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+881be079a - 吴志国 - 2024-04-24 08:43:39 +0800 - fix:[9427]需要添加精度
+1b914987f - 吴志国 - 2024-04-23 19:55:50 +0800 - Merge branch 'feature/wzg/2400312-alpha-1.3.0-temp' into 'alpha-1.3.0'
+474ecb919 - wuzhiguo - 2024-04-23 19:54:04 +0800 - Merge branch 'hotfix/wzg/20240422-bug-10225_10226-release-1.3.0' into feature/wzg/2400312-alpha-1.3.0-temp
+cf2796f96 - wuzhiguo - 2024-04-23 19:53:54 +0800 - Merge branch 'hotfix/wzg/20240423-bug-10266-release-1.3.0' into feature/wzg/2400312-alpha-1.3.0-temp
+b107c9dc4 - wuzhiguo - 2024-04-23 19:53:32 +0800 - Merge branch 'hotfix/zcf/20240320-bug-9427-release-1.3.0' into feature/wzg/2400312-alpha-1.3.0-temp
+6fbe7a1f6 - 吴志国 - 2024-04-23 19:53:02 +0800 - Merge branch 'feature/wzg/2400312-alpha-1.3.0-temp' into 'alpha-1.3.0'
+5573205fd - wuzhiguo - 2024-04-23 19:52:28 +0800 - Merge branch 'feature/wzg/20240423-story-1372-release-1.3.0' into feature/wzg/2400312-alpha-1.3.0-temp
+67ee425ee - wuzhiguo - 2024-04-23 19:50:28 +0800 - feat:[1372]1.根据不同型号的家储， 匹配不同的图片,2.将原来的 SN 码的位置改为显示当前工作模式， 将 SN 放置在基本信息设置页面
+6c6b54311 - 林楷 - 2024-04-23 17:30:08 +0800 - Merge branch 'hotfix/link/20240423-bug-10223-release-1.3.0' into 'alpha-1.3.0'
+4dff1a1ae - linkai - 2024-04-23 17:29:44 +0800 - fix:[10223] token过期提示语优化
+41ff51ea0 - 吴景华 - 2024-04-23 17:28:32 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+55598d50c - wjh - 2024-04-23 17:27:48 +0800 - feat:[1329]设置默认站点
+eb944ca13 - zcf - 2024-04-23 17:24:13 +0800 - feat:[1351]
+d3715c0fe - 陈志祥 - 2024-04-23 17:17:24 +0800 - Merge branch 'feature/czx/20240410-1249-EOLDeviceConfig-release-1.3.0' into 'alpha-1.3.0'
+76a735c3f - cnte01027 - 2024-04-23 17:16:56 +0800 - feat:[1249]EOL自动建站配置参数
+ac56f1056 - wuzhiguo - 2024-04-23 17:15:57 +0800 - Merge branch 'hotfix/zcf/20240320-bug-9427-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+7821ae581 - wuzhiguo - 2024-04-23 17:15:19 +0800 - Merge branch 'beta-2.4.4' into feature/wzg/240411-beta-2.4.4-temp
+e9881e6d3 - wuzhiguo - 2024-04-23 17:13:59 +0800 - fix:[9427]需要添加精度
+907c94b19 - 林少中 - 2024-04-23 16:35:00 +0800 - Merge branch 'feature/wjh/20240423-beta2.4.4-temp1' into 'beta-2.4.4'
+699802b6d - 林少中 - 2024-04-23 16:34:08 +0800 - Merge branch 'feature/czx/20240423-beta-2.4.4-temp' into 'beta-2.4.4'
+51a71b754 - 陈志祥 - 2024-04-23 16:34:08 +0800 - feat:[1152]上下线日志调整
+e3b66915a - wjh - 2024-04-23 16:31:53 +0800 - fix:[10218]站点树内的站点名称取运营名称
+6200f341f - 林楷 - 2024-04-23 16:29:51 +0800 - Merge branch 'hotfix/link/20240423-bug-10223-release-1.3.0' into 'alpha-1.3.0'
+3ede51c95 - wuzhiguo - 2024-04-23 16:29:43 +0800 - fix:[10266]查询物联属性方法由current修改为currentModuleProperty
+75b999d84 - wanghao - 2024-04-23 16:28:27 +0800 - feat:[1389]绝缘监控功能
+417252357 - wjh - 2024-04-23 16:28:09 +0800 - Merge branch 'release-1.3.0' into feature/wjh/20240419-bug-10218-release1.3.0
+55522f716 - linkai - 2024-04-23 16:25:39 +0800 - fix:[10223] 1、互联互通请求登录过期修复 2、在需求1092 调整枪状态是否允许充电逻辑 这个需求上 因为有redis不会进来iot模式，也补上真实的状态码
+215d970d4 - linkai - 2024-04-23 16:23:40 +0800 - fix:[10223] 1、互联互通请求登录过期修复 2、在需求1092 调整枪状态是否允许充电逻辑 这个需求上 因为有redis不会进来iot模式，也补上真实的状态码
+c5c0d3b9f - wjh - 2024-04-23 16:23:39 +0800 - fix:[10218]站点树内的站点名称取运营名称
+ff1bc9bc9 - wuzhiguo - 2024-04-23 16:23:20 +0800 - fix:[10197]触发system的ci
+d092e40fb - cnte01027 - 2024-04-23 16:22:41 +0800 - Merge branch 'feature/czx/20240321-1152-onlineLog-release-1.3.0' into feature/czx/20240423-beta-2.4.4-temp
+39b449689 - 陈志祥 - 2024-04-23 16:20:40 +0800 - Merge branch 'feature/czx/20240423-alpha-1.3.0-temp' into 'alpha-1.3.0'
+751b2fd8b - cnte01027 - 2024-04-23 16:13:39 +0800 - Merge branch 'feature/czx/20240321-1152-onlineLog-release-1.3.0' into feature/czx/20240423-alpha-1.3.0-temp
+76aed41af - linkai - 2024-04-23 16:00:05 +0800 - fix:[10223] 1、互联互通请求登录过期修复 2、在需求1092 调整枪状态是否允许充电逻辑 这个需求上 因为有redis不会进来iot模式，也补上真实的状态码
+865949e38 - cnte01027 - 2024-04-23 15:48:40 +0800 - feat:[1152]上下线日志调整
+0d0fe868b - 林少中 - 2024-04-23 15:45:57 +0800 - Merge branch 'feature/wzg/240423-beta-2.4.4-temp' into 'beta-2.4.4'
+2a6892553 - 吴志国 - 2024-04-23 15:45:57 +0800 - fix:[10197]触发ci
+42a0675ef - wuzhiguo - 2024-04-23 15:43:39 +0800 - fix:[10197]触发ci
+9608f232e - 周晨帆 - 2024-04-23 15:43:37 +0800 - Merge branch 'hotfix/zcf/20240423-bug-10265-release-1.3.0' into 'alpha-1.3.0'
+3f7b63fca - zcf - 2024-04-23 15:43:09 +0800 - fix:[10265]互联互通-家储-EOL：创建设备时，状态应该为0，不然物联平台设备在未激活的时候会显示在线
+341df2956 - 吴景华 - 2024-04-23 15:37:51 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+b1b573d9c - wjh - 2024-04-23 15:35:56 +0800 - feat:[1329]是否支持跳转
+34c2678ef - 林少中 - 2024-04-23 15:34:47 +0800 - Merge branch 'feature/wzg/240423-beta-2.4.4-temp' into 'beta-2.4.4'
+63b676c4d - 吴志国 - 2024-04-23 15:34:47 +0800 - fix:[10197]触发ci
+adbb3d4b4 - wuzhiguo - 2024-04-23 15:33:41 +0800 - fix:[10197]触发ci
+7b4c4de4d - 林少中 - 2024-04-23 15:33:20 +0800 - Merge branch 'feature/wzg/240423-beta-2.4.4-temp' into 'beta-2.4.4'
+a3c6b3889 - 吴志国 - 2024-04-23 15:33:20 +0800 - fix:[10197]时时运维默认语言设置失败
+972ff52f4 - wuzhiguo - 2024-04-23 15:31:25 +0800 - Merge branch 'hotfix/wzg/20240422-bug-10197-release-1.3.0' into feature/wzg/240423-beta-2.4.4-temp
+de54b2272 - cnte01027 - 2024-04-23 15:26:50 +0800 - Merge remote-tracking branch 'origin/feature/link/20240416-story-1361-release-1.3.0' into feature/czx/20240313-1942-passwordCheck-release-1.3.0
+667863555 - cnte01027 - 2024-04-23 15:21:19 +0800 - Merge branch 'release-1.3.0' into feature/czx/20240313-1942-passwordCheck-release-1.3.0
+ba09b0cc7 - 林少中 - 2024-04-23 15:07:01 +0800 - Merge branch 'hotfix/zcf/20240423-bug-9999-beta-2.4.4' into 'beta-2.4.4'
+4dcedbe59 - 周晨帆 - 2024-04-23 15:07:01 +0800 - fix:[9999]物联中心-监控运维-版本管控，分页数量不对多网关
+5a1399792 - zcf - 2024-04-23 14:59:48 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into hotfix/zcf/20240411-bug-9999-release-1.3.0
+5d15ae4c1 - 周晨帆 - 2024-04-23 14:59:01 +0800 - Merge branch 'hotfix/zcf/20240411-bug-9999-release-1.3.0' into 'alpha-1.3.0'
+b6757d866 - zcf - 2024-04-23 14:58:18 +0800 - fix:[9999]物联中心-监控运维-版本管控，分页数量不对多网关
+1876a633e - 林楷 - 2024-04-23 14:54:26 +0800 - Merge branch 'hotfix/link/20240422-bug-10236-release-1.3.0' into 'alpha-1.3.0'
+44afe264d - wanghao - 2024-04-23 14:51:58 +0800 - Merge remote-tracking branch 'origin/hotfix/link/20240422-bug-10236-release-1.3.0' into hotfix/link/20240422-bug-10236-release-1.3.0
+08bc7c4d4 - wanghao - 2024-04-23 14:51:51 +0800 - fix:[10236]获取模块配置参数
+8a73dc53d - 林少中 - 2024-04-23 14:46:34 +0800 - Merge branch 'hotfix/zcf/20240423-bug-10201-beta-2.4.4' into 'beta-2.4.4'
+710c11514 - 周晨帆 - 2024-04-23 14:46:34 +0800 - fix:[10201]1、ems上报检测时间没上传vin字段，数据库vin必填报错，2、检测失败站点为单元站，导致搜索异常， 3、检测失败码应优先取值EMS上报 的故障码状态
+a53e7bb1e - zcf - 2024-04-23 14:45:11 +0800 - Merge branch 'hotfix/zcf/20240423-bug-10201-release-1.3.0' into hotfix/zcf/20240423-bug-10201-beta-2.4.4
+042131a22 - 周晨帆 - 2024-04-23 14:42:07 +0800 - Merge branch 'hotfix/zcf/20240423-bug-10201-release-1.3.0' into 'alpha-1.3.0'
+d21720aaa - zcf - 2024-04-23 14:41:38 +0800 - fix:[10201]1、ems上报检测时间没上传vin字段，数据库vin必填报错，2、检测失败站点为单元站，导致搜索异常， 3、检测失败码应优先取值EMS上报 的故障码状态
+181334bcc - 吴景华 - 2024-04-23 14:30:43 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into 'alpha-1.3.0'
+2a649fae1 - wjh - 2024-04-23 14:30:02 +0800 - feat:[1329]设置默认站点
+5927cc1ca - wanghao - 2024-04-23 14:26:09 +0800 - feat:[1389]绝缘监控功能
+5411a3cbc - 林少中 - 2024-04-23 14:08:53 +0800 - Merge branch 'hotfix/zcf/20240423-bug-9431-beta-2.4.4' into 'beta-2.4.4'
+fa0fbacd2 - 周晨帆 - 2024-04-23 14:08:53 +0800 - fix:[9431]行驶证注册日期-只兼容yyyy-MM-dd格式，其余都为非法格式
+667a28061 - zcf - 2024-04-23 14:07:09 +0800 - Merge branch 'hotfix/zcf/20240301-bug-9431-release-1.3.0' into hotfix/zcf/20240423-bug-9431-beta-2.4.4
+963649414 - zcf - 2024-04-23 14:03:12 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into hotfix/zcf/20240301-bug-9431-release-1.3.0
+a244c44bf - 周晨帆 - 2024-04-23 14:02:12 +0800 - Merge branch 'hotfix/zcf/20240301-bug-9431-release-1.3.0' into 'alpha-1.3.0'
+35faee981 - zcf - 2024-04-23 14:01:46 +0800 - fix:[9431]行驶证注册日期-只兼容yyyy-MM-dd格式，其余都为非法格式
+8fa421e87 - wanghao - 2024-04-23 13:56:07 +0800 - feat:[1372]添加产品详情的图片
+34a147864 - wanghao - 2024-04-23 13:55:51 +0800 - feat:[1372]添加产品详情的图片
+864ea3fdd - linkai - 2024-04-23 13:51:46 +0800 - Merge branch 'hotfix/link/20240422-bug-10224-release-1.3.0' into alpha-1.3.0
+f860f0c64 - linkai - 2024-04-23 13:46:46 +0800 - Merge branch 'hotfix/link/20240422-bug-10236-release-1.3.0' into alpha-1.3.0
+6a218e732 - linkai - 2024-04-23 13:28:52 +0800 - fix:[10236]桩分页接口从物联中心获取功率值
+f3b26edc7 - 陈志祥 - 2024-04-23 13:27:35 +0800 - Merge branch 'feature/czx/20240410-1249-EOLDeviceConfig-release-1.3.0' into 'alpha-1.3.0'
+a2e2096e0 - cnte01027 - 2024-04-23 13:26:51 +0800 - feat:[1249]EOL自动建站配置参数
+267279477 - wjh - 2024-04-23 13:20:23 +0800 - feat:[1329]个人中心统计
+da395d09b - wjh - 2024-04-23 13:19:53 +0800 - feat:[1329]个人中心统计
+5b3338483 - 林少中 - 2024-04-23 11:29:33 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+7370693fe - 吴志国 - 2024-04-23 11:29:33 +0800 - fix:[9427]历史检测报告绝缘检测比例错误
+9322723d3 - zcf - 2024-04-23 11:13:09 +0800 - fix:[1351]
+4fa6d8a42 - wanghao - 2024-04-23 10:57:53 +0800 - fix:[10236]获取模块配置参数
+43286242f - 林少中 - 2024-04-23 10:46:46 +0800 - Merge branch 'hotfix/zcf/20240301-bug-9431-release-1.3.0' into 'beta-2.4.4'
+77b42121c - 周晨帆 - 2024-04-23 10:46:46 +0800 - fix:[9431]行驶证初次登记日期兼容yyyy-MM格式
+8e9192bc2 - wuzhiguo - 2024-04-23 10:19:59 +0800 - fix:[9427]历史检测报告绝缘检测比例错误
+c75cd7d1a - wuzhiguo - 2024-04-23 10:17:58 +0800 - Merge branch 'hotfix/zcf/20240320-bug-9427-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+c8214cfd4 - wuzhiguo - 2024-04-23 10:15:40 +0800 - Merge branch 'beta-2.4.4' into feature/wzg/240411-beta-2.4.4-temp
+398b1f350 - 吴志国 - 2024-04-23 10:11:37 +0800 - Merge branch 'hotfix/zcf/20240320-bug-9427-release-1.3.0' into 'alpha-1.3.0'
+38b9c2398 - wjh - 2024-04-23 10:11:28 +0800 - feat:[1329]正常运行状态
+9c97f9b19 - wuzhiguo - 2024-04-23 10:10:16 +0800 - fix:[9427]历史检测报告绝缘检测比例错误
+71d0bc36d - 吴景华 - 2024-04-23 10:02:50 +0800 - Merge branch 'feature/wjh/20240423-alpha1.3.0-temp' into 'alpha-1.3.0'
+5e512250d - wjh - 2024-04-23 09:59:06 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+7c5f64821 - wjh - 2024-04-23 09:56:20 +0800 - Merge branch 'release-1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+8f3f148df - wuzhiguo - 2024-04-23 09:41:01 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+ad6134e45 - linkai - 2024-04-23 09:30:53 +0800 - feat:[1329]bff-ssyy-app 新增ci配置
+3c2724a71 - wuzhiguo - 2024-04-23 09:27:59 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+6d4cfdeba - wuzhiguo - 2024-04-23 09:27:44 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+084f14768 - wjh - 2024-04-23 09:23:14 +0800 - feat:[1329]解决冲突
+a6f0ae494 - wjh - 2024-04-23 09:13:33 +0800 - Merge branch 'feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240423-alpha1.3.0-temp
+db7030c62 - wjh - 2024-04-23 09:06:15 +0800 - feat:[1329]设置默认站点
+6af28bfd0 - wanghao - 2024-04-23 09:05:59 +0800 - fix:[10236]获取模块配置参数
+61ab8166d - 周晨帆 - 2024-04-23 09:04:30 +0800 - Merge branch 'hotfix/zcf/20240301-bug-9431-release-1.3.0' into 'alpha-1.3.0'
+8818f320c - zcf - 2024-04-23 09:04:12 +0800 - fix:[9431]行驶证初次登记日期兼容yyyy-MM格式
+8ed46e922 - wjh - 2024-04-23 09:00:47 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+1a1761804 - linkai - 2024-04-23 08:48:08 +0800 - fix:[10024]secp system 中的用户新增和修改不用抛异常，导入的需要抛异常
+829519cfe - cnte01027 - 2024-04-22 16:53:32 +0800 - feat:[1329]时时运营2.0
+872e36033 - wjh - 2024-04-22 16:49:37 +0800 - feat:[1329]设置默认站点
+03911c56e - 林楷 - 2024-04-22 16:30:17 +0800 - Merge branch 'pre-alpha-1.3.0' into 'alpha-1.3.0'
+b0b2a45aa - linkai - 2024-04-22 16:27:22 +0800 - Merge branch 'release-1.3.0' into pre-alpha-1.3.0
+a06700631 - cnte01027 - 2024-04-22 16:23:12 +0800 - feat:[1329]时时运营2.0
+e366708d1 - zcf - 2024-04-22 16:08:29 +0800 - feat:[1351]AI检测报告评估
+5059f029d - 林少中 - 2024-04-22 15:59:31 +0800 - Merge branch 'feature/wjh/20240419-bug-10218-release1.3.0' into 'beta-2.4.4'
+3b695dbc2 - 林楷 - 2024-04-22 15:59:31 +0800 - fix:[10218]修改组合站内任意一个子站需要同步修改该组合站内的所有子站的运营名称，并同时修改组合站的站点名称
+908ebc116 - 林少中 - 2024-04-22 15:58:13 +0800 - Merge branch 'feature/wzg/240419-pre-beta-2.4.4-temp' into 'beta-2.4.4'
+7aa2cc140 - 吴志国 - 2024-04-22 15:58:13 +0800 - fix:[9669]导出文件包含运营商下的全部站点订单
+80389c9c3 - wuzhiguo - 2024-04-22 15:41:28 +0800 - fix:[9669]导出文件包含运营商下的全部站点订单
+50e4db268 - wuzhiguo - 2024-04-22 15:14:59 +0800 - fix:[10225,10226]【在线巡检】【异常日志128】 【在线巡检】【异常日志129】
+882138fd3 - wuzhiguo - 2024-04-22 15:07:29 +0800 - fix:[10225]【在线巡检】【异常日志128】 工商业-运营分析-运营总览-站点概览: java.lang.NullPointerException: null
+0289b1f34 - wuzhiguo - 2024-04-22 14:58:02 +0800 - fix:[10197]时时运维默认语言设置失败
+eadfe0641 - wanghao - 2024-04-22 14:37:39 +0800 - fix:[10228]设备版本消费异常到异常数据
+b18ed315b - wuzhiguo - 2024-04-22 14:33:08 +0800 - Merge branch 'hotfix/wzg/20240320-bug-9669-release-1.3.0' into feature/wzg/240419-pre-beta-2.4.4-temp
+50e0be977 - wanghao - 2024-04-22 14:30:39 +0800 - fix:[10227]钉钉推送异常
+5ad4b0044 - wuzhiguo - 2024-04-22 14:30:27 +0800 - fix:[9669]导出文件包含运营商下的全部站点订单
+2f49212da - linkai - 2024-04-22 14:18:59 +0800 - fix:[10024]omp admin 中的用户新增和修改不用抛异常，导入的需要抛异常
+f4fc0663d - zhangxinyu - 2024-04-22 14:18:44 +0800 - feat:[1242]【运维中心】能效日报-单体最大温差告警阈值修改
+9a31af690 - zcf - 2024-04-22 13:36:31 +0800 - feat:[1351]AI检测报告评估
+d3ca744ff - wjh - 2024-04-22 13:20:58 +0800 - feat:[1329]设置默认站点
+0dc70b095 - wjh - 2024-04-22 13:17:35 +0800 - feat:[1329]设置默认站点
+91528183a - 林少中 - 2024-04-22 13:08:41 +0800 - Merge branch 'hotfix/link/20240415-bug-10094-release-1.3.0' into 'beta-2.4.4'
+6367b0d4f - 林楷 - 2024-04-22 13:08:41 +0800 - fix:[10094]用户部门查询问题，库里保存多了个","，方便模糊查询
+830b41c2e - wjh - 2024-04-22 10:40:37 +0800 - feat:[1329]设置默认站点
+6a40ddce5 - wjh - 2024-04-22 10:33:16 +0800 - feat:[1329]修改默认模式
+bc6179bbd - wjh - 2024-04-22 10:01:33 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+a23786bf2 - wjh - 2024-04-22 10:00:30 +0800 - feat:[1329]修改默认模式
+c0ae73f2a - cnte01027 - 2024-04-20 17:31:17 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+e95c23c7d - cnte01027 - 2024-04-20 17:31:06 +0800 - feat:[1329]时时运营2.0
+bff1c324e - wjh - 2024-04-20 17:28:24 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+fb6629d1c - wjh - 2024-04-20 17:28:11 +0800 - feat:[1329]设置默认站点
+c7bbc87c4 - wuzhiguo - 2024-04-20 17:24:53 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+5614437e4 - wuzhiguo - 2024-04-20 17:24:39 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+704f805c9 - wjh - 2024-04-20 17:21:37 +0800 - feat:[1329]判断是否需要跳出弹窗设置默认站点
+f5d769a29 - wjh - 2024-04-20 17:13:10 +0800 - feat:[1329]判断是否需要跳出弹窗设置默认站点
+d0bf1e021 - wjh - 2024-04-20 16:08:04 +0800 - feat:[1329]判断是否需要跳出弹窗设置默认站点
+cba46bdae - wjh - 2024-04-20 15:47:19 +0800 - feat:[1329]判断是否需要跳出弹窗设置默认站点
+6c865e18d - zcf - 2024-04-20 15:03:21 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into feature/zcf/20240415-1351-from-release-1.3.0
+4537f7664 - zcf - 2024-04-20 15:01:58 +0800 - feat:[1351]AI检测报告评估
+263005feb - zcf - 2024-04-20 15:01:35 +0800 - feat:[1351]AI检测报告评估
+837a233a0 - zcf - 2024-04-20 15:01:15 +0800 - feat:[1351]AI检测报告评估
+bf47b1403 - zhangxinyu - 2024-04-20 10:59:29 +0800 - feat:[1411]【运维中心】运营对账增加批量处理功能
+9c8aee375 - 林少中 - 2024-04-20 09:45:43 +0800 - Merge branch 'release-1.3.0' into 'master'
+c8ed279da - 林楷 - 2024-04-20 09:45:43 +0800 - Merge branche release-1.3.0 into master
+e50acf31b - 林少中 - 2024-04-20 09:45:27 +0800 - Merge branch 'master' into 'release-1.3.0'
+abffc8dfa - 吴景华 - 2024-04-20 09:25:03 +0800 - Merge branch 'feature/wjh/20240419-alpha1.3.0-temp' into 'alpha-1.3.0'
+53ac93c90 - wjh - 2024-04-20 09:24:25 +0800 - fix:[10218]修改组合站内任意一个子站需要同步修改该组合站内的所有子站的运营名称，并同时修改组合站的站点名称
+e5a7dd52f - wjh - 2024-04-20 09:21:26 +0800 - fix:[10218]修改组合站内任意一个子站需要同步修改该组合站内的所有子站的运营名称，并同时修改组合站的站点名称
+0c025da1e - 吴景华 - 2024-04-19 16:04:04 +0800 - Merge branch 'feature/wjh/20240419-alpha1.3.0-temp' into 'alpha-1.3.0'
+dd13d3c9e - wjh - 2024-04-19 16:03:41 +0800 - fix:[10218]当站点名称有变化才进行更新，取运营站点名称更新为组合站名称
+56002026e - wjh - 2024-04-19 15:57:46 +0800 - fix:[10218]当站点名称有变化才进行更新，取运营站点名称更新为组合站名称
+2e8050d9a - 林少中 - 2024-04-19 15:50:34 +0800 - Merge branch 'pre-beta-v2.4.4.1' into 'beta-2.4.4'
+8c938cac4 - 林少中 - 2024-04-19 15:50:34 +0800 - Merge branche pre-beta-v2.4.4.1 into beta-2.4.4
+e36f40099 - 林少中 - 2024-04-19 15:49:43 +0800 - Merge branch 'feature/czx/20240321-1152-onlineLog-release-1.3.0' into 'pre-beta-v2.4.4.1'
+9baa1c900 - 林楷 - 2024-04-19 15:49:43 +0800 - ci:触发ci
+d373459c9 - cnte01027 - 2024-04-19 15:48:00 +0800 - Merge remote-tracking branch 'origin/feature/czx/20240321-1152-onlineLog-release-1.3.0' into feature/czx/20240321-1152-onlineLog-release-1.3.0
+155b73932 - cnte01027 - 2024-04-19 15:47:52 +0800 - ci:触发ci
+8dfa1cd4e - 林少中 - 2024-04-19 15:43:09 +0800 - Merge branch 'pre-beta-v2.4.4.1' into 'beta-2.4.4'
+ebc61fcdb - 林少中 - 2024-04-19 15:43:09 +0800 - Merge branche pre-beta-v2.4.4.1 into beta-2.4.4
+36469f9c4 - 林少中 - 2024-04-19 15:42:55 +0800 - Merge branch 'beta-2.4.4' into 'pre-beta-v2.4.4.1'
+3bfcf6dce - 林少中 - 2024-04-19 15:41:00 +0800 - Merge branch 'feature/czx/20240321-1152-onlineLog-release-1.3.0' into 'pre-beta-v2.4.4.1'
+fe4a09775 - 林楷 - 2024-04-19 15:41:00 +0800 - feat:[1152]上下线日志iot版本调整
+5c7bf7c7c - 林少中 - 2024-04-19 15:40:48 +0800 - Merge branch 'pre-beta-v2.4.4.1' into 'feature/czx/20240321-1152-onlineLog-release-1.3.0'
+cf6bdac38 - cnte01027 - 2024-04-19 15:36:05 +0800 - feat:[1152]上下线日志iot版本调整
+e08feffc9 - 林少中 - 2024-04-19 15:34:12 +0800 - Merge branch 'feature/wzg/240419-pre-beta-2.4.4-temp' into 'pre-beta-v2.4.4.1'
+9005c35a9 - cnte01027 - 2024-04-19 15:13:11 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+af6f04079 - cnte01027 - 2024-04-19 15:13:01 +0800 - feat:[1329]时时运营2.0
+5eeb50748 - wuzhiguo - 2024-04-19 15:06:18 +0800 - fix:[9799]判断时段重复优化
+a55d7106d - wjh - 2024-04-19 15:05:56 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+f4d2827e2 - wjh - 2024-04-19 15:05:44 +0800 - feat:[1329]时时监控-今日订单
+a82719ae6 - wanghao - 2024-04-19 15:01:21 +0800 - feat:[1146]检测报告失败
+e2e272053 - wuzhiguo - 2024-04-19 15:00:33 +0800 - fix:[9799]判断时段重复
+deb0d7198 - 林少中 - 2024-04-19 14:31:15 +0800 - Merge branch 'pre-beta-v2.4.4.1' into 'beta-2.4.4'
+df802ce8c - 林少中 - 2024-04-19 14:31:15 +0800 - Merge branche pre-beta-v2.4.4.1 into beta-2.4.4
+6676229f4 - 林少中 - 2024-04-19 14:29:57 +0800 - Merge branch 'hotfix/zcf/20240320-bug-9427-pre-beta-v2.4.4.1' into 'pre-beta-v2.4.4.1'
+ef39b3405 - cnte01027 - 2024-04-19 14:27:38 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+085ee1c37 - cnte01027 - 2024-04-19 14:27:29 +0800 - feat:[1329]时时运营2.0
+04bbde5b4 - linkai - 2024-04-19 14:27:00 +0800 - fix:[9427]代码合并，解决冲突
+1c9dfbc15 - wjh - 2024-04-19 14:23:26 +0800 - feat:[1329]时时监控-今日订单
+90d54818a - 林少中 - 2024-04-19 14:16:08 +0800 - Merge branch 'feature/wangh/20240401-1230-ttsDeviceList' into 'pre-beta-v2.4.4.1'
+c0e82c4cd - 林楷 - 2024-04-19 14:16:08 +0800 - feat:[1230]代理商app设备列表
+226f6a46c - 林少中 - 2024-04-19 14:13:05 +0800 - Merge branch 'pre-beta-v2.4.4.1' into 'feature/wangh/20240401-1230-ttsDeviceList'
+7b7342e59 - 林少中 - 2024-04-19 14:06:27 +0800 - Merge branch 'feature/hcb/20240329-demand-1228-after_sales' into 'pre-beta-v2.4.4.1'
+1b411490d - 林楷 - 2024-04-19 14:06:27 +0800 - feat:[1228] 新增所属产品
+88a33487b - 林少中 - 2024-04-19 14:05:28 +0800 - Merge branch 'feature/czx/20240402-1231-ttsBindDevice-release-1.3.0' into 'pre-beta-v2.4.4.1'
+f4645aebd - 林楷 - 2024-04-19 14:05:28 +0800 - feat:[1231]tts-一个设备可以被不同的角色绑定
+f11fe77e4 - 林少中 - 2024-04-19 14:04:37 +0800 - Merge branch 'feature/zxy/20240320-feat-1176-release-1.3.0' into 'pre-beta-v2.4.4.1'
+67df77450 - 林楷 - 2024-04-19 14:04:37 +0800 - feat:[1176]【能效日报】表格改造
+ef3eb8b73 - 林少中 - 2024-04-19 14:04:02 +0800 - Merge branch 'feature/czx/20240321-1152-onlineLog-release-1.3.0' into 'pre-beta-v2.4.4.1'
+45c8827df - 林楷 - 2024-04-19 14:04:02 +0800 - feat:[1152]上下线日志分页调整
+0af804282 - 林少中 - 2024-04-19 14:02:46 +0800 - Merge branch 'hotfix/wzg/20240415-bug-10127-release-1.3.0' into 'pre-beta-v2.4.4.1'
+4119812c4 - 林楷 - 2024-04-19 14:02:46 +0800 - fix:[9799]削峰填谷工作模式设置时间段重复能正常保存不会失败问题
+be1b60a37 - 林少中 - 2024-04-19 13:56:50 +0800 - Merge branch 'hotfix/link/20240415-bug-10101-release-1.3.0' into 'pre-beta-v2.4.4.1'
+a87999411 - 林楷 - 2024-04-19 13:56:50 +0800 - fix:[10101]修复充电账单中vin码为""，需要保存为""，不能保存为null,防止和数仓统计充电车辆数量不一致问题
+c49ef36de - 林少中 - 2024-04-19 13:55:23 +0800 - Merge branch 'hotfix/zcf/20240409-bug-9960-release-1.3.0' into 'pre-beta-v2.4.4.1'
+3fe7d0e86 - 林楷 - 2024-04-19 13:55:23 +0800 - fix:[9960]查询和导出数量不一致
+865d7245a - 林少中 - 2024-04-19 13:53:52 +0800 - Merge branch 'feature/zxy/20240410-fix-10014-release-1.3.0' into 'pre-beta-v2.4.4.1'
+b73054020 - 林楷 - 2024-04-19 13:53:51 +0800 - fix:[10014]【充电运营】运营概览-单元-充电桩功率曲线未来时间不补0
+6648f6169 - 林少中 - 2024-04-19 13:53:15 +0800 - Merge branch 'hotfix/zcf/20240412-bug-10001-release-1.3.0' into 'pre-beta-v2.4.4.1'
+6dedfd968 - 林楷 - 2024-04-19 13:53:15 +0800 - fix:[10001]运维监控-版本管控品类下拉查询
+a7259460b - 林少中 - 2024-04-19 13:52:13 +0800 - Merge branch 'hotfix/zcf/20240411-bug-9999-release-1.3.0' into 'pre-beta-v2.4.4.1'
+692b49f70 - 林楷 - 2024-04-19 13:52:13 +0800 - fix:[9999]品类过滤无效
+363791b65 - 林少中 - 2024-04-19 13:49:21 +0800 - Merge branch 'hotfix/20240407-bug-9995-release-1.3.0' into 'pre-beta-v2.4.4.1'
+8e156f399 - 林楷 - 2024-04-19 13:49:21 +0800 - fix:[9995]运维中心故障列表导出过滤家储设备
+100ebfb4f - 林少中 - 2024-04-19 13:48:54 +0800 - Merge branch 'hotfix/wjh/20240403-bug-9964-release1.3.0' into 'pre-beta-v2.4.4.1'
+f93d9ad31 - 林楷 - 2024-04-19 13:48:53 +0800 - fix:[9964]时时充订单列表：区分订单列表和故障反馈选择的订单列表
+ca745827b - 林少中 - 2024-04-19 13:48:00 +0800 - Merge branch 'hotfix/wzg/20240408-bug-9891-release-1.3.0' into 'pre-beta-v2.4.4.1'
+6302b1551 - 林楷 - 2024-04-19 13:48:00 +0800 - fix:[9891]工商业储能获取站点编号的空指针异常
+906a4529c - 林少中 - 2024-04-19 13:47:24 +0800 - Merge branch 'hotfix/wzg/20240408-bug-9890-release-1.3.0' into 'pre-beta-v2.4.4.1'
+a9d273754 - 林楷 - 2024-04-19 13:47:24 +0800 - fix:[9890]工商业储能站点列表的sn为空导致报错
+d91ae2a7f - 林少中 - 2024-04-19 13:46:42 +0800 - Merge branch 'hotfix/wjh/20240329-bug-9887-release-1.3.0' into 'pre-beta-v2.4.4.1'
+3a8a6bbbd - 林楷 - 2024-04-19 13:46:42 +0800 - fix:[9887]修复因省未配置补贴报错问题
+a9f9efdbd - 林少中 - 2024-04-19 13:44:33 +0800 - Merge branch 'hotfix/20240329-bug-9885-release-1.3.0' into 'pre-beta-v2.4.4.1'
+ce149a797 - 林楷 - 2024-04-19 13:44:33 +0800 - fix:[9885]【异常日志113】检测服务-生产检测报告
+6fb356e5b - 林少中 - 2024-04-19 13:43:21 +0800 - Merge branch 'hotfix/czx/20240319-bug-9657-release-1.3.0' into 'pre-beta-v2.4.4.1'
+dbbd2ff1a - 林楷 - 2024-04-19 13:43:21 +0800 - fix:[9657] 修复站点信息-站点列表 运营商导出为空的问题
+baf9962fc - 林少中 - 2024-04-19 13:42:12 +0800 - Merge branch 'hotfix/czx/20240325-bug-9759-release-1.3.0' into 'pre-beta-v2.4.4.1'
+48d0c29ff - 林楷 - 2024-04-19 13:42:12 +0800 - fix:[9759] 代理商删除初始化客户服务商管理账号相关逻辑
+18765a888 - 林少中 - 2024-04-19 13:40:50 +0800 - Merge branch 'feature/wjh/20240320-bug-9697-pvBrand-release1.3.0' into 'pre-beta-v2.4.4.1'
+21b143761 - 林楷 - 2024-04-19 13:40:50 +0800 - fix:[9697]家储-光伏模块-站点光伏品牌为空的时候报错
+5c2dd98ad - 林少中 - 2024-04-19 13:38:05 +0800 - Merge branch 'hotfix/wzg/20240320-bug-9669-release-1.3.0' into 'pre-beta-v2.4.4.1'
+374c4f9b5 - 林楷 - 2024-04-19 13:38:05 +0800 - fix:[9669]导出数据和列表的数据不一致bug
+fa33bd99d - 林少中 - 2024-04-19 13:31:29 +0800 - Merge branch 'hotfix/wzg/20240328-bug-9619-release-1.3.0' into 'pre-beta-v2.4.4.1'
+710dca87a - 林楷 - 2024-04-19 13:31:29 +0800 - fix:[9619]家储的日志降级、国际化的异常消息添加message
+6f676c2c8 - 林少中 - 2024-04-19 13:25:46 +0800 - Merge branch 'feature/wjh/20240318-fix9062-release1.3.0' into 'pre-beta-v2.4.4.1'
+cd6e11012 - 林楷 - 2024-04-19 13:25:46 +0800 - fix:[9602]修复运营对账-无异常也会发告警
+29ec14e59 - 林少中 - 2024-04-19 13:24:29 +0800 - Merge branch 'fix/wangh/20240313-bug-9533-strategyConfig' into 'pre-beta-v2.4.4.1'
+430f3947e - 林少中 - 2024-04-19 13:23:03 +0800 - Merge branch 'hotdix/czx/20240308-bug-9436-release-1.3.0' into 'pre-beta-v2.4.4.1'
+03418b1c9 - 林楷 - 2024-04-19 13:23:02 +0800 - fix:[9436]物联中心-监控运维-事件查询，时间格式显示问题
+4a705edae - 林少中 - 2024-04-19 13:21:34 +0800 - Merge branch 'hotfix/zcf/20240301-bug-9431-release-1.3.0' into 'pre-beta-v2.4.4.1'
+d0a6d6882 - 林楷 - 2024-04-19 13:21:34 +0800 - fix:[9431] 初次领证日期 yyyy-MM生成检测报告失败
+f1c4452dd - wuzhiguo - 2024-04-19 13:21:25 +0800 - fix:[9427]代码合并
+df10e0503 - 林少中 - 2024-04-19 13:21:01 +0800 - Merge branch 'feature/wjh/20240304-fix-union-9430-release1.3.0' into 'pre-beta-v2.4.4.1'
+5bb3a3c2e - 林楷 - 2024-04-19 13:21:01 +0800 - fix:[9430]互联互通推送成功订单
+eead802f1 - cnte01027 - 2024-04-19 13:18:30 +0800 - Merge branch 'release-1.3.0' into feature/czx/20240402-1231-ttsBindDevice-release-1.3.0
+f855ce612 - cnte01027 - 2024-04-19 13:16:59 +0800 - Merge branch 'release-1.3.0' into feature/czx/20240321-1152-onlineLog-release-1.3.0
+e8155d5e8 - cnte01027 - 2024-04-19 13:14:35 +0800 - feat:[1329]时时运营2.0
+0f269658a - 林少中 - 2024-04-19 13:13:48 +0800 - Merge branch 'hotfix/zcf/20240320-bug-9427-release-1.3.0' into 'pre-beta-v2.4.4.1'
+a87c87543 - 林楷 - 2024-04-19 13:13:48 +0800 - fix:[9427] ssc检测报告下载-绝缘检测展示问题
+4680b1023 - 林少中 - 2024-04-19 13:12:43 +0800 - Merge branch 'hotfix/link/20240201-bug-9159-release-1.3.0' into 'pre-beta-v2.4.4.1'
+0c8b25d4c - 林楷 - 2024-04-19 13:12:43 +0800 - fix:[9159]流水记录中预付费的退款流水修正 记得有历史数据处理
+c46843450 - 林少中 - 2024-04-19 13:10:44 +0800 - Merge branch 'hotfix/link/20240327-bug-9141-qrcode-release-1.3.0' into 'pre-beta-v2.4.4.1'
+3b585bd18 - 林楷 - 2024-04-19 13:10:44 +0800 - fix:[9141]新增生成枪二维码内容接口
+00a1b6fc6 - wjh - 2024-04-19 09:31:58 +0800 - Merge branch 'release-1.3.0' into hotfix/wjh/20240403-bug-9964-release1.3.0
+9235bd2e4 - wjh - 2024-04-19 09:26:21 +0800 - Merge branch 'release-1.3.0' into hotfix/wjh/20240329-bug-9887-release-1.3.0
+1e83e2bea - wjh - 2024-04-19 09:23:50 +0800 - Merge branch 'release-1.3.0' into feature/wjh/20240320-bug-9697-pvBrand-release1.3.0
+40e60ca34 - wjh - 2024-04-19 09:21:52 +0800 - Merge branch 'release-1.3.0' into feature/wjh/20240318-fix9602-release1.3.0
+a96987975 - wjh - 2024-04-19 09:18:26 +0800 - Merge branch 'release-1.3.0' into feature/wjh/20240304-fix-union-9430-release1.3.0
+a6a31d982 - linkai - 2024-04-19 09:15:07 +0800 - Merge branch 'release-1.3.0' into hotfix/link/20240415-bug-10101-release-1.3.0
+b627de4c3 - cnte01027 - 2024-04-19 09:14:12 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+89f4d29cf - linkai - 2024-04-19 08:57:26 +0800 - Merge branch 'release-1.3.0' into hotfix/link/20240201-bug-9159-release-1.3.0
+e0c376325 - linkai - 2024-04-19 08:46:24 +0800 - Merge branch 'release-1.3.0' into hotfix/link/20240327-bug-9141-qrcode-release-1.3.0
+2f7dfd979 - wjh - 2024-04-18 20:42:51 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+d0c316ff9 - wjh - 2024-04-18 20:42:36 +0800 - feat:[1329]时时监控-今日订单
+07d984b0a - wuzhiguo - 2024-04-18 20:35:52 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+78a68bc68 - wuzhiguo - 2024-04-18 20:35:43 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+20b1ba51b - wjh - 2024-04-18 20:11:04 +0800 - feat:[1329]运营分析
+45ebefbec - zcf - 2024-04-18 20:05:24 +0800 - Merge branch 'release-1.3.0' into hotfix/zcf/20240409-bug-9960-release-1.3.0
+de7ea9b07 - zcf - 2024-04-18 19:58:22 +0800 - Merge branch 'release-1.3.0' into hotfix/zcf/20240412-bug-10001-release-1.3.0
+b0e862ea6 - zcf - 2024-04-18 19:55:09 +0800 - Merge branch 'release-1.3.0' into hotfix/zcf/20240411-bug-9999-release-1.3.0
+7e091acbb - zcf - 2024-04-18 19:49:14 +0800 - Merge branch 'release-1.3.0' into hotfix/20240329-bug-9885-release-1.3.0
+102fc3582 - zcf - 2024-04-18 19:46:29 +0800 - Merge branch 'release-1.3.0' into hotfix/zcf/20240301-bug-9431-release-1.3.0
+ff666ab02 - cnte01027 - 2024-04-18 16:58:09 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+f083bc2b6 - wjh - 2024-04-18 16:39:03 +0800 - feat:[1329]工作台-站点详情
+a14b0933c - wjh - 2024-04-18 16:38:23 +0800 - feat:[1329]工作台-站点详情
+1a23af70b - 林少中 - 2024-04-18 16:28:27 +0800 - Merge branch 'feature/zxy/20240418-fix-10192-release-1.3.0' into 'release-1.3.0'
+022586a56 - 林少中 - 2024-04-18 16:28:27 +0800 - Merge branche feature/zxy/20240418-fix-10192-release-1.3.0 into release-1.3.0
+3eda065fa - wjh - 2024-04-18 16:11:54 +0800 - feat:[1329]根据充电状态获取桩列表
+60af8081d - linkai - 2024-04-18 16:02:54 +0800 - ci:触发构建
+65dbb5b64 - wjh - 2024-04-18 15:50:47 +0800 - feat:[1329]根据充电状态获取桩列表
+0f8f6a688 - 陈志祥 - 2024-04-18 15:33:13 +0800 - Merge branch 'feature/czx/20240410-1249-EOLDeviceConfig-release-1.3.0' into 'alpha-1.3.0'
+109ce5625 - cnte01027 - 2024-04-18 15:32:39 +0800 - feat:[1249]获取产品树
+0e3d645b5 - wjh - 2024-04-18 15:31:59 +0800 - feat:[1329]根据充电状态获取桩列表
+2c11ba2d1 - cnte01027 - 2024-04-18 15:28:29 +0800 - feat:[1329]时时运营2.0
+0c1deefa1 - wuzhiguo - 2024-04-18 14:30:07 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into hotfix/zcf/20240320-bug-9427-release-1.3.0
+f130ff2ad - wjh - 2024-04-18 14:29:56 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+03d65e665 - wjh - 2024-04-18 14:29:42 +0800 - feat:[1329]充电运营站点详情
+0a4b3e43f - wuzhiguo - 2024-04-18 14:27:27 +0800 - Merge branch 'release-1.3.0' into hotfix/wzg/20240328-bug-9619-release-1.3.0
+1c9b01403 - wuzhiguo - 2024-04-18 14:24:24 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into hotfix/wzg/20240320-bug-9669-release-1.3.0
+5b70b5a51 - wuzhiguo - 2024-04-18 14:18:57 +0800 - Merge branch 'release-1.3.0' into hotfix/wzg/20240408-bug-9891-release-1.3.0
+503040045 - cnte01027 - 2024-04-18 14:17:57 +0800 - Merge branch 'release-1.3.0' into hotfix/20240407-bug-9995-release-1.3.0
+185d681b1 - cnte01027 - 2024-04-18 14:15:59 +0800 - Merge branch 'release-1.3.0' into hotfix/czx/20240325-bug-9759-release-1.3.0
+40ca9bfe8 - wuzhiguo - 2024-04-18 14:15:50 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into hotfix/wzg/20240408-bug-9890-release-1.3.0
+6c810c120 - cnte01027 - 2024-04-18 14:14:39 +0800 - Merge branch 'release-1.3.0' into hotfix/czx/20240319-bug-9657-release-1.3.0
+10a0c2e42 - wuzhiguo - 2024-04-18 14:13:52 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into hotfix/wzg/20240415-bug-10127-release-1.3.0
+310ee8fa8 - cnte01027 - 2024-04-18 14:13:04 +0800 - Merge branch 'release-1.3.0' into hotfix/czx/20240308-bug-9436-release-1.3.0
+90c28ebef - 林少中 - 2024-04-18 14:04:22 +0800 - Merge branch 'feature/zxy/20240418-fix-10192-beta-2.4.4' into 'beta-2.4.4'
+461e88d81 - 陈志祥 - 2024-04-18 14:02:31 +0800 - Merge branch 'feature/czx/20240410-1249-EOLDeviceConfig-release-1.3.0' into 'alpha-1.3.0'
+3f37962c0 - cnte01027 - 2024-04-18 14:01:58 +0800 - feat:[1249]获取产品树
+ed53e4033 - zhangxinyu - 2024-04-18 14:01:45 +0800 - fix:[10192]设备故障日报未按等级倒序排序
+cf6677ba8 - 林少中 - 2024-04-18 13:50:05 +0800 - Merge branch 'feature/zxy/20240418-fix-10192-beta-2.4.4' into 'beta-2.4.4'
+810a47b52 - zhangxinyu - 2024-04-18 13:48:36 +0800 - fix:[10192]设备故障日报未按等级倒序排序
+95bd89312 - cnte01027 - 2024-04-18 13:41:27 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+c69ef7899 - wuzhiguo - 2024-04-18 13:23:46 +0800 - feat:[1332,1333,1334,1337,1338,1339,1340]时时运营2.0
+f2abe33d6 - cnte01027 - 2024-04-18 13:23:42 +0800 - feat:[1329]时时运营2.0
+da9804b61 - 陈志祥 - 2024-04-18 10:43:25 +0800 - Merge branch 'feature/czx/20240410-1249-EOLDeviceConfig-release-1.3.0' into 'alpha-1.3.0'
+60d781b2d - wjh - 2024-04-18 10:36:32 +0800 - feat:[1329]充电运营站点详情
+682929764 - wjh - 2024-04-18 10:12:54 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+6f8063570 - wjh - 2024-04-18 10:12:37 +0800 - feat:[1329]充电运营工作台
+43b67d490 - wuzhiguo - 2024-04-18 10:09:48 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+b2016b1b8 - wuzhiguo - 2024-04-18 10:08:57 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+7b9b7872a - cnte01027 - 2024-04-18 09:57:48 +0800 - feat:[1329]时时运营2.0
+54bffd219 - cnte01027 - 2024-04-18 09:57:17 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+755b266a0 - wuzhiguo - 2024-04-18 09:52:41 +0800 - feat:[1332]时时运营2.0
+67ca180b7 - cnte01027 - 2024-04-18 09:49:41 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+f266a642c - wuzhiguo - 2024-04-18 09:40:41 +0800 - feat:[1332]时时运营2.0
+e843f4418 - 林少中 - 2024-04-17 21:13:34 +0800 - Merge branch 'pre-release-v2.4.4' into 'release-1.3.0'
+002772309 - 林少中 - 2024-04-17 21:13:34 +0800 - Merge branche pre-release-v2.4.4 into release-1.3.0
+5806fb563 - 林少中 - 2024-04-17 21:12:11 +0800 - Merge branch 'beta-2.4.4' into 'pre-release-v2.4.4'
+40508f4cd - 林少中 - 2024-04-17 21:12:10 +0800 - Merge branche beta-2.4.4 into pre-release-v2.4.4
+e21de3959 - 林少中 - 2024-04-17 21:11:52 +0800 - Merge branch 'pre-release-v2.4.4' into 'beta-2.4.4'
+0b172b511 - 林少中 - 2024-04-17 20:59:40 +0800 - Merge branch 'feature/wangh/20240414-1146' into 'beta-2.4.4'
+166fbbef0 - wanghao - 2024-04-17 20:58:34 +0800 - feat:[1146]检测报告失败
+ae282d4fb - 林少中 - 2024-04-17 20:52:49 +0800 - Merge branch 'feature/wangh/20240414-1146' into 'beta-2.4.4'
+e61f629c0 - wanghao - 2024-04-17 20:51:23 +0800 - feat:[1146]检测报告失败
+8b1b70177 - 林少中 - 2024-04-17 20:44:49 +0800 - Merge branch 'feature/wangh/20240414-1146' into 'beta-2.4.4'
+5d495eb7c - wanghao - 2024-04-17 20:42:38 +0800 - feat:[1146]检测报告失败
+a44797426 - 林少中 - 2024-04-17 20:10:01 +0800 - Merge branch 'feature/wangh/20240414-1146' into 'beta-2.4.4'
+9d2564b6a - wanghao - 2024-04-17 20:08:16 +0800 - feat:[1146]检测报告失败
+37b96ea29 - 林少中 - 2024-04-17 19:51:23 +0800 - Merge branch 'feature/wangh/20240414-1146' into 'beta-2.4.4'
+1c01a59e9 - wanghao - 2024-04-17 19:50:26 +0800 - feat:[1146]检测报告失败
+2750ea133 - 林少中 - 2024-04-17 19:48:55 +0800 - Merge branch 'feature/240401-1146-release-1.3.0' into 'beta-2.4.4'
+8458c7544 - 王豪 - 2024-04-17 19:48:54 +0800 - feat:[1146]检测报告失败（回退）
+a988658b8 - wanghao - 2024-04-17 19:43:41 +0800 - ci:触发编译
+295e80021 - 林少中 - 2024-04-17 19:42:43 +0800 - Merge branch 'feature/240401-1146-release-1.3.0' into 'beta-2.4.4'
+28b10ff1e - 王豪 - 2024-04-17 19:42:43 +0800 - feat:[1146]检测报告失败
+c77b1631b - wanghao - 2024-04-17 19:41:09 +0800 - feat:[1146]检测报告失败
+e7090f420 - wanghao - 2024-04-17 19:36:38 +0800 - feat:[1146]检测报告失败
+467aa5fab - 林少中 - 2024-04-17 19:07:03 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+8b95ca030 - 吴志国 - 2024-04-17 19:07:03 +0800 - feat:[1297]监控曲线添加时间轴字段
+6ac34205d - wuzhiguo - 2024-04-17 19:05:17 +0800 - Merge branch 'feature/wzg/20240411-story-1297-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+cb0f40992 - wuzhiguo - 2024-04-17 19:04:32 +0800 - feat:[1297]监控曲线添加时间轴字段
+04dc8275d - wuzhiguo - 2024-04-17 19:02:36 +0800 - Merge branch 'beta-2.4.4' into feature/wzg/240411-beta-2.4.4-temp
+c5f6021f4 - wuzhiguo - 2024-04-17 19:00:31 +0800 - Merge branch 'feature/wzg/20240411-story-1297-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+f464d24f8 - wuzhiguo - 2024-04-17 18:59:57 +0800 - feat:[1297]监控曲线添加时间轴字段
+77ef7a8ed - 林少中 - 2024-04-17 18:29:49 +0800 - Merge branch 'feature/240401-1146-release-1.3.0' into 'beta-2.4.4'
+b7362a03b - 王豪 - 2024-04-17 18:29:49 +0800 - feat:[1146]检测报告失败
+7311ee9d5 - wanghao - 2024-04-17 18:28:44 +0800 - ci:触发编译
+d2adf0cc7 - wanghao - 2024-04-17 18:27:21 +0800 - feat:[1389]绝缘监控功能
+7f7173580 - 林少中 - 2024-04-17 18:21:49 +0800 - Merge branch 'feature/240401-1146-release-1.3.0' into 'beta-2.4.4'
+3b3118a60 - 王豪 - 2024-04-17 18:21:49 +0800 - feat:[1146]检测报告失败
+910535bc9 - 林少中 - 2024-04-17 18:17:10 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+5216d19ed - 吴志国 - 2024-04-17 18:17:10 +0800 - feat:[1260]国际化导出表名称
+75000eb7d - cnte01027 - 2024-04-17 18:07:31 +0800 - feat:[1329]时时运营2.0
+31022fef4 - cnte01027 - 2024-04-17 18:06:59 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+c4c725b17 - 林少中 - 2024-04-17 18:02:32 +0800 - Merge branch 'feature/wjh/20240417-beta2.4.4-temp' into 'beta-2.4.4'
+83505f6bd - 吴景华 - 2024-04-17 18:02:32 +0800 - feat:[1106]启动充电失败原因StartFailStatusEnum移除需求外code:0000003
+bfdee94a1 - wuzhiguo - 2024-04-17 18:00:55 +0800 - feat:[1260]国际化导出表名称
+ed558d1af - 林少中 - 2024-04-17 17:34:08 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+51ba0f7f6 - 吴志国 - 2024-04-17 17:34:08 +0800 - feat:[1297,982,1260](1297)导出排序、查询时间不能超过5天bug修复;(982)站点状态查询修改;(1260)查询语言标识设置默认语言为中文\国际化导出列国际化有字典等转换问题
+13b1e59f7 - wuzhiguo - 2024-04-17 17:15:42 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+ac84bb4e7 - 黄春斌 - 2024-04-17 17:05:22 +0800 - Merge branch 'hcb-merge-alpha-1.3.0' into 'alpha-1.3.0'
+f429a78f2 - hcb - 2024-04-17 16:57:13 +0800 - Merge remote-tracking branch 'origin/feature/wzg/20240315-story-1030-release-1.3.0' into hcb-merge-alpha-1.3.0
+f3cb87ac8 - wuzhiguo - 2024-04-17 16:51:59 +0800 - Merge branch 'feature/wzg/20240408-story-1260-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+162369226 - wuzhiguo - 2024-04-17 16:51:17 +0800 - feat:[1260]查询语言标识设置默认语言为中文
+5aa551733 - wjh - 2024-04-17 16:50:54 +0800 - feat:[1329]充电运营站点详情
+8e6be0929 - wjh - 2024-04-17 16:49:59 +0800 - feat:[1329]充电运营站点详情
+4b3555fa4 - 吴志国 - 2024-04-17 16:48:31 +0800 - Merge branch 'feature/wzg/2400412-alpha-1.3.0-temp' into 'alpha-1.3.0'
+423702571 - wuzhiguo - 2024-04-17 16:48:13 +0800 - feat:[1260]打印日志取消
+a7ecc7565 - wjh - 2024-04-17 16:48:01 +0800 - feat:[1329]充电运营站点详情
+f41261272 - wuzhiguo - 2024-04-17 16:37:30 +0800 - Merge branch 'feature/wzg/20240315-story-1030-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+435636458 - wuzhiguo - 2024-04-17 16:37:13 +0800 - Merge branch 'beta-2.4.4' into feature/wzg/240411-beta-2.4.4-temp
+9d5b027d9 - hcb - 2024-04-17 16:16:23 +0800 - Merge remote-tracking branch 'origin/feature/wzg/20240315-story-1030-release-1.3.0' into feature/wzg/20240315-story-1030-release-1.3.0
+f4d783d27 - hcb - 2024-04-17 16:15:57 +0800 - feat:[982] 站点状态查询修改
+3a64cc093 - 吴志国 - 2024-04-17 15:05:57 +0800 - Merge branch 'feature/wzg/2400412-alpha-1.3.0-temp' into 'alpha-1.3.0'
+edf2c0a1a - wuzhiguo - 2024-04-17 15:01:03 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+f57e7188f - wuzhiguo - 2024-04-17 14:59:16 +0800 - feat:[1260]打印日志排查问题
+d3410b3e8 - wanghao - 2024-04-17 14:55:44 +0800 - feat:[1146]检测报告失败
+8304dc222 - wuzhiguo - 2024-04-17 14:55:16 +0800 - Merge branch 'feature/wzg/20240408-story-1260-release-1.3.0' into feature/wzg/2400412-alpha-1.3.0-temp
+e5c29c9b0 - cnte01027 - 2024-04-17 13:45:52 +0800 - feat:[1329]时时运营2.0
+e8a292baa - wuzhiguo - 2024-04-17 13:21:34 +0800 - feat:[1332]时时运营-实时监控相关接口
+8e05d781f - cnte01027 - 2024-04-17 11:29:58 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+3f7361525 - cnte01027 - 2024-04-17 11:28:07 +0800 - feat:[1260]国际化 列国际化有字典等转换问题
+4a6045315 - wuzhiguo - 2024-04-17 11:15:25 +0800 - Merge branch 'feature/wzg/20240411-story-1297-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+501c137c1 - wuzhiguo - 2024-04-17 11:14:58 +0800 - feat:[1297]查询时间不能超过5天bug修复
+e3ef3d029 - wanghao - 2024-04-17 11:11:02 +0800 - feat:[1389]绝缘监控功能
+3c0ba3a2f - wjh - 2024-04-17 11:03:14 +0800 - feat:[1329]充电运营工作台
+ccce20c03 - cnte01027 - 2024-04-17 10:42:18 +0800 - feat:[1329]时时运营2.0
+2acb2d101 - wjh - 2024-04-17 09:33:18 +0800 - Merge branch 'feature/wjh/20240319-story-1106-unionStartFailRes-release1.3.0' into feature/wjh/20240417-beta2.4.4-temp
+b3e6e7c8d - wjh - 2024-04-17 09:28:01 +0800 - feat:[1106]启动充电失败原因StartFailStatusEnum移除需求外code:0000003。
+6010be777 - wuzhiguo - 2024-04-17 09:20:43 +0800 - feat:[1297]导出排序
+b93b0b0b2 - wjh - 2024-04-17 09:20:05 +0800 - feat:[1329]充电运营工作台
+63db30dc8 - wjh - 2024-04-17 09:10:22 +0800 - feat:[1329]充电运营工作台
+a23de8672 - wjh - 2024-04-17 08:57:31 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+0922a6968 - wjh - 2024-04-17 08:57:14 +0800 - feat:[1329]充电运营工作台
+9bdd30a00 - cnte01027 - 2024-04-17 08:54:41 +0800 - feat:[1329]时时运营2.0
+a0cef1ff2 - cnte01027 - 2024-04-17 08:53:56 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+28aebbf65 - cnte01027 - 2024-04-17 08:53:38 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+f3fea4ffa - wuzhiguo - 2024-04-17 08:51:24 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+8f0f3b9a1 - wuzhiguo - 2024-04-17 08:51:08 +0800 - feat:[1332]时时运营-实时监控相关接口
+bcda3fbfa - 林楷 - 2024-04-16 20:56:50 +0800 - Merge branch 'feature/link/20240416-story-1384-release-1.3.0' into 'alpha-1.3.0'
+7cddbd3ec - linkai - 2024-04-16 20:56:26 +0800 - feat:[1384]新增集新互联互通接入
+458b67360 - 林楷 - 2024-04-16 20:41:36 +0800 - Merge branch 'feature/link/20240416-story-1384-release-1.3.0' into 'alpha-1.3.0'
+0aeb7e540 - linkai - 2024-04-16 20:40:30 +0800 - feat:[1384]新增集新互联互通接入
+9b51e5887 - linkai - 2024-04-16 20:24:16 +0800 - Merge branch 'feature/link/20240416-story-1361-release-1.3.0' into alpha-1.3.0
+fd170d278 - linkai - 2024-04-16 20:21:05 +0800 - feat:[1361]secp用户新增最后登录时间
+4cb86538f - linkai - 2024-04-16 20:00:25 +0800 - feat:[1384]新增集新互联互通接入
+110b4e917 - 林少中 - 2024-04-16 19:53:34 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+d6c26ee6c - 吴志国 - 2024-04-16 19:53:34 +0800 - feat:[1297]interval赋值问题
+8450f3172 - wuzhiguo - 2024-04-16 19:52:33 +0800 - Merge branch 'beta-2.4.4' into feature/wzg/240411-beta-2.4.4-temp
+a12033a16 - wuzhiguo - 2024-04-16 19:51:05 +0800 - Merge branch 'feature/wzg/20240411-story-1297-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+3353a8c4f - wuzhiguo - 2024-04-16 19:50:33 +0800 - feat:[1297]interval赋值问题
+e35a9d749 - 林少中 - 2024-04-16 19:35:38 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+695857874 - 吴志国 - 2024-04-16 19:35:38 +0800 - feat:[1260]字典国际化（缓存问题）
+998e82f2d - wuzhiguo - 2024-04-16 19:34:27 +0800 - Merge branch 'feature/wzg/20240408-story-1260-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+7fbbc2772 - wuzhiguo - 2024-04-16 19:33:51 +0800 - feat:[1260]字典国际化（缓存问题）
+edf50add4 - 张新宇 - 2024-04-16 19:24:18 +0800 - Merge branch 'feature/zxy/20240320-feat-1176-release-1.3.0' into 'alpha-1.3.0'
+701cf08c8 - zhangxinyu - 2024-04-16 19:23:49 +0800 - feat:[1176]【能效日报】表格改造
+cac0965d9 - 张新宇 - 2024-04-16 19:15:49 +0800 - Merge branch 'feature/zxy/20240320-feat-1176-release-1.3.0' into 'alpha-1.3.0'
+8d222038a - zhangxinyu - 2024-04-16 19:14:43 +0800 - feat:[1176]【能效日报】表格改造
+f939e9a9e - 林少中 - 2024-04-16 18:24:37 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+43d1601d2 - 吴志国 - 2024-04-16 18:24:37 +0800 - feat:[1297]监控详情导出字段单位
+84e3580d3 - wuzhiguo - 2024-04-16 18:23:26 +0800 - Merge branch 'feature/wzg/20240411-story-1297-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+3826e9b05 - wuzhiguo - 2024-04-16 18:23:01 +0800 - feat:[1297]监控详情导出字段单位
+f0c39197d - 林少中 - 2024-04-16 18:15:14 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+1d9dd23b1 - 吴志国 - 2024-04-16 18:15:14 +0800 - feat:[1297,1260](1297)1.查询时间不能超过5天、2.负载曲线空数据问题(1260)用户活动邀请国际化导出
+386d2f05d - 林楷 - 2024-04-16 18:14:40 +0800 - Merge branch 'feature/link/20240416-story-1361-release-1.3.0' into 'alpha-1.3.0'
+1c100a62e - linkai - 2024-04-16 18:14:21 +0800 - feat:[1361]secp用户新增最后登录时间
+d517fa9c9 - wuzhiguo - 2024-04-16 18:08:29 +0800 - Merge branch 'beta-2.4.4' into feature/wzg/240411-beta-2.4.4-temp
+7df324666 - wuzhiguo - 2024-04-16 18:06:37 +0800 - Merge branch 'feature/wzg/20240411-story-1297-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+b5c4bcf4e - wuzhiguo - 2024-04-16 18:05:33 +0800 - feat:[1297]1.查询时间不能超过5天、2.负载曲线空数据问题
+369681703 - 林少中 - 2024-04-16 17:16:23 +0800 - Merge branch 'feature/czx/20240416-beta-2.4.4-temp' into 'beta-2.4.4'
+2a23447a5 - 陈志祥 - 2024-04-16 17:16:23 +0800 - feat:[1260]国际化 列国际化有字典等转换问题
+53daabd6f - wjh - 2024-04-16 16:26:16 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+c0741c77c - wjh - 2024-04-16 16:24:53 +0800 - feat:[1329]桩订单详情
+996b05cc5 - cnte01027 - 2024-04-16 16:22:39 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240411-story-1329-release1.3.0' into feature/wjh/20240411-story-1329-release1.3.0
+3cb1887be - wuzhiguo - 2024-04-16 16:22:18 +0800 - feat:[1332]时时运营-实时监控相关接口
+ca8afffca - cnte01027 - 2024-04-16 16:05:26 +0800 - Merge branch 'feature/wzg/20240408-story-1260-release-1.3.0' into feature/czx/20240416-beta-2.4.4-temp
+4bb36ea94 - cnte01027 - 2024-04-16 16:02:52 +0800 - Merge remote-tracking branch 'origin/feature/wzg/240411-beta-2.4.4-temp' into feature/wzg/240411-beta-2.4.4-temp
+a152d9c99 - cnte01027 - 2024-04-16 16:02:15 +0800 - Merge branch 'feature/wzg/20240408-story-1260-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+3247b9f49 - cnte01027 - 2024-04-16 15:57:52 +0800 - feat:[1260]国际化 列国际化有字典等转换问题
+19ccacef5 - 林少中 - 2024-04-16 15:17:41 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+d2908be19 - 吴志国 - 2024-04-16 15:17:41 +0800 - feat:[1297]日期条件限制
+cd67f051f - wuzhiguo - 2024-04-16 15:10:56 +0800 - Merge branch 'feature/wzg/20240411-story-1297-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+ffb97bbf6 - 林楷 - 2024-04-16 15:10:22 +0800 - Merge branch 'feature/link/20240416-story-1361-release-1.3.0' into 'alpha-1.3.0'
+6de76b117 - wuzhiguo - 2024-04-16 15:09:44 +0800 - feat:[1297]日期条件限制
+4c8e09cf1 - linkai - 2024-04-16 15:08:18 +0800 - feat:[1361]secp用户新增最后登录时间
+ea1f3d3b1 - 林少中 - 2024-04-16 14:45:49 +0800 - Merge branch 'feature/czx/20240229-1784-faultExport-release-1.3.0' into 'beta-2.4.4'
+aa6c006e8 - 陈志祥 - 2024-04-16 14:45:49 +0800 - feat:[943]ops增大内存
+c9e045252 - cnte01027 - 2024-04-16 14:42:32 +0800 - feat:[943]ops增大内存
+dcb5517fc - 林少中 - 2024-04-16 14:34:47 +0800 - Merge branch 'feature/zxy/20240220-efficiencyDayReport' into 'beta-2.4.4'
+d171142b4 - 张新宇 - 2024-04-16 14:34:47 +0800 - feat:[999]设备故障日报优化
+2e2377625 - 林少中 - 2024-04-16 14:22:50 +0800 - Merge branch 'hcb/device-life-charge-20240315' into 'beta-2.4.4'
+ac1b8f4db - 黄春斌 - 2024-04-16 14:22:50 +0800 - feat:[1082] 寿命监控最高最低温度也需排除0
+177f1f544 - cnte01027 - 2024-04-16 14:18:54 +0800 - feat:[1329]时时运营2.0
+d640c98bd - 黄春斌 - 2024-04-16 13:57:13 +0800 - Merge branch 'hcb/device-life-charge-20240315' into 'alpha-1.3.0'
+ae0d434a9 - hcb - 2024-04-16 13:51:24 +0800 - feat:[1082] 寿命监控最高最低温度也需排除0
+d7a22542e - 林楷 - 2024-04-16 13:50:21 +0800 - Merge branch 'hotfix/link/20240416-bug-9980-release-1.3.0' into 'alpha-1.3.0'
+3878e2a72 - linkai - 2024-04-16 13:49:46 +0800 - fix:[9980]非生产环境的订单，异步通知需要做过滤。修改充值订单号格式，加环境前缀。
+906662656 - 林少中 - 2024-04-16 13:15:09 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+e7d1bfd8f - 吴志国 - 2024-04-16 13:15:09 +0800 - feat:[1030]时时运维修改站点状态接口添加站点状态变更日志
+57e8aa018 - linkai - 2024-04-16 13:14:43 +0800 - Merge branch 'hotfix/link/20240416-bug-9980-release-1.3.0' into alpha-1.3.0
+dbce14274 - wuzhiguo - 2024-04-16 13:14:32 +0800 - Merge branch 'feature/wzg/20240315-story-1030-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+489b5e275 - wuzhiguo - 2024-04-16 13:14:10 +0800 - feat:[1030]时时运维修改站点状态接口添加站点状态变更日志
+08b36b3a1 - wuzhiguo - 2024-04-16 13:12:12 +0800 - Merge branch 'feature/wzg/20240315-story-1030-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+3d97b3f59 - wuzhiguo - 2024-04-16 13:11:32 +0800 - feat:[1030]时时运维修改站点状态接口添加站点状态变更日志
+056659687 - linkai - 2024-04-16 13:09:35 +0800 - fix:[9980]非生产环境的订单，异步通知需要做过滤。修改充值订单号格式，加环境前缀。
+8bd1cbfa9 - linkai - 2024-04-16 13:07:35 +0800 - fix:[9980]非生产环境的订单，异步通知需要做过滤。修改充值订单号格式，加环境前缀。
+2c66d5000 - wuzhiguo - 2024-04-16 13:07:09 +0800 - Merge branch 'feature/wzg/20240315-story-1030-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+c93bcbccd - wuzhiguo - 2024-04-16 13:06:55 +0800 - Merge remote-tracking branch 'origin/beta-2.4.4' into feature/wzg/240411-beta-2.4.4-temp
+fae37cbbc - linkai - 2024-04-16 13:06:49 +0800 - fix:[9980]非生产环境的订单，异步通知需要做过滤。修改充值订单号格式，加环境前缀。
+8e508ec85 - wuzhiguo - 2024-04-16 11:40:17 +0800 - feat:[1030]时时运维修改站点状态接口添加站点状态变更日志
+8687912e6 - linkai - 2024-04-16 11:36:46 +0800 - fix:[9980]非生产环境的订单，异步通知需要做过滤。修改充值订单号格式，加环境前缀。
+509ff0682 - wjh - 2024-04-16 10:55:25 +0800 - feat:[1329]实时监控枪状态
+adedf1ba3 - wjh - 2024-04-16 10:17:15 +0800 - feat:[1329]实时监控枪状态
+f72668814 - 吴志国 - 2024-04-16 10:13:38 +0800 - Merge branch 'feature/wzg/20240415-story-10127-release-1.3.0' into 'alpha-1.3.0'
+0d375caec - wuzhiguo - 2024-04-16 10:13:09 +0800 - fix:[10127]重复时段判断
+87fd50dbe - 林少中 - 2024-04-16 09:50:10 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+d019ba86d - 吴志国 - 2024-04-16 09:50:10 +0800 - feat:[1297]获取soc曲线空指针问题
+9ad2abec3 - wuzhiguo - 2024-04-16 09:46:55 +0800 - Merge branch 'feature/wzg/20240411-story-1297-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+f440be349 - wuzhiguo - 2024-04-16 09:46:45 +0800 - Merge branch 'beta-2.4.4' into feature/wzg/240411-beta-2.4.4-temp
+dadaf1a1d - 林少中 - 2024-04-16 09:46:12 +0800 - Merge branch 'release-1.3.0' into 'master'
+7210354b9 - 林楷 - 2024-04-16 09:46:12 +0800 - Merge branche release 1.3.0 into master
+0f4129650 - wuzhiguo - 2024-04-16 09:45:21 +0800 - feat:[1297]获取soc曲线空指针问题
+e5c9810cc - 林楷 - 2024-04-16 09:41:49 +0800 - Merge branch 'feature/link/20240415-story-1291-release-1.3.0' into 'alpha-1.3.0'
+ef1c2dd15 - 林楷 - 2024-04-16 09:41:49 +0800 - feat:[1291]菜单优化，提供父类的分页接口以及通过分类菜单id获取菜单列表
+e8e4c2651 - 林少中 - 2024-04-16 09:41:40 +0800 - Merge branch 'feature/zxy/20240220-efficiencyDayReport' into 'beta-2.4.4'
+35fe746e1 - 张新宇 - 2024-04-16 09:41:40 +0800 - feat:[999]设备故障日报优化
+c0833385d - linkai - 2024-04-16 09:41:20 +0800 - feat:[1291]菜单优化，提供父类的分页接口以及通过分类菜单id获取菜单列表
+598bff374 - linkai - 2024-04-16 09:36:08 +0800 - feat:[1291]菜单优化，提供父类的分页接口以及通过分类菜单id获取菜单列表
+c5c2e009e - 林少中 - 2024-04-15 20:40:56 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+eba4d4ab6 - 吴志国 - 2024-04-15 20:40:56 +0800 - fix:[10139,10140]1.没有配置额定能量导致报错2.没上报过数据的不参与额定能量计算
+cd9ae66ef - wuzhiguo - 2024-04-15 20:35:28 +0800 - Merge branch 'feature/wzg/20240411-story-1297-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+fefb2f14d - wuzhiguo - 2024-04-15 20:33:36 +0800 - fix:[10139,10140]1.没有配置额定能量导致报错2.没上报过数据的不参与额定能量计算
+d8f2ddb3c - linkai - 2024-04-15 20:03:15 +0800 - feat:[1307]互联互通运营商启动充电接口新增锁，防止并发请求
+0a12f25b3 - 林楷 - 2024-04-15 19:10:10 +0800 - Merge branch 'hotfix/link/20240415-bug-10094-release-1.3.0' into 'alpha-1.3.0'
+616c58dba - linkai - 2024-04-15 19:09:37 +0800 - fix:[10094]用户部门查询问题，库里保存多了个","，方便模糊查询
+ab5540f89 - wuzhiguo - 2024-04-15 19:08:25 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into feature/wzg/20240411-story-1297-release-1.3.0
+d4c475de1 - 林楷 - 2024-04-15 18:59:19 +0800 - Merge branch 'feature/link/20240415-story-1291-release-1.3.0' into 'alpha-1.3.0'
+d7f5d2d49 - 林楷 - 2024-04-15 18:58:46 +0800 - Merge branch 'hotfix/link/20240415-bug-10094-release-1.3.0' into 'alpha-1.3.0'
+ba8e0b1ce - linkai - 2024-04-15 18:58:10 +0800 - fix:[10094]用户部门查询问题，库里保存多了个","，方便模糊查询
+c1ec2c005 - cnte01027 - 2024-04-15 18:26:13 +0800 - feat:[1329]时时运营2.0
+c259f358c - linkai - 2024-04-15 18:23:50 +0800 - feat:[1291]菜单优化，提供父类的分页接口以及通过分类菜单id获取菜单列表
+880e3446f - 林楷 - 2024-04-15 17:21:04 +0800 - Merge branch 'hotfix/link/20240415-bug-10094-release-1.3.0' into 'alpha-1.3.0'
+4b1735b10 - linkai - 2024-04-15 17:19:09 +0800 - fix:[10094]用户部门查询问题，库里保存多了个","，方便模糊查询
+07d414e33 - 张新宇 - 2024-04-15 15:58:31 +0800 - Merge branch 'feature/zxy/20240320-feat-1176-release-1.3.0' into 'alpha-1.3.0'
+98c4fb719 - zhangxinyu - 2024-04-15 15:57:25 +0800 - feat:[1176]【能效日报】表格改造
+552447a75 - 周晨帆 - 2024-04-15 15:48:02 +0800 - Merge branch 'feature/zcf/20240415-1316-alpha-1.3.0' into 'alpha-1.3.0'
+2810c8598 - zcf - 2024-04-15 15:47:19 +0800 - Merge branch 'feature/zcf/20240415-1316-release-1.3.0' into feature/zcf/20240415-1316-alpha-1.3.0
+a7a4cf89a - zcf - 2024-04-15 15:39:39 +0800 - feat:[1316]过滤EMS2.1.1.3.1及以后版本数据无需写入update_ems_index
+f61fd4a76 - 陈志祥 - 2024-04-15 15:38:42 +0800 - Merge branch 'feature/czx/20240321-1152-onlineLog-release-1.3.0' into 'alpha-1.3.0'
+ceffb16df - zcf - 2024-04-15 15:38:28 +0800 - feat:[1316]过滤EMS2.1.1.3.1及以后版本数据无需写入update_ems_index
+5f04cd3d7 - cnte01027 - 2024-04-15 15:38:16 +0800 - feat:[1152]上下线日志分页调整
+7ed4b59ee - 林少中 - 2024-04-15 15:32:43 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+0a9be9011 - 吴志国 - 2024-04-15 15:32:43 +0800 - feat:[1297]工商业储能优化
+1e7b92cc5 - 张新宇 - 2024-04-15 15:30:45 +0800 - Merge branch 'feature/zxy/20240320-feat-1176-release-1.3.0' into 'alpha-1.3.0'
+52ab5597d - zhangxinyu - 2024-04-15 15:30:24 +0800 - feat:[1176]【能效日报】表格改造
+d106f6f54 - 张新宇 - 2024-04-15 14:59:34 +0800 - Merge branch 'feature/zxy/20240320-feat-1176-release-1.3.0' into 'alpha-1.3.0'
+df95fd99a - zhangxinyu - 2024-04-15 14:58:22 +0800 - feat:[1176]【能效日报】表格改造
+448699a4b - 陈志祥 - 2024-04-15 14:57:14 +0800 - Merge branch 'feature/czx/20240321-1152-onlineLog-release-1.3.0' into 'alpha-1.3.0'
+9f3d25f1f - cnte01027 - 2024-04-15 14:56:46 +0800 - feat:[1152]上下线日志状态名调整
+c98aafdbe - zhangxinyu - 2024-04-15 14:52:35 +0800 - feat:[1176]【能效日报】表格改造
+254e999c9 - wjh - 2024-04-15 14:46:29 +0800 - feat:[1329]实时监控枪状态
+297fc97e5 - wanghao - 2024-04-15 14:31:48 +0800 - feat:[1325]对时功能
+f48049dd1 - wuzhiguo - 2024-04-15 14:07:52 +0800 - Merge branch 'feature/wzg/20240411-story-1297-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+314305beb - 陈志祥 - 2024-04-15 14:07:33 +0800 - Merge branch 'feature/czx/20240415-alpha-1.3.0-temp' into 'alpha-1.3.0'
+8bbb66647 - cnte01027 - 2024-04-15 14:06:01 +0800 - Merge branch 'feature/czx/20240321-1152-onlineLog-release-1.3.0' into feature/czx/20240415-alpha-1.3.0-temp
+de647a2fe - wuzhiguo - 2024-04-15 14:05:09 +0800 - Merge branch 'beta-2.4.4' into feature/wzg/240411-beta-2.4.4-temp
+b0fe6ca12 - 林少中 - 2024-04-15 13:31:18 +0800 - Merge branch 'hotfix/zcf/20240412-bug-10001-release-1.3.0' into 'beta-2.4.4'
+877b955dd - 周晨帆 - 2024-04-15 13:31:18 +0800 - fix:[10001]运维监控-版本管控品类下拉查询
+403e90419 - linkai - 2024-04-15 13:19:33 +0800 - fix:[10101]修复充电账单中vin码为""，需要保存为""，不能保存为null,防止和数仓统计充电车辆数量不一致问题
+2fa9f00a4 - 周晨帆 - 2024-04-15 11:23:57 +0800 - Merge branch 'feature/240401-1210-release-1.3.0' into 'alpha-1.3.0'
+d9ee93caf - zcf - 2024-04-15 11:23:25 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into feature/240401-1210-release-1.3.0
+db74a459d - 林少中 - 2024-04-15 11:21:26 +0800 - Merge branch 'pre-release-omp-v1.0.4' into 'release-1.3.0'
+f234e6d1f - 林少中 - 2024-04-15 11:21:26 +0800 - Merge branche pre-release-omp-v1.0.4 into release-1.3.0
+febc4f59a - 林少中 - 2024-04-15 11:08:32 +0800 - Merge branch 'pre-release-omp-v1.0.4' into 'beta-2.4.4'
+3fd718445 - 林少中 - 2024-04-15 11:08:32 +0800 - Merge branch pre-release-omp-v1.0.4 into beta-2.4.4
+6cd92649b - linshaozhong - 2024-04-15 11:06:01 +0800 - feat:[919,963,1113,1114]合并omp-v1.0.4内容至发布分支
+aa43857d5 - 吴志国 - 2024-04-15 10:32:54 +0800 - Merge branch 'feature/wzg/20240415-story-9799-release-1.3.0' into 'alpha-1.3.0'
+ff646cae6 - wuzhiguo - 2024-04-15 10:32:12 +0800 - fix:[9799]削峰填谷工作模式设置时间段重复能正常保存不会失败问题
+68e2ab01a - wuzhiguo - 2024-04-15 10:31:14 +0800 - fix:[9799]削峰填谷工作模式设置时间段重复能正常保存不会失败问题
+683ee19d4 - linshaozhong - 2024-04-15 10:30:30 +0800 - Merge remote-tracking branch 'origin/feature/wzg/20240323-story-1113_1114-release-1.3.0-919_963_tmp' into pre-release-omp-v1.0.4
+b5c187f49 - 周晨帆 - 2024-04-15 10:23:29 +0800 - Merge branch 'hotfix/zcf/20240415-bug-10001-alpha-1.3.0' into 'alpha-1.3.0'
+fcad8f3ac - zcf - 2024-04-15 10:23:03 +0800 - Merge branch 'hotfix/zcf/20240412-bug-10001-release-1.3.0' into hotfix/zcf/20240415-bug-10001-alpha-1.3.0
+16ffd8440 - zcf - 2024-04-15 10:19:22 +0800 - fix:[10001]运维监控-版本管控品类下拉查询
+20cbe0422 - 林少中 - 2024-04-15 09:52:21 +0800 - Merge branch 'cherry-pick-21d3c981' into 'pre-release-omp-v1.0.4'
+077d3575e - 林少中 - 2024-04-15 09:52:21 +0800 - Merge branch 'feature/czx/20240320-2071-release-1.3.0' into 'beta-2.4.4'
+19cabe1d8 - 林少中 - 2024-04-15 09:52:03 +0800 - Merge branch 'feature/czx/20240320-2071-release-1.3.0' into 'beta-2.4.4'
+964c9cf13 - 林少中 - 2024-04-15 09:17:47 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+df98bb169 - 吴志国 - 2024-04-15 09:17:47 +0800 - feat:[1015]充电桩屏蔽推送枪状态
+869ce4651 - wjh - 2024-04-15 08:59:46 +0800 - feat:[1089]本地处理历史订单接口:电动福建推送历史订单
+383a889e2 - 林少中 - 2024-04-15 08:41:05 +0800 - Merge branch 'release-1.3.0' into 'master'
+2f2dad044 - 林楷 - 2024-04-15 08:41:05 +0800 - Merge branch 'release-1.3.0' into master
+e01f71df1 - 林少中 - 2024-04-12 16:41:53 +0800 - Merge branch 'hotfix/zcf/20240411-bug-9999-release-1.3.0' into 'beta-2.4.4'
+c68ce8d3f - 周晨帆 - 2024-04-12 16:41:53 +0800 - fix:[9999]物联中心-监控运维-版本管控，数据展示问题
+17803b31e - wuzhiguo - 2024-04-12 16:39:51 +0800 - Merge branch 'feature/wzg/20240312-story-1015-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+1f8a114ae - wuzhiguo - 2024-04-12 16:39:41 +0800 - Merge remote-tracking branch 'origin/beta-2.4.4' into feature/wzg/240411-beta-2.4.4-temp
+a94150035 - wuzhiguo - 2024-04-12 16:38:09 +0800 - feat:[1015]充电桩屏蔽推送枪状态
+33470371d - 林少中 - 2024-04-12 16:01:30 +0800 - Merge branch 'feature/wzg/20240408-story-1260-release-1.3.0' into 'beta-2.4.4'
+1b602e2d9 - 吴志国 - 2024-04-12 16:01:30 +0800 - feat:[1260]mms国际化优化
+84d419ea7 - 陈志祥 - 2024-04-12 15:29:04 +0800 - Merge branch 'feature/czx/20240412-alpha-1.3.0-temp' into 'alpha-1.3.0'
+c964d31d6 - cnte01027 - 2024-04-12 15:28:24 +0800 - Merge branch 'feature/czx/20240102-1092(1174)-AISendToEms-release-1.3.0' into feature/czx/20240412-alpha-1.3.0-temp
+959e8b3e1 - 吴志国 - 2024-04-12 14:56:28 +0800 - Merge branch 'feature/wzg/20240411-story-1297-release-1.3.0' into 'alpha-1.3.0'
+94452a4e8 - wuzhiguo - 2024-04-12 14:56:00 +0800 - feat:[1297]工商业储能优化
+35ad77c27 - 周晨帆 - 2024-04-12 14:50:36 +0800 - Merge branch 'hotfix/zcf/20240411-bug-9999-release-1.3.0' into 'alpha-1.3.0'
+26d6b6cb1 - zcf - 2024-04-12 14:50:11 +0800 - fix:[9999]空白页
+2afb36100 - wuzhiguo - 2024-04-12 14:19:03 +0800 - Merge remote-tracking branch 'origin/feature/wzg/20240408-story-1260-release-1.3.0' into feature/wzg/20240408-story-1260-release-1.3.0
+ce033c07d - wuzhiguo - 2024-04-12 14:18:51 +0800 - feat:[1260]国际化字典配置
+fe94e4f9d - 周晨帆 - 2024-04-12 13:33:34 +0800 - Merge branch 'hotfix/zcf/20240411-bug-9999-release-1.3.0' into 'alpha-1.3.0'
+44cfdf9a2 - zcf - 2024-04-12 13:31:56 +0800 - fix:[9999]空白页
+153462313 - 林少中 - 2024-04-12 13:31:15 +0800 - Merge branch 'feature/tmp/V2.4.3.2-Vomp-1.0.4-release-1.3.0' into 'release-1.3.0'
+bbd147cf8 - 林少中 - 2024-04-12 13:31:15 +0800 - Merge branche Feature/tmp/v2.4.3.2 vomp 1.0.4 release 1.3.0 into release-1.3.0
+340094a99 - 林少中 - 2024-04-12 13:30:32 +0800 - Merge branch 'release-1.3.0' into 'feature/tmp/V2.4.3.2-Vomp-1.0.4-release-1.3.0'
+86ab7c4e9 - 林少中 - 2024-04-12 13:23:19 +0800 - Merge branch 'cherry-pick-629caf63-3' into 'feature/tmp/V2.4.3.2-Vomp-1.0.4-release-1.3.0'
+34b38d406 - 林少中 - 2024-04-12 13:23:19 +0800 - Merge branch 'feature/wjh/20240412-beta2.4.4-temp' into 'beta-2.4.4'
+6a04993ed - 林少中 - 2024-04-12 13:23:05 +0800 - Merge branch 'feature/wjh/20240412-beta2.4.4-temp' into 'beta-2.4.4'
+b6739d843 - 林少中 - 2024-04-12 13:22:24 +0800 - Merge branch 'cherry-pick-2eaa29ac-2' into 'feature/tmp/V2.4.3.2-Vomp-1.0.4-release-1.3.0'
+adc3fc733 - 林少中 - 2024-04-12 13:22:24 +0800 - Merge branch 'feature/wjh/20240412-beta2.4.4-temp' into 'beta-2.4.4'
+363929577 - 林少中 - 2024-04-12 13:22:11 +0800 - Merge branch 'feature/wjh/20240412-beta2.4.4-temp' into 'beta-2.4.4'
+8fab446a8 - 林少中 - 2024-04-12 13:20:54 +0800 - Merge branch 'feature/wjh/20240412-beta2.4.4-temp' into 'beta-2.4.4'
+4e2088b9f - 林少中 - 2024-04-12 13:14:47 +0800 - Merge branch 'feature/wjh/20240412-beta2.4.4-temp' into 'beta-2.4.4'
+629caf63f - 林少中 - 2024-04-12 13:14:30 +0800 - Merge branch 'feature/wjh/20240412-beta2.4.4-temp' into 'beta-2.4.4'
+2e55419af - 吴景华 - 2024-04-12 13:14:30 +0800 - feat:[1089]电动福建修复非互联互通启动的订单charge_status为空的问题
+41795a4ca - wjh - 2024-04-12 13:13:39 +0800 - feat:[1089]电动福建修复非互联互通启动的订单charge_status为空的问题
+141016e1a - wjh - 2024-04-12 13:12:03 +0800 - Merge branch 'beta-2.4.4' into feature/wjh/20240412-beta2.4.4-temp
+157538336 - wjh - 2024-04-12 13:07:50 +0800 - Merge branch 'feature/wjh/20240314-1089-electricFuJian-release1.3.0' into feature/wjh/20240412-beta2.4.4-temp
+fd111a536 - wjh - 2024-04-12 13:07:15 +0800 - feat:[1089]电动福建修复非互联互通启动的订单charge_status为空的问题
+d7cc68531 - cnte01027 - 2024-04-12 11:36:38 +0800 - feat:[1260]国际化 列国际化有字典等转换问题
+c4836a6bc - cnte01027 - 2024-04-12 11:35:58 +0800 - Merge remote-tracking branch 'origin/feature/wzg/20240408-story-1260-release-1.3.0' into feature/wzg/20240408-story-1260-release-1.3.0
+cb477cff4 - 林少中 - 2024-04-12 11:23:57 +0800 - Merge branch 'feature/wjh/20240412-beta2.4.4-temp' into 'beta-2.4.4'
+2eaa29ac4 - 林少中 - 2024-04-12 11:22:29 +0800 - Merge branch 'feature/wjh/20240412-beta2.4.4-temp' into 'beta-2.4.4'
+b58994208 - 吴景华 - 2024-04-12 11:22:29 +0800 - feat:[1089]电动福建修复charge_status为空的问题
+fbafc677b - wjh - 2024-04-12 11:21:50 +0800 - Merge branch 'feature/wjh/20240314-1089-electricFuJian-release1.3.0' into feature/wjh/20240412-beta2.4.4-temp
+fdee6bad0 - wjh - 2024-04-12 11:21:22 +0800 - feat:[1089]电动福建修复charge_status为空的问题
+3e11c3c55 - wjh - 2024-04-12 11:18:31 +0800 - Merge branch 'feature/wjh/20240314-1089-electricFuJian-release1.3.0' into feature/wjh/20240412-beta2.4.4-temp
+38e32ac7e - wjh - 2024-04-12 11:10:16 +0800 - feat:[1089]电动福建修复charge_status为空的问题
+d9fdcf963 - wjh - 2024-04-12 10:55:18 +0800 - Merge branch 'release-1.3.0' into feature/wjh/20240314-1089-electricFuJian-release1.3.0
+b11b3f815 - 吴志国 - 2024-04-12 10:31:33 +0800 - Merge branch 'feature/wzg/2400412-alpha-1.3.0-temp' into 'alpha-1.3.0'
+fe028d766 - wuzhiguo - 2024-04-12 10:27:14 +0800 - Merge remote-tracking branch 'origin/feature/wzg/240409-beta-2.4.4-temp' into feature/wzg/2400412-alpha-1.3.0-temp
+bd2c7847b - 吴志国 - 2024-04-12 10:07:00 +0800 - Merge branch 'feature/wzg/20240411-story-1297-release-1.3.0' into 'alpha-1.3.0'
+23aea9f01 - wuzhiguo - 2024-04-12 10:02:44 +0800 - feat:[1297]工商业储能优化
+31e43f3f6 - 林少中 - 2024-04-12 09:43:25 +0800 - Merge branch 'feature/wjh/20240408-story-1258-release1.3.0' into 'beta-2.4.4'
+8f21bbc6e - 吴景华 - 2024-04-12 09:43:25 +0800 - feat:[1258]充电运营-用户管理-体验金管理：新增对体验金的账户管理
+786f4bf0c - wjh - 2024-04-12 09:38:38 +0800 - Merge branch 'release-1.3.0' into feature/wjh/20240408-story-1258-release1.3.0
+813892c41 - wjh - 2024-04-12 09:38:12 +0800 - feat:[1329]时时运营V2.0
+e071df5e1 - 林少中 - 2024-04-12 09:37:12 +0800 - Merge branch 'feature/wzg/240409-beta-2.4.4-temp' into 'beta-2.4.4'
+6ac3dc93e - 吴志国 - 2024-04-12 09:37:12 +0800 - feat:[1113,1114]策略分页查询添加设备ems和平台策略对比结果
+d5b570e23 - wuzhiguo - 2024-04-12 09:26:33 +0800 - feat:[1113,1114]策略分页查询添加设备ems和平台策略对比结果
+5d695536f - 吴志国 - 2024-04-12 09:13:52 +0800 - Merge branch 'feature/wzg/2400412-alpha-1.3.0-temp' into 'alpha-1.3.0'
+42f6eb541 - wuzhiguo - 2024-04-12 09:13:08 +0800 - Merge branch 'feature/wzg/20240411-story-1297-release-1.3.0' into feature/wzg/2400412-alpha-1.3.0-temp
+2d815b9ba - wuzhiguo - 2024-04-11 21:00:54 +0800 - feat:[1297]工商业储能优化
+e198f6f9f - linkai - 2024-04-11 20:27:29 +0800 - feat:[1260]国际化1、活动邀请导出文件名和sheet名 2、异常卡单国际化
+606986f01 - 林少中 - 2024-04-11 19:38:16 +0800 - Merge branch 'feature/tmp/V2.4.3.2-Vomp-1.0.4-release-1.3.0' into 'release-1.3.0'
+345d8e42a - 林少中 - 2024-04-11 19:38:16 +0800 - Merge branche Feature/tmp/v2.4.3.2 vomp 1.0.4 release 1.3.0 into release-1.3.0
+c1c05061d - 林少中 - 2024-04-11 19:36:32 +0800 - Merge branch 'cherry-pick-6352e72b' into 'feature/tmp/V2.4.3.2-Vomp-1.0.4-release-1.3.0'
+9f2dc0640 - 林少中 - 2024-04-11 19:36:32 +0800 - Merge branch 'feature/wjh/20240314-1089-electricFuJian-release1.3.0' into 'beta-2.4.4'
+ee9c25bfe - 林少中 - 2024-04-11 19:36:20 +0800 - Merge branch 'feature/wjh/20240314-1089-electricFuJian-release1.3.0' into 'beta-2.4.4'
+23dea24e0 - 林少中 - 2024-04-11 18:40:15 +0800 - Merge branch 'feature/tmp/V2.4.3.2-Vomp-1.0.4-release-1.3.0' into 'release-1.3.0'
+e5294d0f3 - 林少中 - 2024-04-11 18:40:15 +0800 - Merge branch Feature/tmp/v2.4.3.2 vomp 1.0.4 release 1.3.0 into release-1.3.0
+92408517a - 林少中 - 2024-04-11 18:37:10 +0800 - Merge branch 'cherry-pick-6cc590af-2' into 'feature/tmp/V2.4.3.2-Vomp-1.0.4-release-1.3.0'
+100fed2cb - 林少中 - 2024-04-11 18:37:10 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+26214485e - 林少中 - 2024-04-11 18:36:50 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+5c4b0bf76 - wanghao - 2024-04-11 18:33:07 +0800 - ci:
+7b261dca3 - 王豪 - 2024-04-11 18:31:23 +0800 - Merge branch 'feature/wangh/20240325-1183-complexPropertyConf' into 'alpha-1.3.0'
+379e9d81d - wanghao - 2024-04-11 18:31:09 +0800 - feat:[1183]复杂数组数据配置界面
+0d73178e9 - 王豪 - 2024-04-11 18:30:21 +0800 - Merge branch 'feature/wangh/20240325-1183-complexPropertyConf' into 'alpha-1.3.0'
+573376309 - 林少中 - 2024-04-11 18:25:02 +0800 - Merge branch 'cherry-pick-6cc590af' into 'feature/wzg/20240218-story-919_963-release-1.3.0'
+9ac1435dd - 林少中 - 2024-04-11 18:25:02 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+21eb19040 - 林少中 - 2024-04-11 18:24:48 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+80d6667d7 - wanghao - 2024-04-11 18:22:07 +0800 - feat:[1183]复杂数组数据配置界面
+8faf0c32b - cnte01027 - 2024-04-11 17:26:11 +0800 - feat:[1260]国际化 列国际化有字典等转换问题
+48e3a8af6 - wanghao - 2024-04-11 17:19:28 +0800 - Merge remote-tracking branch 'origin/alpha-1.3.0' into alpha-1.3.0
+5147e193d - wanghao - 2024-04-11 17:19:20 +0800 - ci:
+ef08d1e94 - 周晨帆 - 2024-04-11 17:12:19 +0800 - Merge branch 'hotfix/zcf/20240411-bug-9999-alpha-1.3.0' into 'alpha-1.3.0'
+32089e155 - 周晨帆 - 2024-04-11 17:12:19 +0800 - fix:[9999]品类过滤无效
+9b01a7fcd - zcf - 2024-04-11 17:11:45 +0800 - Merge branch 'hotfix/zcf/20240411-bug-9999-release-1.3.0' into hotfix/zcf/20240411-bug-9999-alpha-1.3.0
+932b0f1de - zcf - 2024-04-11 16:55:21 +0800 - fix:[9999]品类过滤无效
+6cc590af4 - 林少中 - 2024-04-11 16:11:25 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+4a6c12946 - 吴志国 - 2024-04-11 16:11:25 +0800 - feat:[1151]新增站点限制乡镇必填
+7060cab3e - wuzhiguo - 2024-04-11 16:08:21 +0800 - Merge remote-tracking branch 'origin/beta-2.4.4' into feature/wzg/240411-beta-2.4.4-temp
+b119ef0a5 - wuzhiguo - 2024-04-11 16:08:03 +0800 - Merge remote-tracking branch 'origin/feature/wzg/20240411-story-1151-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+b518deddc - wuzhiguo - 2024-04-11 16:01:56 +0800 - feat:[1151]新增站点限制乡镇必填
+0a18607de - 王豪 - 2024-04-11 15:44:14 +0800 - Merge branch 'feature/wangh/20240325-1183-complexPropertyConf' into 'alpha-1.3.0'
+272fb09ac - wanghao - 2024-04-11 15:43:17 +0800 - feat:[1183]复杂数组数据配置界面
+96877a002 - wanghao - 2024-04-11 15:42:29 +0800 - feat:[1183]复杂数组数据配置界面
+94635b1ae - 林少中 - 2024-04-11 14:08:26 +0800 - Merge branch 'hotfix/zcf/20240409-bug-9968-release-1.3.0' into 'beta-2.4.4'
+7ed774ca3 - 周晨帆 - 2024-04-11 14:08:26 +0800 - fix:[9968]vin超过五十位截取五十位
+85e422b96 - 周晨帆 - 2024-04-11 14:00:55 +0800 - Merge branch 'hotfix/zcf/20240409-bug-9968-release-1.3.0' into 'alpha-1.3.0'
+4d4bdfa23 - zcf - 2024-04-11 14:00:37 +0800 - fix:[9968]vin超过五十位截取五十位
+baafc44fb - cnte01027 - 2024-04-11 13:16:25 +0800 - feat:[1249]EOL自动建站配置参数
+a0c5d3808 - 林少中 - 2024-04-11 11:14:43 +0800 - Merge branch 'hotfix/zcf/20240409-bug-9967-release-1.3.0' into 'beta-2.4.4'
+ec57d8100 - 周晨帆 - 2024-04-11 11:14:43 +0800 - fix:[9967]优化，没传订单号的时候就返回
+726f75701 - 林少中 - 2024-04-11 10:51:36 +0800 - Merge branch 'feature/240411-1146-beta-2.4.4' into 'beta-2.4.4'
+ec9cf378b - 周晨帆 - 2024-04-11 10:51:35 +0800 - feat:[1146]临时处理特殊情况数据（V2.4.4）
+72b5a1209 - 林少中 - 2024-04-11 10:49:26 +0800 - Merge branch 'feature/wzg/240411-beta-2.4.4-temp' into 'beta-2.4.4'
+73514a35f - 吴志国 - 2024-04-11 10:49:26 +0800 - feat:[1030,1015](1030)站点状态变更日志;(1015)充电桩屏蔽功能，海良的不需要实现（V2.4.4）
+196fb507e - zcf - 2024-04-11 10:48:01 +0800 - Merge branch 'feature/240401-1146-release-1.3.0' into feature/240411-1146-beta-2.4.4
+c146a2f6c - 周晨帆 - 2024-04-11 10:45:28 +0800 - Merge branch 'feature/240401-1146-release-1.3.0' into 'alpha-1.3.0'
+27590bca9 - zcf - 2024-04-11 10:45:04 +0800 - feat:[1146]临时处理特殊情况数据
+8fc8bdeed - wuzhiguo - 2024-04-11 10:41:23 +0800 - Merge branch 'feature/wzg/20240312-story-1015-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+4865aaba5 - wuzhiguo - 2024-04-11 10:40:05 +0800 - Merge branch 'feature/wzg/20240315-story-1030-release-1.3.0' into feature/wzg/240411-beta-2.4.4-temp
+d453b74c4 - 林少中 - 2024-04-11 10:09:03 +0800 - Merge branch 'feature/wzg/240409-beta-2.4.4-temp' into 'beta-2.4.4'
+b5eb9611c - 吴志国 - 2024-04-11 10:09:03 +0800 - feat:[1113,1114]新增站点单元重复校验,【策略查询】EMS版本为2.2以上时，平台发出查询峰谷平参数错误
+c6bbccab2 - wuzhiguo - 2024-04-11 10:06:25 +0800 - Merge remote-tracking branch 'origin/beta-2.4.4' into feature/wzg/240409-beta-2.4.4-temp
+d0a545db4 - wuzhiguo - 2024-04-11 10:04:55 +0800 - feat:[1113,1114]新增站点单元重复校验
+83afb1adc - 陈志祥 - 2024-04-11 09:57:21 +0800 - Merge branch 'feature/czx/20240411-1238-ssjUpgrade-release-1.3.0' into 'alpha-1.3.0'
+5c97cae55 - cnte01027 - 2024-04-11 09:56:41 +0800 - feat:[1238]ssj查询版本
+32e4713c4 - 林少中 - 2024-04-11 09:49:54 +0800 - Merge branch 'feature/tmp/V2.4.3.2-Vomp-1.0.4-release-1.3.0' into 'release-1.3.0'
+9e63e7b19 - 林少中 - 2024-04-11 09:49:53 +0800 - Merge branch Feature/tmp/v2.4.3.2 vomp 1.0.4 release 1.3.0 into release-1.3.0
+863cc84d3 - wuzhiguo - 2024-04-11 09:37:58 +0800 - feat:[1113,1114]【策略查询】EMS版本为2.2以上时，平台发出查询峰谷平参数错误
+9dbfd64c4 - cnte01027 - 2024-04-11 09:33:33 +0800 - feat:[1249]EOL自动建站参数配置
+78a7e6c5c - 林少中 - 2024-04-11 09:02:44 +0800 - Merge branch 'cherry-pick-784e260c-2' into 'feature/tmp/V2.4.3.2-Vomp-1.0.4-release-1.3.0'
+a9696a872 - 林少中 - 2024-04-11 09:02:44 +0800 - Merge branch 'feature/wjh/20240409-story-1284-release1.3.0' into 'beta-2.4.4'
+ad3ccac2e - 林少中 - 2024-04-11 09:02:26 +0800 - Merge branch 'feature/wjh/20240409-story-1284-release1.3.0' into 'beta-2.4.4'
+4e34eb6b8 - 林少中 - 2024-04-11 09:01:49 +0800 - Merge branch 'cherry-pick-c897bc30' into 'feature/tmp/V2.4.3.2-Vomp-1.0.4-release-1.3.0'
+c64614c4c - 林少中 - 2024-04-11 09:01:49 +0800 - Merge branch 'feature/wjh/20240407-story-2314-releae1.3.0' into 'beta-2.4.4'
+b495c6399 - 林少中 - 2024-04-11 09:00:56 +0800 - Merge branch 'feature/wjh/20240407-story-2314-releae1.3.0' into 'beta-2.4.4'
+d5e9a6040 - 林少中 - 2024-04-10 21:11:07 +0800 - Merge branch 'feature/wzg/240409-beta-2.4.4-temp' into 'beta-2.4.4'
+56d49b8ad - 吴志国 - 2024-04-10 21:11:06 +0800 - feat:[1113,1114]查询策略配置、微网新增校验
+d5eaf90b1 - wuzhiguo - 2024-04-10 21:07:53 +0800 - feat:[1113,1114]查询策略配置
+798456a0a - 林少中 - 2024-04-10 20:51:35 +0800 - Merge branch 'feature/wjh/20240409-story-1284-release1.3.0' into 'beta-2.4.4'
+9f29f76a1 - wuzhiguo - 2024-04-10 20:28:38 +0800 - feat:[1113,1114]微网新增校验
+8bfaf930f - wuzhiguo - 2024-04-10 20:08:27 +0800 - feat:[1015]充电桩屏蔽功能，海良的不需要实现
+50ff549b9 - wuzhiguo - 2024-04-10 20:05:04 +0800 - feat:[1030]站点状态变更日志
+6e04bfc75 - 林少中 - 2024-04-10 19:10:43 +0800 - Merge branch 'feature/wzg/240409-beta-2.4.4-temp' into 'beta-2.4.4'
+b4839d790 - 吴志国 - 2024-04-10 19:10:43 +0800 - fix:[10080]单元管理新增策略报错
+5cfc34ac5 - wuzhiguo - 2024-04-10 18:55:31 +0800 - Merge remote-tracking branch 'origin/beta-2.4.4' into feature/wzg/240409-beta-2.4.4-temp
+276d64f97 - wuzhiguo - 2024-04-10 18:53:18 +0800 - fix:[10080]单元管理新增策略报错
+784e260c0 - 林少中 - 2024-04-10 18:50:19 +0800 - Merge branch 'feature/wjh/20240409-story-1284-release1.3.0' into 'beta-2.4.4'
+b84d2a7fd - 吴景华 - 2024-04-10 18:50:19 +0800 - feat:[1284]【后端开发】网页版账号注销：新增一个网页版账号注销功能支持海外APP上谷歌市场
+18f1c6263 - 林少中 - 2024-04-10 17:27:44 +0800 - Merge branch 'feature/wzg/240409-beta-2.4.4-temp' into 'beta-2.4.4'
+ab03d634c - 吴志国 - 2024-04-10 17:27:44 +0800 - fix:[10075]【OMPV1.0.4】【策略设置】微网单元新增 策略未显示
+991398cd5 - wuzhiguo - 2024-04-10 17:14:42 +0800 - fix:[10075]【OMPV1.0.4】【策略设置】微网单元新增 策略未显示
+cd5187c99 - wanghao - 2024-04-10 16:36:38 +0800 - feat:[1241]ota 添加定时升级和业务升级功能
+d9b672a01 - 林少中 - 2024-04-10 15:52:21 +0800 - Merge branch 'feature/link/20240409-story-1155-v2-release-1.3.0' into 'beta-2.4.4'
+512d08c0d - 林楷 - 2024-04-10 15:52:21 +0800 - feat:[1155]优化预付费流程 加锁：解决初始化退款和启动充电冲突问题 避免退款又启动充电（V2.4.4）
+9c07c0dab - 林少中 - 2024-04-10 15:40:43 +0800 - Merge branch 'feature/wzg/240409-beta-2.4.4-temp' into 'beta-2.4.4'
+400502f66 - 吴志国 - 2024-04-10 15:40:43 +0800 - feat:[919,1113,1114](919)策略下发跟随系数赋值错误;(1113,1114)1.策略分页查询的微网did转换、2.策略分页列表添加设备上报记录
+80cfdd9de - wuzhiguo - 2024-04-10 15:36:51 +0800 - Merge remote-tracking branch 'origin/beta-2.4.4' into feature/wzg/240409-beta-2.4.4-temp
+a323b61a5 - 林楷 - 2024-04-10 15:36:47 +0800 - Merge branch 'feature/link/20240409-story-1155-v2-release-1.3.0' into 'alpha-1.3.0'
+118c3464d - linkai - 2024-04-10 15:35:26 +0800 - feat:[1155]优化预付费流程 加锁：解决初始化退款和启动充电冲突问题 避免退款又启动充电
+128842dce - 林楷 - 2024-04-10 15:26:09 +0800 - Merge branch 'feature/link/20240409-story-1155-v2-release-1.3.0' into 'alpha-1.3.0'
+bb661efa3 - linkai - 2024-04-10 15:25:09 +0800 - feat:[1155]优化预付费流程 加锁：解决初始化退款和启动充电冲突问题 避免退款又启动充电
+1d0c35185 - wuzhiguo - 2024-04-10 15:03:53 +0800 - feat:[1113,1114]1.策略分页查询的微网did转换、2.策略分页列表添加设备上报记录
+21343d03f - wuzhiguo - 2024-04-10 14:00:55 +0800 - feat:[919]策略下发跟随系数赋值错误
+7d2c12a63 - 林少中 - 2024-04-10 13:08:17 +0800 - Merge branch 'feature/wzg/240409-beta-2.4.4-temp' into 'beta-2.4.4'
+84017717c - 吴志国 - 2024-04-10 13:08:17 +0800 - feat:[1113,1114]策略获取当前微网信息优化
+3830f762a - wuzhiguo - 2024-04-10 12:15:06 +0800 - feat:[1113,1114]策略获取当前微网信息优化
+aa8fe810a - wuzhiguo - 2024-04-10 12:15:05 +0800 - feat:[1113,1114]策略获取当前微网信息优化
+c897bc30f - 林少中 - 2024-04-10 11:21:08 +0800 - Merge branch 'feature/wjh/20240407-story-2314-releae1.3.0' into 'beta-2.4.4'
+92710de16 - 林楷 - 2024-04-10 11:21:08 +0800 - feat:[1205]钉钉推送-电量对账结果（V22.4.3.2）
+91fd1a56b - wjh - 2024-04-10 11:05:30 +0800 - Merge branch 'release-1.3.0' into feature/wjh/20240407-story-2314-releae1.3.0
+a2e1648fc - 吴景华 - 2024-04-09 19:34:08 +0800 - Merge branch 'feature/wjh/20240409-story-1213-release1.3.0' into 'alpha-1.3.0'
+ca91d05dc - wjh - 2024-04-09 19:33:14 +0800 - feat:[1213]【互联互通】打印充电小票接口返回“空”，不报错
+042f07447 - 林少中 - 2024-04-09 18:47:51 +0800 - Merge branch 'release-1.3.0' into 'master'
+85314facf - 林楷 - 2024-04-09 18:47:51 +0800 - Merge branch 'release-1.3.0' into 'master'
+8465f1180 - linkai - 2024-04-09 18:38:32 +0800 - feat:[1155]优化预付费流程 支付成功后，自动启动充电
+60c56e6cf - 吴景华 - 2024-04-09 18:36:53 +0800 - Merge branch 'feature/wjh/20240409-alpha1.3.0-temp' into 'alpha-1.3.0'
+d4ee548ea - wjh - 2024-04-09 18:32:53 +0800 - Merge branch 'feature/wjh/20240409-story-1284-release1.3.0' into feature/wjh/20240409-alpha1.3.0-temp
+c9215bc03 - wjh - 2024-04-09 18:28:27 +0800 - feat:[1284]后端开发】网页版账号注销：新增一个网页版账号注销功能支持海外APP上谷歌市场
+4cbd3875f - 林少中 - 2024-04-09 17:03:44 +0800 - Merge branch 'feature/wzg/240409-beta-2.4.4-temp' into 'beta-2.4.4'
+53afa1254 - 吴志国 - 2024-04-09 17:03:44 +0800 - feat:[919]如果有多个bms总柜默认走bms-1下发
+e247cad98 - wuzhiguo - 2024-04-09 16:48:53 +0800 - Merge branch 'beta-2.4.4' into feature/wzg/240409-beta-2.4.4-temp
+34b50a11a - 陈志祥 - 2024-04-09 16:20:33 +0800 - Merge branch 'feature/czx/20240409-alpha-1.3.0-temp' into 'alpha-1.3.0'
+c40f480e8 - cnte01027 - 2024-04-09 16:17:01 +0800 - Merge branch 'feature/czx/20240409-1281-deviceConfig-release-1.3.0' into feature/czx/20240409-alpha-1.3.0-temp
+137566973 - wuzhiguo - 2024-04-09 16:14:53 +0800 - feat:[919]如果有多个bms总柜默认走bms-1下发
+1f7cd0720 - cnte01027 - 2024-04-09 16:14:24 +0800 - feat:[1281]设备管理-设备列表-配置管理，数组格式判断调整
+8718f0b36 - 林少中 - 2024-04-09 15:33:42 +0800 - Merge branch 'feature/wzg/240409-beta-2.4.4-temp' into 'beta-2.4.4'
+889a9e532 - 吴志国 - 2024-04-09 15:33:42 +0800 - feat:[919,1113,1114](919)特殊情况：如果有多个bms总柜默认走ems模块下发; (1113,1114)微网策略
+b1fd5f534 - 林少中 - 2024-04-09 15:21:07 +0800 - Merge branch 'feature/wzg/20240315-story-1030-release-1.3.0' into 'beta-2.4.4'
+5016b8396 - 林楷 - 2024-04-09 15:21:06 +0800 - feat:[982] 水冷机组状态判断非正常运营状态（V2.4.4）
+1eb5f1ae5 - wuzhiguo - 2024-04-09 15:18:08 +0800 - feat:[1113,1114]微网策略
+ee520c74d - 林少中 - 2024-04-09 14:59:54 +0800 - Merge branch 'feature/wjh/20240402-story-1235-release1.3.0' into 'beta-2.4.4'
+38a86061f - 林楷 - 2024-04-09 14:59:54 +0800 - feat:[1235]数据对账告警推送钉钉功能增加开关设置功能(V2.4.4)
+9c76410ab - 林少中 - 2024-04-09 14:58:48 +0800 - Merge branch 'feature/wjh/20240329-story-1200-HLChargeDetails-release1.3.0' into 'beta-2.4.4'
+fc2c76671 - 林楷 - 2024-04-09 14:58:48 +0800 - feat:[1200]海梁超充推送充电订单信息(notification_charge_order_info)新增充电明细数据(V2.4.4)
+229ad481c - 林少中 - 2024-04-09 14:52:28 +0800 - Merge branch 'feature/20240326-2147-from-release-1.3.0' into 'beta-2.4.4'
+583b861cb - 林楷 - 2024-04-09 14:52:28 +0800 - feat:[1187]星云检测接口优化 ：获取检测数据接口调整(V2.4.4)
+29ab712ba - 林少中 - 2024-04-09 14:50:36 +0800 - Merge branch 'feature/czx/20240102-1092-AISendToEms-release-1.3.0' into 'beta-2.4.4'
+71cc0299b - 林楷 - 2024-04-09 14:50:36 +0800 - feat:[1174] ai策略下发(V2.4.4)
+77d0939f8 - 林少中 - 2024-04-09 14:35:56 +0800 - Merge branch 'feature/link/20240319-story-1092-from-story-1106' into 'beta-2.4.4'
+214cbf1e0 - 林楷 - 2024-04-09 14:35:56 +0800 - feat:[1092,1106]1106:互联互通启动失败返回原因状态增加自定义类型.1092:互联互通启动充电时除桩状态2以外，增加300、301、302、303、304 五个状态允许正常启动充电(V2.4.4)
+33afddb77 - 王豪 - 2024-04-09 14:33:26 +0800 - Merge branch 'feature/wangh/20240325-1183-complexPropertyConf' into 'alpha-1.3.0'
+6352e72b5 - 林少中 - 2024-04-09 14:19:03 +0800 - Merge branch 'feature/wjh/20240314-1089-electricFuJian-release1.3.0' into 'beta-2.4.4'
+d06d03a67 - 林楷 - 2024-04-09 14:19:03 +0800 - feat:[1089]fjevdc接入互联互通(V2.4.4)
+a4f3bef7b - wanghao - 2024-04-09 14:14:22 +0800 - feat:[1183]复杂数组数据配置界面
+2349c8985 - 林少中 - 2024-04-09 14:02:00 +0800 - Merge branch 'hcb/device-life-charge-20240315' into 'beta-2.4.4'
+3c5a0916e - 林楷 - 2024-04-09 14:02:00 +0800 - feat:[1082] 寿命预测页面电池最高/最低温度需过滤下高压状态下的温度(V2.4.4)
+f43d7c369 - 林少中 - 2024-04-09 13:50:33 +0800 - Merge branch 'feature/wzg/20240312-story-1015-release-1.3.0' into 'beta-2.4.4'
+310270aa5 - 林楷 - 2024-04-09 13:50:33 +0800 - feat:[1015]配置屏蔽互联互通的桩(V2.4.4)
+12a32eb8e - hcb - 2024-04-09 13:46:47 +0800 - Merge remote-tracking branch 'origin/beta-2.4.4' into feature/wzg/20240315-story-1030-release-1.3.0
+f3380523f - 林少中 - 2024-04-09 13:46:05 +0800 - Merge branch 'feature/zxy/20240220-efficiencyDayReport' into 'beta-2.4.4'
+a314775bc - 林楷 - 2024-04-09 13:46:05 +0800 - feat:[999]设备故障日报优化(V2.4.4)
+a0f9fed27 - 王豪 - 2024-04-09 13:45:08 +0800 - Merge branch 'feature/wangh/20240325-1183-complexPropertyConf' into 'alpha-1.3.0'
+e51c5908a - wanghao - 2024-04-09 13:26:28 +0800 - feat:[1183]复杂数组数据配置界面
+d2713b7b0 - linkai - 2024-04-09 13:26:01 +0800 - Merge remote-tracking branch 'origin/feature/wjh/20240319-story-1106-unionStartFailRes-release1.3.0' into feature/link/20240319-story-1092-from-story-1106
+59d43ad69 - linkai - 2024-04-09 13:07:06 +0800 - feat:[1155]优化预付费流程 支付成功后，自动启动充电
+3331dbd1f - 王豪 - 2024-04-09 11:38:47 +0800 - Merge branch 'fix/wangh/20240403-bug-9971-pushOpsJiGuang' into 'alpha-1.3.0'
+faa7576b8 - wuzhiguo - 2024-04-09 11:32:11 +0800 - Merge branch 'feature/wzg/20240218-story-919_963-release-1.3.0' into feature/wzg/240409-beta-2.4.4-temp
+7ba600f1e - wuzhiguo - 2024-04-09 11:26:06 +0800 - feat:[1238]【时时家V2.4.1】应用商城有新版本APP时没有推送升级通知
+d019905c4 - wuzhiguo - 2024-04-09 11:01:23 +0800 - Merge remote-tracking branch 'origin/feature/wzg/20240218-story-919_963-release-1.3.0' into feature/wzg/20240218-story-919_963-release-1.3.0
+7834c542d - wuzhiguo - 2024-04-09 11:01:04 +0800 - feat:[919]特殊情况：如果有多个bms总柜默认走ems模块下发
+6d01f9a2a - wanghao - 2024-04-09 10:42:19 +0800 - Merge branch 'release-1.3.0' into feature/wangh/20240325-1183-complexPropertyConf
+04360ac56 - 周晨帆 - 2024-04-09 10:30:44 +0800 - Merge branch 'hotfix/zcf/20240409-bug-9968-alpha-1.3.0' into 'alpha-1.3.0'
+ca502e004 - zcf - 2024-04-09 10:30:16 +0800 - Merge branch 'hotfix/zcf/20240409-bug-9968-release-1.3.0' into hotfix/zcf/20240409-bug-9968-alpha-1.3.0
+c7abb4271 - 王豪 - 2024-04-09 10:24:27 +0800 - Merge branch 'feature/wangh/20240325-1183-complexPropertyConf' into 'alpha-1.3.0'
+d6bb0cd04 - wanghao - 2024-04-09 10:23:55 +0800 - feat:[1183]复杂数组数据配置界面
+b52d60cd2 - zcf - 2024-04-09 10:10:24 +0800 - fix:[9968]优化，异常vin过滤
+ad79e8bba - 张新宇 - 2024-04-09 10:10:23 +0800 - Merge branch 'feature/zxy/20240409-feat-1282-release-1.3.0' into 'alpha-1.3.0'
+59b692212 - zhangxinyu - 2024-04-09 10:09:33 +0800 - feat:[1282]【充电运营】运营统计，修改过字段配置后，导出表头未按标准表头显示
+ebab1c8cc - 陈志祥 - 2024-04-09 10:08:08 +0800 - Merge branch 'hotfix/czx/20240409-bug-9974-release-1.3.0' into 'alpha-1.3.0'
+df804f1df - cnte01027 - 2024-04-09 10:07:41 +0800 - fix:[9974]升级包查询详情包装类增加判空处理
+d94803f2d - 周晨帆 - 2024-04-09 09:49:58 +0800 - Merge branch 'hotfix/zcf/20240409-bug-9967-release-1.3.0' into 'alpha-1.3.0'
+316616a32 - zcf - 2024-04-09 09:49:40 +0800 - fix:[9967]优化，没传订单号的时候就返回
+d888ad603 - 林少中 - 2024-04-09 09:29:12 +0800 - Merge branch 'hotfix/zcf/20240409-bug-9960-release-1.3.0' into 'beta-2.4.4'
+c576292cf - 周晨帆 - 2024-04-09 09:29:11 +0800 - fix:[9960]查询和导出数量不一致
+b0f827b80 - zcf - 2024-04-09 09:26:12 +0800 - fix:[9960]查询和导出数量不一致
+9d7439701 - 林少中 - 2024-04-09 09:21:56 +0800 - Merge branch 'feature/240401-1146-release-1.3.0' into 'beta-2.4.4'
+92f351119 - 周晨帆 - 2024-04-09 09:21:55 +0800 - feat:[1146]生成查询检测失败报告
+199bf4704 - 周晨帆 - 2024-04-09 09:09:15 +0800 - Merge branch 'hotfix/zcf/20240409-bug-9960-release-1.3.0' into 'alpha-1.3.0'
+e0e0eb396 - zcf - 2024-04-09 09:08:42 +0800 - fix:[9960]查询和导出数量不一致
+97a40578a - 陈志祥 - 2024-04-09 08:52:02 +0800 - Merge branch 'hotfix/czx/20240408-bug-9926-release-1.3.0' into 'alpha-1.3.0'
+f793291bf - cnte01027 - 2024-04-09 08:51:38 +0800 - fix:[9926]设备配置枚举型显示有误处理
+a72fa98fd - 吴景华 - 2024-04-09 08:51:20 +0800 - Merge branch 'feature/wjh/20240409-story-1239-release1.3.0' into 'alpha-1.3.0'
+0c2589607 - wjh - 2024-04-09 08:49:55 +0800 - feat:[1239]时时家APPV2.4.1APP内添加设备无法删除问题
+93e0bb1fe - wuzhiguo - 2024-04-08 20:15:38 +0800 - feat:[919]查询策略接口判断站点是否存在
+69a120c81 - wjh - 2024-04-08 17:57:09 +0800 - feat:[1055]高德
+a695af1dd - hcb - 2024-04-08 16:05:00 +0800 - feat:[1229] 增加站点数筛选条件
+bb4db1f67 - 黄春斌 - 2024-04-08 16:00:57 +0800 - Merge branch 'feature/hcb/merge-alpha-1.3.0-20240408' into 'alpha-1.3.0'
+a7e102d08 - hcb - 2024-04-08 15:54:43 +0800 - feat:[1229] 增加站点数筛选条件
+4c64adb0d - 周晨帆 - 2024-04-08 15:53:35 +0800 - Merge branch 'feature/240401-1146-release-1.3.0' into 'alpha-1.3.0'
+a2e2a1c32 - zcf - 2024-04-08 15:49:52 +0800 - feat:[1146]生成查询检测失败报告
+5ce198887 - 吴景华 - 2024-04-08 15:44:05 +0800 - Merge branch 'hotfix/wjh/20240401-bug-9787-release1.3.0' into 'alpha-1.3.0'
+5bf3e013c - wjh - 2024-04-08 15:43:46 +0800 - fix:[9787]家储告警站点名称统一处理
+0715f0f7a - 吴景华 - 2024-04-08 15:31:39 +0800 - Merge branch 'feature/wjh/20240408-story-1258-release1.3.0' into 'alpha-1.3.0'
+2874046c1 - wjh - 2024-04-08 15:20:02 +0800 - feat:[1258]充电运营-用户管理-体验金管理：新增对体验金的账户管理
+5e09b2c00 - 黄春斌 - 2024-04-08 14:41:44 +0800 - Merge branch 'feature/hcb/merge-alpha-1.3.0-20240408' into 'alpha-1.3.0'
+94fb298f4 - hcb - 2024-04-08 14:41:17 +0800 - Merge remote-tracking branch 'origin/feature/hcb/20240325-demand-1229-operation-app-aftersale' into feature/hcb/merge-alpha-1.3.0-20240408
+3ac13d43e - hcb - 2024-04-08 14:35:57 +0800 - feat:[1229] 增加产品型号
+bd6a15118 - 林少中 - 2024-04-08 14:15:53 +0800 - Merge branch 'feature/zxy/20240402-feat-1264-release-1.3.0' into 'beta-2.4.4'
+460036ec2 - 张新宇 - 2024-04-08 14:15:53 +0800 - feat:[1264]【充电运营】运营分析-单元-充电桩功率图数据空时补0显示
+6b270ba63 - 吴志国 - 2024-04-08 13:48:43 +0800 - Merge branch 'hotfix/zcf/20240320-bug-9427-release-1.3.0' into 'alpha-1.3.0'
+f28374d2b - wuzhiguo - 2024-04-08 13:46:45 +0800 - fix:[9427]下载检测报告绝缘检测字段转换
+104e35d25 - 吴志国 - 2024-04-08 11:21:40 +0800 - Merge branch 'feature/wzg/240408-alpha-1.3.0-temp' into 'alpha-1.3.0'
+b0bae9a0a - wuzhiguo - 2024-04-08 11:19:36 +0800 - Merge branch 'hotfix/wzg/20240408-bug-9891-release-1.3.0' into feature/wzg/240408-alpha-1.3.0-temp
+5bdd323ee - wuzhiguo - 2024-04-08 11:19:28 +0800 - Merge branch 'hotfix/wzg/20240408-bug-9890-release-1.3.0' into feature/wzg/240408-alpha-1.3.0-temp
+e5f76772a - wuzhiguo - 2024-04-08 11:09:01 +0800 - fix:[9890]工商业储能站点列表的sn为空导致报错
+7095043ec - 张新宇 - 2024-04-08 10:59:02 +0800 - Merge branch 'feature/zxy/20240402-feat-1264-release-1.3.0' into 'alpha-1.3.0'
+6fb560dd5 - zhangxinyu - 2024-04-08 10:55:38 +0800 - feat:[1264]【充电运营】运营分析-单元-充电桩功率图数据空时补0显示
+bdc3ab684 - wuzhiguo - 2024-04-08 10:53:38 +0800 - fix:[9891]工商业储能获取站点编号的空指针异常
+afe3c29ad - wuzhiguo - 2024-04-08 10:02:23 +0800 - Merge remote-tracking branch 'origin/release-1.3.0' into hotfix/zcf/20240320-bug-9427-release-1.3.0
+3656ea00e - 林少中 - 2024-04-08 09:21:33 +0800 - Merge branch 'cherry-pick-58371129' into 'release-1.3.0'
+4d3570d5e - 林少中 - 2024-04-08 09:21:33 +0800 - Merge branch 'hotfix/wjh/20240407-bug-9984-release1.3.0' into 'beta-2.4.4'
+e2299373c - 林少中 - 2024-04-08 09:21:12 +0800 - Merge branch 'hotfix/wjh/20240407-bug-9984-release1.3.0' into 'beta-2.4.4'
+980b44073 - 林少中 - 2024-04-08 09:20:18 +0800 - Merge branch 'cherry-pick-d2f2d1f1' into 'release-1.3.0'
+4ccc292ef - 林少中 - 2024-04-08 09:20:18 +0800 - Merge branch 'hotfix/wjh/20240407-bug-9984-release1.3.0' into 'beta-2.4.4'
+f14cf47ef - 林少中 - 2024-04-08 09:20:05 +0800 - Merge branch 'hotfix/wjh/20240407-bug-9984-release1.3.0' into 'beta-2.4.4'
+dc2443ef4 - 林少中 - 2024-04-08 09:08:24 +0800 - Merge branch 'cherry-pick-077affb3' into 'release-1.3.0'
+8599cb903 - 林少中 - 2024-04-08 09:08:24 +0800 - Merge branch 'feature/zxy/20240402-feat-1264-release-1.3.0' into 'beta-2.4.4'
+420d5296d - 林少中 - 2024-04-08 09:08:05 +0800 - Merge branch 'feature/zxy/20240402-feat-1264-release-1.3.0' into 'beta-2.4.4'
+962261369 - 吴景华 - 2024-04-07 17:23:25 +0800 - Merge branch 'feature/wjh/20240407-story-2314-releae1.3.0' into 'alpha-1.3.0'
+1968c20e8 - wjh - 2024-04-07 17:23:00 +0800 - feat:[1205]钉钉推送-电量对账结果
+064e6fce9 - zhangxinyu - 2024-04-07 17:16:04 +0800 - feat:[1176]【能效日报】表格改造
+ffef3f604 - cnte01027 - 2024-04-07 17:09:19 +0800 - fix:[9995]运维中心故障列表导出过滤家储设备
+f24c6635b - 黄春斌 - 2024-04-07 17:04:33 +0800 - Merge branch 'feature/hcb/20240325-demand-1229-operation-app-aftersale' into 'alpha-1.3.0'
+f497fb6b3 - hcb - 2024-04-07 17:04:08 +0800 - feat:[1229] 修改请求名称
+bedddc39c - cnte01027 - 2024-04-07 17:01:06 +0800 - Merge branch 'release-1.3.0' into feature/czx/20240229-1784-faultExport-release-1.3.0
+994b852ba - cnte01027 - 2024-04-07 16:58:51 +0800 - Merge branch 'release-1.3.0' into feature/czx/20240102-1092(1174)-AISendToEms-release-1.3.0
+dea5afcf7 - wjh - 2024-04-07 16:58:08 +0800 - feat:[1205]解决冲突
+e9a0f93b8 - zcf - 2024-04-07 16:53:17 +0800 - Merge branch 'release-1.3.0' into feature/20240326-2147-from-release-1.3.0
+1fd2a936c - zcf - 2024-04-07 16:51:07 +0800 - Merge branch 'release-1.3.0' into feature/240320-2119-release-1.3.0
+6fa281822 - zcf - 2024-04-07 16:49:58 +0800 - feat:[1146]检测失败
+4bd7a5542 - wjh - 2024-04-07 16:38:01 +0800 - Merge branch 'release-1.3.0' into feature/wjh/20240319-story-1106-unionStartFailRes-release1.3.0
+3a3560ceb - linkai - 2024-04-07 16:35:06 +0800 - Merge branch 'release-1.3.0' into feature/link/20240319-story-1155-release-1.3.0
+a97c5671c - wjh - 2024-04-07 16:34:29 +0800 - Merge branch 'release-1.3.0' into feature/wjh/20240314-1089-electricFuJian-release1.3.0
+053d18860 - linkai - 2024-04-07 16:27:31 +0800 - feat:[1155]优化预付费流程 支付成功后，自动启动充电
+cdf60fac9 - 吴景华 - 2024-04-07 16:20:20 +0800 - Merge branch 'feature/wjh/20240407-story-2314-releae1.3.0' into 'alpha-1.3.0'
+6afb8f5ba - wjh - 2024-04-07 16:19:08 +0800 - feat:[1205]钉钉推送-电量对账结果
+0fca28d1b - zcf - 2024-04-07 16:01:18 +0800 - Merge branch 'release-1.3.0' into feature/240401-1146-release-1.3.0
+4afc2c257 - zhangxinyu - 2024-04-07 15:15:50 +0800 - feat:[1176]【能效日报】表格改造
+58371129d - 林少中 - 2024-04-07 14:23:38 +0800 - Merge branch 'hotfix/wjh/20240407-bug-9984-release1.3.0' into 'beta-2.4.4'
+092b979da - wjh - 2024-04-07 14:22:06 +0800 - fix:[9984]VIN启动订单用户为空， 需要显示为“VIN启动”
+98cbb5942 - 吴景华 - 2024-04-07 14:08:07 +0800 - Merge branch 'hotfix/wjh/20240403-bug-9964-release1.3.0' into 'alpha-1.3.0'
+1efcd2d63 - linkai - 2024-04-07 14:01:57 +0800 - Merge branch 'feature/wzg/20240323-story-1113_1114-release-1.3.0-919_963_tmp' into beta-2.4.4
+a10e8f37a - linkai - 2024-04-07 13:57:23 +0800 - Merge branch 'feature/wzg/20240218-story-919_963-release-1.3.0' into feature/wzg/20240323-story-1113_1114-release-1.3.0-919_963_tmp
+d2f2d1f14 - 林少中 - 2024-04-07 13:55:56 +0800 - Merge branch 'hotfix/wjh/20240407-bug-9984-release1.3.0' into 'beta-2.4.4'
+cc911f776 - 黄春斌 - 2024-04-07 13:53:32 +0800 - Merge branch 'feature/hcb/20240325-demand-2192-straegy-default_version' into 'alpha-1.3.0'
+1ca41b59f - hcb - 2024-04-07 13:52:27 +0800 - feat:[1198] 新增策略默认值
+1e603164e - zhangxinyu - 2024-04-07 13:42:33 +0800 - feat:[1176]【能效日报】表格改造
+21d3c9811 - 林少中 - 2024-04-07 13:34:03 +0800 - Merge branch 'feature/czx/20240320-2071-release-1.3.0' into 'beta-2.4.4'
+4c6440421 - 林楷 - 2024-04-07 13:34:03 +0800 - feat:[1112] 界面显示内容优化-增加拼接模块全称
+e3b51aaa8 - 林少中 - 2024-04-07 13:33:24 +0800 - Merge branch 'feature/wzg/20240218-story-919_963-release-1.3.0' into 'beta-2.4.4'
+3c3e848f7 - 林楷 - 2024-04-07 13:33:24 +0800 - feat:[919,963]919:添加策略来源字段，补充设备策略展示,todo 查询配置的超时时间还没实现,963:SOC指标及曲线取值
+1e5361847 - 黄春斌 - 2024-04-07 13:24:29 +0800 - Merge branch 'feature/hcb/20240325-demand-1229-operation-app-aftersale' into 'alpha-1.3.0'
+59b0125db - linkai - 2024-04-07 13:23:31 +0800 - Merge branch 'release-1.3.0' into feature/wzg/20240323-story-1113_1114-release-1.3.0
+181858118 - hcb - 2024-04-07 13:23:30 +0800 - feat:[1229] 新增所属产品
+57bca148d - linkai - 2024-04-07 13:21:18 +0800 - Merge branch 'release-1.3.0' into feature/wzg/20240218-story-919_963-release-1.3.0
+6f9b99075 - wjh - 2024-04-07 10:51:46 +0800 - fix:[9984]VIN启动订单用户为空， 需要显示为“VIN启动”
+d255ce563 - 林少中 - 2024-04-07 10:03:51 +0800 - Merge branch 'fix/wangh/20240325-9737-copyDevice' into 'beta-2.4.4'
+5fdbc07f8 - 王豪 - 2024-04-07 10:03:51 +0800 - fix:[9737]修复拷贝设备时模板字段的复制
+f7e52ebb4 - 王豪 - 2024-04-07 09:29:22 +0800 - Merge branch 'fix/wangh/20240325-9737-copyDevice' into 'alpha-1.3.0'
+7fb3e8838 - wanghao - 2024-04-07 09:28:13 +0800 - Merge branch 'release-1.3.0' into fix/wangh/20240325-9737-copyDevice
+b1a520ced - wjh - 2024-04-03 17:44:31 +0800 - feat:[1235]master-alpha1.3.0
+d0641fdf8 - wjh - 2024-04-03 17:17:58 +0800 - Merge branch 'master' into alpha-1.3.0
+e7acb287e - wanghao - 2024-04-03 14:29:53 +0800 - fix:[9971]修复推送极光推送运维app故障id错误的问题
+5f41099df - wjh - 2024-04-03 13:47:38 +0800 - feat:[1235]数据对账告警推送钉钉功能增加开关设置功能
+bce4873c5 - wjh - 2024-04-03 13:17:23 +0800 - fix:[9964]时时充订单列表：区分订单列表和故障反馈选择的订单列表
+077affb36 - 林少中 - 2024-04-03 11:11:16 +0800 - Merge branch 'feature/zxy/20240402-feat-1264-release-1.3.0' into 'beta-2.4.4'
+f488aab14 - 张新宇 - 2024-04-03 11:11:15 +0800 - feat:[1264]【充电运营】运营分析-单元-功率导出，除充电桩外补空，充电桩补0
+54277816d - zhangxinyu - 2024-04-03 11:02:26 +0800 - feat:[1264]【充电运营】运营分析-单元-功率导出，除充电桩外补空，充电桩补0
+5c81fbc36 - zhangxinyu - 2024-04-03 11:01:46 +0800 - Merge remote-tracking branch 'origin/beta-2.4.4' into feature/zxy/20240402-feat-1264-release-1.3.0
+59a842323 - zhangxinyu - 2024-04-03 10:53:07 +0800 - feat:[1264]【充电运营】运营分析-单元-功率导出，除充电桩外补空，充电桩补0
+a0c241b18 - zhangxinyu - 2024-04-03 10:52:41 +0800 - feat:[1264]【充电运营】运营分析-单元-功率导出，除充电桩外补空，充电桩补0
+56af1c234 - linkai - 2024-04-03 09:18:40 +0800 - Merge branch 'release-1.3.0' into master
+f5f11ccfd - zhangxinyu - 2024-04-03 09:16:16 +0800 - Merge remote-tracking branch 'origin/beta-2.4.3' into feature/zxy/20240402-feat-1264-release-1.3.0
+18e7a1e05 - 张新宇 - 2024-04-02 16:51:19 +0800 - Merge branch 'feature/zxy/20240402-feat-1264-alpha-1.3.0' into 'alpha-1.3.0'
+e00fb83e3 - zhangxinyu - 2024-04-02 16:50:38 +0800 - Merge branch 'feature/zxy/20240402-feat-1264-release-1.3.0' into feature/zxy/20240402-feat-1264-alpha-1.3.0
+206dd37ee - 陈志祥 - 2024-04-02 15:27:48 +0800 - Merge branch 'feature/czx/20240402-1231-ttsBindDevice-release-1.3.0' into 'alpha-1.3.0'
+e00d75d9d - cnte01027 - 2024-04-02 15:26:03 +0800 - feat:[1231]tts-一个设备可以被不同的角色绑定
+e00131334 - zcf - 2024-04-02 14:57:25 +0800 - feat:[1210]检测报告底层数据- 国际化站点的兼容优化
+6d641943c - 林少中 - 2024-04-02 14:40:13 +0800 - Merge branch 'feature/link/tmp-v2.4.3-release-1.3.0' into 'release-1.3.0'
+17dc8081e - 林楷 - 2024-04-02 14:40:13 +0800 - Merged feature/link/tmp-v2.4.3-release-1.3.0  to release-1.3.0
+ab57e80ab - wanghao - 2024-04-02 14:31:18 +0800 - feat:[1241]ota 添加定时升级和业务升级功能
+798e156dc - zhangxinyu - 2024-04-02 13:57:53 +0800 - feat:[1264]【充电运营】运营分析-单元-功率导出，除充电桩外补空，充电桩补0
+6d07ddac2 - wanghao - 2024-04-02 13:55:52 +0800 - feat:[1241]ota 添加定时升级和业务升级功能
+e206f6a78 - linkai - 2024-04-02 13:42:10 +0800 - Merge branch 'beta-2.4.3' into feature/link/tmp-v2.4.3-release-1.3.0
+cd04c3eab - zhangxinyu - 2024-04-02 13:34:13 +0800 - feat:[1264]【充电运营】运营分析-单元-充电桩功率图数据空时补0显示
+b1fb32ad8 - 林楷 - 2024-04-02 11:38:01 +0800 - Merge branch 'feature/wzg/20240328-story-957-beta-2.4.3' into 'beta-2.4.3'
+af0c76eb0 - linkai - 2024-04-02 11:36:24 +0800 - feat:[988]启动充电，金额不足或者较低时是否提醒 兼容时时充3.2以下版本
+24b40c7dd - zhangxinyu - 2024-04-02 11:21:04 +0800 - feat:[957]【MMS】国际化（英文改造）-dbapi查询出的结果中，总计等中文字段国际化
+92e9b6edf - linkai - 2024-04-02 10:53:40 +0800 - feat:[988]启动充电，金额不足或者较低时是否提醒 兼容时时充3.2以下版本
+32143b3a5 - linkai - 2024-04-02 10:51:37 +0800 - feat:[988]启动充电，金额不足或者较低时是否提醒 兼容时时充3.2以下版本
+0dd5cf04d - 林少中 - 2024-04-02 09:40:08 +0800 - Merge branch 'feature/wzg/20240328-story-957-beta-2.4.3' into 'beta-2.4.3'
+8471e25f6 - 吴景华 - 2024-04-02 09:40:08 +0800 - feat:[957]企业车辆导出和页面展示不一致问题修复
+97ef4cdc3 - wjh - 2024-04-02 09:20:46 +0800 - feat:[957]企业车辆导出和页面展示不一致问题修复
+7152e95e5 - 王豪 - 2024-04-02 08:59:47 +0800 - Merge branch 'feature/wangh/20240401-1230-ttsDeviceList-tmp' into 'alpha-1.3.0'
+3fd152736 - wanghao - 2024-04-02 08:59:05 +0800 - Merge branch 'feature/wangh/20240401-1230-ttsDeviceList' into feature/wangh/20240401-1230-ttsDeviceList-tmp
+6735c50e1 - wanghao - 2024-04-02 08:58:34 +0800 - feat:[1230]代理商app设备列表
+dae892c93 - 林少中 - 2024-04-02 08:57:47 +0800 - Merge branch 'feature/wzg/20240328-story-957-beta-2.4.3' into 'beta-2.4.3'
+e5c0fbb63 - 张新宇 - 2024-04-02 08:57:47 +0800 - feat:[957]【MMS】国际化（英文改造）-dbapi查询出的结果中，总计等中文字段国际化
+e6329ee62 - linkai - 2024-04-02 08:56:00 +0800 - feat:[957]导出文件中 总计 走语言包国际化
+74971d424 - zhangxinyu - 2024-04-02 08:44:20 +0800 - feat:[957]【MMS】国际化（英文改造）-dbapi查询出的结果中，总计等中文字段国际化
+971f225d5 - linkai - 2024-04-01 21:58:10 +0800 - Merge branch 'beta-2.4.3' into feature/link/tmp-v2.4.3-release-1.3.0
+f1f8a7d12 - 林少中 - 2024-04-01 21:43:48 +0800 - Merge branch 'feature/wzg/20240328-story-957-beta-2.4.3' into 'beta-2.4.3'
+a10ad69dc - linkai - 2024-04-01 21:42:01 +0800 - feat:[957]导出文件名 国际化：峰谷平电量数据详情功能
+8d57f4b04 - linkai - 2024-04-01 21:12:09 +0800 - Merged beta-2.4.3 to feature/link/tmp-v2.4.3-release-1.3.0
+b4ce2c9cf - linkai - 2024-04-01 20:51:34 +0800 - Merge branch 'beta-2.4.3' into feature/link/tmp-v2.4.3-release-1.3.0
+0f57eeaa2 - 林少中 - 2024-04-01 20:05:05 +0800 - Merge branch 'feature/wzg/20240328-story-957-beta-2.4.3' into 'beta-2.4.3'
+9a8bfa023 - linkai - 2024-04-01 19:29:24 +0800 - feat:[957]异常订单处理记录 导出 忽略processUserId字段
+39ce8208f - 林楷 - 2024-04-01 19:09:18 +0800 - Merge branch 'feature/wzg/20240328-story-957-beta-2.4.3' into 'beta-2.4.3'
+4adda2518 - linkai - 2024-04-01 19:07:45 +0800 - feat:[957]检测失败订单导出文件名和sheetname 国际化
+a7811f0c9 - 林少中 - 2024-04-01 19:00:54 +0800 - Merge branch 'feature/wjh/20240320-beta2.4.3-temp' into 'beta-2.4.3'
+7626b78ff - 吴景华 - 2024-04-01 19:00:54 +0800 - feat:[957]解决冲突
+25cc3d4d2 - wjh - 2024-04-01 18:58:30 +0800 - Merge branch 'beta-2.4.3' into feature/wjh/20240320-beta2.4.3-temp
+96969d238 - wjh - 2024-04-01 18:55:05 +0800 - feat:[957]解决冲突
+fffcc7ce0 - 林少中 - 2024-04-01 18:51:27 +0800 - Merge branch 'feature/link/20240401-story-1041-beta-2.4.3' into 'beta-2.4.3'
+8938896e9 - linkai - 2024-04-01 18:50:19 +0800 - feat:[1041]虚拟电厂接口增加“填谷”数据推送
+05acdddc1 - 林少中 - 2024-04-01 18:46:07 +0800 - Merge branch 'feature/wjh/20240320-beta2.4.3-temp' into 'beta-2.4.3'
+9712121ac - 林楷 - 2024-04-01 18:46:07 +0800 - Merge branch 'feature/wjh/20240320-beta2.4.3-temp' into beta-2.4.3
+f73f0e78a - linkai - 2024-04-01 18:42:20 +0800 - Merge branch 'feature/wzg/20240328-story-957-beta-2.4.3' into feature/wjh/20240320-beta2.4.3-temp
+3f53e9966 - linkai - 2024-04-01 18:42:07 +0800 - Merge branch 'beta-2.4.3' into feature/wjh/20240320-beta2.4.3-temp
+696e7f377 - linkai - 2024-04-01 18:39:22 +0800 - feat:[957]国际化 列国际化有字典等转换问题先撤回
+4e480d7dd - linkai - 2024-04-01 18:33:55 +0800 - feat:[957]国际化 列国际化有字典等转换问题先撤回
+e58fd15a7 - 张新宇 - 2024-04-01 18:04:05 +0800 - Merge branch 'feature/zxy/20240220-efficiencyDayReport' into 'alpha-1.3.0'
+43ad1b2fa - 王豪 - 2024-04-01 17:13:36 +0800 - Merge branch 'feature/wangh/20240401-1230-ttsDeviceList-tmp' into 'alpha-1.3.0'
+79b96e501 - wanghao - 2024-04-01 17:11:49 +0800 - Merge branch 'alpha-1.3.0' into feature/wangh/20240401-1230-ttsDeviceList-tmp
+afe833a2f - wanghao - 2024-04-01 17:06:53 +0800 - feat:[1230]代理商app设备列表
+f397d71cd - wjh - 2024-04-01 16:32:12 +0800 - feat:[957]解决冲突
+9c6db0cf3 - 林少中 - 2024-04-01 16:07:40 +0800 - Merge branch 'feature/wjh/20240320-beta2.4.3-temp' into 'beta-2.4.3'
+f099b627d - 林楷 - 2024-04-01 16:07:40 +0800 - Merge branch 'feature/wjh/20240320-beta2.4.3-temp' into beta-2.4.3
+5e82c2447 - linkai - 2024-04-01 15:57:38 +0800 - Merge branch 'feature/wzg/20240328-story-957-beta-2.4.3' into feature/wjh/20240320-beta2.4.3-temp
+f18a6e4cf - linkai - 2024-04-01 15:56:05 +0800 - Merge branch 'beta-2.4.3' into feature/wjh/20240320-beta2.4.3-temp
+d33a9e912 - linkai - 2024-04-01 15:53:21 +0800 - Merge remote-tracking branch 'origin/feature/wzg/20240328-story-957-beta-2.4.3' into feature/wzg/20240328-story-957-beta-2.4.3
+753031c2c - linkai - 2024-04-01 15:53:02 +0800 - feat:[957]导出 列名 国际化bug修改
+46cd8cd2c - wjh - 2024-04-01 15:46:22 +0800 - feat:[957]国际化导出问题优化
+444aa2a9f - zhangxinyu - 2024-04-01 15:41:18 +0800 - feat:[957]【MMS】国际化（英文改造）-dbapi查询出的结果中，总计等中午字段国际化
+42db0425b - linkai - 2024-04-01 15:03:13 +0800 - Merge remote-tracking branch 'origin/feature/wzg/20240328-story-957-beta-2.4.3' into feature/wzg/20240328-story-957-beta-2.4.3
+d322c0f4a - linkai - 2024-04-01 15:03:00 +0800 - feat:[957]导出bug修改
+575da6dc9 - zcf - 2024-04-01 14:59:57 +0800 - feat:[1146]优化容量保持率未负数的情况
+792eb823c - zhangxinyu - 2024-04-01 14:41:28 +0800 - feat:[957]【MMS】国际化（英文改造）-dbapi查询出的结果中，总计等中午字段国际化
+d47d0f8e2 - 王豪 - 2024-04-01 13:15:51 +0800 - Merge branch 'feature/wangh/20240301-978-swithFuntion-alpha' into 'alpha-1.3.0'
+d345ac856 - wanghao - 2024-04-01 13:15:29 +0800 - Merge branch 'feature/wangh/20240301-978-switchFuntion' into feature/wangh/20240301-978-swithFuntion-alpha
+c4bd91b50 - 陈志祥 - 2024-04-01 11:15:31 +0800 - Merge branch 'hotfix/czx/20240401-bug-9895-release-1.3.0' into 'alpha-1.3.0'
+83aee818a - cnte01027 - 2024-04-01 11:14:59 +0800 - fix:[9895] 保存售后说明信息增加判空处理
+569f1e6d6 - 陈志祥 - 2024-04-01 10:54:33 +0800 - Merge branch 'hotfix/czx/20240401-bug-9893-release-1.3.0' into 'alpha-1.3.0'
+81c404b9f - cnte01027 - 2024-04-01 10:54:11 +0800 - fix:[9893] tts-查询用户信息增加判空处理
+b937725ee - 吴景华 - 2024-04-01 10:29:43 +0800 - Merge branch 'feature/wjh/20240329-story-1203-stationMonitor-release1.3.0' into 'alpha-1.3.0'
+0ff4f0479 - wjh - 2024-04-01 10:29:29 +0800 - feat[1203]：后端赋值站点名称
+64c038b3d - 吴景华 - 2024-04-01 10:24:34 +0800 - Merge branch 'feature/wjh/20240401-alpha1.3.0-temp' into 'alpha-1.3.0'
+63ea74e19 - wjh - 2024-04-01 10:23:50 +0800 - Merge branch 'feature/wjh/20240123-pointExchange-release1.3.0' into feature/wjh/20240401-alpha1.3.0-temp
+bd67657f8 - 林少中 - 2024-04-01 10:18:01 +0800 - Merge branch 'feature/zxy/20240301-MerchatnPowerTrendDetail' into 'beta-2.4.3'
+8fdff189d - 张新宇 - 2024-04-01 10:18:01 +0800 - Feature/zxy/20240301 merchatn power trend detail
+17f8dcacf - wjh - 2024-04-01 10:03:32 +0800 - fix[9787]：家储告警站点名称统一处理
+4502c439d - wanghao - 2024-04-01 09:38:44 +0800 - feat: [1183] 复杂数组数据配置界面
