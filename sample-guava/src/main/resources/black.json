@@ -1,0 +1,10 @@
+[
+	{
+		"BlacklistPro": "LockApp,inet_gethost",
+		"did": "11111"
+	},
+	{
+		"BlacklistPro": "ShellExperienceHost",
+		"did": "22222"
+	}
+]
