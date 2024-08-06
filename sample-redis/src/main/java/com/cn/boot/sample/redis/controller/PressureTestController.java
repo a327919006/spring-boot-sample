@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @Slf4j
 @RestController
 @RequestMapping("/pressure/test")
-@Api(tags = "压力测试", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "2、压力测试", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PressureTestController {
 
     @Autowired

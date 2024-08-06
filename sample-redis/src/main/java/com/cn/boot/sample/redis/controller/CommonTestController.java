@@ -1,6 +1,7 @@
 package com.cn.boot.sample.redis.controller;
 
 import cn.hutool.core.util.StrUtil;
+import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @RestController
 @RequestMapping("/common/test")
-@Api(tags = "基础功能测试", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "1、基础功能测试", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CommonTestController {
 
     @Autowired
@@ -50,5 +51,18 @@ public class CommonTestController {
         return StrUtil.fillBefore(num, '0', 4);
     }
 
-
+    @ApiOperation("3、lua脚本测试")
+    @GetMapping("/lua")
+    public String lua(Integer num) {
+        Jedis jedis = jedisPool.getResource();
+        String script = "local value = redis.call('get', KEYS[1])\n" +
+                "if value == false then\n" +
+                "    redis.call('set', KEYS[1], ARGV[1])\n" +
+                "\treturn ARGV[1]\n" +
+                "else\n" +
+                "    return redis.call('incr', KEYS[1])\n" +
+                "end\t";
+        String helloLua = jedis.eval(script, Lists.newArrayList("hellolua"), Lists.newArrayList(num.toString())).toString();
+        return helloLua;
+    }
 }
