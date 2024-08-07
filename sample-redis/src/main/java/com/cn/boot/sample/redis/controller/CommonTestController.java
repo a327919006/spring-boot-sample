@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RAtomicLong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -32,6 +35,8 @@ public class CommonTestController {
     private JedisPool jedisPool;
     @Autowired
     private RAtomicLong atomicLong;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     @Value("${spring.redis.database}")
     private int database;
@@ -62,7 +67,27 @@ public class CommonTestController {
                 "else\n" +
                 "    return redis.call('incr', KEYS[1])\n" +
                 "end\t";
-        String helloLua = jedis.eval(script, Lists.newArrayList("hellolua"), Lists.newArrayList(num.toString())).toString();
-        return helloLua;
+        List<String> keys = Lists.newArrayList("hellolua");
+        List<String> args = Lists.newArrayList(num.toString());
+        return jedis.eval(script, keys, args).toString();
+    }
+
+    @ApiOperation("4、lua脚本测试-StringRedisTemplate")
+    @GetMapping("/lua/stringRedisTemplate")
+    public Long luaStringRedisTemplate(Long num) {
+        String script = "local value = redis.call('get', KEYS[1])\n" +
+                "if value == false then\n" +
+                "    redis.call('set', KEYS[1], ARGV[1])\n" +
+                "\treturn ARGV[1]\n" +
+                "else\n" +
+                "    return redis.call('incr', KEYS[1])\n" +
+                "end\t";
+        List<String> keys = Lists.newArrayList("hellolua");
+        DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(script, Long.class);
+        Long result = stringRedisTemplate.execute(redisScript, keys, num.toString());
+        if(result == null){
+            return num;
+        }
+        return result;
     }
 }
