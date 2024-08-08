@@ -3,14 +3,17 @@ package com.cn.boot.sample.redis.service;
 import com.cn.boot.sample.api.model.po.Client;
 import com.cn.boot.sample.api.service.ClientService;
 import com.cn.boot.sample.api.service.RedisService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.*;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.data.redis.core.script.RedisScript;
 
-import java.util.Map;
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -45,12 +48,29 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public boolean lock(String key, String value) {
-        return valueOperations.setIfAbsent(key, value, 30, TimeUnit.SECONDS);
+        return stringRedisTemplate.opsForValue().setIfAbsent(key, value, 30, TimeUnit.SECONDS);
     }
 
     @Override
-    public boolean unlock(String key) {
-        return stringRedisTemplate.delete(key);
+    public boolean unlock(String key, String value) {
+        // 直接del可能删除别人的锁，因此要先get判断线程标识再删除
+
+        // 这样写有线程安全问题
+        // String lockValue = stringRedisTemplate.opsForValue().get(key);
+        // if(StringUtils.equals(value, lockValue)){
+        //     stringRedisTemplate.delete(key);
+        // }
+        // return true;
+
+        // 使用lua脚本，原子性操作get与del，防止线程安全问题
+        String script =
+                "if (redis.call('GET', KEYS[1]) == ARGV[1]) then\n" +
+                "  return redis.call('DEL', KEYS[1])\n" +
+                "end\n" +
+                "return 0";
+        RedisScript<Long> redisScript = new DefaultRedisScript<>(script, Long.class);
+        long result = stringRedisTemplate.execute(redisScript, Collections.singletonList(key), value);
+        return 1L == result;
     }
 
     @Override

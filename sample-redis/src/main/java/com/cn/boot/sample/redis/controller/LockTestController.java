@@ -2,6 +2,7 @@ package com.cn.boot.sample.redis.controller;
 
 import cn.hutool.core.thread.ThreadFactoryBuilder;
 import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.core.util.IdUtil;
 import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.api.service.RedisService;
 import io.swagger.annotations.Api;
@@ -34,7 +35,7 @@ public class LockTestController {
 
     private int num = 0;
 
-    @ApiOperation("测试(有瑕疵，不会自动延期)")
+    @ApiOperation("1、set命令实现(有瑕疵，不会自动延期)")
     @GetMapping("")
     public String lock(String key, int count) {
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
@@ -47,14 +48,15 @@ public class LockTestController {
 
         for (int i = 0; i < count; i++) {
             executor.execute(() -> {
-                boolean lock = redisService.lock(key, key);
+                String value = IdUtil.simpleUUID();
+                boolean lock = redisService.lock(key, value);
                 if (lock) {
                     try {
                         log.info("======in==========");
                         ThreadUtil.sleep(100);
                     } finally {
                         log.info("out");
-                        redisService.unlock(key);
+                        redisService.unlock(key, value);
                     }
                 }
             });
@@ -63,7 +65,7 @@ public class LockTestController {
         return Constants.MSG_SUCCESS;
     }
 
-    @ApiOperation("测试（使用Redisson会自动延期）")
+    @ApiOperation("2、Redisson实现（会自动延期）")
     @GetMapping("redisson")
     public String redissonLock(String key, int count, long timeout, long businessTime) {
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
@@ -100,7 +102,7 @@ public class LockTestController {
         return Constants.MSG_SUCCESS;
     }
 
-    @ApiOperation("测试（Redisson-TryLock）")
+    @ApiOperation("3、Redisson-TryLock(推荐)")
     @GetMapping("redisson/tryLock")
     public String redissonTryLock(String key, int count, long businessTime) {
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
