@@ -22,7 +22,7 @@ public interface RedisService {
      * @param key key
      * @return 结果
      */
-    boolean unlock(String key);
+    boolean unlock(String key, String value);
 
     /**
      * 缓存对象
