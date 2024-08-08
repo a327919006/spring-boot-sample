@@ -22,4 +22,9 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientMapper, Client, Str
     public int saveClient(Client client) {
         return mapper.saveClient(client);
     }
+
+    @Override
+    public int testAop(Client client) {
+        return 0;
+    }
 }
