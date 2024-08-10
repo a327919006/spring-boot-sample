@@ -56,7 +56,7 @@ public class CommonTestController {
         return StrUtil.fillBefore(num, '0', 4);
     }
 
-    @ApiOperation("3、lua脚本测试")
+    @ApiOperation("3、lua脚本测试-Jedis")
     @GetMapping("/lua")
     public String lua(Integer num) {
         Jedis jedis = jedisPool.getResource();
