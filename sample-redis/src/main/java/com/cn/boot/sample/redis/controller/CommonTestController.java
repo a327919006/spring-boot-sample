@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RAtomicLong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.http.MediaType;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -37,6 +39,13 @@ public class CommonTestController {
     private RAtomicLong atomicLong;
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+    private static final DefaultRedisScript<Long> SECKILL_SCRIPT;
+
+    static {
+        SECKILL_SCRIPT = new DefaultRedisScript<>();
+        SECKILL_SCRIPT.setLocation(new ClassPathResource("seckill.lua"));
+        SECKILL_SCRIPT.setResultType(Long.class);
+    }
 
     @Value("${spring.redis.database}")
     private int database;
@@ -85,9 +94,16 @@ public class CommonTestController {
         List<String> keys = Lists.newArrayList("hellolua");
         DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(script, Long.class);
         Long result = stringRedisTemplate.execute(redisScript, keys, num.toString());
-        if(result == null){
+        if (result == null) {
             return num;
         }
         return result;
+    }
+
+    @ApiOperation("5、lua脚本-秒杀")
+    @GetMapping("/lua/seckill")
+    public Long seckill(String voucherId, String userId) {
+        return stringRedisTemplate.execute(SECKILL_SCRIPT,
+                Collections.emptyList(), voucherId, userId);
     }
 }
