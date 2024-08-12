@@ -102,8 +102,8 @@ public class CommonTestController {
 
     @ApiOperation("5、lua脚本-秒杀")
     @GetMapping("/lua/seckill")
-    public Long seckill(String voucherId, String userId) {
+    public Long seckill(String voucherId, String userId, String orderId) {
         return stringRedisTemplate.execute(SECKILL_SCRIPT,
-                Collections.emptyList(), voucherId, userId);
+                Collections.emptyList(), voucherId, userId, orderId);
     }
 }
