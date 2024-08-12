@@ -52,6 +52,7 @@ public class VoucherOrderConsumer {
                     // 解析数据
                     MapRecord<String, Object, Object> record = list.get(0);
                     Map<Object, Object> value = record.getValue();
+                    // 操作业务-如入库
                     log.info("value={}", value);
                     // 4.确认消息 XACK
                     stringRedisTemplate.opsForStream().acknowledge("s1", "g1", record.getId());
@@ -80,6 +81,7 @@ public class VoucherOrderConsumer {
                     // 解析数据
                     MapRecord<String, Object, Object> record = list.get(0);
                     Map<Object, Object> value = record.getValue();
+                    // 操作业务-如入库
                     log.info("value={}", value);
                     // 4.确认消息 XACK
                     stringRedisTemplate.opsForStream().acknowledge("s1", "g1", record.getId());
