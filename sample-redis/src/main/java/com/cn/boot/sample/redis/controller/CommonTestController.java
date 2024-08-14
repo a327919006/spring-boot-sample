@@ -1,6 +1,8 @@
 package com.cn.boot.sample.redis.controller;
 
 import cn.hutool.core.util.StrUtil;
+import com.cn.boot.sample.redis.dto.ScrollResult;
+import com.cn.boot.sample.redis.service.ScrollServiceImpl;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,13 +35,16 @@ import java.util.concurrent.TimeUnit;
 @Api(tags = "1、基础功能测试", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CommonTestController {
 
+    private static final DefaultRedisScript<Long> SECKILL_SCRIPT;
+
     @Autowired
     private JedisPool jedisPool;
     @Autowired
     private RAtomicLong atomicLong;
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
-    private static final DefaultRedisScript<Long> SECKILL_SCRIPT;
+    @Autowired
+    private ScrollServiceImpl scrollService;
 
     static {
         SECKILL_SCRIPT = new DefaultRedisScript<>();
@@ -105,5 +110,11 @@ public class CommonTestController {
     public Long seckill(String voucherId, String userId, String orderId) {
         return stringRedisTemplate.execute(SECKILL_SCRIPT,
                 Collections.emptyList(), voucherId, userId, orderId);
+    }
+
+    @ApiOperation("6、zset实现滚动分页查询")
+    @GetMapping("/scrollPage")
+    public ScrollResult scrollPage(Long max, Integer offset) {
+        return scrollService.scrollPage(max, offset);
     }
 }
