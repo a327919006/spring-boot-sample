@@ -2,6 +2,7 @@ package com.cn.boot.sample.redis.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.cn.boot.sample.redis.dto.ScrollResult;
+import com.cn.boot.sample.redis.service.GeoServiceImpl;
 import com.cn.boot.sample.redis.service.ScrollServiceImpl;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
@@ -11,6 +12,8 @@ import org.redisson.api.RAtomicLong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.geo.GeoResult;
+import org.springframework.data.redis.connection.RedisGeoCommands;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.http.MediaType;
@@ -45,6 +48,8 @@ public class CommonTestController {
     private StringRedisTemplate stringRedisTemplate;
     @Autowired
     private ScrollServiceImpl scrollService;
+    @Autowired
+    private GeoServiceImpl geoService;
 
     static {
         SECKILL_SCRIPT = new DefaultRedisScript<>();
@@ -116,5 +121,21 @@ public class CommonTestController {
     @GetMapping("/scrollPage")
     public ScrollResult scrollPage(Long max, Integer offset) {
         return scrollService.scrollPage(max, offset);
+    }
+
+    @ApiOperation("7、GEO-add-添加地理坐标")
+    @GetMapping("/geo/add")
+    public Long geoAdd(String type, String shopId, double longitude, double latitude) {
+        return geoService.add(type, shopId, longitude, latitude);
+    }
+
+    @ApiOperation("8、GEO-add-添加地理坐标")
+    @GetMapping("/geo/search")
+    public List<GeoResult<RedisGeoCommands.GeoLocation<String>>> gepSearch(String type, Double longitude, Double latitude,
+                                                                           Double distance, Integer page) {
+        if(page == null){
+            page = 1;
+        }
+        return geoService.searchPage(type, longitude, latitude, distance, page);
     }
 }
