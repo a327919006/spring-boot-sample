@@ -1,7 +1,9 @@
 package com.cn.boot.sample.redis.controller;
 
 import cn.hutool.core.util.StrUtil;
+import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.redis.dto.ScrollResult;
+import com.cn.boot.sample.redis.service.BitMapServiceImpl;
 import com.cn.boot.sample.redis.service.GeoServiceImpl;
 import com.cn.boot.sample.redis.service.ScrollServiceImpl;
 import com.google.common.collect.Lists;
@@ -50,6 +52,8 @@ public class CommonTestController {
     private ScrollServiceImpl scrollService;
     @Autowired
     private GeoServiceImpl geoService;
+    @Autowired
+    private BitMapServiceImpl bitMapService;
 
     static {
         SECKILL_SCRIPT = new DefaultRedisScript<>();
@@ -138,4 +142,13 @@ public class CommonTestController {
         }
         return geoService.searchPage(type, longitude, latitude, distance, page);
     }
+
+
+    @ApiOperation("9、BITMAP-sign-签到")
+    @GetMapping("/bitmap/sign")
+    public String bitmapSign(Long userId) {
+        bitMapService.sign(userId);
+        return Constants.MSG_SUCCESS;
+    }
+
 }
