@@ -5,6 +5,7 @@ import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.redis.dto.ScrollResult;
 import com.cn.boot.sample.redis.service.BitMapServiceImpl;
 import com.cn.boot.sample.redis.service.GeoServiceImpl;
+import com.cn.boot.sample.redis.service.HyperLogLogServiceImpl;
 import com.cn.boot.sample.redis.service.ScrollServiceImpl;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
@@ -54,6 +55,8 @@ public class CommonTestController {
     private GeoServiceImpl geoService;
     @Autowired
     private BitMapServiceImpl bitMapService;
+    @Autowired
+    private HyperLogLogServiceImpl hyperLogLogService;
 
     static {
         SECKILL_SCRIPT = new DefaultRedisScript<>();
@@ -137,12 +140,11 @@ public class CommonTestController {
     @GetMapping("/geo/search")
     public List<GeoResult<RedisGeoCommands.GeoLocation<String>>> gepSearch(String type, Double longitude, Double latitude,
                                                                            Double distance, Integer page) {
-        if(page == null){
+        if (page == null) {
             page = 1;
         }
         return geoService.searchPage(type, longitude, latitude, distance, page);
     }
-
 
     @ApiOperation("9、BITMAP-sign-签到")
     @GetMapping("/bitmap/sign")
@@ -151,4 +153,22 @@ public class CommonTestController {
         return Constants.MSG_SUCCESS;
     }
 
+    @ApiOperation("10、BITMAP-count-连续签到次数统计")
+    @GetMapping("/bitmap/count")
+    public int bitmapCount(Long userId) {
+        return bitMapService.count(userId);
+    }
+
+    @ApiOperation("11、HyperLogLog-add-添加当日UV数")
+    @GetMapping("/hyperLogLog/add")
+    public String hyperLogLogAdd(Long userId) {
+        hyperLogLogService.add(userId);
+        return Constants.MSG_SUCCESS;
+    }
+
+    @ApiOperation("12、HyperLogLog-count-获取当日UV数")
+    @GetMapping("/hyperLogLog/count")
+    public Long hyperLogLogCount() {
+        return hyperLogLogService.count();
+    }
 }
