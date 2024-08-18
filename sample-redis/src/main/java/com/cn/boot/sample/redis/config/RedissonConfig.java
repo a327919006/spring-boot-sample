@@ -2,11 +2,10 @@ package com.cn.boot.sample.redis.config;
 
 import org.redisson.Redisson;
 import org.redisson.api.RAtomicLong;
+import org.redisson.api.RBloomFilter;
 import org.redisson.config.Config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Chen Nan
@@ -27,5 +26,16 @@ public class RedissonConfig {
     public RAtomicLong atomicLong(Redisson redisson) {
         RAtomicLong atomicLong = redisson.getAtomicLong("testAtomicLong");
         return atomicLong;
+    }
+
+    @Bean
+    public RBloomFilter<Long> bloomFilter(Redisson redisson) {
+        RBloomFilter<Long> bloomFilter = redisson.getBloomFilter("bf:order");
+        // 预计插入的数量
+        long expectedInsertions = 1000000;
+        // 误判率
+        double falseProbability = 0.01;
+        bloomFilter.tryInit(expectedInsertions, falseProbability);
+        return bloomFilter;
     }
 }

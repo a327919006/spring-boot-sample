@@ -1,6 +1,5 @@
 package com.cn.boot.sample.redis.controller;
 
-import cn.hutool.core.util.StrUtil;
 import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.redis.dto.ScrollResult;
 import com.cn.boot.sample.redis.service.BitMapServiceImpl;
@@ -11,7 +10,6 @@ import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.api.RAtomicLong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
@@ -30,7 +28,6 @@ import redis.clients.jedis.JedisPool;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Chen Nan
@@ -45,8 +42,6 @@ public class CommonTestController {
 
     @Autowired
     private JedisPool jedisPool;
-    @Autowired
-    private RAtomicLong atomicLong;
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
     @Autowired
@@ -74,15 +69,7 @@ public class CommonTestController {
         return jedis.hgetAll(key);
     }
 
-    @ApiOperation("2、测试redisson，AtomicLong")
-    @GetMapping("/atomic/addAndGet")
-    public String atomic(long expire) {
-        String num = String.valueOf(atomicLong.addAndGet(1));
-        atomicLong.expire(expire, TimeUnit.MILLISECONDS);
-        return StrUtil.fillBefore(num, '0', 4);
-    }
-
-    @ApiOperation("3、lua脚本测试-Jedis")
+    @ApiOperation("2、lua脚本测试-Jedis")
     @GetMapping("/lua")
     public String lua(Integer num) {
         Jedis jedis = jedisPool.getResource();
@@ -98,7 +85,7 @@ public class CommonTestController {
         return jedis.eval(script, keys, args).toString();
     }
 
-    @ApiOperation("4、lua脚本测试-StringRedisTemplate")
+    @ApiOperation("3、lua脚本测试-StringRedisTemplate")
     @GetMapping("/lua/stringRedisTemplate")
     public Long luaStringRedisTemplate(Long num) {
         String script = "local value = redis.call('get', KEYS[1])\n" +
@@ -117,26 +104,26 @@ public class CommonTestController {
         return result;
     }
 
-    @ApiOperation("5、lua脚本-秒杀")
+    @ApiOperation("4、lua脚本-秒杀")
     @GetMapping("/lua/seckill")
     public Long seckill(String voucherId, String userId, String orderId) {
         return stringRedisTemplate.execute(SECKILL_SCRIPT,
                 Collections.emptyList(), voucherId, userId, orderId);
     }
 
-    @ApiOperation("6、zset实现滚动分页查询")
+    @ApiOperation("5、zset实现滚动分页查询")
     @GetMapping("/scrollPage")
     public ScrollResult scrollPage(Long max, Integer offset) {
         return scrollService.scrollPage(max, offset);
     }
 
-    @ApiOperation("7、GEO-add-添加地理坐标")
+    @ApiOperation("6、GEO-add-添加地理坐标")
     @GetMapping("/geo/add")
     public Long geoAdd(String type, String shopId, double longitude, double latitude) {
         return geoService.add(type, shopId, longitude, latitude);
     }
 
-    @ApiOperation("8、GEO-add-添加地理坐标")
+    @ApiOperation("7、GEO-add-添加地理坐标")
     @GetMapping("/geo/search")
     public List<GeoResult<RedisGeoCommands.GeoLocation<String>>> gepSearch(String type, Double longitude, Double latitude,
                                                                            Double distance, Integer page) {
@@ -146,27 +133,27 @@ public class CommonTestController {
         return geoService.searchPage(type, longitude, latitude, distance, page);
     }
 
-    @ApiOperation("9、BITMAP-sign-签到")
+    @ApiOperation("8、BITMAP-sign-签到")
     @GetMapping("/bitmap/sign")
     public String bitmapSign(Long userId) {
         bitMapService.sign(userId);
         return Constants.MSG_SUCCESS;
     }
 
-    @ApiOperation("10、BITMAP-count-连续签到次数统计")
+    @ApiOperation("9、BITMAP-count-连续签到次数统计")
     @GetMapping("/bitmap/count")
     public int bitmapCount(Long userId) {
         return bitMapService.count(userId);
     }
 
-    @ApiOperation("11、HyperLogLog-add-添加当日UV数")
+    @ApiOperation("10、HyperLogLog-add-添加当日UV数")
     @GetMapping("/hyperLogLog/add")
     public String hyperLogLogAdd(Long userId) {
         hyperLogLogService.add(userId);
         return Constants.MSG_SUCCESS;
     }
 
-    @ApiOperation("12、HyperLogLog-count-获取当日UV数")
+    @ApiOperation("11、HyperLogLog-count-获取当日UV数")
     @GetMapping("/hyperLogLog/count")
     public Long hyperLogLogCount() {
         return hyperLogLogService.count();
