@@ -1,6 +1,9 @@
 canal:
   ip: 127.0.0.1
   port: 11111
+  # 必须
   destination: example
   username:
   password:
+  # 上面为官方配置，下面为第三方配置
+  server: 127.0.0.1:11111

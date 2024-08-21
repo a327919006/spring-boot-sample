@@ -19,9 +19,16 @@
         </dependency>
 
         <!--canal-->
-        <dependency>
+        <!--官方依赖，但是使用起来不方便，采用第三方封装的-->
+        <!--<dependency>
             <groupId>com.alibaba.otter</groupId>
             <artifactId>canal.client</artifactId>
+        </dependency>-->
+        <!--底层也是依赖官方，只是做了封装-->
+        <dependency>
+            <groupId>top.javatool</groupId>
+            <artifactId>canal-spring-boot-starter</artifactId>
+            <version>1.2.1-RELEASE</version>
         </dependency>
 
         <!-- modules -->
