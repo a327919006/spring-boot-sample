@@ -2,10 +2,7 @@ package com.cn.boot.sample.redis.controller;
 
 import com.cn.boot.sample.api.model.Constants;
 import com.cn.boot.sample.redis.dto.ScrollResult;
-import com.cn.boot.sample.redis.service.BitMapServiceImpl;
-import com.cn.boot.sample.redis.service.GeoServiceImpl;
-import com.cn.boot.sample.redis.service.HyperLogLogServiceImpl;
-import com.cn.boot.sample.redis.service.ScrollServiceImpl;
+import com.cn.boot.sample.redis.service.*;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -45,13 +42,15 @@ public class CommonTestController {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
     @Autowired
-    private ScrollServiceImpl scrollService;
+    private ZSetServiceImpl scrollService;
     @Autowired
     private GeoServiceImpl geoService;
     @Autowired
     private BitMapServiceImpl bitMapService;
     @Autowired
     private HyperLogLogServiceImpl hyperLogLogService;
+    @Autowired
+    private RedisServiceImpl redisService;
 
     static {
         SECKILL_SCRIPT = new DefaultRedisScript<>();
@@ -157,5 +156,12 @@ public class CommonTestController {
     @GetMapping("/hyperLogLog/count")
     public Long hyperLogLogCount() {
         return hyperLogLogService.count();
+    }
+
+    @ApiOperation("12、SCAN--遍历查找BigKey")
+    @GetMapping("/scan/bigKey")
+    public String scanBigKey() {
+        redisService.scanBigKey();
+        return Constants.MSG_SUCCESS;
     }
 }

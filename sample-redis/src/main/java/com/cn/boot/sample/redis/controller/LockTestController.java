@@ -4,7 +4,7 @@ import cn.hutool.core.thread.ThreadFactoryBuilder;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.IdUtil;
 import com.cn.boot.sample.api.model.Constants;
-import com.cn.boot.sample.api.service.RedisService;
+import com.cn.boot.sample.redis.service.RedisServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -28,8 +28,8 @@ import java.util.concurrent.*;
 @Api(tags = "3、分布式锁测试", produces = MediaType.APPLICATION_JSON_VALUE)
 public class LockTestController {
 
-    @Reference
-    private RedisService redisService;
+    @Autowired
+    private RedisServiceImpl redisService;
     @Autowired
     private Redisson redisson;
 

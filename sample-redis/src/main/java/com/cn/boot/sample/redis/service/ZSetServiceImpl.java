@@ -14,13 +14,15 @@ import java.util.Set;
  * @author Chen Nan
  */
 @Service
-public class ScrollServiceImpl {
+public class ZSetServiceImpl {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
     /**
-     * @param min 已返回数据的最小score
+     * zset滚动分页查询
+     *
+     * @param min    已返回数据的最小score
      * @param offset 如果能保证score不重复，则固定为1，如果不能保障，如前端传已返回最小score的个数作为跳过offset
      * @return 滚动分页结果
      */
@@ -44,9 +46,9 @@ public class ScrollServiceImpl {
             ids.add(tuple.getValue());
             // 4.2.获取分数(时间戳）
             long time = tuple.getScore().longValue();
-            if(time == minTime){
+            if (time == minTime) {
                 os++;
-            }else{
+            } else {
                 minTime = time;
                 os = 1;
             }
