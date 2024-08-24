@@ -23,7 +23,7 @@ public class RedisServiceImpl {
      * BigKey判断标准
      */
     private final static int STR_MAX_LEN = 10 * 1024;
-    private final static int HASH_MAX_LEN = 500;
+    private final static int HASH_MAX_LEN = 1000;
 
     private RedisTemplate redisTemplate;
     private HashOperations hashOperations;
