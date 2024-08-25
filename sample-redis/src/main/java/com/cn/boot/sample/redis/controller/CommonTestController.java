@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.geo.GeoResult;
+import org.springframework.data.redis.connection.ClusterSlotHashUtil;
 import org.springframework.data.redis.connection.RedisGeoCommands;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
@@ -163,5 +164,18 @@ public class CommonTestController {
     public String scanBigKey() {
         redisService.scanBigKey();
         return Constants.MSG_SUCCESS;
+    }
+
+    @ApiOperation("13、Pipeline")
+    @GetMapping("/pipeline")
+    public String pipeline() {
+        redisService.pipeline();
+        return Constants.MSG_SUCCESS;
+    }
+
+    @ApiOperation("14、计算key的slot")
+    @GetMapping("/calculateSlot")
+    public int calculateSlot(String key) {
+        return ClusterSlotHashUtil.calculateSlot(key);
     }
 }

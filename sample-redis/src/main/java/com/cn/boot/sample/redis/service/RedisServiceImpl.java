@@ -1,26 +1,35 @@
 package com.cn.boot.sample.redis.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.StringRedisConnection;
 import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.Pipeline;
 import redis.clients.jedis.ScanResult;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author Chen Nan
  */
+@Slf4j
 @Service
 public class RedisServiceImpl {
 
     /**
      * BigKey判断标准
+     * 官方默认500
      */
     private final static int STR_MAX_LEN = 10 * 1024;
     private final static int HASH_MAX_LEN = 1000;
@@ -89,7 +98,7 @@ public class RedisServiceImpl {
      * 使用scan命令遍历搜索BigKey
      * 判断依据：
      * 1、string类型的数据长度不超过10k
-     * 2、hash、list、set、zset等类型的集合内子数量不超过500个
+     * 2、hash、list、set、zset等类型的集合内子数量不超过1000个（官方默认配置500个）
      */
     public void scanBigKey() {
         Jedis jedis = jedisPool.getResource();
@@ -139,5 +148,58 @@ public class RedisServiceImpl {
                 }
             }
         } while (!"0".equals(cursor));
+    }
+
+    public void pipeline() {
+        long start = System.currentTimeMillis();
+
+        // 使用set耗时：18967ms
+        // for (int i = 0; i < 100000; i++) {
+        //     String key = "test:key_" + i;
+        // String value = "value" + i;
+        //     stringRedisTemplate.opsForValue().set(key, value);
+        // }
+
+        // 使用jedis.mset耗时：200ms
+        // Jedis jedis = jedisPool.getResource();
+        // String[] arr = new String[2000];
+        // int j;
+        // for (int i = 1; i <= 100000; i++) {
+        //     String key = "test:key_" + i;
+        //     String value = "value" + i;
+        //
+        //     j = (i % 1000) << 1;
+        //     arr[j] = key;
+        //     arr[j + 1] = value;
+        //     if (j == 0) {
+        //         jedis.mset(arr);
+        //     }
+        // }
+
+        // 使用pipeline耗时：265ms
+        // Jedis jedis = jedisPool.getResource();
+        // Pipeline pipelined = jedis.pipelined();
+        // for (int i = 1; i <= 100000; i++) {
+        //     String key = "test:key_" + i;
+        //     String value = "value" + i;
+        //     pipelined.set(key, value);
+        //     if (i % 1000 == 0) {
+        //         pipelined.sync();
+        //     }
+        // }
+
+
+        // 使用spring封装的mset，支持集群模式，耗时：450ms
+        Map<String, String> data = new HashMap<>(1000);
+        for (int i = 0; i < 100000; i++) {
+            String key = "test:key_" + i;
+            String value = "value" + i;
+            data.put(key, value);
+            if (data.size() == 1000) {
+                stringRedisTemplate.opsForValue().multiSet(data);
+                data.clear();
+            }
+        }
+        log.info("耗时：" + (System.currentTimeMillis() - start) + "ms");
     }
 }
