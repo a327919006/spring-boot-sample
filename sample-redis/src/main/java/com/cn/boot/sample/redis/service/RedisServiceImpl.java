@@ -2,9 +2,6 @@ package com.cn.boot.sample.redis.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.connection.StringRedisConnection;
 import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
@@ -177,29 +174,29 @@ public class RedisServiceImpl {
         // }
 
         // 使用pipeline耗时：265ms
-        // Jedis jedis = jedisPool.getResource();
-        // Pipeline pipelined = jedis.pipelined();
-        // for (int i = 1; i <= 100000; i++) {
-        //     String key = "test:key_" + i;
-        //     String value = "value" + i;
-        //     pipelined.set(key, value);
-        //     if (i % 1000 == 0) {
-        //         pipelined.sync();
-        //     }
-        // }
+        Jedis jedis = jedisPool.getResource();
+        Pipeline pipelined = jedis.pipelined();
+        for (int i = 1; i <= 100000; i++) {
+            String key = "test:key_" + i;
+            String value = "value" + i;
+            pipelined.set(key, value);
+            if (i % 1000 == 0) {
+                pipelined.sync();
+            }
+        }
 
 
         // 使用spring封装的mset，支持集群模式，耗时：450ms
-        Map<String, String> data = new HashMap<>(1000);
-        for (int i = 0; i < 100000; i++) {
-            String key = "test:key_" + i;
-            String value = "value" + i;
-            data.put(key, value);
-            if (data.size() == 1000) {
-                stringRedisTemplate.opsForValue().multiSet(data);
-                data.clear();
-            }
-        }
+        // Map<String, String> data = new HashMap<>(1000);
+        // for (int i = 0; i < 100000; i++) {
+        //     String key = "test:key_" + i;
+        //     String value = "value" + i;
+        //     data.put(key, value);
+        //     if (data.size() == 1000) {
+        //         stringRedisTemplate.opsForValue().multiSet(data);
+        //         data.clear();
+        //     }
+        // }
         log.info("耗时：" + (System.currentTimeMillis() - start) + "ms");
     }
 }
