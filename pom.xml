@@ -66,6 +66,8 @@
         <module>sample-agent</module>
         <module>sample-pulsar</module>
         <module>sample-doris</module>
+        <module>sample-dal-mp</module>
+        <module>sample-server-mp</module>
     </modules>
 
 
@@ -199,6 +201,11 @@
             <dependency>
                 <groupId>com.cn.boot</groupId>
                 <artifactId>sample-dal</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cn.boot</groupId>
+                <artifactId>sample-dal-mp</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
