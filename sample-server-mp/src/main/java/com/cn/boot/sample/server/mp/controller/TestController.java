@@ -1,8 +1,7 @@
 package com.cn.boot.sample.server.mp.controller;
 
-import cn.hutool.core.util.IdUtil;
-import com.cn.boot.sample.api.model.po.User;
-import com.cn.boot.sample.api.service.UserService;
+import com.cn.boot.sample.dal.mp.entity.People;
+import com.cn.boot.sample.server.mp.service.PeopleServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -23,18 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @Autowired
-    private UserService userService;
+    private PeopleServiceImpl peopleService;
 
     @ApiOperation("")
     @GetMapping("")
     @Transactional
-    public String save(String name) {
-        User user = new User();
-        user.setId(IdUtil.getSnowflakeNextIdStr());
-        user.setUsername(name);
-        user.setPassword("123456");
-        userService.insert(user);
+    public Long save(String name) {
+        People people = new People();
+        people.setName(name);
+        peopleService.insert(people);
 
-        return user.getId();
+        return people.getId();
     }
 }
