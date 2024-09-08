@@ -1,7 +1,8 @@
 package com.cn.boot.sample.server.mp.controller;
 
 import com.cn.boot.sample.dal.mp.entity.People;
-import com.cn.boot.sample.server.mp.service.PeopleServiceImpl;
+import com.cn.boot.sample.server.mp.service.IPeopleService;
+import com.cn.boot.sample.server.mp.service.impl.PeopleServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -17,20 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/people")
 @Api(tags = "", produces = MediaType.APPLICATION_JSON_VALUE)
-public class TestController {
+public class PeopleController {
 
     @Autowired
-    private PeopleServiceImpl peopleService;
+    private IPeopleService peopleService;
 
     @ApiOperation("")
     @GetMapping("")
-    @Transactional
     public Long save(String name) {
         People people = new People();
         people.setName(name);
-        peopleService.insert(people);
+        peopleService.save(people);
 
         return people.getId();
     }
