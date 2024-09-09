@@ -1,6 +1,6 @@
 package com.cn.boot.sample.server.mp.service;
 
-import com.cn.boot.sample.dal.mp.entity.People;
+import com.cn.boot.sample.dal.mp.model.po.People;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -12,5 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-09-08
  */
 public interface IPeopleService extends IService<People> {
+    People getByName(String name);
 
 }

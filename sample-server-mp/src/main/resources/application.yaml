@@ -1,3 +1,10 @@
 spring:
   profiles:
     active: @profileActive@
+
+
+mybatis-plus:
+  typeAliasesPackage: com.cn.boot.sample.dal.mp.model.po
+  mapperLocations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true

@@ -1,12 +1,10 @@
-package com.cn.boot.sample.dal.mp.entity;
+package com.cn.boot.sample.dal.mp.model.po;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -28,7 +26,7 @@ import lombok.Setter;
 @Setter
 @TableName("t_people")
 @ApiModel(value = "People对象", description = "人员信息")
-public class People implements Serializable {
+public class People extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -38,16 +36,6 @@ public class People implements Serializable {
     @ApiModelProperty("姓名")
     @TableField("name")
     private String name;
-
-    @TableField("is_deleted")
-    @TableLogic
-    private Byte isDeleted;
-
-    @TableField("create_time")
-    private LocalDateTime createTime;
-
-    @TableField("update_time")
-    private LocalDateTime updateTime;
 
     @TableField(exist = false)
     private Integer page;

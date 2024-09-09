@@ -1,7 +1,7 @@
 package com.cn.boot.sample.dal.mp.mapper;
 
-import com.cn.boot.sample.dal.mp.entity.People;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.cn.boot.sample.dal.mp.model.po.People;
 
 /**
  * <p>
@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2024-09-08
  */
 public interface PeopleMapper extends BaseMapper<People> {
-
+    People getByName(String name);
 }
