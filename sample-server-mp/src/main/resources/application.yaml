@@ -8,3 +8,10 @@ mybatis-plus:
   mapperLocations: classpath:mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
+    cache-enabled: false #是否开启二级缓存
+  global-config:
+    banner: false #控制是否在控制台打印 MyBatis-Plus 的 LOGO
+    db-config:
+      id-type: ASSIGN_ID # ID类型，默认雪花ID
+      insert-strategy: not_null # 默认：仅在字段值不为 NULL 时插入该字段
+      update-strategy: not_null
