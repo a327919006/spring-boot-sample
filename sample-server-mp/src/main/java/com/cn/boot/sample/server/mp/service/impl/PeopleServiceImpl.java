@@ -1,10 +1,13 @@
 package com.cn.boot.sample.server.mp.service.impl;
 
-import com.cn.boot.sample.dal.mp.model.po.People;
-import com.cn.boot.sample.dal.mp.mapper.PeopleMapper;
+import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cn.boot.sample.dal.mp.mapper.PeopleMapper;
+import com.cn.boot.sample.dal.mp.model.po.People;
 import com.cn.boot.sample.server.mp.service.IPeopleService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -20,5 +23,12 @@ public class PeopleServiceImpl extends ServiceImpl<PeopleMapper, People> impleme
     @Override
     public People getByName(String name) {
         return baseMapper.getByName(name);
+    }
+
+    @Override
+    public List<People> list(People dto) {
+        return baseMapper.selectList(new LambdaQueryChainWrapper<>(baseMapper)
+                .select(People::getId)
+                .eq(People::getName, dto.getName()));
     }
 }

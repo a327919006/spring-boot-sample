@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author Chen Nan
  */
@@ -33,6 +35,11 @@ public class PeopleController {
         return people.getId();
     }
 
+    @ApiOperation("")
+    @GetMapping("list")
+    public List<People> list(People people) {
+        return peopleService.list(people);
+    }
 
     @ApiOperation("")
     @GetMapping("test")
