@@ -1,5 +1,6 @@
 package com.cn.boot.sample.server.mp.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cn.boot.sample.dal.mp.mapper.PeopleMapper;
@@ -27,8 +28,11 @@ public class PeopleServiceImpl extends ServiceImpl<PeopleMapper, People> impleme
 
     @Override
     public List<People> list(People dto) {
-        return baseMapper.selectList(new LambdaQueryChainWrapper<>(baseMapper)
+        // QueryWrapper<People> queryWrapper = new QueryWrapper<>();
+        // queryWrapper.select("id").eq("name", dto.getName());
+        // return baseMapper.selectList(queryWrapper);
+        return new LambdaQueryChainWrapper<>(People.class)
                 .select(People::getId)
-                .eq(People::getName, dto.getName()));
+                .eq(People::getName, dto.getName()).list();
     }
 }
