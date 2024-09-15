@@ -1,6 +1,7 @@
 package com.cn.boot.sample.server.mp.controller;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.extension.toolkit.Db;
 import com.cn.boot.sample.dal.mp.model.dto.PeopleDTO;
 import com.cn.boot.sample.dal.mp.model.po.People;
 import com.cn.boot.sample.dal.mp.model.vo.PeopleVO;
@@ -20,13 +21,13 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/people")
-@Api(tags = "", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "人员信息", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class PeopleController {
 
     private final IPeopleService peopleService;
 
-    @ApiOperation("save")
+    @ApiOperation("新增")
     @PostMapping("")
     public Long save(@RequestBody PeopleDTO dto) {
         People people = BeanUtil.copyProperties(dto, People.class);
@@ -35,33 +36,33 @@ public class PeopleController {
         return people.getId();
     }
 
-    @ApiOperation("delete")
+    @ApiOperation("删除")
     @DeleteMapping("{id}")
     public boolean delete(@PathVariable String id) {
         return peopleService.removeById(id);
     }
 
-    @ApiOperation("update")
+    @ApiOperation("修改")
     @PutMapping("")
     public boolean update(@RequestBody PeopleDTO dto) {
         People people = BeanUtil.copyProperties(dto, People.class);
         return peopleService.updateById(people);
     }
 
-    @ApiOperation("updateAccount")
+    @ApiOperation("修改账户金额")
     @PutMapping("/account")
     public boolean updateAccount(@RequestBody PeopleDTO dto) {
         return peopleService.updateAccount(dto);
     }
 
-    @ApiOperation("detail")
+    @ApiOperation("获取详情")
     @GetMapping("/detail/{id}")
     public PeopleVO detail(@PathVariable String id) {
         People people = peopleService.getById(id);
         return BeanUtil.copyProperties(people, PeopleVO.class);
     }
 
-    @ApiOperation("list")
+    @ApiOperation("获取列表")
     @GetMapping("/list")
     public List<PeopleVO> list(People people) {
         return peopleService.list(people);
@@ -73,17 +74,22 @@ public class PeopleController {
     //     return peopleService.page(page);
     // }
 
-    @ApiOperation("getByName")
+    @ApiOperation("获取-根据姓名")
     @GetMapping("/getByName")
     public People getByName(String name) {
         return peopleService.getByName(name);
     }
 
-
-    @ApiOperation("saveBatch")
+    @ApiOperation("批量新增")
     @PostMapping("/batch")
     public boolean saveBatch(@RequestBody List<PeopleDTO> dto) {
         List<People> people = BeanUtil.copyToList(dto, People.class);
         return peopleService.saveBatch(people);
+    }
+
+    @ApiOperation(value = "获取-使用静态工具DB", notes = "在发生循环依赖时可使用DB进行调用")
+    @GetMapping("/util")
+    public People getUseUtil(String name) {
+        return Db.getOne(new People().setName(name));
     }
 }
