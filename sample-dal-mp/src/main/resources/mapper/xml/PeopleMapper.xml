@@ -4,21 +4,27 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cn.boot.sample.dal.mp.model.po.People">
-        <id column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="is_deleted" property="isDeleted" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, name, is_deleted, create_time, update_time
     </sql>
+
     <select id="getByName" resultMap="BaseResultMap">
       select * from t_people
       where name = #{name}
       limit 1
     </select>
+
+    <update id="updateAccount">
+      UPDATE t_people SET account = account + #{account}
+      ${ew.customSqlSegment}
+    </update>
 
 </mapper>

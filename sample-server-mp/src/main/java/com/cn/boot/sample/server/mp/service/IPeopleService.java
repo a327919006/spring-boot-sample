@@ -1,7 +1,9 @@
 package com.cn.boot.sample.server.mp.service;
 
+import com.cn.boot.sample.dal.mp.model.dto.PeopleDTO;
 import com.cn.boot.sample.dal.mp.model.po.People;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.cn.boot.sample.dal.mp.model.vo.PeopleVO;
 
 import java.util.List;
 
@@ -16,6 +18,8 @@ import java.util.List;
 public interface IPeopleService extends IService<People> {
     People getByName(String name);
 
-    List<People> list(People dto);
+    List<PeopleVO> list(People dto);
+
+    boolean updateAccount(PeopleDTO dto);
 
 }

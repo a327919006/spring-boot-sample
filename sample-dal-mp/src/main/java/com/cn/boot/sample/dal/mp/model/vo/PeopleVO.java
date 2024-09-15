@@ -1,4 +1,4 @@
-package com.cn.boot.sample.dal.mp.model.dto;
+package com.cn.boot.sample.dal.mp.model.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -6,10 +6,11 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
-@ApiModel(value = "PeopleDTO")
-public class PeopleDTO implements Serializable {
+@ApiModel(value = "PeopleVO")
+public class PeopleVO implements Serializable {
 
     @ApiModelProperty("ID")
     private Long id;
@@ -19,4 +20,10 @@ public class PeopleDTO implements Serializable {
 
     @ApiModelProperty("账户余额")
     private BigDecimal account;
+
+    @ApiModelProperty("创建时间")
+    private LocalDateTime createTime;
+
+    @ApiModelProperty("更新时间")
+    private LocalDateTime updateTime;
 }

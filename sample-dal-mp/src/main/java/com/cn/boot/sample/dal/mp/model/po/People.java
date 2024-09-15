@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -37,6 +38,10 @@ public class People extends BaseEntity implements Serializable {
     @ApiModelProperty("姓名")
     @TableField("name")
     private String name;
+
+    @ApiModelProperty("账户余额")
+    @TableField("account")
+    private BigDecimal account;
 
     @TableField(exist = false)
     private Integer page;
