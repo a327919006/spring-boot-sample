@@ -1,6 +1,7 @@
 package com.cn.boot.sample.server.mp.controller;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.toolkit.Db;
 import com.cn.boot.sample.dal.mp.model.dto.PeopleDTO;
 import com.cn.boot.sample.dal.mp.model.po.People;
@@ -64,20 +65,15 @@ public class PeopleController {
 
     @ApiOperation("获取列表")
     @GetMapping("/list")
-    public List<PeopleVO> list(People people) {
+    public List<PeopleVO> list(PeopleDTO dto) {
+        People people = BeanUtil.copyProperties(dto, People.class);
         return peopleService.list(people);
     }
 
-    // @ApiOperation("")
-    // @GetMapping("page")
-    // public List<People> page(IPage page, People people) {
-    //     return peopleService.page(page);
-    // }
-
-    @ApiOperation("获取-根据姓名")
-    @GetMapping("/getByName")
-    public People getByName(String name) {
-        return peopleService.getByName(name);
+    @ApiOperation("")
+    @GetMapping("page")
+    public IPage<PeopleVO> page(PeopleDTO dto) {
+        return peopleService.pageVO(dto);
     }
 
     @ApiOperation("批量新增")

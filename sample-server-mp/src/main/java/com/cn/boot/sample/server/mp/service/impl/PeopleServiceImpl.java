@@ -2,7 +2,10 @@ package com.cn.boot.sample.server.mp.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cn.boot.sample.dal.mp.mapper.PeopleMapper;
 import com.cn.boot.sample.dal.mp.model.dto.PeopleDTO;
@@ -11,8 +14,10 @@ import com.cn.boot.sample.dal.mp.model.vo.PeopleVO;
 import com.cn.boot.sample.server.mp.service.IPeopleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -26,8 +31,16 @@ import java.util.List;
 public class PeopleServiceImpl extends ServiceImpl<PeopleMapper, People> implements IPeopleService {
 
     @Override
-    public People getByName(String name) {
-        return baseMapper.getByName(name);
+    public IPage<PeopleVO> pageVO(PeopleDTO dto) {
+        if (dto.getCurrent() == null) {
+            dto.setCurrent(1L);
+        }
+        if (dto.getSize() == null) {
+            dto.setSize(10L);
+        }
+        Page<PeopleVO> page = Page.of(dto.getCurrent(), dto.getSize(), dto.getCurrent() == 1);
+        page.addOrder(OrderItem.desc("update_time"));
+        return baseMapper.pageVO(page, dto);
     }
 
     @Override
