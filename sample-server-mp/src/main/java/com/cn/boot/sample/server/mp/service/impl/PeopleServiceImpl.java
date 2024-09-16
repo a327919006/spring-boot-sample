@@ -4,7 +4,6 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
-import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cn.boot.sample.dal.mp.mapper.PeopleMapper;
@@ -14,10 +13,8 @@ import com.cn.boot.sample.dal.mp.model.vo.PeopleVO;
 import com.cn.boot.sample.server.mp.service.IPeopleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -57,8 +54,13 @@ public class PeopleServiceImpl extends ServiceImpl<PeopleMapper, People> impleme
         // list = baseMapper.selectList(queryWrapper);
 
         // 写法3：LambdaQueryChainWrapper
-        list = new LambdaQueryChainWrapper<>(People.class)
-                .select(People::getId, People::getAccount)
+        // list = new LambdaQueryChainWrapper<>(People.class)
+        //         .select(People::getId, People::getAccount)
+        //         .eq(StringUtils.isNoneEmpty(dto.getName()), People::getName, dto.getName())
+        //         .list();
+
+        // 写法4：lambdaQuery
+        list = lambdaQuery().select(People::getId, People::getAccount)
                 .eq(StringUtils.isNoneEmpty(dto.getName()), People::getName, dto.getName())
                 .list();
 
@@ -76,7 +78,12 @@ public class PeopleServiceImpl extends ServiceImpl<PeopleMapper, People> impleme
         // return update(new LambdaUpdateWrapper<People>().setSql("account = account + " + dto.getAccount())
         //         .eq(People::getName, dto.getName()));
 
-        // 写法3：自定义SQL
+        // 写法3：LambdaUpdateWrapper
+        // return lambdaUpdate().setSql("account = account + "+ dto.getAccount())
+        //         .eq(People::getName, dto.getName())
+        //         .update();
+
+        // 写法4：自定义SQL
         return baseMapper.updateAccount(dto.getAccount(),
                 new LambdaQueryWrapper<People>().eq(People::getDeleted, 0)
                         .eq(People::getName, dto.getName())) > 0;

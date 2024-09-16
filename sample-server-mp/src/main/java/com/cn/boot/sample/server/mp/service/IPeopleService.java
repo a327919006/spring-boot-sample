@@ -19,16 +19,25 @@ import java.util.List;
 public interface IPeopleService extends IService<People> {
     /**
      * 分页查询
+     *
+     * @param dto 查询条件
+     * @return 分页查询结果
      */
     IPage<PeopleVO> pageVO(PeopleDTO dto);
 
     /**
      * 查询列表
+     *
+     * @param dto 查询条件
+     * @return 查询结果
      */
     List<PeopleVO> list(People dto);
 
     /**
      * 修改账户余额
+     *
+     * @param dto 账户及金额信息
+     * @return 变更
      */
     boolean updateAccount(PeopleDTO dto);
 }
