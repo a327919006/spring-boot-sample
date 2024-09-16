@@ -8,7 +8,7 @@
         <result column="name" property="name"/>
         <result column="account" property="account"/>
         <result column="status" property="status"/>
-        <result column="is_deleted" property="isDeleted"/>
+        <result column="deleted" property="deleted"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
@@ -34,6 +34,7 @@
         <include refid="Vo_Column_List"/>
         FROM t_people
         <where>
+            AND deleted = 0
             <if test="dto.name != null and dto.name != ''">
                 AND name = #{dto.name}
             </if>

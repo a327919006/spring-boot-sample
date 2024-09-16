@@ -78,7 +78,7 @@ public class PeopleServiceImpl extends ServiceImpl<PeopleMapper, People> impleme
 
         // 写法3：自定义SQL
         return baseMapper.updateAccount(dto.getAccount(),
-                new LambdaQueryWrapper<People>().eq(People::getIsDeleted, 0)
+                new LambdaQueryWrapper<People>().eq(People::getDeleted, 0)
                         .eq(People::getName, dto.getName())) > 0;
     }
 }

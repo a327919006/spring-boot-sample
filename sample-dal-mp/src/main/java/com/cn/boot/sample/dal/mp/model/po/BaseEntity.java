@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
  */
 @Data
 public class BaseEntity {
-    @TableField("is_deleted")
+    @TableField("deleted")
     @TableLogic
-    private Byte isDeleted;
+    private Byte deleted;
 
     @ApiModelProperty("创建时间")
     @TableField("create_time")
