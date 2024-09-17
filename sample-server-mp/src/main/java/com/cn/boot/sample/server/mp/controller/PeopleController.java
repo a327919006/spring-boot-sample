@@ -1,6 +1,7 @@
 package com.cn.boot.sample.server.mp.controller;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.toolkit.Db;
 import com.cn.boot.sample.dal.mp.model.dto.PeopleDTO;
@@ -83,7 +84,8 @@ public class PeopleController {
         return peopleService.saveBatch(people);
     }
 
-    @ApiOperation(value = "获取-使用静态工具DB", notes = "在发生循环依赖时可使用DB进行调用")
+    @ApiOperation(value = "获取-使用静态工具DB", notes = "在发生循环依赖时可使用DB进行调用，" +
+            "官方文档：https://baomidou.com/guides/data-interface/#db-kit")
     @GetMapping("/util")
     public People getUseUtil(String name) {
         return Db.getOne(new People().setName(name));

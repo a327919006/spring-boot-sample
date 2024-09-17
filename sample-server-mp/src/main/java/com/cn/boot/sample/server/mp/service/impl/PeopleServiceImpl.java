@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cn.boot.sample.dal.mp.mapper.PeopleMapper;
@@ -48,10 +49,10 @@ public class PeopleServiceImpl extends ServiceImpl<PeopleMapper, People> impleme
         // queryWrapper.select("id").eq("name", dto.getName());
         // list = baseMapper.selectList(queryWrapper);
 
-        // 写法2：LambdaQueryWrapper
-        // LambdaQueryWrapper<People> queryWrapper = new LambdaQueryWrapper<>();
-        // queryWrapper.select(People::getId).eq(People::getName, dto.getName());
-        // list = baseMapper.selectList(queryWrapper);
+        // 写法2：静态工具 Wrappers + LambdaQueryWrapper
+        // list = baseMapper.selectList(Wrappers.lambdaQuery(People.class)
+        //         .select(People::getId)
+        //         .eq(People::getName, dto.getName()));
 
         // 写法3：LambdaQueryChainWrapper
         // list = new LambdaQueryChainWrapper<>(People.class)

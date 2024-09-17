@@ -10,7 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Chen Nan
  */
 @SpringBootApplication
-@MapperScan({"com.cn.boot.sample.dal.mp.mapper"})
+@MapperScan({
+        "com.cn.boot.sample.dal.mp.mapper",
+        "com.baidu.fsg.uid.worker.dao"})
 public class ServerMpApplication {
     public static void main(String[] args) {
         SpringApplication.run(ServerMpApplication.class, args);

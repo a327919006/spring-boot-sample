@@ -1,6 +1,7 @@
 package com.cn.boot.sample.dal.mp.model.dto;
 
 import com.cn.boot.sample.dal.mp.enums.PeopleStatus;
+import com.cn.boot.sample.dal.mp.model.po.Address;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -23,6 +24,9 @@ public class PeopleDTO implements Serializable {
 
     @ApiModelProperty("账户余额")
     private BigDecimal account;
+
+    @ApiModelProperty("地址")
+    private Address address;
 
     @ApiModelProperty("状态 0待审核 1审核中 2审核成功 3审核失败")
     private PeopleStatus status;
