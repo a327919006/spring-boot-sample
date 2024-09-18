@@ -46,6 +46,10 @@ public class People extends BaseEntity implements Serializable {
     @TableField("account")
     private BigDecimal account;
 
+    @ApiModelProperty("租户ID")
+    @TableField("tenant_id")
+    private Long tenantId;
+
     /**
      * 枚举类型，使用mp中自带的枚举类型处理器
      */

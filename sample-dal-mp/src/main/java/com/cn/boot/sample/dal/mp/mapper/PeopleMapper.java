@@ -1,5 +1,6 @@
 package com.cn.boot.sample.dal.mp.mapper;
 
+import com.baomidou.mybatisplus.annotation.InterceptorIgnore;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -30,12 +31,13 @@ public interface PeopleMapper extends BaseMapper<People> {
     IPage<PeopleVO> pageVO(IPage<PeopleVO> page, @Param("dto") PeopleDTO dto);
 
     /**
-     * 修改账户余额
+     * 修改账户余额,InterceptorIgnore(tenantLine = "1") // 忽略多租户拦截器
      *
      * @param account 账户变动金额
      * @param wrapper 查询条件
      * @return 更新结果
      */
+    @InterceptorIgnore(tenantLine = "1")
     int updateAccount(@Param("account") BigDecimal account,
                       @Param(Constants.WRAPPER) LambdaQueryWrapper<People> wrapper);
 }

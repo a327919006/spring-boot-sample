@@ -1,5 +1,6 @@
 package com.cn.boot.sample.dal.mp.model.po;
 
+import com.baomidou.mybatisplus.annotation.OrderBy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import io.swagger.annotations.ApiModelProperty;
@@ -22,5 +23,6 @@ public class BaseEntity {
 
     @ApiModelProperty("更新时间")
     @TableField("update_time")
+    @OrderBy
     private LocalDateTime updateTime;
 }

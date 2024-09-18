@@ -61,7 +61,8 @@ public class PeopleServiceImpl extends ServiceImpl<PeopleMapper, People> impleme
         //         .list();
 
         // 写法4：lambdaQuery
-        list = lambdaQuery().select(People::getId, People::getAccount)
+        list = lambdaQuery().select(People::getId, People::getName, People::getAccount, People::getAddress,
+                People::getStatus, People::getCreateTime, People::getUpdateTime)
                 .eq(StringUtils.isNoneEmpty(dto.getName()), People::getName, dto.getName())
                 .list();
 
