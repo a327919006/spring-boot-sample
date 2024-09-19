@@ -1,6 +1,7 @@
 package com.cn.boot.sample.server.mp.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
@@ -30,5 +31,10 @@ public class MyBatisConfig {
         // TenantLineInnerInterceptor tenantInterceptor = new TenantLineInnerInterceptor(customTenantHandler);
         // interceptor.addInnerInterceptor(tenantInterceptor);
         return interceptor;
+    }
+
+    @Bean
+    public CustomSqlInjector sqlInjector() {
+        return new CustomSqlInjector();
     }
 }

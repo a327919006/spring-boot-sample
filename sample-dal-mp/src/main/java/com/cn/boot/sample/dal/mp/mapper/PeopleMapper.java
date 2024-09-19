@@ -20,7 +20,7 @@ import java.math.BigDecimal;
  * @author Chen Nan
  * @since 2024-09-08
  */
-public interface PeopleMapper extends BaseMapper<People> {
+public interface PeopleMapper extends MyBaseMapper<People> {
     /**
      * 分页查询
      *
