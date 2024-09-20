@@ -1,4 +1,4 @@
-package com.cn.boot.sample.server.mp.config;
+package com.cn.boot.sample.server.mp.config.mybatis;
 
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;

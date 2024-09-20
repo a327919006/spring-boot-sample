@@ -1,4 +1,4 @@
-package com.cn.boot.sample.server.mp.config;
+package com.cn.boot.sample.server.mp.config.uid;
 
 import com.baidu.fsg.uid.impl.DefaultUidGenerator;
 import com.baidu.fsg.uid.worker.DisposableWorkerIdAssigner;

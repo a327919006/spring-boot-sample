@@ -1,10 +1,8 @@
-package com.cn.boot.sample.server.mp.config;
+package com.cn.boot.sample.server.mp.config.mybatis;
 
 import com.baomidou.mybatisplus.annotation.DbType;
-import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,8 +26,8 @@ public class MyBatisConfig {
         interceptor.addInnerInterceptor(paginationInnerInterceptor);
 
         //多租户插件
-        // TenantLineInnerInterceptor tenantInterceptor = new TenantLineInnerInterceptor(customTenantHandler);
-        // interceptor.addInnerInterceptor(tenantInterceptor);
+        CustomerTenantInterceptor tenantInterceptor = new CustomerTenantInterceptor(customTenantHandler);
+        interceptor.addInnerInterceptor(tenantInterceptor);
         return interceptor;
     }
 

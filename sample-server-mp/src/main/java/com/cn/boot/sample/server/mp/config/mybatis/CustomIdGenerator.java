@@ -1,4 +1,4 @@
-package com.cn.boot.sample.server.mp.config;
+package com.cn.boot.sample.server.mp.config.mybatis;
 
 import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.incrementer.IKeyGenerator;

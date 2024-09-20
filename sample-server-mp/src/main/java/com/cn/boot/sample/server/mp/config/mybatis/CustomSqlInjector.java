@@ -1,4 +1,4 @@
-package com.cn.boot.sample.server.mp.config;
+package com.cn.boot.sample.server.mp.config.mybatis;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
@@ -19,7 +19,7 @@ public class CustomSqlInjector extends DefaultSqlInjector {
     public List<AbstractMethod> getMethodList(Configuration configuration, Class<?> mapperClass, TableInfo tableInfo) {
         List<AbstractMethod> methodList = super.getMethodList(configuration, mapperClass, tableInfo);
         //增加自定义方法
-        // methodList.add(new DeleteAll("deleteAll"));
+        // methodList.add(new CustomInsertAllBatch("insertAllBatch"));
         // methodList.add(new FindOne("findOne"));
         methodList.add(new InsertBatchSomeColumn(i -> i.getFieldFill() != FieldFill.UPDATE));
         methodList.add(new AlwaysUpdateSomeColumnById());
