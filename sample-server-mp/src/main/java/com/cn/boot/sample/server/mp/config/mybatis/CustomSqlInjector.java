@@ -11,6 +11,8 @@ import org.apache.ibatis.session.Configuration;
 import java.util.List;
 
 /**
+ * 注入自定义方法以及MyBatisPlus实现好的通用方法
+ *
  * @author Chen Nan
  */
 public class CustomSqlInjector extends DefaultSqlInjector {

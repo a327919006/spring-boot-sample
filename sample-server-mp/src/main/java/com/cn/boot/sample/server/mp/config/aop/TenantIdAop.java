@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 租户ID切面，解析用户信息，获取租户ID，放入上下文
+ * 租户ID切面，解析Token中用户信息，获取租户ID，放入上下文，用于多租户数据权限控制
  *
  * @author Chen Nan
  */
@@ -25,5 +25,10 @@ public class TenantIdAop implements HandlerInterceptor {
             TenantIdContextHolder.setTenantId(Long.parseLong(tenantId));
         }
         return true;
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        TenantIdContextHolder.clearTenantId();
     }
 }

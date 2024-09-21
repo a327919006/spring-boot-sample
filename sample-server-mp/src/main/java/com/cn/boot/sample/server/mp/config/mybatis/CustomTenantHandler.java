@@ -8,6 +8,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 /**
+ * 多租户处理器，提供租户ID给MP的sql拦截器，实现数据权限过滤
+ *
  * @author Chen Nan
  */
 @Component
@@ -17,7 +19,7 @@ public class CustomTenantHandler implements TenantLineHandler {
     public Expression getTenantId() {
         // 从上下文获取租户ID
         Long tenantId = TenantIdContextHolder.getTenantId();
-        // 为空时查询所有
+        // 为空时查询所有，使用场景：超级管理员账号可查看所有租户数据
         if (tenantId == null) {
             return null;
         }

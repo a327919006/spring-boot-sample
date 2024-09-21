@@ -35,6 +35,9 @@ import java.util.List;
 import java.util.Properties;
 
 /**
+ * 基于TenantLineInnerInterceptor源码，修改内容：
+ * 判断租户ID为空时查询所有数据，原有代码是查询租户id为空的数据
+ *
  * @author Chen Nan
  */
 @Data
@@ -261,7 +264,7 @@ public class CustomerTenantInterceptor extends BaseMultiTableInnerInterceptor im
         }
         Expression tenantId = tenantLineHandler.getTenantId();
         // ChenNan：租户ID为空时查询所有
-        if (tenantId == null){
+        if (tenantId == null) {
             return null;
         }
         return new EqualsTo(getAliasColumn(table), tenantId);
