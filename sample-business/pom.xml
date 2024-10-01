@@ -119,6 +119,13 @@
             <version>5.4</version>
         </dependency>
 
+        <!-- X-EasyPdf-->
+        <dependency>
+            <groupId>org.dromara.x-easypdf</groupId>
+            <artifactId>x-easypdf</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+
 
         <!--cglib-->
         <dependency>

@@ -22,6 +22,11 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipOutputStream;
+import org.dromara.pdf.fop.core.base.Template;
+import org.dromara.pdf.fop.core.doc.Document;
+import org.dromara.pdf.fop.core.doc.component.text.Text;
+import org.dromara.pdf.fop.core.doc.page.Page;
+import org.dromara.pdf.fop.handler.TemplateHandler;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -34,10 +39,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author ChenNan
@@ -286,6 +288,18 @@ public class FileController {
 
         writeDate(list, fileName, ClientCsv.class, response);
     }
+
+    @ApiOperation("下载PDF")
+    @GetMapping("/download/pdf")
+    public void downloadPdf(HttpServletResponse response) throws Exception {
+        Document document = TemplateHandler.Document.build();
+        Page page = TemplateHandler.Page.build();
+        Text text = TemplateHandler.Text.build().setText("hello world");
+        page.addBodyComponent(text);
+        document.addPage(page);
+        document.transform("./hello-world.pdf");
+    }
+
 
     private <T> void writeDate(List<T> list, String fileName, Class<T> clazz, HttpServletResponse response) throws Exception {
         ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream(1024 * 1024);
