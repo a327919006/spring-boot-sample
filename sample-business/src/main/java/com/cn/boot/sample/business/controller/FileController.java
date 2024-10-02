@@ -292,10 +292,37 @@ public class FileController {
     @ApiOperation("下载PDF")
     @GetMapping("/download/pdf")
     public void downloadPdf(HttpServletResponse response) throws Exception {
-        Document document = TemplateHandler.Document.build();
-        Page page = TemplateHandler.Page.build();
-        Text text = TemplateHandler.Text.build().setText("hello world");
-        page.addBodyComponent(text);
+        Document document = TemplateHandler.Document.build()
+                .setTitle("标题-测试")
+                .setAuthor("作者-测试")
+                .setSubject("主题-测试")
+                .setKeywords("关键词-测试")
+                .setCreator("创建人-测试")
+                .setCreationDate(new Date());
+        Page page = TemplateHandler.Page.build()
+                .setWidth("21cm")// 默认页面大小：A4 21cm/29.7cm
+                .setHeight("29.7cm")
+                .setHeaderHeight("30pt")
+                .setBodyMarginTop("30pt")
+                .setFooterHeight("30pt")
+                .setBodyMarginBottom("30pt");
+        // 创建页眉文本
+        Text headerText = TemplateHandler.Text.build()
+                .setText("页眉")
+                .setFontFamily("微软雅黑");
+        // 创建主体文本
+        Text bodyText = TemplateHandler.Text.build()
+                .setText("hello world")
+                .setFontFamily("微软雅黑");
+        // 创建页脚文本
+        Text footerText = TemplateHandler.Text.build()
+                .setText("页脚")
+                .setFontFamily("微软雅黑");
+
+
+        page.addHeaderComponent(headerText)
+                .addBodyComponent(bodyText)
+                .addFooterComponent(footerText);
         document.addPage(page);
         document.transform("./hello-world.pdf");
     }
