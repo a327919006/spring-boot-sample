@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/alert")
 @Api(tags = "测试19-AlertManager WebHook", produces = MediaType.APPLICATION_JSON_VALUE)
-public class AlertmanagerController {
+public class AlertManagerController {
 
     @ApiOperation("用于接收AlertManager告警信息")
     @PostMapping("")
