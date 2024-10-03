@@ -7,6 +7,7 @@ import com.cn.boot.sample.api.model.po.Client;
 import com.cn.boot.sample.business.excel.ClientCsv;
 import com.cn.boot.sample.business.excel.ClientExcel;
 import com.cn.boot.sample.business.excel.listener.ClientImportListener;
+import com.cn.boot.sample.business.util.pdf.PdfUtil;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
@@ -24,6 +25,7 @@ import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipOutputStream;
 import org.dromara.pdf.fop.core.base.Template;
 import org.dromara.pdf.fop.core.doc.Document;
+import org.dromara.pdf.fop.core.doc.bookmark.Bookmark;
 import org.dromara.pdf.fop.core.doc.component.text.Text;
 import org.dromara.pdf.fop.core.doc.page.Page;
 import org.dromara.pdf.fop.handler.TemplateHandler;
@@ -292,39 +294,7 @@ public class FileController {
     @ApiOperation("下载PDF")
     @GetMapping("/download/pdf")
     public void downloadPdf(HttpServletResponse response) throws Exception {
-        Document document = TemplateHandler.Document.build()
-                .setTitle("标题-测试")
-                .setAuthor("作者-测试")
-                .setSubject("主题-测试")
-                .setKeywords("关键词-测试")
-                .setCreator("创建人-测试")
-                .setCreationDate(new Date());
-        Page page = TemplateHandler.Page.build()
-                .setWidth("21cm")// 默认页面大小：A4 21cm/29.7cm
-                .setHeight("29.7cm")
-                .setHeaderHeight("30pt")
-                .setBodyMarginTop("30pt")
-                .setFooterHeight("30pt")
-                .setBodyMarginBottom("30pt");
-        // 创建页眉文本
-        Text headerText = TemplateHandler.Text.build()
-                .setText("页眉")
-                .setFontFamily("微软雅黑");
-        // 创建主体文本
-        Text bodyText = TemplateHandler.Text.build()
-                .setText("hello world")
-                .setFontFamily("微软雅黑");
-        // 创建页脚文本
-        Text footerText = TemplateHandler.Text.build()
-                .setText("页脚")
-                .setFontFamily("微软雅黑");
-
-
-        page.addHeaderComponent(headerText)
-                .addBodyComponent(bodyText)
-                .addFooterComponent(footerText);
-        document.addPage(page);
-        document.transform("./hello-world.pdf");
+        PdfUtil.createPdf();
     }
 
 
