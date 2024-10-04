@@ -2,7 +2,11 @@ package com.cn.boot.sample.business.util.pdf;
 
 import org.dromara.pdf.fop.core.doc.Document;
 import org.dromara.pdf.fop.core.doc.bookmark.Bookmark;
+import org.dromara.pdf.fop.core.doc.component.block.BlockContainer;
+import org.dromara.pdf.fop.core.doc.component.image.Image;
+import org.dromara.pdf.fop.core.doc.component.line.SplitLine;
 import org.dromara.pdf.fop.core.doc.component.text.Text;
+import org.dromara.pdf.fop.core.doc.component.text.TextExtend;
 import org.dromara.pdf.fop.core.doc.page.Page;
 import org.dromara.pdf.fop.core.doc.watermark.Watermark;
 import org.dromara.pdf.fop.handler.TemplateHandler;
@@ -16,8 +20,6 @@ public class PdfUtil {
     /**
      * 页眉文本
      */
-    private static final Text TEXT_HEADER = TemplateHandler.Text.build()
-            .setText("页眉").setFontFamily("微软雅黑");
     /**
      * 页脚文本
      */
@@ -32,10 +34,10 @@ public class PdfUtil {
         Page page = TemplateHandler.Page.build()
                 .setWidth("21cm")// 默认页面大小：A4 21cm/29.7cm
                 .setHeight("29.7cm")
-                .setHeaderHeight("30pt") // 页眉高度
-                .setBodyMarginTop("30pt")// 顶部边距，防止与页眉重叠
-                .setFooterHeight("30pt") // 页脚高度
-                .setBodyMarginBottom("30pt") // 底部边距，防止与页脚重叠
+                // .setHeaderHeight("30pt") // 页眉高度
+                // .setBodyMarginTop("30pt")// 顶部边距，防止与页眉重叠
+                // .setFooterHeight("30pt") // 页脚高度
+                // .setBodyMarginBottom("30pt") // 底部边距，防止与页脚重叠
                 ;
 
         // 创建主体文本
@@ -48,7 +50,7 @@ public class PdfUtil {
                 .setId("content")
                 .setText("111111111111111");
 
-        page.addBodyComponent(bodyTitle, bodyContent);
+        // page.addBodyComponent(bodyTitle, bodyContent);
         // 添加页眉页脚
         addHeaderAndFooter(page);
         // 添加水印
@@ -56,7 +58,7 @@ public class PdfUtil {
 
         document.addPage(page)
                 .addBookmark(createBookmark()) // 添加书签
-                .transform("./hello-world.pdf");
+                .transform("./pdf/hello-world.pdf");
     }
 
     /**
@@ -93,7 +95,30 @@ public class PdfUtil {
      * 添加页眉页脚
      */
     private static void addHeaderAndFooter(Page page) {
-        page.addHeaderComponent(TEXT_HEADER)
+        Image logoImage = TemplateHandler.Image.build()
+                .setPath("./pdf/logo.png")
+                .setWidth("144px")
+                .setHeight("18px");
+        Text headerNum = TemplateHandler.Text.build()
+                .setText("报告编号：1234567890123456789")
+                .setFontFamily("微软雅黑")
+                .setFontSize("8pt")
+                .setFontColor("#919292")
+                .setPaddingLeft("33%");
+
+        // 创建容器
+        BlockContainer container = TemplateHandler.BlockContainer.build()
+                .addComponent(logoImage, headerNum)
+                .setMarginTop("25pt")
+                .setMarginLeft("10%");
+
+        // 分割线
+        SplitLine splitLine = TemplateHandler.SplitLine.build()
+                .setStyle("solid")
+                .setLength("85%")
+                .setMarginLeft("10%");
+
+        page.addHeaderComponent(container, splitLine)
                 .addFooterComponent(TEXT_FOOTER);
     }
 
@@ -104,11 +129,13 @@ public class PdfUtil {
         // 创建多行水印
         Watermark watermark = TemplateHandler.Watermark.build()
                 // 设置水印id
-                .setId("logo")
-                // 设置水印文本
+                .setId("watermark")
+                // 设置水印文件临时目录
+                .setTempDir("./pdf")
+                // 设置水印文本，支持多行
                 .setText("ChenNan")
                 // 设置字体大小
-                .setFontSize("12pt")
+                .setFontSize("20pt")
                 // 设置字体
                 .setFontFamily("微软雅黑")
                 // 设置水印图片宽度
@@ -118,7 +145,7 @@ public class PdfUtil {
                 // 设置水印显示宽度
                 .setShowWidth("200pt")
                 // 设置旋转弧度
-                .setRadians("10")
+                .setRadians("-10")
                 // 设置透明度
                 .setFontAlpha("100")
                 // 开启文件覆盖
