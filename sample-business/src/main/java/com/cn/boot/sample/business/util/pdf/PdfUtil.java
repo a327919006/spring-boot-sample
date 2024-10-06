@@ -194,52 +194,6 @@ public class PdfUtil {
     }
 
     /**
-     * 创建表格-检测结果
-     */
-    private static Table createContentResultTable() {
-        // 表格
-        Table table = TemplateHandler.Table.build()
-                .setBorder("1 solid black")
-                .setVerticalStyle("center")
-                .setMinColumnWidth("20px")
-                .setWidth("500px")
-                .setMinRowHeight("30px");
-        // 表格体
-        TableBody body = TemplateHandler.Table.Body.build();
-
-        // 表格行
-        TableRow rowTitle = TemplateHandler.Table.Row.build();
-        TableRow rowItem = TemplateHandler.Table.Row.build();
-        TableRow rowChart = TemplateHandler.Table.Row.build();
-
-        // 表格单元格
-        TableCell cellTitle = TemplateHandler.Table.Cell.build().setBorder("1 solid black").setColumnSpan(6);
-        TableCell cellStateItem = TemplateHandler.Table.Cell.build().setBorder("1 solid black");
-        TableCell cellStateUnit = TemplateHandler.Table.Cell.build().setBorder("1 solid black").setWidth("20px");
-        TableCell cellStateValue = TemplateHandler.Table.Cell.build().setBorder("1 solid black");
-        TableCell cellStateResult = TemplateHandler.Table.Cell.build().setBorder("1 solid black").setWidth("20px");
-        TableCell cellStateRange = TemplateHandler.Table.Cell.build().setBorder("1 solid black");
-        TableCell cellStateStandard = TemplateHandler.Table.Cell.build().setBorder("1 solid black");
-
-        cellTitle.addComponent(TemplateHandler.Text.build().setText("2.检测表现").setMarginLeft("5pt"));
-        cellStateItem.addComponent(createTableNameText("检测项目"));
-        cellStateUnit.addComponent(createTableNameText("单位"));
-        cellStateValue.addComponent(createTableNameText("检测值"));
-        cellStateResult.addComponent(createTableNameText("检测结果"));
-        cellStateRange.addComponent(createTableNameText("参考值"));
-        cellStateStandard.addComponent(createTableNameText("参考标准"));
-
-        rowTitle.addCell(cellTitle);
-        rowItem.addCell(cellStateItem, cellStateUnit, cellStateValue, cellStateResult, cellStateRange, cellStateStandard);
-
-        body.addRow(rowTitle, rowItem);
-        body.addRow(createStateRow("漏洞数", "个", "1", "不合格", "=0", "GB 12345-2024"));
-        body.addRow(createStateRow("BUG数", "个", "3", "合格", "≤5", "GB 12345-2024"));
-        table.setBody(body);
-        return table;
-    }
-
-    /**
      * 创建表格-基本信息
      */
     private static Table createContentInfoTable() {
@@ -287,6 +241,61 @@ public class PdfUtil {
         rowInfo2.addCell(cellInfoPeopleName, cellInfoPeopleValue, cellInfoDateName, cellInfoDateValue,
                 cellInfoTypeName, cellInfoTypeValue);
         body.addRow(rowTitle, rowInfo1, rowInfo2);
+        table.setBody(body);
+        return table;
+    }
+
+    /**
+     * 创建表格-检测结果
+     */
+    private static Table createContentResultTable() {
+        // 表格
+        Table table = TemplateHandler.Table.build()
+                .setBorder("1 solid black")
+                .setVerticalStyle("center")
+                // .setMinColumnWidth("20px")
+                .setMinRowHeight("30px");
+        // 表格体
+        TableBody body = TemplateHandler.Table.Body.build();
+
+        // 表格行
+        TableRow rowTitle = TemplateHandler.Table.Row.build();
+        TableRow rowItem = TemplateHandler.Table.Row.build();
+        TableRow rowResult = TemplateHandler.Table.Row.build();
+
+        // 表格单元格
+        TableCell cellTitle = TemplateHandler.Table.Cell.build();
+        TableCell cellEmpty2 = TemplateHandler.Table.Cell.build().setWidth("50px");
+        TableCell cellEmpty3 = TemplateHandler.Table.Cell.build();
+        TableCell cellEmpty4 = TemplateHandler.Table.Cell.build().setWidth("80px");
+        TableCell cellEmpty5 = TemplateHandler.Table.Cell.build();
+        TableCell cellEmpty6 = TemplateHandler.Table.Cell.build().setWidth("120px");
+        TableCell cellStateItem = TemplateHandler.Table.Cell.build().setBorder("1 solid black");
+        TableCell cellStateUnit = TemplateHandler.Table.Cell.build().setBorder("1 solid black");
+        TableCell cellStateValue = TemplateHandler.Table.Cell.build().setBorder("1 solid black");
+        TableCell cellStateResult = TemplateHandler.Table.Cell.build().setBorder("1 solid black");
+        TableCell cellStateRange = TemplateHandler.Table.Cell.build().setBorder("1 solid black");
+        TableCell cellStateStandard = TemplateHandler.Table.Cell.build().setBorder("1 solid black");
+
+        cellTitle.addComponent(TemplateHandler.Text.build().setText("2.检测表现").setMarginLeft("5pt"));
+        cellEmpty2.addComponent(TemplateHandler.Text.build().setText(""));
+        cellEmpty3.addComponent(TemplateHandler.Text.build().setText(""));
+        cellEmpty4.addComponent(TemplateHandler.Text.build().setText(""));
+        cellEmpty5.addComponent(TemplateHandler.Text.build().setText(""));
+        cellEmpty6.addComponent(TemplateHandler.Text.build().setText(""));
+        cellStateItem.addComponent(createTableNameText("检测项目"));
+        cellStateUnit.addComponent(createTableNameText("单位"));
+        cellStateValue.addComponent(createTableNameText("检测值"));
+        cellStateResult.addComponent(createTableNameText("检测结果"));
+        cellStateRange.addComponent(createTableNameText("参考值"));
+        cellStateStandard.addComponent(createTableNameText("参考标准"));
+
+        rowTitle.addCell(cellTitle, cellEmpty2, cellEmpty3, cellEmpty4, cellEmpty5, cellEmpty6);
+        rowItem.addCell(cellStateItem, cellStateUnit, cellStateValue, cellStateResult, cellStateRange, cellStateStandard);
+
+        body.addRow(rowTitle, rowItem);
+        body.addRow(createStateRow("漏洞数", "个", "1", "不合格", "=0", "GB 12345-2024"));
+        body.addRow(createStateRow("BUG数", "个", "3", "合格", "≤5", "GB 12345-2024"));
         table.setBody(body);
         return table;
     }
