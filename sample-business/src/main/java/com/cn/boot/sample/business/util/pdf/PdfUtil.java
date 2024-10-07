@@ -177,21 +177,65 @@ public class PdfUtil {
         Text titleReport = TemplateHandler.Text.build().setText("二、检测报告").setMarginTop("10pt").setFontSize("15pt");
 
         Table infoTable = createContentInfoTable();
-        Table stateTable = createContentResultTable();
-
-        // 容器-表格
-        BlockContainer container = TemplateHandler.BlockContainer.build()
-                // .setBackgroundImage("./pdf/stamp.png")
-                // .setBackgroundImageWidth("80px")
-                // .setBackgroundImageHeight("80px")
-                // .setBackgroundRepeat("no-repeat")
-                // .setBackgroundPosition("200px 180px")
-                ;
-        container.addComponent(infoTable, stateTable);
+        Table stateTable = createContentStateTable();
+        BlockContainer resultTable = createContentItemTable();
 
         // 添加主体
-        page.addBodyComponent(title, titleQuote, quote1, quote2, titleReport, container);
+        page.addBodyComponent(title, titleQuote, quote1, quote2, titleReport, infoTable, stateTable, resultTable);
         return page;
+    }
+
+    private static BlockContainer createContentItemTable() {
+        BlockContainer resultContainer = TemplateHandler.BlockContainer.build()
+                .setHeight("150px")
+                // .setVerticalStyle("top")
+                .setBackgroundImage("./pdf/stamp.png")
+                .setBackgroundImageWidth("80px")
+                .setBackgroundImageHeight("80px")
+                .setBackgroundRepeat("no-repeat")
+                .setBackgroundPosition("410px 50px");
+
+        // 表格
+        Table table = TemplateHandler.Table.build().setBorder("1 solid black");
+        // 表格体
+        TableBody body = TemplateHandler.Table.Body.build();
+
+        // 表格行
+        TableRow rowResult = TemplateHandler.Table.Row.build();
+        TableRow rowResultCenter = TemplateHandler.Table.Row.build();
+        TableRow rowResultDate = TemplateHandler.Table.Row.build();
+
+        // 表格单元格
+        TableCell cellResult = TemplateHandler.Table.Cell.build().setHeight("80px");
+        TableCell cellResultCenter = TemplateHandler.Table.Cell.build();
+        TableCell cellResultDate = TemplateHandler.Table.Cell.build().setHeight("40px");
+
+        Text textResultTitle = TemplateHandler.Text.build().setText("检测结论：");
+        Text textResultContent = TemplateHandler.Text.build().setText("您的代码本次评分为90分，代码质量优秀，请继续保持。").setFontColor(COLOR_GRAY);
+        TextExtend textResult = TemplateHandler.TextExtend.build().addText(textResultTitle, textResultContent)
+                .setMargin("20pt 0 0 5pt");
+        Text textResultCenter = TemplateHandler.Text.build().setText("CN代码质量检测中心")
+                .setHorizontalStyle("right")
+                .setMarginRight("5pt")
+                .setFontColor(COLOR_GRAY);
+        Text textResultDate = TemplateHandler.Text.build().setText("2024-10-01")
+                .setHorizontalStyle("right")
+                .setMarginRight("30pt")
+                .setFontColor(COLOR_GRAY);
+        cellResult.addComponent(textResult);
+        cellResultCenter.addComponent(textResultCenter);
+        cellResultDate.addComponent(textResultDate);
+
+        rowResult.addCell(cellResult);
+        rowResultCenter.addCell(cellResultCenter);
+        rowResultDate.addCell(cellResultDate);
+
+        body.addRow(rowResult, rowResultCenter, rowResultDate);
+
+        table.setBody(body);
+
+        resultContainer.addComponent(table);
+        return resultContainer;
     }
 
     /**
@@ -249,7 +293,7 @@ public class PdfUtil {
     /**
      * 创建表格-检测结果
      */
-    private static Table createContentResultTable() {
+    private static Table createContentStateTable() {
         // 表格
         Table table = TemplateHandler.Table.build()
                 .setBorder("1 solid black")
@@ -293,29 +337,13 @@ public class PdfUtil {
         cellStateRange.addComponent(createTableNameText("参考值"));
         cellStateStandard.addComponent(createTableNameText("参考标准"));
 
-        // Text textResultTitle = TemplateHandler.Text.build().setText("检测结论：").setVerticalStyle("top");
-        // Text textResultContent = TemplateHandler.Text.build().setText("您的代码本次评分为90分，代码质量优秀，请继续保持。").setFontColor(COLOR_GRAY);
-        // Text textResultCenter = TemplateHandler.Text.build().setText("CN代码质量检测中心").setHorizontalStyle("right");
-        // Text textResultDate = TemplateHandler.Text.build().setText("2024-10-01").setHorizontalStyle("right");
-        // BlockContainer container = TemplateHandler.BlockContainer.build()
-        //         .setHeight("150px")
-        //         .setVerticalStyle("top")
-        //         .setBackgroundImage("./pdf/stamp.png")
-        //         .setBackgroundImageWidth("80px")
-        //         .setBackgroundImageHeight("80px")
-        //         .setBackgroundRepeat("no-repeat")
-        //         .setBackgroundPosition("400px 60px");
-        // container.addComponent(textResultTitle, textResultContent, textResultCenter, textResultDate);
-        // cellResult.addComponent(container);
 
         rowTitle.addCell(cellTitle, cellEmpty2, cellEmpty3, cellEmpty4, cellEmpty5, cellEmpty6);
         rowItem.addCell(cellStateItem, cellStateUnit, cellStateValue, cellStateResult, cellStateRange, cellStateStandard);
-        // rowResult.addCell(cellResult);
 
         body.addRow(rowTitle, rowItem);
         body.addRow(createStateRow("漏洞数", "个", "1", "不合格", "=0", "GB 12345-2024"));
         body.addRow(createStateRow("BUG数", "个", "3", "合格", "≤5", "GB 12345-2024"));
-        // body.addRow(rowResult);
         table.setBody(body);
         return table;
     }
