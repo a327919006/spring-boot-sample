@@ -11,6 +11,7 @@ import org.dromara.pdf.fop.core.doc.component.table.TableBody;
 import org.dromara.pdf.fop.core.doc.component.table.TableCell;
 import org.dromara.pdf.fop.core.doc.component.table.TableRow;
 import org.dromara.pdf.fop.core.doc.component.text.Text;
+import org.dromara.pdf.fop.core.doc.component.text.TextExtend;
 import org.dromara.pdf.fop.core.doc.page.Page;
 import org.dromara.pdf.fop.core.doc.watermark.Watermark;
 import org.dromara.pdf.fop.handler.TemplateHandler;
@@ -261,7 +262,7 @@ public class PdfUtil {
         // 表格行
         TableRow rowTitle = TemplateHandler.Table.Row.build();
         TableRow rowItem = TemplateHandler.Table.Row.build();
-        TableRow rowResult = TemplateHandler.Table.Row.build();
+        // TableRow rowResult = TemplateHandler.Table.Row.build();
 
         // 表格单元格
         TableCell cellTitle = TemplateHandler.Table.Cell.build();
@@ -276,6 +277,8 @@ public class PdfUtil {
         TableCell cellStateResult = TemplateHandler.Table.Cell.build().setBorder("1 solid black");
         TableCell cellStateRange = TemplateHandler.Table.Cell.build().setBorder("1 solid black");
         TableCell cellStateStandard = TemplateHandler.Table.Cell.build().setBorder("1 solid black");
+        // TableCell cellResult = TemplateHandler.Table.Cell.build().setBorder("1 solid black").setColumnSpan(6).setVerticalStyle("top");
+
 
         cellTitle.addComponent(TemplateHandler.Text.build().setText("2.检测表现").setMarginLeft("5pt"));
         cellEmpty2.addComponent(TemplateHandler.Text.build().setText(""));
@@ -290,12 +293,29 @@ public class PdfUtil {
         cellStateRange.addComponent(createTableNameText("参考值"));
         cellStateStandard.addComponent(createTableNameText("参考标准"));
 
+        // Text textResultTitle = TemplateHandler.Text.build().setText("检测结论：").setVerticalStyle("top");
+        // Text textResultContent = TemplateHandler.Text.build().setText("您的代码本次评分为90分，代码质量优秀，请继续保持。").setFontColor(COLOR_GRAY);
+        // Text textResultCenter = TemplateHandler.Text.build().setText("CN代码质量检测中心").setHorizontalStyle("right");
+        // Text textResultDate = TemplateHandler.Text.build().setText("2024-10-01").setHorizontalStyle("right");
+        // BlockContainer container = TemplateHandler.BlockContainer.build()
+        //         .setHeight("150px")
+        //         .setVerticalStyle("top")
+        //         .setBackgroundImage("./pdf/stamp.png")
+        //         .setBackgroundImageWidth("80px")
+        //         .setBackgroundImageHeight("80px")
+        //         .setBackgroundRepeat("no-repeat")
+        //         .setBackgroundPosition("400px 60px");
+        // container.addComponent(textResultTitle, textResultContent, textResultCenter, textResultDate);
+        // cellResult.addComponent(container);
+
         rowTitle.addCell(cellTitle, cellEmpty2, cellEmpty3, cellEmpty4, cellEmpty5, cellEmpty6);
         rowItem.addCell(cellStateItem, cellStateUnit, cellStateValue, cellStateResult, cellStateRange, cellStateStandard);
+        // rowResult.addCell(cellResult);
 
         body.addRow(rowTitle, rowItem);
         body.addRow(createStateRow("漏洞数", "个", "1", "不合格", "=0", "GB 12345-2024"));
         body.addRow(createStateRow("BUG数", "个", "3", "合格", "≤5", "GB 12345-2024"));
+        // body.addRow(rowResult);
         table.setBody(body);
         return table;
     }
