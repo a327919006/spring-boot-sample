@@ -1,7 +1,6 @@
 package com.cn.boot.sample.business.chart;
 
 import com.cn.boot.sample.business.util.chart.ChartUtil;
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -11,8 +10,17 @@ import org.junit.jupiter.api.Test;
 public class ChartTest {
 
     @Test
-    @SneakyThrows
     public void createPieChart(){
         ChartUtil.createPieChart();
+    }
+
+    @Test
+    public void createLineChart(){
+        ChartUtil.createLineChart();
+    }
+
+    @Test
+    public void createBarChart(){
+        ChartUtil.createBarChart();
     }
 }
