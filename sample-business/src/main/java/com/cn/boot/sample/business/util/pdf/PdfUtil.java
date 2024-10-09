@@ -374,7 +374,18 @@ public class PdfUtil {
         TableCell cellChart = TemplateHandler.Table.Cell.build().setBorder("1 solid black");
 
         cellTitle.addComponent(TemplateHandler.Text.build().setText("3.图表分析").setMarginLeft("5pt"));
-        cellChart.addComponent(TemplateHandler.Text.build().setText(""));
+
+        // 创建图像
+        Image image = TemplateHandler.Image.build()
+                // 设置图像路径（绝对路径）
+                .setPath("./pdf/chart/lineChart.png")
+                // 设置图像宽度
+                .setWidth("500px")
+                // 设置图像高度
+                .setHeight("200px")
+                // 设置水平居中
+                .setHorizontalStyle("center");
+        cellChart.addComponent(image);
 
         rowTitle.addCell(cellTitle);
         rowChart.addCell(cellChart);
