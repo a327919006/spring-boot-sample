@@ -20,6 +20,11 @@ public class ChartTest {
     }
 
     @Test
+    public void createXYLineChart(){
+        ChartUtil.createXYLineChart();
+    }
+
+    @Test
     public void createBarChart(){
         ChartUtil.createBarChart();
     }

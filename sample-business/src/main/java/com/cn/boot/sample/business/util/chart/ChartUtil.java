@@ -2,10 +2,10 @@ package com.cn.boot.sample.business.util.chart;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.usermodel.charts.LegendPosition;
 import org.jfree.chart.*;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.Plot;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.ui.HorizontalAlignment;
@@ -13,6 +13,8 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 import java.awt.*;
 import java.io.File;
@@ -68,7 +70,7 @@ public class ChartUtil {
         chartTheme.setLargeFont(new Font("微软雅黑", Font.BOLD, 10));
         ChartFactory.setChartTheme(chartTheme);
         JFreeChart chart = ChartFactory.createLineChart(null, null, null, dataset);
-        Plot plot = chart.getPlot();
+        CategoryPlot plot = (CategoryPlot) chart.getPlot();
         plot.setBackgroundPaint(Color.WHITE);  // 设置绘图区背景颜色为白色
 
         // 自定义标题
@@ -78,11 +80,57 @@ public class ChartUtil {
         customTitle.setMargin(new RectangleInsets(5, 5, 5, 5)); // 可以根据需要调整这些值
         chart.setTitle(customTitle);
 
-        // 假设你已经有了 JFreeChart 对象 chart
+        // 网格线
+        plot.setRangeGridlinesVisible(true);
+        plot.setRangeGridlinePaint(Color.LIGHT_GRAY);
+
+        // 边框
+        plot.setOutlineVisible(false);
+
+        // 获取X轴和Y轴
+        CategoryAxis domainAxis = plot.getDomainAxis();
+        domainAxis.setAxisLineVisible(false);
+        domainAxis.setTickMarksVisible(false);
+        ValueAxis rangeAxis = plot.getRangeAxis();
+        rangeAxis.setAxisLineVisible(false);
+        rangeAxis.setTickMarksVisible(false);
+
+        // 设置图例位置
         LegendTitle legend = chart.getLegend();
+        legend.setPadding(0, 300, 0, 0);
         legend.setPosition(RectangleEdge.TOP);
 
         ChartUtils.saveChartAsPNG(new File("./pdf/chart/lineChart.png"), chart, 500, 200);
+    }
+
+    /**
+     * 创建折线图
+     */
+    @SneakyThrows
+    public static void createXYLineChart() {
+        // 创建数据集
+        XYSeries series1 = new XYSeries("Bug数");
+        series1.add(1.0, 1.0);
+        series1.add(2.0, 4.0);
+        series1.add(3.0, 3.0);
+        series1.add(4.0, 5.0);
+        XYSeries series2 = new XYSeries("漏洞数");
+        series2.add(1.0, 4.0);
+        series2.add(2.0, 2.0);
+        series2.add(3.0, 3.0);
+        series2.add(4.0, 1.0);
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(series1);
+        dataset.addSeries(series2);
+
+        StandardChartTheme chartTheme = new StandardChartTheme("CN");
+        chartTheme.setExtraLargeFont(new Font("微软雅黑", Font.BOLD, 13));
+        chartTheme.setRegularFont(new Font("微软雅黑", Font.BOLD, 10));
+        chartTheme.setLargeFont(new Font("微软雅黑", Font.BOLD, 10));
+        ChartFactory.setChartTheme(chartTheme);
+        JFreeChart chart = ChartFactory.createXYLineChart(null, null, null, dataset);
+
+        ChartUtils.saveChartAsPNG(new File("./pdf/chart/xyLineChart.png"), chart, 500, 200);
     }
 
     /**
