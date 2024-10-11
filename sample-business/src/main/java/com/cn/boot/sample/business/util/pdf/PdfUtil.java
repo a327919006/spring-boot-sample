@@ -27,7 +27,7 @@ public class PdfUtil {
      */
     private static final String PAGE_ID = "page";
 
-    private static final String COLOR_GRAY = "#919292";
+    private static final String COLOR_GRAY = "#929292";
 
     public static void createPdf() {
         // 创建文档
@@ -44,6 +44,7 @@ public class PdfUtil {
         addPageWatermark(homePage);
         addPageWatermark(contentPage);
         // 添加页脚
+        addFooter(homePage);
         addFooter(contentPage);
 
         document.addPage(homePage, contentPage)
@@ -75,8 +76,8 @@ public class PdfUtil {
                 .setFontFamily("微软雅黑")
                 // .setHeaderHeight("30pt") // 页眉高度
                 .setBodyMarginTop("30pt")// 顶部边距，防止与页眉重叠
-                .setFooterHeight("50pt") // 页脚高度
                 // .setBodyMarginBottom("30pt") // 底部边距，防止与页脚重叠
+                .setFooterHeight("50pt") // 页脚高度
                 ;
 
         // 创建主体文本
