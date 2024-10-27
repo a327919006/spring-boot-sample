@@ -5,15 +5,17 @@ import com.cn.boot.sample.es.util.DateTimeSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
+import org.dromara.easyes.annotation.IndexField;
+import org.dromara.easyes.annotation.IndexName;
+import org.dromara.easyes.annotation.rely.FieldType;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
+@IndexName
 public class Student implements Serializable {
 
     @Id
@@ -24,7 +26,14 @@ public class Student implements Serializable {
      * 姓名
      */
     @Column(name = "name", nullable = false)
+    @IndexField(fieldType = FieldType.KEYWORD)
     private String name;
+
+    /**
+     * 备注
+     */
+    @Column(name = "remark")
+    private String remark;
 
     /**
      * 年龄
