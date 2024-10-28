@@ -32,8 +32,23 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public void save(Teacher docBean) {
-        dao.insert(docBean);
+    public Integer save(Teacher docBean) {
+        return dao.insert(docBean);
+    }
+
+    @Override
+    public Integer update(Teacher req) {
+        return dao.updateById(req);
+    }
+
+    @Override
+    public Teacher getById(String id) {
+        return dao.selectById(id);
+    }
+
+    @Override
+    public Integer delete(String id) {
+        return dao.deleteById(id);
     }
 
     @Override
@@ -45,4 +60,10 @@ public class TeacherServiceImpl implements TeacherService {
     public EsPageInfo<Teacher> findByName(String name, int page, int size) {
         return EsWrappers.lambdaChainQuery(dao).eq(Teacher::getName, name).page(page, size);
     }
+
+    @Override
+    public long countByName(String name) {
+        return EsWrappers.lambdaChainQuery(dao).eq(Teacher::getName, name).count();
+    }
+
 }

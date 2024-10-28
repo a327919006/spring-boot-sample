@@ -6,6 +6,7 @@ import com.cn.boot.sample.es.service.TeacherService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.easyes.core.biz.EsPageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -44,10 +45,28 @@ public class TeacherController {
 
     @ApiOperation("添加")
     @PostMapping("")
-    public String insert(@RequestBody Teacher req) {
-        teacherService.save(req);
-        return Constants.MSG_SUCCESS;
+    public Integer insert(@RequestBody Teacher req) {
+        return teacherService.save(req);
     }
+
+    @ApiOperation("更新")
+    @PutMapping("")
+    public Integer update(@RequestBody Teacher req) {
+        return teacherService.update(req);
+    }
+
+    @ApiOperation("根据ID获取")
+    @GetMapping("/{id}")
+    public Teacher getById(@PathVariable String id) {
+        return teacherService.getById(id);
+    }
+
+    @ApiOperation("根据ID删除")
+    @DeleteMapping("/{id}")
+    public Integer deleteById(@PathVariable String id) {
+        return teacherService.delete(id);
+    }
+
 
     @ApiOperation("获取列表")
     @GetMapping("/all")
@@ -57,8 +76,14 @@ public class TeacherController {
 
     @ApiOperation("根据姓名获取")
     @GetMapping("/name")
-    public List<Teacher> findByContent(@RequestParam String name, @RequestParam int page,
-                                       @RequestParam int size) {
-        return teacherService.findByName(name, page, size).getList();
+    public EsPageInfo<Teacher> findByContent(@RequestParam String name, @RequestParam int page,
+                                             @RequestParam int size) {
+        return teacherService.findByName(name, page, size);
+    }
+
+    @ApiOperation("根据name获取数量")
+    @GetMapping("/count")
+    public long count(@RequestParam String name) {
+        return teacherService.countByName(name);
     }
 }

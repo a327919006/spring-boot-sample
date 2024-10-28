@@ -28,7 +28,10 @@ public interface TeacherService {
      *
      * @param teacher 消息内容
      */
-    void save(Teacher teacher);
+    Integer save(Teacher teacher);
+
+    Teacher getById(String id);
+    Integer delete(String id);
 
     /**
      * 获取所有消息
@@ -44,4 +47,8 @@ public interface TeacherService {
      * @return 学生列表
      */
     EsPageInfo<Teacher> findByName(String name, int page, int size);
+
+    long countByName(String name);
+
+    Integer update(Teacher req);
 }
