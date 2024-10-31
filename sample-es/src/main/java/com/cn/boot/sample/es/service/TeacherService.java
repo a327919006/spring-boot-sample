@@ -1,5 +1,6 @@
 package com.cn.boot.sample.es.service;
 
+import com.cn.boot.sample.es.model.dto.TeacherReq;
 import com.cn.boot.sample.es.model.po.Teacher;
 import org.dromara.easyes.core.biz.EsPageInfo;
 
@@ -24,31 +25,39 @@ public interface TeacherService {
     boolean deleteIndex();
 
     /**
-     * 保存消息
-     *
-     * @param teacher 消息内容
+     * 新增
      */
-    Integer save(Teacher teacher);
-
-    Teacher getById(String id);
-    Integer delete(String id);
+    Integer insert(Teacher req);
 
     /**
-     * 获取所有消息
-     *
-     * @return 消息列表
+     * 更新
      */
-    List<Teacher> findAll();
-
-    /**
-     * 根据name搜索
-     *
-     * @param name 姓名
-     * @return 学生列表
-     */
-    EsPageInfo<Teacher> findByName(String name, int page, int size);
-
-    long countByName(String name);
-
     Integer update(Teacher req);
+
+    /**
+     * 根据ID删除
+     */
+    Integer deleteById(String id);
+
+    /**
+     * 根据ID获取
+     */
+    Teacher getById(String id);
+
+    /**
+     * 获取所有
+     */
+    List<Teacher> list(TeacherReq req);
+
+    /**
+     * 分页查询
+     */
+    EsPageInfo<Teacher> page(TeacherReq req);
+
+    /**
+     * 获取数量
+     */
+    long count(TeacherReq req);
+
+
 }

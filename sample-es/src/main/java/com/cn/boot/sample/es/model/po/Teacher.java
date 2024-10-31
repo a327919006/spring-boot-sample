@@ -1,5 +1,9 @@
 package com.cn.boot.sample.es.model.po;
 
+import com.cn.boot.sample.es.util.DateDeserializer;
+import com.cn.boot.sample.es.util.DateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import org.dromara.easyes.annotation.*;
 import org.dromara.easyes.annotation.rely.FieldType;
@@ -10,7 +14,7 @@ import java.util.Date;
 
 @Data
 @IndexName
-@Settings(shardsNum = 1, replicasNum = 1, maxResultWindow = 10000)
+@Settings(shardsNum = 1, replicasNum = 0, maxResultWindow = 10000)
 public class Teacher implements Serializable {
 
     /**
@@ -42,6 +46,9 @@ public class Teacher implements Serializable {
     /**
      * 创建时间
      */
+    @IndexField(fieldType = FieldType.DATE, dateFormat = "yyyy-MM-dd HH:mm:ss.SSSZ")
+    @JsonSerialize(using = DateSerializer.class)
+    @JsonDeserialize(using = DateDeserializer.class)
     private Date createTime;
 
     /**
