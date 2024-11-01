@@ -11,6 +11,7 @@ import org.dromara.easyes.core.conditions.select.LambdaEsQueryChainWrapper;
 import org.dromara.easyes.core.kernel.EsWrappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -77,7 +78,16 @@ public class TeacherServiceImpl implements TeacherService {
     private LambdaEsQueryChainWrapper<Teacher> buildCondition(TeacherReq req) {
         return EsWrappers.lambdaChainQuery(dao)
                 .eq(StringUtils.isNoneEmpty(req.getName()), Teacher::getName, req.getName())
-                .eq(req.getAge() != null, Teacher::getAge, req.getAge());
+                .eq(req.getAge() != null, Teacher::getAge, req.getAge())
+                .ge(req.getStartTime() != null, Teacher::getCreateTime, req.getStartTime())
+                .le(req.getEndTime() != null, Teacher::getCreateTime, req.getEndTime())
+                .in(!CollectionUtils.isEmpty(req.getNameList()), Teacher::getName, req.getNameList())
+                .match(StringUtils.isNotEmpty(req.getRemark()), Teacher::getRemark, req.getRemark())
+                .orderByDesc(StringUtils.isNotEmpty(req.getOrderBy()), req.getOrderBy())
+                // 支持声明只返回指定字段或不返回指定字段
+                // .select(Teacher::getName)
+                // .notSelect(Teacher::getRemark)
+                ;
     }
 
 }
