@@ -69,8 +69,8 @@ public class TeacherController {
     }
 
     @ApiOperation("获取列表")
-    @GetMapping("/list")
-    public List<Teacher> list(TeacherReq req) {
+    @PostMapping("/list")
+    public List<Teacher> list(@RequestBody TeacherReq req) {
         return teacherService.list(req);
     }
 
@@ -84,5 +84,11 @@ public class TeacherController {
     @GetMapping("/count")
     public long count(TeacherReq req) {
         return teacherService.count(req);
+    }
+
+    @ApiOperation("测试SQL")
+    @GetMapping("/sql")
+    public String sql() {
+        return teacherService.sql();
     }
 }

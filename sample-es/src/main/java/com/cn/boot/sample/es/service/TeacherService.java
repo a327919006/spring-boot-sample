@@ -59,5 +59,10 @@ public interface TeacherService {
      */
     long count(TeacherReq req);
 
+    /**
+     * 执行sql
+     */
+    String sql();
+
 
 }

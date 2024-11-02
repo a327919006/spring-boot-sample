@@ -46,7 +46,7 @@ public class Teacher implements Serializable {
     /**
      * 创建时间
      */
-    @IndexField(fieldType = FieldType.DATE, dateFormat = "yyyy-MM-dd HH:mm:ss.SSSZ")
+    @IndexField(fieldType = FieldType.DATE, dateFormat = "yyyy-MM-dd HH:mm:ss.SSS")
     @JsonSerialize(using = DateSerializer.class)
     @JsonDeserialize(using = DateDeserializer.class)
     private Date createTime;

@@ -1,5 +1,6 @@
 package com.cn.boot.sample.es.util;
 
+import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -17,7 +18,7 @@ public class DateSerializer extends JsonSerializer<Date> {
     public void serialize(Date date, JsonGenerator jsonGenerator,
                           SerializerProvider serializerProvider) throws IOException {
         if (date != null) {
-            jsonGenerator.writeString(DateUtil.formatDateTime(date));
+            jsonGenerator.writeString(DateUtil.format(date, DatePattern.NORM_DATETIME_MS_FORMAT));
         } else {
             jsonGenerator.writeString("");
         }

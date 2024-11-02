@@ -19,7 +19,7 @@ public class DateDeserializer extends JsonDeserializer<Date> {
     public Date deserialize(JsonParser parser, DeserializationContext context) throws IOException {
         String src = parser.getText();
         if (StringUtils.isNotBlank(src)) {
-            return DateUtil.parse(src, DatePattern.NORM_DATETIME_MS_FORMAT);
+            return DateUtil.parse(src, DatePattern.NORM_DATETIME_MS_FORMAT).toJdkDate();
         }
         return null;
     }

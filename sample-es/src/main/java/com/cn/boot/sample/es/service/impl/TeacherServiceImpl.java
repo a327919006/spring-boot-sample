@@ -1,5 +1,7 @@
 package com.cn.boot.sample.es.service.impl;
 
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.DateUtil;
 import com.cn.boot.sample.es.dao.TeacherDao;
 import com.cn.boot.sample.es.model.dto.TeacherReq;
 import com.cn.boot.sample.es.model.po.Teacher;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,6 +42,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Integer insert(Teacher req) {
         req.setId(null);
+        req.setCreateTime(new Date());
         return dao.insert(req);
     }
 
@@ -72,15 +76,23 @@ public class TeacherServiceImpl implements TeacherService {
         return buildCondition(req).count();
     }
 
+    @Override
+    public String sql() {
+        String sql = "select age,count(*) from teacher group by age";
+        return dao.executeSQL(sql);
+    }
+
     /**
      * 构造查询条件
      */
     private LambdaEsQueryChainWrapper<Teacher> buildCondition(TeacherReq req) {
         return EsWrappers.lambdaChainQuery(dao)
                 .eq(StringUtils.isNoneEmpty(req.getName()), Teacher::getName, req.getName())
-                .eq(req.getAge() != null, Teacher::getAge, req.getAge())
-                .ge(req.getStartTime() != null, Teacher::getCreateTime, req.getStartTime())
-                .le(req.getEndTime() != null, Teacher::getCreateTime, req.getEndTime())
+                .eq(req.getAge() != null && req.getAge() > 0, Teacher::getAge, req.getAge())
+                .ge(req.getStartTime() != null, Teacher::getCreateTime,
+                        DateUtil.format(req.getStartTime(), DatePattern.NORM_DATETIME_MS_FORMAT))
+                .le(req.getEndTime() != null, Teacher::getCreateTime,
+                        DateUtil.format(req.getEndTime(), DatePattern.NORM_DATETIME_MS_FORMAT))
                 .in(!CollectionUtils.isEmpty(req.getNameList()), Teacher::getName, req.getNameList())
                 .match(StringUtils.isNotEmpty(req.getRemark()), Teacher::getRemark, req.getRemark())
                 .orderByDesc(StringUtils.isNotEmpty(req.getOrderBy()), req.getOrderBy())
