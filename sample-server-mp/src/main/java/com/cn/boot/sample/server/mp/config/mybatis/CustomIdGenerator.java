@@ -1,9 +1,10 @@
 package com.cn.boot.sample.server.mp.config.mybatis;
 
-import cn.hutool.core.util.IdUtil;
+import com.baidu.fsg.uid.UidGenerator;
 import com.baomidou.mybatisplus.core.incrementer.IKeyGenerator;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.baomidou.mybatisplus.extension.incrementer.H2KeyGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomIdGenerator implements IdentifierGenerator {
 
+    @Autowired
+    private UidGenerator uidGenerator;
+
     /**
      * 当MyBatisPlus生成ID时，自动会调用自定义ID生成器
      *
@@ -26,8 +30,9 @@ public class CustomIdGenerator implements IdentifierGenerator {
     public Long nextId(Object entity) {
         // 可根据entity信息针对不同业务创建不同ID
         // String bizKey = entity.getClass().getName();
+        // return IdUtil.getSnowflakeNextId();
         // 根据业务键调用分布式ID生成服务，返回生成的ID值
-        return IdUtil.getSnowflakeNextId();
+        return uidGenerator.getUID();
     }
 
     @Bean
