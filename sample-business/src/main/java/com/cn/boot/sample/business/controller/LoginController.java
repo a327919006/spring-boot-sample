@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/auth")
-@Api(tags = "测试19-AlertManager WebHook", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "测试21-验证码登录", produces = MediaType.APPLICATION_JSON_VALUE)
 public class LoginController {
 
     @Autowired
