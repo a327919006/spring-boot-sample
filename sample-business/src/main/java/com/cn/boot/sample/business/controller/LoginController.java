@@ -28,6 +28,11 @@ public class LoginController {
     @Autowired
     private CaptchaService captchaService;
 
+    /**
+     * @param captchaVerification 前端根据check接口返回的token以及用户point移动信息aesEncrypt
+     *                            AES加密密钥为get接口返回的secretKey
+     *                            前端计算此参数代码见verify.js 333行
+     */
     @PostMapping("/login")
     @ApiOperation("后端二次校验接口示例")
     public ResponseModel get(@RequestParam("captchaVerification") String captchaVerification) {

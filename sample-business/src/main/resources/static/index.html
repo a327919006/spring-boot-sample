@@ -116,8 +116,9 @@
 				ready : function() {},  //加载完毕的回调
 				success : function(params) { //成功的回调
 					// params为返回的二次验证参数 需要在接下来的实现逻辑回传服务器
-					// 例如: login($.extend({}, params))  
-				},
+					// 例如: login($.extend({}, params))
+                    console.log(params,"params");
+                },
 				error : function() {}        //失败的回调
 			});
 			
@@ -134,7 +135,8 @@
 		    	},
 		        success : function(params) {
 					//返回的二次验证参数 合并到验证通过之后的逻辑 参数中回传服务器
-		        },
+                    console.log(params,"params");
+                },
 		        error : function() {
 		        }
 		        
@@ -153,6 +155,7 @@
 		    	},
 		        success : function(params) {
 					//返回的二次验证参数 合并到验证通过之后的逻辑 参数中回传服务器
+                    console.log(params,"params");
 		        },
 		        error : function() {
 		        }
