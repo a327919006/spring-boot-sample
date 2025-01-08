@@ -3,26 +3,11 @@ package com.cn.boot.sample.api.service;
 import com.cn.boot.sample.api.model.po.Client;
 
 /**
+ * redis缓存服务
+ *
  * @author Chen Nan
  */
-public interface RedisService {
-
-    /**
-     * 添加分布式锁
-     *
-     * @param key   key
-     * @param value value
-     * @return 结果
-     */
-    boolean lock(String key, String value);
-
-    /**
-     * 移除分布式锁
-     *
-     * @param key key
-     * @return 结果
-     */
-    boolean unlock(String key);
+public interface CacheService {
 
     /**
      * 缓存对象
@@ -47,5 +32,4 @@ public interface RedisService {
      * @return 商户信息
      */
     Client getClient(String id);
-
 }

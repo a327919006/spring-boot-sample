@@ -31,8 +31,7 @@ public class DingTalkController {
     public String msgSend(RobotMsg dto) {
         try {
             // 接口地址
-            String robotUrl = "https://oapi.dingtalk.com/robot/send?access_token=52f33b2355ac6af1f813345d2c4ef76e60f9cbc207c368d3eddb3b72f80908cd";
-            DingTalkClient client = new DefaultDingTalkClient(robotUrl);
+            DingTalkClient client = new DefaultDingTalkClient(dto.getRobotUrl());
 
             // at参数
             OapiRobotSendRequest.At at = new OapiRobotSendRequest.At();

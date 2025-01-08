@@ -33,7 +33,8 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 10081         | sample-business           | 业务接口，整合Swagger，详情查看该模块README |
 | 10106         | sample-cadence            | 整合cadence，实现工作流 |
 | 10081         | sample-canal              | 整合canal，实现mysql的binlog日志订阅 |
-| -----         | sample-dal                | mapper、sql语句，整合tk-mybatis |
+| -----         | sample-dal                | mapper、sql语句，整合tk-mybatis   |
+| -----         | sample-dal-mp             | mapper、sql语句，整合mybatis-plus |
 | -----         | sample-design-pattern     | 实现常见设计模式，如单例、工厂、适配器等等 |
 | 10099         | sample-es                 | 整合Elasticsearch |
 | 10104         | sample-fastdfs            | 整合FastDFS |
@@ -70,6 +71,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | 20881         | sample-server-jpa-dynamic | 服务接口实现，整合JPA，支持动态数据源 |
 | 20881         | sample-server-jpa-more    | 服务接口实现，整合JPA、Hikari，对接多数据源 |
 | 20881         | sample-server-more        | 服务接口实现，整合MyBatis、Druid，对接多数据源 |
+| 10084         | sample-server-mp          | 服务接口实现，整合MyBatisPlus |
 | 20881         | sample-server-shard       | 服务接口实现，整合ShardingSphere，分库分表 |
 | 10098         | sample-swagger            | 整合Swagger，使用原生方式 |
 | 10085         | sample-webflux            | 业务接口，整合webflux |
@@ -107,6 +109,7 @@ SpringBoot 2.3.x 整合其他框架：MyBatis、Dubbo、Swagger2、SpringSecurit
 | SpringMVC| SpringMVC |
 | Spring | Spring |
 | MyBatis | MyBatis |
+| MyBatisPlus | 通用mapper |
 | tk-mybatis | 通用mapper |
 | Dubbo | RPC |
 | UidGenerator | 百度开源的ID生成框架 |

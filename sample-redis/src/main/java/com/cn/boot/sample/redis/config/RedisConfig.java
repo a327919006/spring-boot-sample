@@ -10,8 +10,6 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.listener.PatternTopic;
-import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
@@ -88,4 +86,16 @@ public class RedisConfig extends CachingConfigurerSupport {
 //        container.addMessageListener(new RedisEventListener(), new PatternTopic("__keyevent@0__:*"));
 //        return container;
 //    }
+
+    /**
+     * 配置哨兵模式读写分离
+     * MASTER：从主节点读取
+     * MASTER_PREFERRED：优先从master节点读取，master不可用才读取replica
+     * REPLICA：从slave（replica）节点读取
+     * REPLICA _PREFERRED：优先从slave（replica）节点读取，所有的slave都不可用才读取master
+     */
+    // @Bean
+    // public LettuceClientConfigurationBuilderCustomizer clientConfigurationBuilderCustomizer() {
+    //     return clientConfigurationBuilder -> clientConfigurationBuilder.readFrom(ReadFrom.REPLICA_PREFERRED);
+    // }
 }

@@ -1,6 +1,0 @@
-#查询入口
-type Query {
-    test: String
-    testError: String
-    testError2: String
-}

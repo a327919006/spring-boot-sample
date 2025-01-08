@@ -13,10 +13,11 @@ import java.net.InetSocketAddress;
 import java.util.List;
 
 /**
+ * 官方用法
  * @author ChenNan
  */
 @Slf4j
-@Component
+// @Component
 public class CanalClient {
     private final static int BATCH_SIZE = 1000;
 

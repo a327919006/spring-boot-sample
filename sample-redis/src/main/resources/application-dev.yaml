@@ -7,7 +7,7 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-    database: 1
+    database: 0
     timeout: 10000
     password:
     jedis:
@@ -16,6 +16,13 @@ spring:
         max-idle: 100
         min-idle: 1
         max-wait: 1000
+#    连接哨兵
+#    sentinel:
+#      master: mymaster
+#      nodes:
+#      - 127.0.0.1:27001
+#      - 127.0.0.1:27002
+#      - 127.0.0.1:27003
 
 # Dubbo配置
 dubbo:
