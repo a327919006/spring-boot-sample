@@ -39,9 +39,9 @@ public class CommitParseTest {
 
     @BeforeAll
     public void init() throws FileNotFoundException {
-        String commitFilePath = "commit20240408.txt";
-        String planFeatFilePath = "commit_plan_feat-20240408.txt";
-        String planFixFilePath = "commit_plan_fix-20240408.txt";
+        String commitFilePath = "commit_info.txt";
+        String planFeatFilePath = "commit_plan_feat.txt";
+        String planFixFilePath = "commit_plan_fix.txt";
         commitFile = ResourceUtils.getFile("classpath:" + commitFilePath);
         planFeatFile = ResourceUtils.getFile("classpath:" + planFeatFilePath);
         planFixFile = ResourceUtils.getFile("classpath:" + planFixFilePath);
@@ -130,6 +130,9 @@ public class CommitParseTest {
                     if (StringUtils.equals(type, typeFeat)) {
                         featMap.put(numInt, commitInfo);
                     } else {
+                        if (numInt < 2000) {
+                            continue;
+                        }
                         fixMap.put(numInt, commitInfo);
                     }
                 }
