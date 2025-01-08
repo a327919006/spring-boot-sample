@@ -1,5 +1,7 @@
 package com.cn.boot.sample.guava.io;
 
+import cn.hutool.core.date.DateField;
+import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
@@ -37,16 +39,17 @@ public class DataParseTest {
 
     @BeforeAll
     public void init() throws FileNotFoundException {
+//         String sourceFilePath = "test.csv";
         // String sourceFilePath = "train_temp.csv";
         // String sourceFilePath = "test_temp.csv";
         // String sourceFilePath = "train_hudi.csv";
 //        String sourceFilePath = "test_hudi.csv";
-//         String sourceFilePath = "bms_temp_train.csv";
-//         String sourceFilePath = "bms_temp_test.csv";
+//        String sourceFilePath = "bms_temp_train.csv";
+        String sourceFilePath = "bms_temp_test.csv";
 //         String sourceFilePath = "bms_diff_train.csv";
 //         String sourceFilePath = "bms_diff_test.csv";
 //         String sourceFilePath = "bms_jueyuan_train.csv";
-        String sourceFilePath = "bms_jueyuan_test.csv";
+//        String sourceFilePath = "bms_jueyuan_test.csv";
 
         sourceFile = ResourceUtils.getFile("classpath:" + sourceFilePath);
         String sinkFilePath = sourceFile.getParent() + "/result.csv";
@@ -79,7 +82,7 @@ public class DataParseTest {
                     return true;
                 }
                 if (result.size() == 1) {
-                    result.add(line);
+                    addLine(result, line);
                     return true;
                 }
 
@@ -96,10 +99,10 @@ public class DataParseTest {
                     String fillTime = DateUtil.formatDateTime(new Date(lastTime + 60 * 1000));
                     String fillLine = fillTime + "," + lastData[1] + "," + lastData[2];
                     log.info("fillLine={}", fillLine);
-                    result.add(fillLine);
+                    addLine(result, fillLine);
                     lastTime = lastTime + 60 * 1000;
                 }
-                result.add(line);
+                addLine(result, line);
                 return true;
             }
 
@@ -118,7 +121,19 @@ public class DataParseTest {
     private long getLineTime(String line) {
         String[] split = line.split(",");
         String timeStr = split[0];
-        return DateUtil.parseDateTime(timeStr).getTime();
+        DateTime dateTime = DateUtil.parseDateTime(timeStr);
+        dateTime.setField(DateField.SECOND, 0);
+        return dateTime.getTime();
+    }
+
+    private void addLine(List<String> result, String line) {
+        String[] split = line.split(",");
+        String timeStr = split[0];
+        DateTime dateTime = DateUtil.parseDateTime(timeStr);
+        dateTime.setField(DateField.SECOND, 0);
+        String lineTime = DateUtil.formatDateTime(dateTime);
+        String addLine = lineTime + "," + split[1] + "," + split[2];
+        result.add(addLine);
     }
 
 }
