@@ -5,10 +5,32 @@ mergeRegex='^(Merge|merge).*'
 contentRegex='^(feat|fix):\[[0-9]+(,[0-9]+)*\].*|(docs|test|ci|revert):.*'
 userInfoFile='/var/opt/gitlab/gitaly/user.info'
 urlSession='http://192.168.1.221:82/zentao/api-getsessionid.json'
-urlLogin='http://192.168.1.221:82/zentao/user-login.json?account=xxx&password=xxx'
+urlLogin='http://192.168.1.221:82/zentao/user-login.json?account=ops&password=cnte@123'
 
-if [[ "$GL_PROJECT_PATH" == "ai/cnte-algo-etl" || "$GL_PROJECT_PATH" == "ai/cnte-algo-vehicle-detection"
-|| "$GL_PROJECT_PATH" == "ems/commcomponents" || "$GL_PROJECT_PATH" == "test/test1" ]]; then
+if [[ "$GL_PROJECT_PATH" == "test/test1"
+|| "$GL_PROJECT_PATH" == "ai/cnte-algo-etl"
+|| "$GL_PROJECT_PATH" == "ai/cnte-algo-vehicle-detection"
+|| "$GL_PROJECT_PATH" == "secp2/secp-bmp/bmp-backend/bmp-backend"
+|| "$GL_PROJECT_PATH" == "secp2/secp-bmp/bmp-frontend/bmp-frontend"
+|| "$GL_PROJECT_PATH" == "secp2/secp-iot/iot-services"
+|| "$GL_PROJECT_PATH" == "ems/cnte_ems"
+|| "$GL_PROJECT_PATH" == "ems/cnte_emsplatform"
+|| "$GL_PROJECT_PATH" == "ems/cnte_gioc"
+|| "$GL_PROJECT_PATH" == "ems/cnte_heatstratery"
+|| "$GL_PROJECT_PATH" == "ems/cnte_strategy"
+|| "$GL_PROJECT_PATH" == "ems/cnte_virtualpower"
+|| "$GL_PROJECT_PATH" == "ems/manager"
+|| "$GL_PROJECT_PATH" == "ems/Idcservice"
+|| "$GL_PROJECT_PATH" == "ems/Upgrade"
+|| "$GL_PROJECT_PATH" == "ems/commcomponents"
+|| "$GL_PROJECT_PATH" == "ems/cnte_devops"
+|| "$GL_PROJECT_PATH" == "esd/pc/common/acan-simulation"
+|| "$GL_PROJECT_PATH" == "esd/mcu/rt-thread/chp"
+|| "$GL_PROJECT_PATH" == "esd/mcu/rt-thread/dtu"
+|| "$GL_PROJECT_PATH" == "esd/mcu/rt-thread/pcu"
+|| "$GL_PROJECT_PATH" == "esd/mcu/rt-thread/pps"
+|| "$GL_PROJECT_PATH" == "esd/mcu/rt-thread/rcmu"
+|| "$GL_PROJECT_PATH" == "test/test2" ]]; then
   while read -r oldrev newrev refname; do
 
     echo "[INFO]开始检查提交信息..."
@@ -106,6 +128,4 @@ if [[ "$GL_PROJECT_PATH" == "ai/cnte-algo-etl" || "$GL_PROJECT_PATH" == "ai/cnte
     echo "[INFO]本次提交关联禅道BUG号："${!bugs[*]}
     echo "[INFO]--------------------------------------------------------"
   done
-else
-  echo "该项目无需校验"
 fi
