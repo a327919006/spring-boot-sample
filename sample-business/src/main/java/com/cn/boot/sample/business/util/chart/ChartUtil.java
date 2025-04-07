@@ -2,13 +2,11 @@ package com.cn.boot.sample.business.util.chart;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartUtils;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.StandardChartTheme;
-import org.jfree.chart.axis.CategoryAxis;
-import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.*;
+import org.jfree.chart.axis.*;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
@@ -18,11 +16,16 @@ import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.VerticalAlignment;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.time.Day;
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import java.awt.*;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * @author Chen Nan
@@ -179,5 +182,96 @@ public class ChartUtil {
         JFreeChart chart = ChartFactory.createBarChart("部门人数曲线", null, null, dataset);
 
         ChartUtils.saveChartAsPNG(new File("./pdf/chart/barChart.png"), chart, 500, 200);
+    }
+
+    @SneakyThrows
+    public static void createPerformanceChart() {
+        // 创建数据集
+        TimeSeriesCollection datasetRate = new TimeSeriesCollection();
+        TimeSeriesCollection datasetTemp = new TimeSeriesCollection();
+
+        // 创建三个数据序列
+        TimeSeries cpuUsage = new TimeSeries("CPU使用率");
+        TimeSeries memoryUsage = new TimeSeries("内存使用率");
+        TimeSeries cpuTemp = new TimeSeries("CPU温度");
+
+        // 生成测试数据（30天）
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -30); // 从30天前开始
+
+        for (int i = 0; i < 30; i++) {
+            Day day = new Day(calendar.getTime());
+            cpuUsage.add(day, Math.random() * 100);       // 0-100%
+            memoryUsage.add(day, 20 + Math.random() * 80); // 20-100%
+            cpuTemp.add(day, Math.random() * 80 - 10);      // -10-40℃
+            calendar.add(Calendar.MINUTE, 5);
+        }
+
+        // 将序列添加到数据集
+        datasetRate.addSeries(cpuUsage);
+        datasetRate.addSeries(memoryUsage);
+        datasetTemp.addSeries(cpuTemp);
+
+        // 创建图表
+        StandardChartTheme chartTheme = new StandardChartTheme("CN");
+        chartTheme.setExtraLargeFont(new Font("微软雅黑", Font.BOLD, 13));
+        chartTheme.setRegularFont(new Font("微软雅黑", Font.BOLD, 10));
+        chartTheme.setLargeFont(new Font("微软雅黑", Font.BOLD, 10));
+        ChartFactory.setChartTheme(chartTheme);
+        JFreeChart chart = ChartFactory.createTimeSeriesChart(
+                "边缘控制器-1",  // 标题
+                null,             // X轴标签
+                "使用率(%)", // Y轴标签
+                datasetRate,           // 数据集
+                true,              // 显示图例
+                true,              // 显示工具提示
+                false              // 不显示URL
+        );
+
+        // 获取图表绘图对象
+        XYPlot plot = chart.getXYPlot();
+        // 设置背景颜色
+        plot.setBackgroundPaint(Color.WHITE);
+        plot.setDomainGridlinePaint(Color.LIGHT_GRAY);
+        plot.setRangeGridlinePaint(Color.LIGHT_GRAY);
+
+        // 设置坐标轴格式
+        DateAxis axis = (DateAxis) plot.getDomainAxis();
+        axis.setDateFormatOverride(new SimpleDateFormat("MM-dd"));  // 日期格式
+        axis.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 5)); // 每5天显示一个标签
+
+        // 配置左侧Y轴（使用率）
+        NumberAxis leftAxis = (NumberAxis) plot.getRangeAxis();
+        leftAxis.setAutoRangeIncludesZero(false); // 自动调整范围
+        leftAxis.setAutoRange(true);
+        // 强制设置刻度单位为10
+        // rangeAxis.setTickUnit(new NumberTickUnit(10));
+
+        // 配置右侧Y轴（温度）
+        NumberAxis rightAxis = new NumberAxis("温度(℃)");
+        rightAxis.setTickLabelPaint(Color.RED);   // 新增：刻度值红色
+        rightAxis.setAutoRangeIncludesZero(false);
+        rightAxis.setAutoRange(true);
+        plot.setRangeAxis(1, rightAxis);
+        plot.setDataset(1, datasetTemp);
+        plot.mapDatasetToRangeAxis(1, 1);
+
+        // 设置折线样式
+        XYLineAndShapeRenderer rendererRate = new XYLineAndShapeRenderer();
+        rendererRate.setSeriesPaint(0, Color.BLUE);    // CPU使用率 - 蓝色
+        rendererRate.setSeriesPaint(1, Color.GREEN);   // 内存使用率 - 绿色
+        rendererRate.setDefaultShapesVisible(false); // 不显示形状
+        XYLineAndShapeRenderer rendererTemp = new XYLineAndShapeRenderer();
+        rendererTemp.setSeriesPaint(0, Color.RED);    // CPU温度 - 红色
+        rendererTemp.setSeriesShapesVisible(0, false);
+
+        // 6. 设置边距
+        plot.setAxisOffset(RectangleInsets.ZERO_INSETS); // 坐标轴与边框无间距
+        // chart.setPadding(new RectangleInsets(10, 10, 10, 10));
+
+        plot.setRenderer(0, rendererRate);
+        plot.setRenderer(1, rendererTemp);
+
+        ChartUtils.saveChartAsPNG(new File("./pdf/chart/performance.png"), chart, 800, 400);
     }
 }

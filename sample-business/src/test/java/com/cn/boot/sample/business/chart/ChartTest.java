@@ -28,4 +28,9 @@ public class ChartTest {
     public void createBarChart(){
         ChartUtil.createBarChart();
     }
+
+    @Test
+    public void createPerformanceChart(){
+        ChartUtil.createPerformanceChart();
+    }
 }
