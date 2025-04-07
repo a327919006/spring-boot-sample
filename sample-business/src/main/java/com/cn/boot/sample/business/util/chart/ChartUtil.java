@@ -2,7 +2,10 @@ package com.cn.boot.sample.business.util.chart;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.jfree.chart.*;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtils;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.axis.*;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.XYPlot;
@@ -16,16 +19,20 @@ import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.VerticalAlignment;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.time.Day;
+import org.jfree.data.time.Minute;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import java.awt.*;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @author Chen Nan
@@ -185,32 +192,60 @@ public class ChartUtil {
     }
 
     @SneakyThrows
-    public static void createPerformanceChart() {
+    public static JFreeChart createPerformanceChart() {
         // 创建数据集
-        TimeSeriesCollection datasetRate = new TimeSeriesCollection();
-        TimeSeriesCollection datasetTemp = new TimeSeriesCollection();
+        TimeSeries cpuSeries = new TimeSeries("CPU使用率");
+        TimeSeries memorySeries = new TimeSeries("内存使用率");
+        TimeSeries tempSeries = new TimeSeries("CPU温度");
 
-        // 创建三个数据序列
-        TimeSeries cpuUsage = new TimeSeries("CPU使用率");
-        TimeSeries memoryUsage = new TimeSeries("内存使用率");
-        TimeSeries cpuTemp = new TimeSeries("CPU温度");
-
-        // 生成测试数据（30天）
+        // 生成高密度测试数据（每5分钟一条）
+        Date now = new Date();
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, -30); // 从30天前开始
+        calendar.setTime(now);
+        calendar.add(Calendar.DAY_OF_MONTH, -30); // 30天前
 
-        for (int i = 0; i < 30; i++) {
-            Day day = new Day(calendar.getTime());
-            cpuUsage.add(day, Math.random() * 100);       // 0-100%
-            memoryUsage.add(day, 20 + Math.random() * 80); // 20-100%
-            cpuTemp.add(day, Math.random() * 80 - 10);      // -10-40℃
+        // 数据生成参数
+        double memoryBase = 40.0; // 内存基准值
+
+        int i = 0;
+        while (calendar.getTime().before(now)) {
+            Minute minute = new Minute(calendar.getTime());
+
+            // 生成带时间特征的模拟数据
+            int hour = calendar.get(Calendar.HOUR_OF_DAY);
+
+            // CPU使用率（白天高夜间低）
+            double cpuUsage = 30 + 50 * Math.abs(Math.sin(hour * Math.PI / 24))
+                    + 5 * Math.random();
+
+            // 内存使用率（缓慢上升趋势）
+            double memoryUsage = memoryBase + 0.1 * (calendar.get(Calendar.DAY_OF_MONTH));
+            memoryUsage += 5 * Math.random();
+
+            // CPU温度（包含负值波动）
+            double temperature = 20 + 15 * Math.sin(calendar.get(Calendar.DAY_OF_MONTH))
+                    + 10 * Math.random() - 5;
+
+            // 添加数据点
+            if (i % 3 != 0) {
+                cpuSeries.add(minute, cpuUsage);
+                memorySeries.add(minute, Math.min(100, memoryUsage));
+                tempSeries.add(minute, temperature);
+            }
+
+            // 每5分钟增加一次
             calendar.add(Calendar.MINUTE, 5);
+            memoryBase += 0.0001; // 模拟内存缓慢增长
+            i++;
         }
 
+        // 创建数据集
+        TimeSeriesCollection dataSetRate = new TimeSeriesCollection();
+        TimeSeriesCollection dataSetTemp = new TimeSeriesCollection();
         // 将序列添加到数据集
-        datasetRate.addSeries(cpuUsage);
-        datasetRate.addSeries(memoryUsage);
-        datasetTemp.addSeries(cpuTemp);
+        dataSetRate.addSeries(cpuSeries);
+        dataSetRate.addSeries(memorySeries);
+        dataSetTemp.addSeries(tempSeries);
 
         // 创建图表
         StandardChartTheme chartTheme = new StandardChartTheme("CN");
@@ -222,7 +257,7 @@ public class ChartUtil {
                 "边缘控制器-1",  // 标题
                 null,             // X轴标签
                 "使用率(%)", // Y轴标签
-                datasetRate,           // 数据集
+                dataSetRate,           // 数据集
                 true,              // 显示图例
                 true,              // 显示工具提示
                 false              // 不显示URL
@@ -249,11 +284,12 @@ public class ChartUtil {
 
         // 配置右侧Y轴（温度）
         NumberAxis rightAxis = new NumberAxis("温度(℃)");
+        rightAxis.setLabelFont(new Font("微软雅黑", Font.BOLD, 10));
         rightAxis.setTickLabelPaint(Color.RED);   // 新增：刻度值红色
         rightAxis.setAutoRangeIncludesZero(false);
         rightAxis.setAutoRange(true);
         plot.setRangeAxis(1, rightAxis);
-        plot.setDataset(1, datasetTemp);
+        plot.setDataset(1, dataSetTemp);
         plot.mapDatasetToRangeAxis(1, 1);
 
         // 设置折线样式
@@ -272,6 +308,32 @@ public class ChartUtil {
         plot.setRenderer(0, rendererRate);
         plot.setRenderer(1, rendererTemp);
 
-        ChartUtils.saveChartAsPNG(new File("./pdf/chart/performance.png"), chart, 800, 400);
+        // ChartUtils.saveChartAsPNG(new File("./pdf/chart/performance.png"), chart, 800, 400);
+
+        // 设置抗锯齿
+        chart.setAntiAlias(true);
+        chart.setTextAntiAlias(true);
+        return chart;
+    }
+
+    public static String chartToBase64(JFreeChart chart, int width, int height) {
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+            // 设置高DPI渲染（解决字体模糊问题）
+            ChartUtils.writeChartAsPNG(bos, chart, width, height);
+
+            // 转换为Base64字符串
+            return Base64.getEncoder().encodeToString(bos.toByteArray());
+        } catch (Exception e) {
+            log.error("创建异常：", e);
+            return null;
+        }
+    }
+
+    public static void chartToFile(JFreeChart chart, int width, int height) {
+        try {
+            ChartUtils.saveChartAsPNG(new File("./pdf/chart/performance.png"), chart, width, height);
+        } catch (IOException e) {
+            log.error("创建异常：", e);
+        }
     }
 }
