@@ -2,23 +2,27 @@ package com.cn.boot.sample.business.util.chart;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartUtils;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.StandardChartTheme;
+import org.jfree.chart.*;
 import org.jfree.chart.axis.*;
+import org.jfree.chart.labels.ItemLabelAnchor;
+import org.jfree.chart.labels.ItemLabelPosition;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
+import org.jfree.chart.labels.StandardXYItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.CategoryItemRenderer;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
-import org.jfree.chart.ui.HorizontalAlignment;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.VerticalAlignment;
+import org.jfree.chart.ui.*;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.time.Day;
 import org.jfree.data.time.Minute;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -26,20 +30,21 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import java.awt.*;
+import java.awt.List;
+import java.awt.geom.Ellipse2D;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Base64;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 /**
  * @author Chen Nan
  */
 @Slf4j
 public class ChartUtil {
-
+    private static final String FONT_NAME = "文泉驿正黑";
     private static final Color COLOR_GRAY = new Color(146, 146, 146);
 
     /**
@@ -53,9 +58,9 @@ public class ChartUtil {
         dataset.setValue("销售部", 50);
 
         StandardChartTheme chartTheme = new StandardChartTheme("CN");
-        chartTheme.setExtraLargeFont(new Font("微软雅黑", Font.BOLD, 20));
-        chartTheme.setRegularFont(new Font("微软雅黑", Font.BOLD, 15));
-        chartTheme.setLargeFont(new Font("微软雅黑", Font.BOLD, 15));
+        chartTheme.setExtraLargeFont(new Font(FONT_NAME, Font.BOLD, 20));
+        chartTheme.setRegularFont(new Font(FONT_NAME, Font.BOLD, 15));
+        chartTheme.setLargeFont(new Font(FONT_NAME, Font.BOLD, 15));
         ChartFactory.setChartTheme(chartTheme);
         JFreeChart chart = ChartFactory.createPieChart("部门人数分布", dataset, true, false, false);
 
@@ -88,16 +93,16 @@ public class ChartUtil {
         dataset.setValue(94, "漏洞", "09月");
 
         StandardChartTheme chartTheme = new StandardChartTheme("CN");
-        chartTheme.setExtraLargeFont(new Font("微软雅黑", Font.PLAIN, 13));
-        chartTheme.setRegularFont(new Font("微软雅黑", Font.PLAIN, 10));
-        chartTheme.setLargeFont(new Font("微软雅黑", Font.PLAIN, 10));
+        chartTheme.setExtraLargeFont(new Font(FONT_NAME, Font.PLAIN, 13));
+        chartTheme.setRegularFont(new Font(FONT_NAME, Font.PLAIN, 10));
+        chartTheme.setLargeFont(new Font(FONT_NAME, Font.PLAIN, 10));
         ChartFactory.setChartTheme(chartTheme);
         JFreeChart chart = ChartFactory.createLineChart(null, null, null, dataset);
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
         plot.setBackgroundPaint(Color.WHITE);  // 设置绘图区背景颜色为白色
 
         // 自定义标题
-        TextTitle customTitle = new TextTitle("风险点趋势", new Font("微软雅黑", Font.BOLD, 12));
+        TextTitle customTitle = new TextTitle("风险点趋势", new Font(FONT_NAME, Font.BOLD, 12));
         customTitle.setHorizontalAlignment(HorizontalAlignment.LEFT);
         customTitle.setMargin(new RectangleInsets(5, 5, 5, 5)); // 可以根据需要调整这些值
         chart.setTitle(customTitle);
@@ -108,7 +113,7 @@ public class ChartUtil {
         legend.setPosition(RectangleEdge.TOP);
 
         // 增加y轴单位说明文字
-        Title title = new TextTitle("单位：个", new Font("微软雅黑", Font.BOLD, 10), COLOR_GRAY,
+        Title title = new TextTitle("单位：个", new Font(FONT_NAME, Font.BOLD, 10), COLOR_GRAY,
                 RectangleEdge.TOP, HorizontalAlignment.LEFT, VerticalAlignment.TOP, RectangleInsets.ZERO_INSETS);
         title.setPadding(0, 20, 0, 0);
         chart.addSubtitle(title);
@@ -153,9 +158,9 @@ public class ChartUtil {
         dataset.addSeries(series2);
 
         StandardChartTheme chartTheme = new StandardChartTheme("CN");
-        chartTheme.setExtraLargeFont(new Font("微软雅黑", Font.BOLD, 13));
-        chartTheme.setRegularFont(new Font("微软雅黑", Font.BOLD, 10));
-        chartTheme.setLargeFont(new Font("微软雅黑", Font.BOLD, 10));
+        chartTheme.setExtraLargeFont(new Font(FONT_NAME, Font.BOLD, 13));
+        chartTheme.setRegularFont(new Font(FONT_NAME, Font.BOLD, 10));
+        chartTheme.setLargeFont(new Font(FONT_NAME, Font.BOLD, 10));
         ChartFactory.setChartTheme(chartTheme);
         JFreeChart chart = ChartFactory.createXYLineChart(null, null, null, dataset);
 
@@ -182,13 +187,221 @@ public class ChartUtil {
         dataset.setValue(50, "销售部", "2024年");
 
         StandardChartTheme chartTheme = new StandardChartTheme("CN");
-        chartTheme.setExtraLargeFont(new Font("微软雅黑", Font.BOLD, 13));
-        chartTheme.setRegularFont(new Font("微软雅黑", Font.BOLD, 10));
-        chartTheme.setLargeFont(new Font("微软雅黑", Font.BOLD, 10));
+        chartTheme.setExtraLargeFont(new Font(FONT_NAME, Font.BOLD, 13));
+        chartTheme.setRegularFont(new Font(FONT_NAME, Font.BOLD, 10));
+        chartTheme.setLargeFont(new Font(FONT_NAME, Font.BOLD, 10));
         ChartFactory.setChartTheme(chartTheme);
         JFreeChart chart = ChartFactory.createBarChart("部门人数曲线", null, null, dataset);
 
         ChartUtils.saveChartAsPNG(new File("./pdf/chart/barChart.png"), chart, 500, 200);
+    }
+
+    @SneakyThrows
+    public static void createBugPeopleCountChart() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.setValue(10, "BUG", "张三");
+        dataset.setValue(30, "BUG", "李四");
+        dataset.setValue(55, "BUG", "王五");
+        dataset.setValue(32, "BUG", "马六");
+        dataset.setValue(44, "BUG", "马六1");
+        dataset.setValue(55, "BUG", "马六2");
+        dataset.setValue(66, "BUG", "马六3");
+        dataset.setValue(77, "BUG", "马六4");
+        dataset.setValue(11, "BUG", "马六5");
+        dataset.setValue(22, "BUG", "马六6");
+        dataset.setValue(33, "BUG", "马六7");
+        dataset.setValue(123, "BUG", "马六8");
+        dataset.setValue(31, "BUG", "马六9");
+
+        StandardChartTheme chartTheme = new StandardChartTheme("CN");
+        chartTheme.setExtraLargeFont(new Font(FONT_NAME, Font.BOLD, 13));
+        chartTheme.setRegularFont(new Font(FONT_NAME, Font.BOLD, 10));
+        chartTheme.setLargeFont(new Font(FONT_NAME, Font.BOLD, 10));
+        ChartFactory.setChartTheme(chartTheme);
+        JFreeChart chart = ChartFactory.createBarChart("本周新增BUG数",
+                null,                // 分类轴标签
+                null,                // 数值轴标签
+                dataset,             // 数据集
+                PlotOrientation.VERTICAL,  // 图表方向
+                false,               // 不显示图例
+                false,               // 不生成工具提示
+                false                // 不生成URL
+        );
+
+        // 移除灰色背景（核心修改部分）
+        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        plot.setBackgroundPaint(Color.WHITE);                 // 绘图区域背景
+        plot.setRangeGridlinePaint(Color.LIGHT_GRAY);         // 设置横向网格线颜色（可选）
+        // 设置纯蓝色柱形（核心修改1）
+        CategoryItemRenderer renderer = plot.getRenderer();
+        renderer.setSeriesPaint(0, new Color(0, 100, 255)); // RGB纯蓝色
+        // 显示数据标签（关键修改点）
+        renderer.setDefaultItemLabelsVisible(true); // 全局启用标签
+        renderer.setSeriesItemLabelsVisible(0, true); // 针对系列0启用（双保险）
+        renderer.setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator());
+        renderer.setDefaultItemLabelFont(new Font(FONT_NAME, Font.BOLD, 12));
+        renderer.setDefaultItemLabelPaint(Color.BLACK); // 白色标签确保可读性
+        // 设置标签显示在柱形上方（核心修改）
+        renderer.setDefaultPositiveItemLabelPosition(new ItemLabelPosition(
+                ItemLabelAnchor.OUTSIDE12,     // 标签锚点：柱形外侧顶部
+                TextAnchor.BOTTOM_CENTER       // 文本对齐：底部居中
+        ));
+
+        // 设置X轴标签显示优化（核心修改部分）
+        CategoryAxis domainAxis = plot.getDomainAxis();
+        domainAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45); // 标签旋转45度
+
+        // 调整绘图区域边距确保标签完整显示
+        plot.setAxisOffset(new RectangleInsets(10, 0, 0, 0)); // 增加10px上边距
+
+        ChartUtils.saveChartAsPNG(new File("./pdf/chart/研发BUG数.png"), chart, 500, 400);
+    }
+
+    @SneakyThrows
+    public static void createPeopleTaskChart() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.setValue(33, "任务", "张三(1.5)");
+        dataset.setValue(22, "任务", "赵四(1.5)");
+        dataset.setValue(44, "任务", "李四(1.5)");
+        dataset.setValue(55, "任务", "王五(1.5)");
+        dataset.setValue(66, "任务", "马六(1.5)");
+        dataset.setValue(10, "BUG", "张三(1.5)");
+        dataset.setValue(10, "BUG", "赵四(1.5)");
+        dataset.setValue(30, "BUG", "李四(1.5)");
+        dataset.setValue(55, "BUG", "王五(1.5)");
+        dataset.setValue(32, "BUG", "马六(1.5)");
+
+        StandardChartTheme chartTheme = new StandardChartTheme("CN");
+        chartTheme.setExtraLargeFont(new Font(FONT_NAME, Font.BOLD, 13));
+        chartTheme.setRegularFont(new Font(FONT_NAME, Font.BOLD, 10));
+        chartTheme.setLargeFont(new Font(FONT_NAME, Font.BOLD, 10));
+        ChartFactory.setChartTheme(chartTheme);
+        JFreeChart chart = ChartFactory.createBarChart("研发任务情况",
+                null,                // 分类轴标签
+                null,                // 数值轴标签
+                dataset,             // 数据集
+                PlotOrientation.VERTICAL,  // 图表方向
+                true,               // 不显示图例
+                false,               // 不生成工具提示
+                false                // 不生成URL
+        );
+
+        // 移除灰色背景
+        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        plot.setBackgroundPaint(Color.WHITE);                 // 绘图区域背景
+        plot.setRangeGridlinePaint(Color.LIGHT_GRAY);         // 设置横向网格线颜色（可选）
+        // 设置纯蓝色柱形
+        CategoryItemRenderer renderer = plot.getRenderer();
+        renderer.setSeriesPaint(0, new Color(0, 100, 255)); // RGB纯蓝色
+        // 显示数据标签
+        renderer.setDefaultItemLabelsVisible(true); // 全局启用标签
+        renderer.setSeriesItemLabelsVisible(0, true); // 针对系列0启用（双保险）
+        renderer.setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator());
+        renderer.setDefaultItemLabelFont(new Font(FONT_NAME, Font.BOLD, 12));
+        renderer.setDefaultItemLabelPaint(Color.BLACK); // 白色标签确保可读性
+        // 设置标签显示在柱形上方
+        renderer.setDefaultPositiveItemLabelPosition(new ItemLabelPosition(
+                ItemLabelAnchor.OUTSIDE12,     // 标签锚点：柱形外侧顶部
+                TextAnchor.BOTTOM_CENTER       // 文本对齐：底部居中
+        ));
+
+        // 设置X轴标签显示优化
+        CategoryAxis domainAxis = plot.getDomainAxis();
+        domainAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45); // 标签旋转45度
+        domainAxis.setCategoryMargin(0.30); // 调整分类间距，0.2表示20%的空隙
+        ((BarRenderer) plot.getRenderer()).setItemMargin(0); // 设置同一分类内不同系列柱形间距为0
+
+        // 配置Y轴扩展显示空间
+        ValueAxis rangeAxis = plot.getRangeAxis();
+        rangeAxis.setUpperMargin(0.15);  // 增加顶部边距15%
+
+        // 调整绘图区域边距确保标签完整显示
+        plot.setAxisOffset(new RectangleInsets(0, 0, 0, 0)); // 增加10px上边距
+
+        ChartUtils.saveChartAsPNG(new File("./pdf/chart/研发任务情况.png"), chart, 500, 300);
+    }
+
+    @SneakyThrows
+    public static void createBugDayCountChart() {
+        // 创建时间序列数据集
+        TimeSeries series = new TimeSeries("日新增BUG数量");
+
+        // 生成模拟数据（30天）
+        Calendar calendar = Calendar.getInstance();
+        Random rand = new Random();
+
+        // 从30天前到今天生成数据
+        for (int i = 29; i >= 0; i--) {
+            calendar.add(Calendar.DAY_OF_MONTH, -1); // 递减天数
+            Day day = new Day(calendar.getTime());
+
+            // 生成随机BUG数量（0-20之间）
+            int bugCount = rand.nextInt(20);
+            series.add(day, bugCount);
+        }
+
+        // 创建数据集
+        TimeSeriesCollection dataSet = new TimeSeriesCollection();
+        // 将序列添加到数据集
+        dataSet.addSeries(series);
+
+        // 创建图表
+        StandardChartTheme chartTheme = new StandardChartTheme("CN");
+        chartTheme.setExtraLargeFont(new Font(FONT_NAME, Font.BOLD, 13));
+        chartTheme.setRegularFont(new Font(FONT_NAME, Font.BOLD, 10));
+        chartTheme.setLargeFont(new Font(FONT_NAME, Font.BOLD, 10));
+        ChartFactory.setChartTheme(chartTheme);
+        JFreeChart chart = ChartFactory.createTimeSeriesChart(
+                "BUG趋势图",  // 标题
+                null,             // X轴标签
+                null, // Y轴标签
+                dataSet,           // 数据集
+                false,              // 显示图例
+                true,              // 显示工具提示
+                false              // 不显示URL
+        );
+
+        // 获取图表绘图对象
+        XYPlot plot = chart.getXYPlot();
+        // 设置背景颜色
+        plot.setBackgroundPaint(Color.WHITE);
+        plot.setDomainGridlinePaint(Color.LIGHT_GRAY);
+        plot.setRangeGridlinePaint(Color.LIGHT_GRAY);
+
+        // 设置坐标轴格式
+        DateAxis axis = (DateAxis) plot.getDomainAxis();
+        axis.setDateFormatOverride(new SimpleDateFormat("dd"));  // 日期格式
+
+        // 配置左侧Y轴
+        NumberAxis leftAxis = (NumberAxis) plot.getRangeAxis();
+        leftAxis.setAutoRangeIncludesZero(true); // 自动调整范围
+        leftAxis.setAutoRange(true);
+
+        // 设置折线样式
+        XYLineAndShapeRenderer rendererRate = new XYLineAndShapeRenderer();
+        rendererRate.setSeriesPaint(0, Color.BLUE);    // 蓝色
+//        rendererRate.setDefaultShapesVisible(true); // 显示形状
+        rendererRate.setSeriesShape(0, new Ellipse2D.Double(-3, -3, 6, 6));
+        rendererRate.setSeriesShapesVisible(0, true);
+//        rendererRate.setDefaultItemLabelsVisible(true); // 显示每个点的标签
+        rendererRate.setSeriesItemLabelsVisible(0, true);
+        rendererRate.setSeriesItemLabelGenerator(0, new StandardXYItemLabelGenerator(
+                StandardXYItemLabelGenerator.DEFAULT_ITEM_LABEL_FORMAT,
+                new SimpleDateFormat("MM-dd"),
+                new java.text.DecimalFormat("0")));
+        rendererRate.setSeriesItemLabelFont(0, new Font(FONT_NAME, Font.PLAIN, 10));
+        rendererRate.setSeriesItemLabelPaint(0, Color.DARK_GRAY);
+        plot.setRenderer(0, rendererRate);
+
+        // 6. 设置边距
+        plot.setAxisOffset(RectangleInsets.ZERO_INSETS); // 坐标轴与边框无间距
+        // chart.setPadding(new RectangleInsets(10, 10, 10, 10));
+
+        // 设置抗锯齿
+        chart.setAntiAlias(true);
+        chart.setTextAntiAlias(true);
+
+        ChartUtils.saveChartAsPNG(new File("./pdf/chart/BUG趋势.png"), chart, 800, 400);
     }
 
     @SneakyThrows
@@ -249,9 +462,9 @@ public class ChartUtil {
 
         // 创建图表
         StandardChartTheme chartTheme = new StandardChartTheme("CN");
-        chartTheme.setExtraLargeFont(new Font("微软雅黑", Font.BOLD, 13));
-        chartTheme.setRegularFont(new Font("微软雅黑", Font.BOLD, 10));
-        chartTheme.setLargeFont(new Font("微软雅黑", Font.BOLD, 10));
+        chartTheme.setExtraLargeFont(new Font(FONT_NAME, Font.BOLD, 13));
+        chartTheme.setRegularFont(new Font(FONT_NAME, Font.BOLD, 10));
+        chartTheme.setLargeFont(new Font(FONT_NAME, Font.BOLD, 10));
         ChartFactory.setChartTheme(chartTheme);
         JFreeChart chart = ChartFactory.createTimeSeriesChart(
                 "边缘控制器-1",  // 标题
@@ -284,7 +497,7 @@ public class ChartUtil {
 
         // 配置右侧Y轴（温度）
         NumberAxis rightAxis = new NumberAxis("温度(℃)");
-        rightAxis.setLabelFont(new Font("微软雅黑", Font.BOLD, 10));
+        rightAxis.setLabelFont(new Font(FONT_NAME, Font.BOLD, 10));
         rightAxis.setTickLabelPaint(Color.RED);   // 新增：刻度值红色
         rightAxis.setAutoRangeIncludesZero(false);
         rightAxis.setAutoRange(true);
