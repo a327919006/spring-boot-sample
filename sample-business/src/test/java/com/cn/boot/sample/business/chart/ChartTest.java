@@ -27,7 +27,7 @@ public class ChartTest {
 
     @Test
     public void createBarChart() {
-        ChartUtil.createBarChart();
+        ChartUtil.createBarChart2();
     }
 
     @Test

@@ -7,8 +7,11 @@ import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.axis.*;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
@@ -188,6 +191,42 @@ public class ChartUtil {
         ChartFactory.setChartTheme(chartTheme);
         JFreeChart chart = ChartFactory.createBarChart("部门人数曲线", null, null, dataset);
 
+        ChartUtils.saveChartAsPNG(new File("./pdf/chart/barChart.png"), chart, 500, 200);
+    }
+
+    @SneakyThrows
+    public static void createBarChart2() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.setValue(10, "解决方案", "张三");
+        dataset.setValue(30, "解决方案", "李四");
+        dataset.setValue(55, "解决方案", "王五");
+        dataset.setValue(200, "解决方案", "马六");
+
+        StandardChartTheme chartTheme = new StandardChartTheme("CN");
+        chartTheme.setExtraLargeFont(new Font("微软雅黑", Font.BOLD, 13));
+        chartTheme.setRegularFont(new Font("微软雅黑", Font.BOLD, 10));
+        chartTheme.setLargeFont(new Font("微软雅黑", Font.BOLD, 10));
+        ChartFactory.setChartTheme(chartTheme);
+        JFreeChart chart = ChartFactory.createBarChart("解决方案数量", null, null,
+                dataset, PlotOrientation.VERTICAL, false, true, false);
+
+        // 新增样式配置代码
+        CategoryPlot plot = chart.getCategoryPlot();
+
+        // 1. 去除灰色背景
+        chart.setBackgroundPaint(Color.WHITE);          // 设置图表整体背景
+        plot.setBackgroundPaint(Color.WHITE);           // 设置绘图区背景
+        plot.setDomainGridlinePaint(Color.LIGHT_GRAY);  // 设置横向网格线
+        plot.setRangeGridlinePaint(Color.LIGHT_GRAY);   // 设置纵向网格线
+
+        // 2. 设置浅蓝色柱形
+        BarRenderer renderer = (BarRenderer) plot.getRenderer();
+        renderer.setSeriesPaint(0, new Color(173, 216, 230)); // RGB浅蓝色
+        renderer.setDrawBarOutline(false); // 关闭柱形边框 ★ 核心修改
+
+        // 显示柱形数值标签
+        renderer.setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator());
+        renderer.setDefaultItemLabelsVisible(true);
         ChartUtils.saveChartAsPNG(new File("./pdf/chart/barChart.png"), chart, 500, 200);
     }
 
