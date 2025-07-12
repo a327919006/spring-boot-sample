@@ -58,8 +58,8 @@ public class RedisConfig extends CachingConfigurerSupport {
      * 防止redis入库序列化乱码的问题
      */
     @Bean
-    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
         redisTemplate.setKeySerializer(new StringRedisSerializer());//key序列化
         redisTemplate.setValueSerializer(jackson2JsonRedisSerializer());  //value序列化
@@ -67,7 +67,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
         redisTemplate.setHashValueSerializer(new JdkSerializationRedisSerializer());
 
-        redisTemplate.afterPropertiesSet();
+//        redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
 

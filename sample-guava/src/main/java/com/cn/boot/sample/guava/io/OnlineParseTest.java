@@ -50,9 +50,10 @@ public class OnlineParseTest {
         String logStr = Files.asCharSource(sourceFile, StandardCharsets.UTF_8).read();
         List<OnlineData> onlineDataList = JSONArray.parseArray(logStr, OnlineData.class);
         String did = "500112000004";
-        String deviceName = "重庆";
-        Date startTime = DateUtil.parse("2023-12-02 00:00:00");
-        Date endTime = DateUtil.parse("2023-12-09 00:00:00");
+        String deviceName = "上海嘉定区博园路麦当劳智道乐206";
+        String format = "yyyy-MM-dd HH:mm:ss.SSS";
+        Date startTime = DateUtil.parse("2024-05-14 00:00:00");
+        Date endTime = DateUtil.parse("2024-05-15 00:00:00");
         OnlineData firstData = onlineDataList.get(0);
 
         Date firstTime = DateUtil.parse(firstData.getTs());
@@ -91,7 +92,10 @@ public class OnlineParseTest {
                 continue;
             }
             long time = currTime.getTime() - lastTime.getTime();
+            String formatTime = DateUtil.formatBetween(time);
+
             if (StringUtils.equals("offline", lastStatus) && StringUtils.equals("online", currStatus)) {
+                System.out.println("'" + DateUtil.format(lastTime, format) + "\t" + "'" + DateUtil.format(currTime, format) + "\t离线\t" + formatTime);
                 totalOfflineSecond += time;
                 if (time < minOfflineSecond) {
                     minOfflineSecond = time;
@@ -109,6 +113,7 @@ public class OnlineParseTest {
                 hourCount.put(key, count);
             }
             if (StringUtils.equals("online", lastStatus) && StringUtils.equals("offline", currStatus)) {
+                System.out.println("'" + DateUtil.format(lastTime, format) + "\t" + "'" + DateUtil.format(currTime, format) + "\t在线\t" + formatTime);
                 totalOnlineSecond += time;
                 if (time < minOnlineSecond) {
                     minOnlineSecond = time;
@@ -285,9 +290,15 @@ public class OnlineParseTest {
     }
 
     private String formatSecond(long second) {
+        if (second == 0) {
+            return DateUtil.formatBetween(second, BetweenFormatter.Level.SECOND);
+        }
         if (second < 1000) {
             return DateUtil.formatBetween(second);
         }
-        return DateUtil.formatBetween(second, BetweenFormatter.Level.SECOND);
+        if (second < 3600 * 1000) {
+            return DateUtil.formatBetween(second, BetweenFormatter.Level.SECOND);
+        }
+        return DateUtil.formatBetween(second, BetweenFormatter.Level.MINUTE);
     }
 }

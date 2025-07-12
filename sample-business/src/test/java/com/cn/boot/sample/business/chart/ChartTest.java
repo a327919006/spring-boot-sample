@@ -31,6 +31,21 @@ public class ChartTest {
     }
 
     @Test
+    public void createBugDayCountChart() {
+        ChartUtil.createBugDayCountChart();
+    }
+
+    @Test
+    public void createBugPeopleCountChart() {
+        ChartUtil.createBugPeopleCountChart();
+    }
+
+    @Test
+    public void createPeopleTaskChart() {
+        ChartUtil.createPeopleTaskChart();
+    }
+
+    @Test
     public void createPerformanceChart() {
         JFreeChart performanceChart = ChartUtil.createPerformanceChart();
         // 保存为图片
