@@ -1,5 +1,7 @@
 package com.cn.boot.sample.guava.io;
 
+import cn.hutool.core.date.DateField;
+import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
@@ -37,6 +39,7 @@ public class DataParseTest {
 
     @BeforeAll
     public void init() throws FileNotFoundException {
+        // String sourceFilePath = "test.csv";
         // String sourceFilePath = "train_temp.csv";
         // String sourceFilePath = "test_temp.csv";
         // String sourceFilePath = "train_hudi.csv";
@@ -79,7 +82,7 @@ public class DataParseTest {
                     return true;
                 }
                 if (result.size() == 1) {
-                    result.add(line);
+                    addLine(result, line);
                     return true;
                 }
 
@@ -99,7 +102,7 @@ public class DataParseTest {
                     result.add(fillLine);
                     lastTime = lastTime + 60 * 1000;
                 }
-                result.add(line);
+                addLine(result, line);
                 return true;
             }
 
@@ -118,7 +121,19 @@ public class DataParseTest {
     private long getLineTime(String line) {
         String[] split = line.split(",");
         String timeStr = split[0];
-        return DateUtil.parseDateTime(timeStr).getTime();
+        DateTime dateTime = DateUtil.parseDateTime(timeStr);
+        dateTime.setField(DateField.SECOND, 0);
+        return dateTime.getTime();
+    }
+
+    private void addLine(List<String> result, String line) {
+        String[] split = line.split(",");
+        String timeStr = split[0];
+        DateTime dateTime = DateUtil.parseDateTime(timeStr);
+        dateTime.setField(DateField.SECOND, 0);
+        String addTime = DateUtil.formatDateTime(dateTime);
+        String addLine = addTime + "," + split[1] + "," + split[2];
+        result.add(addLine);
     }
 
 }
