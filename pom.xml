@@ -68,6 +68,7 @@
         <module>sample-doris</module>
         <module>sample-dal-mp</module>
         <module>sample-server-mp</module>
+        <module>sample-websocket-client</module>
     </modules>
 
 
