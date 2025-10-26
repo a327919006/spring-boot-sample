@@ -1,15 +1,19 @@
-package com.cn.boot.sample.websocket.controller;
+package com.cn.boot.sample.websocket.client.controller;
 
-import com.cn.boot.sample.websocket.client.ClientManager;
+import com.cn.boot.sample.websocket.client.config.AutoReconnectClientManager;
+import com.cn.boot.sample.websocket.client.config.ClientManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Chen Nan
  */
 @RestController
-@RequestMapping("/websocket")
-public class WebSocketController {
+@RequestMapping("/client")
+public class ClientController {
 
     @Autowired
     private ClientManager webSocketManager;

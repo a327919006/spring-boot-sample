@@ -1,4 +1,4 @@
-package com.cn.boot.sample.websocket.client;
+package com.cn.boot.sample.websocket.client.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import javax.annotation.PreDestroy;
 @Slf4j
 @Component
 public class ClientManager {
-    @Value("${websocket.server.url:ws://127.0.0.1:9072/websocket/12345}")
+    @Value("${websocket.server.url:ws://127.0.0.1:10105/test/12345}")
     private String webSocketUrl;
 
     @Autowired

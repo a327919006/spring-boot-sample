@@ -1,4 +1,4 @@
-package com.cn.boot.sample.websocket.client;
+package com.cn.boot.sample.websocket.client.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @Slf4j
 //@Component
 public class AutoReconnectClientManager {
-    @Value("${websocket.server.url:ws://localhost:8080/websocket}")
+    @Value("${websocket.server.url:ws://127.0.0.1:10105/test/12345}")
     private String webSocketUrl;
 
     @Autowired
@@ -77,7 +77,7 @@ public class AutoReconnectClientManager {
     }
 
     // 每30秒检查一次连接状态
-    @Scheduled(fixedDelay = 30000)
+    @Scheduled(fixedDelay = 5000)
     public void checkConnection() {
         if (shouldReconnect.get() && !webSocketHandler.isConnected() && !isConnecting.get()) {
             log.info("检测到连接断开，尝试重连...");

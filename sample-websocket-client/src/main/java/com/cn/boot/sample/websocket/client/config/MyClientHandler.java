@@ -1,6 +1,6 @@
-package com.cn.boot.sample.websocket.client;
+package com.cn.boot.sample.websocket.client.config;
 
-import com.cn.boot.sample.websocket.service.DataService;
+import com.cn.boot.sample.websocket.client.service.MsgService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,6 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author Chen Nan
@@ -19,12 +18,11 @@ import java.util.concurrent.atomic.AtomicLong;
 @Component
 public class MyClientHandler extends TextWebSocketHandler {
 
-    private AtomicLong count = new AtomicLong(0);
     private WebSocketSession session;
     private CountDownLatch connectionLatch = new CountDownLatch(1);
 
     @Autowired
-    private DataService dataService;
+    private MsgService msgService;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -45,9 +43,7 @@ public class MyClientHandler extends TextWebSocketHandler {
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         String payload = message.getPayload();
-//        log.info("收到消息: {}", payload);
-        String[] split = payload.split("\n");
-        log.info("count={}", count.addAndGet(split.length));
+        msgService.process(payload);
     }
 
     @Override
