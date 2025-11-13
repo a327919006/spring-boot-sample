@@ -9,6 +9,10 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.Redisson;
+import org.redisson.api.RBatch;
+import org.redisson.api.RBucketAsync;
+import org.redisson.api.RMapAsync;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisCallback;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.Pipeline;
 
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
@@ -34,12 +39,11 @@ import java.util.concurrent.atomic.AtomicLong;
 public class PressureTestController {
 
     @Autowired
-    private JedisPool jedisPool;
-
-    @Value("${spring.redis.database}")
-    private int database;
-    @Autowired
     private StringRedisTemplate redisTemplate;
+    @Autowired
+    private JedisPool jedisPool;
+    @Autowired
+    private Redisson redisson;
 
     /**
      * 写入数据：100万，QPS：8849/s，并发线程数：32
@@ -317,7 +321,7 @@ public class PressureTestController {
     }
 
     /**
-     * 写入数据：100万，QPS：57000/s，并发线程数：10
+     * 写入数据：100万，QPS：57000/s，并发线程数：1
      *
      * @param threadCount 线程数
      * @param batchCount  批次数
@@ -369,6 +373,125 @@ public class PressureTestController {
             // 多线程操作
             threadPool.execute(task);
         }
+        return Constants.MSG_SUCCESS;
+    }
+
+    /**
+     * 写入数据：100万，QPS：620000/s，并发线程数：1
+     *
+     * @param threadCount 线程数
+     * @param batchCount  批次数
+     * @param batchSize   每批数据量
+     * @param printStep   打印日志步长
+     */
+    @ApiOperation("7、pipeline批量操作测试(Jedis)")
+    @PostMapping("/pipeline/jedis")
+    public String pipelineJedis(int threadCount, int batchCount, int batchSize, int printStep) {
+        // 初始化线程池
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("demo-pool-%d").build();
+        ExecutorService threadPool = new ThreadPoolExecutor(threadCount, threadCount,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+
+        int count = batchCount / threadCount;
+        String data = RandomUtil.randomNumbers(75);
+
+        Runnable task = () -> {
+            long start = System.currentTimeMillis();
+            long temp = System.currentTimeMillis();
+            Jedis jedis = jedisPool.getResource();
+            jedis.select(1);
+            String key = IdUtil.simpleUUID();
+            log.info("key = {}", key);
+            for (int i = 0; i < count; i++) {
+                String value = data + i;
+
+                Pipeline pipeline = jedis.pipelined();
+                for (int j = 0; j < batchSize; j++) {
+                    pipeline.hset(
+                            key + ":" + i,
+                            key + j,
+                            value
+                    );
+                }
+                pipeline.sync();
+
+                if (0 == i % printStep) {
+                    log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
+                    temp = System.currentTimeMillis();
+                }
+            }
+            log.info("总耗时:{}", System.currentTimeMillis() - start);
+        };
+
+        for (int j = 0; j < threadCount; j++) {
+            // 多线程操作
+            threadPool.execute(task);
+        }
+        return Constants.MSG_SUCCESS;
+    }
+
+
+    /**
+     * 写入数据：100万，QPS：120000/s，并发线程数：1
+     *
+     * @param threadCount 线程数
+     * @param batchCount  批次数
+     * @param batchSize   每批数据量
+     * @param printStep   打印日志步长
+     */
+    @ApiOperation("7、pipeline批量操作测试(Redisson)")
+    @PostMapping("/pipeline/redisson")
+    public String pipelineRedisson(int threadCount, int batchCount, int batchSize, int printStep) {
+        // 初始化线程池
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("demo-pool-%d").build();
+        ExecutorService threadPool = new ThreadPoolExecutor(threadCount, threadCount,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+
+        int count = batchCount / threadCount;
+        String data = RandomUtil.randomNumbers(75);
+
+        Runnable task = () -> {
+            long start = System.currentTimeMillis();
+            long temp = System.currentTimeMillis();
+            String key = IdUtil.simpleUUID();
+            log.info("key = {}", key);
+
+            for (int i = 0; i < count; i++) {
+                String value = data + i;
+
+                // 使用 Redisson 的 RBatch 执行批量操作
+                RBatch batch = redisson.createBatch();
+
+                for (int j = 0; j < batchSize; j++) {
+                    String hashKey = key + ":" + i;
+                    String field = key + j;
+                    // 注意：Redisson 的 RMapAsync 对应 Redis 的 Hash
+                    RMapAsync<String, String> map = batch.getMap(hashKey);
+                    map.fastPutAsync(field, value); // fastPutAsync 不返回旧值，性能更高
+                }
+
+                // 执行批量命令（同步等待结果）
+                batch.execute();
+
+                if (i % printStep == 0) {
+                    log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
+                    temp = System.currentTimeMillis();
+                }
+            }
+            log.info("总耗时: {}", System.currentTimeMillis() - start);
+        };
+
+        for (int j = 0; j < threadCount; j++) {
+            threadPool.execute(task);
+        }
+
+        // 可选：优雅关闭线程池（根据实际场景决定是否在这里 shutdown）
+        // threadPool.shutdown();
+
         return Constants.MSG_SUCCESS;
     }
 }
