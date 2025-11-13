@@ -11,6 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import java.util.TreeMap;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -37,6 +38,8 @@ public class PressureTestController {
 
     @Value("${spring.redis.database}")
     private int database;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     /**
      * 写入数据：100万，QPS：8849/s，并发线程数：32
@@ -308,6 +311,62 @@ public class PressureTestController {
         };
 
         for (int j = 0; j < threadCount; j++) {
+            threadPool.execute(task);
+        }
+        return Constants.MSG_SUCCESS;
+    }
+
+    /**
+     * 写入数据：100万，QPS：57000/s，并发线程数：10
+     *
+     * @param threadCount 线程数
+     * @param batchCount  批次数
+     * @param batchSize   每批数据量
+     * @param printStep   打印日志步长
+     */
+    @ApiOperation("7、pipeline批量操作测试")
+    @PostMapping("/pipeline")
+    public String pipeline(int threadCount, int batchCount, int batchSize, int printStep) {
+        // 初始化线程池
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("demo-pool-%d").build();
+        ExecutorService threadPool = new ThreadPoolExecutor(threadCount, threadCount,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+
+        int count = batchCount / threadCount;
+        String data = RandomUtil.randomNumbers(75);
+
+        Runnable task = () -> {
+            long start = System.currentTimeMillis();
+            long temp = System.currentTimeMillis();
+
+            String key = IdUtil.simpleUUID();
+            log.info("key = {}", key);
+            for (int i = 0; i < count; i++) {
+                String value = data + i;
+                int finalI = i;
+                redisTemplate.executePipelined((RedisCallback<Object>) connection -> {
+                    for (int j = 0; j < batchSize; j++) {
+                        connection.hSet(
+                                redisTemplate.getStringSerializer().serialize(key + ":" + finalI),
+                                redisTemplate.getStringSerializer().serialize(key + j),
+                                redisTemplate.getStringSerializer().serialize(value)
+                        );
+                    }
+                    return null;
+                });
+
+                if (0 == i % printStep) {
+                    log.info("i = {}, time={}", i, System.currentTimeMillis() - temp);
+                    temp = System.currentTimeMillis();
+                }
+            }
+            log.info("总耗时:{}", System.currentTimeMillis() - start);
+        };
+
+        for (int j = 0; j < threadCount; j++) {
+            // 多线程操作
             threadPool.execute(task);
         }
         return Constants.MSG_SUCCESS;
