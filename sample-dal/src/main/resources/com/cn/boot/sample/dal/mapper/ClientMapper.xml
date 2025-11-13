@@ -43,4 +43,9 @@
         `plat_id` = #{platId}
     </insert>
 
+    <select id="listByHandler" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+            FROM `boot_sample`.`client`
+    </select>
 </mapper>
