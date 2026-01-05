@@ -26,6 +26,14 @@ public class CsvResultHandler implements ResultHandler<Map<String, Object>> {
     private List<String> identifyList;
     private boolean headersInitialized = false;
 
+    public CsvResultHandler(OutputStream outputStream) {
+        this.outputStream = outputStream;
+        this.bufferSize = 1000;
+        this.buffer = new ArrayList<>(bufferSize);
+        this.count = new AtomicInteger(0);
+        this.csvExportUtil = new CsvExportUtil();
+    }
+
     public CsvResultHandler(OutputStream outputStream, List<String> headerList) {
         this.outputStream = outputStream;
         this.bufferSize = 1000;
@@ -52,7 +60,7 @@ public class CsvResultHandler implements ResultHandler<Map<String, Object>> {
 
         // 初始化表头
         if (!headersInitialized) {
-            initializeHeaders();
+            initializeHeaders(data);
         }
 
         buffer.add(data);
@@ -69,7 +77,11 @@ public class CsvResultHandler implements ResultHandler<Map<String, Object>> {
         }
     }
 
-    private void initializeHeaders() {
+    private void initializeHeaders(Map<String, Object> firstRecord) {
+        if (this.headerList == null) {
+            this.headerList = new ArrayList<>(firstRecord.keySet());
+            this.identifyList = new ArrayList<>(firstRecord.keySet());
+        }
         try {
             csvExportUtil.writeHeaders(outputStream, headerList);
             headersInitialized = true;
