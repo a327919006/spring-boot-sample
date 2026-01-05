@@ -15,7 +15,10 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -43,38 +46,14 @@ public class TestServiceImpl implements TestService {
     @Override
     public void exportCsv(HttpServletResponse response) {
         List<String> headerList = Lists.newArrayList();
-        headerList.add("id");
-        headerList.add("plat_id");
-        headerList.add("name");
-        headerList.add("status");
-        headerList.add("threshold");
-        headerList.add("repeat_second");
-        headerList.add("oss_type");
-        headerList.add("oss_config_id");
-        headerList.add("third_type");
-        headerList.add("third_app_id");
-        headerList.add("third_secret_id");
-        headerList.add("third_secret_key");
-        headerList.add("third_user_id");
-        headerList.add("create_time");
-        headerList.add("update_time");
+        headerList.add("名称");
+        headerList.add("状态");
+        headerList.add("创建时间");
 
         List<String> identifierList = Lists.newArrayList();
-        identifierList.add("id");
-        identifierList.add("plat_id");
         identifierList.add("name");
         identifierList.add("status");
-        identifierList.add("threshold");
-        identifierList.add("repeat_second");
-        identifierList.add("oss_type");
-        identifierList.add("oss_config_id");
-        identifierList.add("third_type");
-        identifierList.add("third_app_id");
-        identifierList.add("third_secret_id");
-        identifierList.add("third_secret_key");
-        identifierList.add("third_user_id");
         identifierList.add("create_time");
-        identifierList.add("update_time");
 
         setupCsvResponse(response, System.currentTimeMillis() + ".csv");
 
@@ -89,7 +68,16 @@ public class TestServiceImpl implements TestService {
     public void exportExcel(HttpServletResponse response) {
         setupExcelResponse(response, System.currentTimeMillis() + ".xlsx");
 
-        MapExcelResultHandler resultHandler = new MapExcelResultHandler(response.getOutputStream(), 1000);
+        // 自定义表头映射，传null为全量字段
+        Map<String, String> customHeaders = new HashMap<>();
+        customHeaders.put("name", "名称");
+        customHeaders.put("status", "状态");
+        customHeaders.put("create_time", "创建时间");
+
+        // 字段顺序
+        List<String> fieldOrder = Arrays.asList("name", "status", "create_time");
+
+        MapExcelResultHandler resultHandler = new MapExcelResultHandler(response.getOutputStream(), 1000, customHeaders, fieldOrder);
         clientMapper.export(resultHandler);
 
         resultHandler.finish();

@@ -9,12 +9,11 @@ import org.apache.ibatis.session.ResultContext;
 import org.apache.ibatis.session.ResultHandler;
 
 import java.io.OutputStream;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -29,14 +28,24 @@ public class MapExcelResultHandler implements ResultHandler<Map<String, Object>>
     private final AtomicInteger count;
     private final int bufferSize;
     private final OutputStream outputStream;
-    private List<String> headers;
+    private final Map<String, String> customHeaders; // 自定义表头映射
+    private List<String> fieldOrder; // 字段顺序
     private boolean headersInitialized = false;
 
-    public MapExcelResultHandler(OutputStream outputStream, int bufferSize) {
+    public MapExcelResultHandler(OutputStream outputStream,
+                                 int bufferSize,
+                                 Map<String, String> customHeaders,
+                                 List<String> fieldOrder) {
         this.bufferSize = bufferSize;
         this.buffer = new ArrayList<>(bufferSize);
         this.count = new AtomicInteger(0);
         this.outputStream = outputStream;
+        this.customHeaders = customHeaders != null ? customHeaders : new HashMap<>();
+        this.fieldOrder = fieldOrder;
+    }
+
+    public MapExcelResultHandler(OutputStream outputStream, int bufferSize) {
+        this(outputStream, bufferSize, null, null);
     }
 
     @Override
@@ -60,15 +69,13 @@ public class MapExcelResultHandler implements ResultHandler<Map<String, Object>>
         if (count.get() % 1000 == 0) {
             log.info("已处理 {} 条记录", count.get());
         }
-
-        // 停止条件（可选）
-        if (shouldStop(resultContext)) {
-            resultContext.stop();
-        }
     }
 
     private void initializeHeaders(Map<String, Object> firstRecord) {
-        this.headers = new ArrayList<>(firstRecord.keySet());
+        // 确定字段顺序
+        if (fieldOrder == null || fieldOrder.isEmpty()) {
+            fieldOrder = new ArrayList<>(firstRecord.keySet());
+        }
 
         // 创建 ExcelWriter，使用动态表头
         this.excelWriter = EasyExcel.write(outputStream)
@@ -80,14 +87,15 @@ public class MapExcelResultHandler implements ResultHandler<Map<String, Object>>
         this.writeSheet = EasyExcel.writerSheet("数据导出").build();
         this.headersInitialized = true;
 
-        log.info("初始化表头: {}", headers);
+        log.info("初始化表头完成，字段顺序: {}", fieldOrder);
     }
 
     private List<List<String>> generateHead() {
         List<List<String>> head = new ArrayList<>();
-        for (String header : headers) {
+        for (String field : fieldOrder) {
             List<String> headColumn = new ArrayList<>();
-            headColumn.add(header);
+            String headerName = customHeaders.getOrDefault(field, field);
+            headColumn.add(headerName);
             head.add(headColumn);
         }
         return head;
@@ -98,14 +106,10 @@ public class MapExcelResultHandler implements ResultHandler<Map<String, Object>>
 
         for (Map<String, Object> data : buffer) {
             List<Object> row = new ArrayList<>();
-            for (String header : headers) {
-                Object value = data.get(header);
-                if (value instanceof Timestamp) {
-                    value = value.toString();
-                } else if (value instanceof Date) {
-                    value = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format((Date) value);
-                }
-                row.add(value);
+            for (String field : fieldOrder) {
+                Object value = data.get(field);
+                // 处理特殊类型
+                row.add(convertValue(value));
             }
             excelData.add(row);
         }
@@ -113,19 +117,35 @@ public class MapExcelResultHandler implements ResultHandler<Map<String, Object>>
         return excelData;
     }
 
+    private Object convertValue(Object value) {
+        if (value == null) {
+            return "";
+        }
+
+        // 处理日期类型
+        if (value instanceof Date) {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format((Date) value);
+        }
+
+        // 处理 LocalDateTime
+        if (value instanceof LocalDateTime) {
+            return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format((LocalDateTime) value);
+        }
+
+        // 处理 LocalDate
+        if (value instanceof LocalDate) {
+            return DateTimeFormatter.ofPattern("yyyy-MM-dd").format((LocalDate) value);
+        }
+
+        return value;
+    }
+
     private void flushToExcel() {
         if (!buffer.isEmpty() && excelWriter != null) {
             List<List<Object>> excelData = convertBufferToExcelData();
             excelWriter.write(excelData, writeSheet);
             buffer.clear();
-            log.debug("已写入 {} 条数据到Excel", excelData.size());
         }
-    }
-
-    private boolean shouldStop(ResultContext<? extends Map<String, Object>> resultContext) {
-        // 自定义停止逻辑
-        // return count.get() >= 1000000; // 限制最大记录数
-        return false;
     }
 
     public void finish() {
@@ -144,9 +164,5 @@ public class MapExcelResultHandler implements ResultHandler<Map<String, Object>>
 
     public int getProcessedCount() {
         return count.get();
-    }
-
-    public List<String> getHeaders() {
-        return headers;
     }
 }
