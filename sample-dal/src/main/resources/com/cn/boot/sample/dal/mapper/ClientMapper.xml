@@ -48,4 +48,10 @@
         <include refid="Base_Column_List"/>
             FROM `boot_sample`.`client`
     </select>
+
+    <select id="export" resultType="java.util.Map">
+        SELECT
+        <include refid="Base_Column_List"/>
+            FROM `boot_sample`.`client`
+    </select>
 </mapper>

@@ -6,6 +6,8 @@ import org.apache.ibatis.mapping.ResultSetType;
 import org.apache.ibatis.session.ResultHandler;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.Map;
+
 /**
  * @author Chen Nan
  */
@@ -21,4 +23,7 @@ public interface ClientMapper extends Mapper<Client> {
 
     @Options(resultSetType = ResultSetType.FORWARD_ONLY, fetchSize = Integer.MIN_VALUE)
     void listByHandler(ResultHandler<Client> handler);
+
+    @Options(resultSetType = ResultSetType.FORWARD_ONLY, fetchSize = Integer.MIN_VALUE)
+    void export(ResultHandler<Map<String, Object>> handler);
 }
